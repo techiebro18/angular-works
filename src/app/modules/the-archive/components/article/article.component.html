@@ -1,0 +1,61 @@
+<div class="allArticles">
+  <div class="focusArticle" *ngIf="WeekArticle">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6">
+          <div class="imageHolder archivesingleimage">
+            <img
+              src="{{ env.IMGIX_UPLOADS_URL }}dynamic/archive/{{ WeekArticle.featured_image }}.{{
+                WeekArticle.feature_img_extension
+              }}"
+              alt="{{ WeekArticle.alt_feature ? WeekArticle.alt_feature : WeekArticle.featured_image }}"
+              class="img-responsive"
+            />
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6">
+          <div class="page-title hoverContent">
+            <p class="category">{{ WeekArticle.post_category }}</p>
+            <h2 class="title">{{ WeekArticle.post_title }}</h2>
+            <p class="postDate">{{ WeekArticle.archive_date }}</p>
+            <p></p>
+            <div class="d-none d-md-block week_para" innerHTML="{{ WeekArticle.description_for }}"></div>
+            <p></p>
+            <div class="cta-btn archive-btn">
+              <a routerLink="/the-archive/{{ WeekArticle.post_name }}">READ</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container" *ngIf="Articles">
+    <div class="masonry">
+      <ng-container *ngFor="let article of Articles">
+        <div class="brick" *ngIf="article.featured_image">
+          <div class="content">
+            <div class="articleImg">
+              <a routerLink="/the-archive/{{ article.post_name }}" rel="bookmark">
+                <img
+                  src="{{ env.IMGIX_UPLOADS_URL }}dynamic/archive/{{ article.featured_image }}.{{
+                    article.feature_img_extension
+                  }}"
+                />
+              </a>
+            </div>
+            <p class="category" *ngIf="article.category">{{ article.category.category_title }}</p>
+            <h3 class="entry-title">
+              <a routerLink="/the-archive/{{ article.post_name }}" rel="bookmark">
+                {{ article.post_title }}
+              </a>
+            </h3>
+            <p class="postDate">{{ article.archive_date | date: 'dd MMM yyyy' }}</p>
+            <div class="entry-content d-none d-md-block">
+              <div class="d-none d-md-block" innerHTML="{{ article.description_for }}"></div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

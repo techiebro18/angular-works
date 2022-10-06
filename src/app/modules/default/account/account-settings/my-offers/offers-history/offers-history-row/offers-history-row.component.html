@@ -1,0 +1,39 @@
+<div [ngClass]="getClassAccordingToOwnerAndPerspective()" class="offer-value-box">
+  <img tvb-img-fallback class="user-picture" [alt]="getRowUserName()" [src]="getRowProfilePicture()" />
+
+  <div [ngClass]="getClassAccordingToOwnerAndPerspective()" class="chat-balloon">
+    <div class="balloon-left-content">
+      <span class="chat-balloon-username">
+        {{ getRowUserName() }}
+      </span>
+
+      <span class="chat-balloon-offer-date">
+        {{ offerMadeAt | date: 'dd/MM/YYYY hh:MM:ss' }}
+      </span>
+    </div>
+
+    <div class="balloon-right-content">
+      <span class="chat-balloon-offer-value">
+        {{ getOfferValueText() }}
+      </span>
+    </div>
+  </div>
+</div>
+
+<div class="offer-date-box" *ngIf="isLastPosition">
+  <span *ngIf="isBuyerPerspective() && isSellerRow()" class="offer-details-text">
+    You have {{ daysToRespond }} days to respond to the Seller
+  </span>
+
+  <span *ngIf="isSellerPerspective() && isBuyerRow()" class="offer-details-text">
+    You have {{ daysToRespond }} days to respond to the Buyer
+  </span>
+
+  <span *ngIf="isBuyerPerspective() && isBuyerRow()" class="offer-details-text">
+    The Seller has {{ daysToRespond }} days to respond
+  </span>
+
+  <span *ngIf="isSellerPerspective() && isSellerRow()" class="offer-details-text">
+    The Buyer has {{ daysToRespond }} days to respond
+  </span>
+</div>

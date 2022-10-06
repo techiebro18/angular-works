@@ -1,0 +1,622 @@
+<div class="loader-wrapper" *ngIf="loading">
+  <div class="loader">
+    <mat-spinner></mat-spinner>
+  </div>
+</div>
+<div class="product-list account-tab-page order-detail">
+  <div class="container">
+    <!--- Tabing starts --->
+    <div class="row" *ngIf="orderDetail">
+      <div class="col-md-12">
+        <!-- tabs -->
+        <div class="tabbable tabs-left">
+          <div class="col-md-12">
+            <div class="tab-content">
+              <div class="tab-pane active" id="your_orders">
+                <div class="tab_body">
+                  <div class="your-order" id="track-order2">
+                    <div class="col-md-12 form-group" [style.display]="return_message ? 'block' : 'none'">
+                      <div class="alert proceed-btn" [innerHtml]="return_message"></div>
+                    </div>
+                    <!--- Track your order --->
+                    <div class="track-order">
+                      <div class="header-title">
+                        <h2>{{ 'Order' | translate }} #{{ orderDetail.order_id }}</h2>
+                        <p>
+                          {{ 'You placed this order on' | translate }}
+                          {{ orderDetail.orderDate | date: 'medium' }}
+                        </p>
+                        <h3>{{ 'YOUR ORDER SUMMARY' | translate }}</h3>
+                      </div>
+                      <!--- Order Summery --->
+                      <div class="order-summary-bottom">
+                        <table *ngFor="let order of orderItems.orders.order_item" class="order-summary-details">
+                          <app-order-detail
+                            class="app-order-detail"
+                            [orderItem]="order"
+                            [country_data]="orderItems.country_data"
+                            [orderDetail]="orderItems.data"
+                            (returnData)="calculateReturn($event)"
+                            (returnorderItem)="returnorderItem($event)"
+                            (cancelData)="cancelOrder($event)"
+                            (reSellData)="reSellOrderItem($event)"
+                            (resellForFree)="onResellForFree($event)"
+                          ></app-order-detail>
+                        </table>
+                        <table [ngStyle]="{ width: '100%' }" class="order-summary-details">
+                          <tr class="orderbottom">
+                            <td colspan="3" valign="center">
+                              <div class="product-detail">
+                                <p>
+                                  <span>{{ 'Item Total' | translate }}:</span>
+                                  {{ itemTotalFinal | currency: orderDetail.currencycode }}
+                                </p>
+                                <p *ngIf="itemDiscountFinal != 0">
+                                  <span>{{ 'Discount' | translate }}:</span>
+                                  -{{ itemDiscountFinal | currency: orderDetail.currencycode }}
+                                </p>
+                                <p>
+                                  <span>{{ 'Shipping' | translate }}:</span>
+                                  {{ itemShippingFinal | currency: orderDetail.currencycode }}
+                                </p>
+                                <p>
+                                  <span>{{ 'Subtotal' | translate }}:</span>
+                                  {{ itemSubTotalFinal | currency: orderDetail.currencycode }}
+                                </p>
+                                <p class="total">
+                                  <span>{{ 'Total Order incl. tax' | translate }}:</span>
+                                  {{ itemTaxTotalFinal | currency: orderDetail.currencycode }}
+                                </p>
+                              </div>
+                            </td>
+                          </tr>
+                        </table>
+                        <table [ngStyle]="{ width: '100%' }">
+                          <tr class="addressbottom">
+                            <td valign="center">
+                              <div class="ordersummary">
+                                <h3>{{ 'Order Summary' | translate }}</h3>
+                                <p>{{ 'Order' | translate }}: #{{ orderDetail.order_id }}</p>
+                                <p>
+                                  {{ 'Order Date' | translate }}:
+                                  {{ orderDetail.orderDate | date: 'medium' }}
+                                </p>
+                                <p>
+                                  {{ 'Order Total' | translate }}:
+                                  {{ orderDetail.total_paid_amount | currency: orderDetail.currencycode }}
+                                </p>
+                              </div>
+                            </td>
+                            <td valign="center">
+                              <div class="shippingaddress">
+                                <h3>{{ 'Shipping Address' | translate }}</h3>
+                                <p>
+                                  <span>{{ orderDetail.name }}</span>
+                                  <span>
+                                    {{ orderDetail.phone_code ? '+' + orderDetail.phone_code : '' }}
+                                    {{ orderDetail.mobile_no }}
+                                  </span>
+                                  <span>
+                                    {{ orderDetail.company }} {{ orderDetail.address_1 }}
+                                    {{ orderDetail.address_2 }}
+                                  </span>
+                                  <span>{{ orderDetail.city }} {{ orderDetail.pin_code }}</span>
+                                  <span>{{ orderDetail.country_name }}</span>
+                                </p>
+                              </div>
+                            </td>
+                            <td valign="center">
+                              <div class="billingaddress">
+                                <h3>{{ 'Billing address' | translate }}</h3>
+                                <p>
+                                  <span>{{ orderDetail.billing_name }}</span>
+                                  <span *ngIf="orderDetail.billing_mobile_no">
+                                    {{ orderDetail.billing_phone_code ? '+' + orderDetail.billing_phone_code : '' }}
+                                    {{ orderDetail.billing_mobile_no }}
+                                  </span>
+                                  <span>
+                                    {{ orderDetail.billing_company }}
+                                    {{ orderDetail.billing_address_1 }}
+                                    {{ orderDetail.billing_address_2 }}
+                                  </span>
+                                  <span>
+                                    {{ orderDetail.billing_city }}
+                                    {{ orderDetail.billing_pin_code }}
+                                  </span>
+                                  <span>{{ orderDetail.billing_country_name }}</span>
+                                </p>
+                              </div>
+                            </td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--- Col --->
+      </div>
+      <!-- /tabs -->
+    </div>
+  </div>
+</div>
+<div class="returnorderpopup">
+  <div class="modal" id="trash-pupup" [style.display]="returnModel ? 'block' : 'none'">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" (click)="closePopup('returnModel')" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="modal-body-inner">
+            <!-- start of return step 1-->
+            <div id="invalidAddress" class="invalid-address" [style.display]="invalidAddress ? 'block' : 'none'">
+              <h4 class="modal-title">{{ 'Dear Customer' | translate }},</h4>
+              <p>{{ 'DHL_ERR1' | translate }}</p>
+              <p>{{ 'DHL_ERR2' | translate }}</p>
+            </div>
+            <div id="validAddress" [style.display]="validAddress ? 'block' : 'none'">
+              <div class="refundstep1" id="refundstep1" [style.display]="refundstep1 ? 'block' : 'none'">
+                <h4 class="modal-title">{{ 'Order Items' | translate }}</h4>
+                <form name="saveReturn" autocomplete="off">
+                  <div class="spb__header-row">
+                    <div class="header-row__slno">{{ 'Slno' | translate }}</div>
+                    <div class="header-row__thumb">{{ 'Item' | translate }}</div>
+                    <div class="header-row__description">{{ 'Description' | translate }}</div>
+                    <div class="header-row__color">{{ 'Colour' | translate }}</div>
+                    <div class="header-row__size">{{ 'Size' | translate }}</div>
+                    <div class="header-row__qty">{{ 'Qty' | translate }}</div>
+                    <div class="header-row__unit-price">{{ 'Unit price' | translate }}</div>
+                    <div class="header-row__item-price">{{ 'Item total' | translate }}</div>
+                  </div>
+                  <div class="spb__items-list-row" id="selected_item" [innerHtml]="selected_item"></div>
+                  <div class="spb__items-list-row" *ngIf="!orderItem">
+                    <div class="spb__items-list-row__inner">
+                      {{ 'No item found for return' | translate }}
+                    </div>
+                  </div>
+                  <p id="itemMsg"></p>
+                  <div class="returnreason">
+                    <label for="notes_order">
+                      <b>{{ 'Reason' | translate }}</b>
+                    </label>
+                    :
+                    <select
+                      required
+                      class="form-control CustomCountrySelectregistration"
+                      name="return_reason"
+                      #returnReason
+                    >
+                      <option value="">{{ 'Select Reason' | translate }}</option>
+                      <option value="Too_big">{{ 'Too big' | translate }}</option>
+                      <option value="Too_small">{{ 'Too small' | translate }}</option>
+                      <option value="Unsuitable">{{ 'Unsuitable' | translate }}</option>
+                      <option value="Ordered_two_size">
+                        {{ 'Ordered two sizes' | translate }}
+                      </option>
+                      <option value="Not_as_pictured">
+                        {{ 'Not as pictured/described' | translate }}
+                      </option>
+                      <option value="Fabric">{{ 'Fabric' | translate }}</option>
+                      <option value="Color">{{ 'Color' | translate }}</option>
+                      <option value="Dont_fit">{{ 'It does not fit me' | translate }}</option>
+                      <option value="Incorrect_color">{{ 'Incorrect color' | translate }}</option>
+                      <option value="Incorrect_size">{{ 'Incorrrect size' | translate }}</option>
+                      <option value="Price">{{ 'Price' | translate }}</option>
+                      <option value="Damaged">{{ 'Damaged' | translate }}</option>
+                      <option value="Delivery_issue">{{ 'Delivery issue' | translate }}</option>
+                    </select>
+                  </div>
+                  <p id="resonMsg" [innerHtml]="resonMsg"></p>
+                  <div class="returnaddress" *ngIf="orderDetail">
+                    <input type="hidden" name="countryId" id="countryId" value="{{ orderDetail.country_id }}" />
+                    <input type="hidden" name="order_item_id" id="order_item_id" value="" />
+                    <input type="hidden" name="currency_id" id="currency_id" value="{{ orderDetail.currency_id }}" />
+                    <input
+                      type="hidden"
+                      name="currency_code"
+                      id="currency_code"
+                      value="{{ orderDetail.currencycode }}"
+                    />
+                    <p>
+                      <b>{{ 'Country' | translate }}</b>
+                      :
+                      <span id="country_name">{{ orderDetail.country_name }}</span>
+                    </p>
+                    <p>
+                      <b>{{ 'Item Total' | translate }}</b>
+                      : {{ orderDetail.currencysymbol }}
+                      <span id="total_item_amt">{{ total_item_amt }}</span>
+                    </p>
+                    <p id="discountshow" [style.display]="discountshow ? 'block' : 'none'">
+                      <b>{{ 'Discount' | translate }}</b>
+                      : - {{ orderDetail.currencysymbol }}
+                      <span id="discount_amount">{{ discount_amount }}</span>
+                    </p>
+                    <p>
+                      <b>
+                        {{ 'Cost of Return' | translate }}
+                        <a data-toggle="modal" data-target="#countryModal" aria-hidden="true">
+                          <svg
+                            version="1.1"
+                            id="Layer_1"
+                            xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                            x="0px"
+                            y="0px"
+                            viewBox="0 0 100 100"
+                            style="enable-background: new 0 0 100 100; width: 13px; margin-left: 10px"
+                            xml:space="preserve"
+                          >
+                            <path
+                              d="M27.1,6.6C34,3.01,41.85,0.99,50.17,1c27.52,0.05,49.79,22.41,49.79,49.93c-0.02,27.56-22.41,49.9-49.97,49.83
+                                              C22.47,100.71,0.18,78.35,0.2,50.83C0.22,31.59,11.13,14.91,27.1,6.6 M57.46,59.01c0-5.39-0.02-10.8,0.02-16.19
+                                              c0-0.99-0.31-1.28-1.28-1.25c-2.29,0.07-4.56,0.02-6.86,0.07c-4.73,0.07-9.46,0.19-14.18,0.26c-0.76,0-1.09,0.28-1.02,1.04
+                                              c0.02,0.31,0.05,0.64,0,0.95c-0.12,0.87,0.24,1.3,1.16,1.35c0.73,0.02,1.49,0.17,2.22,0.26c4.78,0.66,5.86,1.87,5.91,6.67
+                                              c0.05,7.21,0.05,14.42,0.05,21.63c0,1.06-0.09,2.13-0.24,3.17c-0.26,2.03-1.35,3.43-3.33,4c-1.25,0.35-2.51,0.66-3.78,0.87
+                                              c-1.58,0.28-0.76,1.47-0.87,2.27c-0.17,0.92,0.59,0.83,1.18,0.83c9.5,0,18.98,0,28.49,0c0.57,0,1.25,0.05,1.09-0.78
+                                              c-0.17-0.78,0.76-1.96-0.83-2.27c-1.61-0.33-3.24-0.69-4.8-1.18c-1.47-0.47-2.36-1.54-2.58-3.1c-0.17-1.16-0.31-2.34-0.31-3.52
+                                              C57.43,69.01,57.46,64.02,57.46,59.01z M58.4,26.44c-0.02-5.32-4.4-9.62-9.67-9.57c-5.32,0.07-9.55,4.37-9.53,9.72
+                                              c0.02,5.25,4.35,9.5,9.62,9.5C54.15,36.08,58.42,31.76,58.4,26.44z"
+                            />
+                          </svg>
+                        </a>
+                      </b>
+                      : {{ orderDetail.currencysymbol }}
+                      <span id="cntry_return_amnt">{{ cntry_return_amnt }}</span>
+                    </p>
+                    <p>
+                      <b>{{ 'Total Refund Amount' | translate }}</b>
+                      : {{ orderDetail.currencysymbol }}
+                      <span id="final_refund">{{ final_refund }}</span>
+                    </p>
+                  </div>
+                  <div class="modal-footer text-center">
+                    <div class="col-sm-12">
+                      <button type="button" class="btn proceed-btn" id="nextbtnrefund" (click)="nextbtnrefund()">
+                        {{ 'NEXT' | translate }}
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <!-- end of refund step 1-->
+              <!-- start of refund step 2-->
+              <div class="refundstep2" id="refundstep2" [style.display]="refundstep2 ? 'block' : 'none'">
+                <div class="refundprivacy">
+                  <h2 class="backreturn">
+                    <a class="refundstep2return" (click)="backButtonReturn()">
+                      {{ 'BACK' | translate }}
+                    </a>
+                  </h2>
+                  <h4 class="modal-title">{{ 'Confirm Return' | translate }}</h4>
+
+                  <div class="spb__header-row">
+                    <div class="header-row__thumb">{{ 'Item' | translate }}</div>
+                    <div class="header-row__description">{{ 'Description' | translate }}</div>
+                    <div class="header-row__color">{{ 'Colour' | translate }}</div>
+                    <div class="header-row__size">{{ 'Size' | translate }}</div>
+                    <div class="header-row__qty">{{ 'Qty' | translate }}</div>
+                    <div class="header-row__unit-price">{{ 'Unit price' | translate }}</div>
+                    <div class="header-row__item-price">{{ 'Item total' | translate }}</div>
+                  </div>
+
+                  <div class="spb__items-list-row" id="selected_item1" [innerHtml]="selected_item1"></div>
+                  <div class="returnterms">
+                    <div class="conditionterms">
+                      <p>
+                        <a href="">
+                          <svg
+                            version="1.1"
+                            id="Layer_1"
+                            xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                            x="0px"
+                            y="0px"
+                            viewBox="0 0 100 100"
+                            style="enable-background: new 0 0 100 100; width: 13px; margin-left: 10px"
+                            xml:space="preserve"
+                          >
+                            <path
+                              d="M27.1,6.6C34,3.01,41.85,0.99,50.17,1c27.52,0.05,49.79,22.41,49.79,49.93c-0.02,27.56-22.41,49.9-49.97,49.83
+                                                      C22.47,100.71,0.18,78.35,0.2,50.83C0.22,31.59,11.13,14.91,27.1,6.6 M57.46,59.01c0-5.39-0.02-10.8,0.02-16.19
+                                                      c0-0.99-0.31-1.28-1.28-1.25c-2.29,0.07-4.56,0.02-6.86,0.07c-4.73,0.07-9.46,0.19-14.18,0.26c-0.76,0-1.09,0.28-1.02,1.04
+                                                      c0.02,0.31,0.05,0.64,0,0.95c-0.12,0.87,0.24,1.3,1.16,1.35c0.73,0.02,1.49,0.17,2.22,0.26c4.78,0.66,5.86,1.87,5.91,6.67
+                                                      c0.05,7.21,0.05,14.42,0.05,21.63c0,1.06-0.09,2.13-0.24,3.17c-0.26,2.03-1.35,3.43-3.33,4c-1.25,0.35-2.51,0.66-3.78,0.87
+                                                      c-1.58,0.28-0.76,1.47-0.87,2.27c-0.17,0.92,0.59,0.83,1.18,0.83c9.5,0,18.98,0,28.49,0c0.57,0,1.25,0.05,1.09-0.78
+                                                      c-0.17-0.78,0.76-1.96-0.83-2.27c-1.61-0.33-3.24-0.69-4.8-1.18c-1.47-0.47-2.36-1.54-2.58-3.1c-0.17-1.16-0.31-2.34-0.31-3.52
+                                                      C57.43,69.01,57.46,64.02,57.46,59.01z M58.4,26.44c-0.02-5.32-4.4-9.62-9.67-9.57c-5.32,0.07-9.55,4.37-9.53,9.72
+                                                      c0.02,5.25,4.35,9.5,9.62,9.5C54.15,36.08,58.42,31.76,58.4,26.44z"
+                            />
+                          </svg>
+                        </a>
+
+                        <span class="condition">
+                          <b>{{ 'Return Conditions' | translate }}</b>
+                        </span>
+                        <span class="returned">
+                          {{ 'return_info1' | translate }}
+                          <a routerLink="/{{ 'returns' | translate }}">
+                            {{ 'click here' | translate }}
+                          </a>
+                          {{ 'return_info2' | translate }}
+                        </span>
+                      </p>
+                    </div>
+                    <div class="checkboxreturn">
+                      <input
+                        type="checkbox"
+                        name="return_policy"
+                        id="return_policy"
+                        (change)="returnPolicyClick($event)"
+                      />
+                      <label for="return_policy">
+                        <small>{{ 'return_t_c' | translate }}</small>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="modal-footer text-center">
+                    <div class="col-sm-12">
+                      <button
+                        type="button"
+                        class="btn proceed-btn"
+                        [disabled]="confirmrefundbtn === true ? false : true"
+                        (click)="saveReturn()"
+                      >
+                        {{ 'CONFIRM' | translate }}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- end of refund step 2-->
+              <!-- start of refund step 3-->
+              <div class="refundstep3 orderdetails" id="refundstep3" style="display: none">
+                <div class="heading">
+                  <h4 class="modal-title">{{ 'thank_you' | translate }}</h4>
+                </div>
+                <div class="orderitem">
+                  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 col-sm-12">
+                    <div class="item">
+                      <h3><span>1</span></h3>
+                      <h2>
+                        <a href="#">{{ 'refundstep1' | translate }}</a>
+                      </h2>
+                      <p>{{ 'refundstep2' | translate }}</p>
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 col-sm-12">
+                    <div class="item">
+                      <h3><span>2</span></h3>
+                      <h2>
+                        <a href="#">{{ 'refundstep3' | translate }}</a>
+                      </h2>
+                      <p>{{ 'refundstep4' | translate }}</p>
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 col-sm-12">
+                    <div class="item">
+                      <h3><span>3</span></h3>
+                      <h2>
+                        <a href="#">{{ 'refundstep5' | translate }}</a>
+                      </h2>
+                      <p>{{ 'refundstep6' | translate }}</p>
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 col-sm-12">
+                    <div class="item">
+                      <h3><span>4</span></h3>
+                      <h2>
+                        <a href="#">{{ 'refundstep7' | translate }}</a>
+                      </h2>
+                      <p>{{ 'refundstep8' | translate }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- end of refund step 3-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="country-custom-popup countrymodal modal fade" id="countryModal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-body-inner">
+          <h4 class="modal-title">{{ 'Deduction Price' | translate }}</h4>
+          <input
+            type="type"
+            placeholder="Search"
+            id="searchItem"
+            name="searchItem"
+            class="search form-control CustomSelect deductionsearch"
+          />
+          <table class="table countryprice" id="countrydata">
+            <thead>
+              <tr>
+                <th scope="col">{{ 'Country' | translate }}</th>
+                <th scope="col">{{ 'Price' | translate }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let country of country_data">
+                <td>{{ country.name }}</td>
+                <td>{{ country.return_cost }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal" id="confirmModal" [style.display]="confirmModal ? 'block' : 'none'" style="z-index: 1050">
+  <div class="modal-dialog popupBox-center">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" (click)="closePopup('confirmModal')">&times;</button>
+      </div>
+      <div class="modal-body" id="confirmMessage">{{ confirmMessage }}</div>
+      <div class="modal-footer hide-footer">
+        <button type="button" class="btn primary" id="confirmOk" (click)="cancelOrderConfirm()">
+          {{ 'OK' | translate }}
+        </button>
+        <button type="button" class="btn primary" id="confirmCancel" (click)="closePopup('confirmModal')">
+          {{ 'Cancel' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal" id="resellModal" [style.display]="resellModalConfirm ? 'block' : 'none'" style="z-index: 1050">
+  <div class="modal-dialog popupBox-center">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" (click)="closePopup('resellModalConfirm')">
+          &times;
+        </button>
+      </div>
+      <div class="modal-body" id="resellConfirmMessage">{{ resellConfirmMessage }}</div>
+      <div class="modal-footer hide-footer">
+        <button type="button" class="btn proceed-btn" id="resellConfirmOk" (click)="resellAgreeConfirm()">
+          {{ 'OK' | translate }}
+        </button>
+        <button
+          type="button"
+          class="btn proceed-btn"
+          id="resellConfirmCancel"
+          (click)="closePopup('resellModalConfirm')"
+        >
+          {{ 'Cancel' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal"
+  id="resellModalSuccessMsg"
+  [style.display]="resellModalSuccessMsg ? 'block' : 'none'"
+  style="z-index: 1050"
+>
+  <div class="modal-dialog popupBox-center">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" (click)="closePopup('resellModalSuccessMsg')">
+          &times;
+        </button>
+      </div>
+      <div class="modal-body" id="resellConfirmSuccessMsg">{{ resellConfirmSuccessMsg }}</div>
+      <div class="modal-footer hide-footer">
+        <button
+          type="button"
+          class="btn proceed-btn"
+          id="resellModalSuccessMsg"
+          (click)="closePopup('resellModalSuccessMsg')"
+        >
+          {{ 'OK' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="items-model-up">
+  <div class="modal" id="trash-pupup" [style.display]="resellModalOnboarding ? 'block' : 'none'">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div>
+          <button type="button" class="close" data-dismiss="modal" (click)="closePopup('resellModalOnboarding')">
+            &times;
+          </button>
+        </div>
+        <div class="modal-body">
+          {{ resellConfirmMessage }}
+          <h2></h2>
+          <div class="buttom-box" [style.display]="'block'">
+            <button type="button" class="btn btn-dark yes-button" (click)="resellOnboardingConfirm()">
+              {{ 'YES' | translate }}
+            </button>
+            <button
+              type="button"
+              class="btn btn-light no-button"
+              data-dismiss="modal"
+              (click)="closePopup('resellModalOnboarding')"
+            >
+              {{ 'NO' | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="items-model-up">
+  <div class="modal" id="trash-pupup" [style.display]="'none'">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <h2></h2>
+          <div class="buttom-box" [style.display]="'block'">
+            <button type="button" class="btn btn-dark yes-button">{{ 'YES' | translate }}</button>
+            <button type="button" class="btn btn-light no-button" data-dismiss="modal">
+              {{ 'NO' | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="returnorderpopup">
+  <div class="modal" id="trash-pupup" [style.display]="resellModal ? 'block' : 'none'">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" (click)="closePopup('resellModal')">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="modal-body-inner">
+            <div class="refundstep1" id="refundstep1">
+              <h4 class="modal-title">{{ 'Order Items' | translate }}</h4>
+              <div class="spb__header-row">
+                <div class="header-row__slno">{{ 'Slno' | translate }}</div>
+                <div class="header-row__thumb">{{ 'Item' | translate }}</div>
+                <div class="header-row__description">{{ 'Description' | translate }}</div>
+                <div class="header-row__color">{{ 'Colour' | translate }}</div>
+                <div class="header-row__size">{{ 'Size' | translate }}</div>
+                <div class="header-row__qty">{{ 'Qty' | translate }}</div>
+                <div class="header-row__unit-price">{{ 'Payout' | translate }}</div>
+                <div class="header-row__item-price">{{ 'List price' | translate }}</div>
+              </div>
+              <div class="spb__items-list-row" id="resell_item" [innerHtml]="resell_item"></div>
+              <div class="modal-footer text-center">
+                <div class="col-sm-12">
+                  <input type="hidden" id="resell-item-id" value="" />
+                  <button type="button" class="btn proceed-btn resell-agree" (click)="resellAgree()">
+                    {{ 'Resell' | translate }}
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- end of refund step 3-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

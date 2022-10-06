@@ -1,0 +1,51 @@
+.lowercase {
+  text-transform: lowercase;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+.bold {
+  font-weight: 500 !important;
+}
+
+.bolder {
+  font-weight: 600 !important;
+}
+
+.text-error {
+  color: var(--form-error);
+  font-size: 0.8rem;
+}
+
+.text-success {
+  color: var(--form-success);
+  font-size: 0.8rem;
+}
+
+.text-underline {
+  text-decoration: underline;
+}
+
+.text-line-through {
+  text-decoration: line-through;
+}
+
+.text-bold {
+  font-weight: bold;
+}
+
+.text-italic {
+  font-style: italic;
+}
+
+.text-overflow-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

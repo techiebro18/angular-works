@@ -1,0 +1,154 @@
+<div class="modal-body">
+  <div class="modal-body-inner">
+    <h3>{{ 'MAKE AN OFFER' | translate }}</h3>
+
+    <ng-container *ngIf="isOfferUnderNegotiation === false">
+      <div class="image-box-" *ngIf="product && product.imgix_image_url">
+        <img src="{{ product.imgix_image_url }}" class="product-img" />
+      </div>
+
+      <div class="offer-form" *ngIf="!offerSubmitted">
+        <p class="offer-text">
+          {{ 'Make an offer to seller at which You want to buy the following item' | translate }}:&nbsp;
+        </p>
+        <p class="product">{{ product.brand_name }}, {{ product.name }}</p>
+
+        <form [formGroup]="offerFormGroup" (ngSubmit)="submitOffer()">
+          <div class="row">
+            <div class="col-md-6">
+              <input
+                type="text"
+                class="amount-input"
+                formControlName="offer_price"
+                (keyup)="onKeyUp($event)"
+                placeholder="{{ 'Amount' | translate }}"
+              />
+              <span class="amount-input-txt">{{ currency }}</span>
+
+              <span
+                class="err-msg"
+                *ngIf="
+                  offerFormGroup.dirty &&
+                  offerFormGroup.controls.offer_price.errors &&
+                  offerFormGroup.controls.offer_price.invalid
+                "
+              >
+                {{ 'Please enter price between' | translate }}
+                {{ startingPrice | currency: currency }} {{ 'and' | translate }}
+                {{ endPrice | currency: currency }}
+              </span>
+            </div>
+            <div class="col-md-6">
+              <button class="btn tvb-button primary" type="submit">
+                {{ 'Submit offer' | translate }}
+              </button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 mt-2">
+              <span class="err-msg" *ngIf="errMessage.length">{{ errMessage }}</span>
+            </div>
+          </div>
+        </form>
+
+        <div class="product-detail">
+          <div class="price-wrapper-popup">
+            <span class="price" *ngIf="product.is_discount">
+              <span class="price">
+                {{ 'make_an_offer.make_offer_dialog.starting_price' | translate }}:&nbsp;
+                {{ startingPrice | currency: currency }}
+              </span>
+
+              <span class="price">
+                {{ 'make_an_offer.make_offer_dialog.regular_price' | translate }}:&nbsp;
+                <span class="normal-price">{{ price | currency: currency }}</span>
+                <span class="actual-price">{{ discountPrice | currency: currency }}</span>
+              </span>
+            </span>
+
+            <span class="price" *ngIf="!product.is_discount">
+              <span class="price">
+                {{ 'make_an_offer.make_offer_dialog.starting_price' | translate }}:&nbsp;
+                {{ startingPrice | currency: currency }}
+              </span>
+
+              <span class="price">
+                {{ 'make_an_offer.make_offer_dialog.regular_price' | translate }}:&nbsp;
+                {{ price | currency: currency }}
+              </span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="offer-form" *ngIf="offerSubmitted">
+        <p class="offer-text mt-3 mb-3">{{ 'Offer Submitted' | translate }}!</p>
+
+        <div class="row">
+          <div class="col-md-6">
+            <button class="btn tvb-button primary" type="button" (click)="closeDialog()">
+              {{ 'Back to Shop' | translate }}
+            </button>
+          </div>
+          <div class="col-md-6">
+            <a
+              routerLink="/account/my-offers/your-offers"
+              class="btn tvb-button btn-reverse primary"
+              (click)="closeDialog()"
+            >
+              {{ 'My Offers' | translate }}
+            </a>
+          </div>
+        </div>
+
+        <div class="product-detail">
+          <div class="price-wrapper-popup">
+            <span class="price" *ngIf="product.is_discount">
+              {{ 'make_an_offer.make_offer_dialog.starting_price' | translate }}:&nbsp;
+              <span class="normal-price">{{ price | currency: currency }}</span>
+              <span class="actual-price">{{ startingPrice | currency: currency }}</span>
+            </span>
+
+            <span class="price" *ngIf="!product.is_discount">
+              <span class="price">
+                {{ 'make_an_offer.make_offer_dialog.starting_price' | translate }}:&nbsp;
+                {{ startingPrice | currency: currency }}
+              </span>
+
+              <span class="price">
+                {{ 'make_an_offer.make_offer_dialog.regular_price' | translate }}:&nbsp;
+                {{ price | currency: currency }}
+              </span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="isOfferUnderNegotiation">
+      <br />
+      <br />
+      <h3>{{ 'make_an_offer.make_offer_dialog.offer_under_negotiation_warning' | translate }}</h3>
+      <br />
+      <br />
+
+      <div class="row">
+        <div class="col-md-6">
+          <button class="btn tvb-button primary" type="button" (click)="closeDialog()">
+            {{ 'Back to Shop' | translate }}
+          </button>
+        </div>
+
+        <div class="col-md-6">
+          <a
+            routerLink="/account/my-offers/your-offers"
+            class="btn primary tvb-button btn-reverse"
+            (click)="closeDialog()"
+          >
+            {{ 'My Offers' | translate }}
+          </a>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

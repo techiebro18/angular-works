@@ -1,0 +1,125 @@
+.wishlist-btn.compact {
+  min-width: 40px;
+  padding: 0px 10px;
+  background: #fff;
+  color: var(--text-input-grey);
+  border: 1px solid #000;
+  i {
+    margin-left: 0em;
+  }
+}
+.wishlist-btn {
+  display: inline-block;
+  min-width: 250px;
+  font-size: 14px;
+  margin-right: 10px;
+  color: var(--text-input-grey);
+  background: #f2f2f2;
+  border: none;
+  padding: 0px 20px;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 40px;
+  cursor: pointer;
+  transition: all 0.1s ease-out;
+
+  &.link {
+    background: none;
+    text-transform: none;
+    text-decoration: underline;
+    min-width: auto;
+    margin: 0;
+    padding: 0;
+    font-size: inherit;
+    text-align: inherit;
+
+    &:hover {
+      background: none;
+      opacity: 0.8;
+      color: var(--text-input-grey);
+    }
+  }
+
+  &:hover {
+    background-color: #666;
+    color: #fff;
+  }
+
+  .invert {
+    margin-left: 0.6em;
+  }
+
+  i {
+    display: inline-block;
+    margin-left: 0.5em;
+  }
+}
+
+.heart-container {
+  display: inline;
+  position: absolute;
+  margin-left: -1.5em;
+}
+
+.heart {
+  position: absolute;
+  color: var(--main-color-dark) !important;
+
+  &:nth-child(1) i {
+    opacity: 0;
+    animation: heartUp 1.4s ease-in;
+  }
+  &:nth-child(2) i {
+    position: absolute;
+    left: 1rem;
+    opacity: 0;
+    animation: heartUp 1.4s 0.3s ease-in;
+  }
+  &:nth-child(3) i {
+    position: absolute;
+    left: 0.5rem;
+    opacity: 0;
+    animation: heartUp 1.4s 0.6s ease-in;
+  }
+}
+
+.font-black {
+  color: var(--main-color-dark) !important;
+  font-weight: 600;
+}
+
+@keyframes heartUp {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 0, 0) rotate(10deg);
+    transform: translate3d(0, 0, 0) rotate(10deg);
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  65% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -35vh, 0) scale(1.2) rotate(-10deg);
+    transform: translate3d(0, -35vh, 0) scale(1.2) rotate(-10deg);
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .wishlist-btn {
+    width: 100%;
+  }
+  .wishlist-btn.compact {
+    width: 26%;
+    margin-right: 0px;
+  }
+}

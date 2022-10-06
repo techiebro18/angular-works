@@ -1,0 +1,30 @@
+@import '../my-items-base-style';
+
+.tvb-table {
+  .tvb-header {
+    .header-img {
+      margin: 0 20px 0 0;
+    }
+
+    .header-actions {
+      margin: 0 0 0 -20px;
+    }
+  }
+
+  .tvb-body {
+    .row {
+      .col-img {
+        margin: 0 20px 0 0;
+      }
+
+      .col-actions {
+        padding: 0;
+        justify-content: flex-end;
+        margin: 0 0 0 -20px;
+      }
+    }
+  }
+}
+
+@media (max-width: 991px) {
+}

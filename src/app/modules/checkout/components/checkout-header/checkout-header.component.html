@@ -1,0 +1,43 @@
+<header>
+  <div class="container">
+    <a>
+      <img class="logo" src="assets/images/logo.jpg" alt="logo" (click)="openPopUp()" />
+    </a>
+
+    <div class="secure-header">
+      <span>Secure Checkout</span>
+      <img src="assets/images/security.svg" />
+    </div>
+    <div
+      class="modal checkpopup"
+      id="checkoutpopup"
+      [style.display]="trashModel ? 'block' : 'none'"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="modal-body-inner">
+              <div class="title-info">
+                <p>{{ 'checkout_confirm' | translate }}?</p>
+              </div>
+              <div class="checkpopuppopup text-center">
+                <div class="col-md-12">
+                  <div class="secondbox">
+                    <button class="updatebtn" type="button" (click)="returnToBag()">
+                      {{ 'Return to bag' | translate }}
+                    </button>
+                  </div>
+                  <div class="thirdboxbox">
+                    <button class="updatebtn" type="button" (click)="stayCheckout()">
+                      {{ 'Stay in checkout' | translate }}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

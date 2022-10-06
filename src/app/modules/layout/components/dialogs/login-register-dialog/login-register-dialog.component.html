@@ -1,0 +1,27 @@
+<div class="modal-body login-register-popup">
+  <div class="registration_div" *ngIf="!isLoginView">
+    <app-register
+      (onShowLogin)="switchView(true)"
+      (registered)="closeDialog()"
+      [location]="location"
+      [prdImage]="prdImg"
+      [isWishlistReg]="isWishlist"
+    ></app-register>
+  </div>
+  <div class="login_div" *ngIf="isLoginView">
+    <h3 class="main-label membersignin">{{ 'MEMBER SIGN IN' | translate }}</h3>
+    <div class="form-group" *ngIf="prdImg">
+      <img class="productImg" src="{{ prdImg }}" />
+    </div>
+    <app-login
+      (loggedin)="closeDialog()"
+      [prdImg]="prdImg"
+      [location]="location"
+      [isWishlist]="isWishlist"
+    ></app-login>
+    <h4 class="main-label notmember">{{ 'NOT A MEMBER YET?' | translate }}</h4>
+    <button class="btn tvb-button primary" type="submit" (click)="switchView(false)">
+      {{ 'CREATE AN ACCOUNT' | translate }}
+    </button>
+  </div>
+</div>

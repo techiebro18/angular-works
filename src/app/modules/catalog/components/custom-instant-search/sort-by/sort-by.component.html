@@ -1,0 +1,13 @@
+<ng-select
+  #sortBySelect
+  [placeholder]=""
+  [clearable]="false"
+  [(ngModel)]="state.currentRefinement"
+  class="tvb-select"
+  [searchable]="false"
+  (change)="onchangeSortBy($event)"
+>
+  <ng-option *ngFor="let item of items" [value]="item.value">
+    {{ item.label | translate }}
+  </ng-option>
+</ng-select>

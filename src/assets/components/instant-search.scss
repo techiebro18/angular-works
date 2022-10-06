@@ -1,0 +1,188 @@
+/**      styling for instant Search          **/
+.ais-Hits {
+  padding-right: 19px;
+}
+
+.ais-Pagination {
+  margin-top: 1em;
+  float: right;
+}
+.ais-Pagination-list {
+  overflow: hidden;
+}
+
+.ais-Pagination-link {
+  background: transparent !important;
+  color: #777;
+  box-shadow: unset !important;
+  border: 0;
+  border-bottom: 1px solid transparent !important;
+  transition: all 0.15s ease-in-out;
+}
+.ais-Pagination-link:hover {
+  background: transparent !important;
+  box-shadow: unset !important;
+  color: #222 !important;
+  text-decoration: unset;
+  border-bottom: 1px solid #222 !important;
+}
+
+.ais-Pagination-link:active,
+.ais-Pagination-item--selected .ais-Pagination-link {
+  color: #222 !important;
+}
+
+.ais-Pagination-item--firstPage,
+.ais-Pagination-item--lastPage {
+  display: none;
+}
+
+.ais-Pagination-item--nextPage a,
+.ais-Pagination-item--previousPage a,
+.ais-Pagination-item--nextPage button,
+.ais-Pagination-item--previousPage button {
+  font-family: 'FuturaBT-Light' !important;
+  font-size: 38px;
+  color: #222;
+  padding-bottom: 12px;
+  border-radius: 0 !important;
+}
+.ais-Pagination-item--disabled a,
+.ais-Pagination-item--disabled button {
+  color: #999 !important;
+  cursor: not-allowed;
+  border-bottom: 1px solid transparent !important;
+  opacity: 0.6;
+}
+.ais-Pagination-item--disabled a:hover,
+.ais-Pagination-item--disabled button:hover {
+  color: #999 !important;
+  border-bottom: 1px solid transparent !important;
+}
+
+.ais-InstantSearch {
+  max-width: 960px;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.ais-Hits-item {
+  box-shadow: unset;
+  padding: 10px 5px 0 5px;
+
+  .hit-wrapper {
+    width: 100%;
+    height: 100%;
+    display: block;
+
+    .item-image {
+      position: relative;
+      text-align: center;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      vertical-align: middle;
+      height: 240px;
+      max-width: 100%;
+      width: 213px;
+      &.new-layout {
+        width: 268px;
+      }
+    }
+    .item-image a {
+      margin: 0 auto;
+    }
+    .hit-img {
+      width: auto;
+      height: auto;
+      display: block;
+      max-width: 100%;
+      max-height: 240px;
+      &.new-layout {
+        max-height: 200px;
+      }
+    }
+
+    .details {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      &.new-layout {
+        margin-top: 30px;
+        text-align: center;
+      }
+
+      .hit-name {
+        margin-bottom: 0.3em;
+        font-weight: 500;
+        font-size: 14px;
+        text-align: left;
+        color: #191919;
+        letter-spacing: 1px;
+        line-height: 25px;
+        height: 50px;
+        margin-bottom: 5px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        cursor: pointer;
+        &.new-layout {
+          text-align: center;
+          height: 30px;
+          font-size: 15px;
+        }
+      }
+
+      .hit-description {
+        font-weight: 500;
+        font-size: 20px;
+        margin-bottom: 0.3em;
+        font-family: 'Playfair Display', serif;
+        text-align: left;
+        text-transform: uppercase;
+        cursor: pointer;
+        color: #212529;
+        &.new-layout {
+          text-align: center;
+        }
+      }
+
+      .hit-name:hover,
+      .hit-description:hover {
+        text-decoration: underline;
+        color: currentColor;
+      }
+
+      .hit-price {
+        margin-bottom: 0.5em;
+        font-family: 'FuturaBT-Medium', Book;
+        font-size: 14px;
+        text-align: left;
+        font-weight: bold;
+        min-height: 40px;
+
+        &.new-layout {
+          text-align: center;
+          font-family: 'Montserrat';
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .ais-Hits-item .hit-wrapper .hit-img {
+    max-height: 180px;
+  }
+  .ais-Hits-item .hit-wrapper .item-image {
+    height: 180px;
+  }
+}
+@media only screen and (max-width: 1024px) {
+  .hit-description {
+    height: 40px;
+  }
+  .ais-Hits {
+    padding-right: 0;
+  }
+}

@@ -1,0 +1,20 @@
+<div class="container container-community">
+  <ng-container *ngIf="member?.role_id">
+    <ng-container *ngIf="!pressItemsSold">
+      <app-active-product [member]="member"></app-active-product>
+    </ng-container>
+    <ng-container *ngIf="itemsSold && pressItemsSold">
+      <app-sold-items [soldItems]="itemsSold"></app-sold-items>
+    </ng-container>
+  </ng-container>
+
+  <ng-container *ngIf="userNotFound">
+    <div class="col-md-12 not-found">
+      <p>
+        Member
+        <strong>{{ username }}</strong>
+        not found
+      </p>
+    </div>
+  </ng-container>
+</div>

@@ -1,0 +1,17 @@
+<ng-container *ngIf="isPDP; else PlpTemplate">
+  <app-product-detail-view
+    [routeParam]="routeParamMap$ | async"
+    [currencyConfig]="currencyConfiguration$ | async"
+    [productId]="productId"
+  ></app-product-detail-view>
+</ng-container>
+
+<ng-template #PlpTemplate>
+  <div class="container">
+    <app-listing-products
+      [member]="member"
+      [instantsearchConfig]="instantsearchConfig"
+      [plpConfig]="plpConfig$ | async"
+    ></app-listing-products>
+  </div>
+</ng-template>

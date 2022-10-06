@@ -1,0 +1,55 @@
+<tvb-badge
+  [label]="getSaleBadgeText()"
+  backgroundColor="#EDE9E1"
+  color="#000000"
+  borderRadius="0px"
+  style="white-space: nowrap"
+  *ngIf="showSaleBadge && product?.is_discount == 1 && product?.discount?.toFixed(0) > 3"
+></tvb-badge>
+
+<app-wishlist-icon [hit]="product" [productId]="product?.id" [prdImg]="product?.imgix_image_url"></app-wishlist-icon>
+
+<div class="img-box">
+  <a class="tvb-link img-link" routerLink="/{{ product?.seo_url ?? 'item' }}" [queryParams]="{ pdp: product?.id }">
+    <img class="img" [src]="product?.imgix_image_url ?? product?.image_url" [alt]="product?.name" />
+  </a>
+</div>
+
+<div class="info">
+  <tvb-badge
+    label="We Love"
+    backgroundColor="#EDE9E1"
+    color="#000000"
+    borderRadius="50px"
+    class="we-love-badge"
+    *ngIf="showWeLoveTag"
+  ></tvb-badge>
+
+  <br />
+
+  <div class="brand">
+    <a class="tvb-link" routerLink="/designer/{{ product?.brand_name.toLowerCase() }}">
+      {{ product?.brand_name }}
+    </a>
+  </div>
+
+  <div class="name text-overflow-ellipsis" [title]="product?.name">
+    <a class="tvb-link" routerLink="/{{ product?.seo_url ?? 'item' }}" [queryParams]="{ pdp: product?.id }">
+      {{ product?.name }}
+    </a>
+  </div>
+
+  <br />
+
+  <div class="price">
+    <a class="tvb-link" routerLink="/{{ product?.seo_url ?? 'item' }}" [queryParams]="{ pdp: product?.id }">
+      <div [ngClass]="{ 'text-line-through': product?.is_discount }">
+        {{ productHelper.getPriceOnSiteByCurrency(product, currencyCode) | currency: currencyCode }}
+      </div>
+
+      <div class="discount-price" *ngIf="product?.is_discount">
+        {{ productHelper.getDiscountPriceByCurrency(product, currencyCode) | currency: currencyCode }}
+      </div>
+    </a>
+  </div>
+</div>

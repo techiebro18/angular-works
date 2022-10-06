@@ -1,0 +1,139 @@
+:host {
+  flex: 1;
+
+  .auth-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+
+    .left {
+      display: flex;
+      flex-direction: column;
+      flex-basis: 100%;
+      flex: 1;
+    }
+
+    .right {
+      display: flex;
+      flex-direction: column;
+      flex-basis: 100%;
+      flex: 1;
+      .tabs-container {
+        display: flex;
+        justify-content: center;
+        flex: auto;
+        padding: 10px 0;
+
+        .tabs-container-wrapper {
+          width: 100%;
+          min-width: 50%;
+          justify-content: center;
+
+          .tab-container {
+            width: 100%;
+          }
+
+          ::ng-deep .tab-content {
+            background: #f0f0f0;
+            padding: 1.5em;
+          }
+
+          ::ng-deep .nav-tabs {
+            border: 0;
+            display: flex;
+            flex-direction: row;
+            flex: 1;
+
+            .nav-item {
+              display: flex;
+              flex-direction: column;
+              flex-basis: 100%;
+              flex: 1;
+
+              &:first-child .nav-link.active:after {
+                content: ' ';
+                display: block;
+                height: 1px;
+                width: calc(100% - 2em);
+                background: #cdcdcd;
+                right: 0;
+                bottom: 0;
+                position: absolute;
+              }
+
+              &:nth-child(2) .nav-link.active:after {
+                content: ' ';
+                display: block;
+                height: 1px;
+                width: calc(100% - 2em);
+                background: #cdcdcd;
+                left: 0;
+                bottom: 0;
+                position: absolute;
+              }
+
+              .nav-link {
+                color: #bcbcbc;
+                border-color: #f0f0f0;
+                background: transparent;
+                border-width: 0 0 1px 0;
+                text-align: center;
+                white-space: nowrap;
+                font-family: 'Manrope-SemiBold';
+                font-size: 15px;
+                padding: 1em 0;
+                transition: all ease 0.3s;
+                display: block;
+                position: relative;
+
+                &.active {
+                  background: #f0f0f0;
+                  color: var(--main-color-black);
+                  border-radius: 50px 50px 0 0;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .auth-container {
+    flex-direction: column !important;
+
+    .right {
+      .tabs-container {
+        .tabs-container-wrapper {
+          .nav-tabs {
+            border: 0;
+            display: flex;
+            flex-direction: row;
+            flex: 1;
+
+            .nav-item {
+              display: flex;
+              flex-direction: row;
+              flex-basis: 100%;
+              flex: 0 0 50%;
+              white-space: pre-wrap;
+              flex-wrap: inherit;
+              overflow-wrap: break-word;
+
+              .nav-link {
+                white-space: pre-wrap;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  ::ng-deep .auth-container .right .tabs-container .tabs-container-wrapper .nav-tabs .nav-item .nav-link span {
+    font-size: 12px;
+  }
+}

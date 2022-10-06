@@ -1,0 +1,84 @@
+@import '../my-items-base-style';
+
+.tvb-body {
+  .row.item-row {
+    overflow: hidden;
+
+    .accordion-arrow {
+      display: inline;
+      float: right;
+      margin: 20px;
+      font-family: FuturaBT-Medium, sans-serif;
+      transform: rotate(270deg);
+      transition: all 0.25s linear 0s;
+      cursor: pointer;
+    }
+
+    .travel-line-chart {
+      display: none;
+      transition: all 0.1s linear 0s;
+    }
+
+    &.expanded {
+      .accordion-arrow {
+        transform: rotate(90deg);
+      }
+
+      .travel-line-chart {
+        display: block;
+        width: 100%;
+      }
+    }
+
+    .col-img,
+    .col-name {
+      cursor: pointer;
+    }
+  }
+
+  .col {
+    &.price-on-site {
+      display: block;
+      margin: auto;
+    }
+  }
+}
+
+// Up to phones, tablets
+@media (max-width: 991px) {
+  .mobile {
+    .row.item-row {
+      overflow: hidden;
+
+      .accordion-arrow {
+        display: inline;
+        float: right;
+        margin: 0;
+        font-family: FuturaBT-Medium, serif;
+        transform: rotate(270deg);
+        transition: all 0.25s linear 0s;
+        cursor: pointer;
+      }
+
+      &.expanded {
+        .accordion-arrow {
+          transform: rotate(90deg);
+        }
+      }
+
+      .product-img {
+        margin: 0;
+        padding: 0;
+
+        img {
+          width: 100%;
+          max-width: 110px;
+        }
+      }
+
+      .item-info {
+        padding-right: 0;
+      }
+    }
+  }
+}

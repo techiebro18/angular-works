@@ -1,0 +1,22 @@
+<div class="product-detail-right">
+  <p class="brand">{{ product.brand_name }}</p>
+  <p class="product-name">{{ product.name }}</p>
+
+  <div class="price-wrapper-popup">
+    <p class="price" *ngIf="product.is_discount">
+      Price:
+      <span class="normal-price">{{ price | currency: currencyCode }}</span>
+      <span class="actual-price">{{ discountPrice | currency: currencyCode }}</span>
+    </p>
+
+    <p class="price" *ngIf="!product.is_discount">Price: {{ price | currency: currencyCode }}</p>
+  </div>
+
+  <div class="cta-btn btn-shoping" *ngIf="product && product.stock > 0">
+    <a href="javascript:;" (click)="viewShoppingBag()">{{ 'View Shopping Bag' | translate }}</a>
+  </div>
+
+  <div class="cta-btn btn-shoping back-to-shop" *ngIf="product && product.stock > 0">
+    <a href="javascript:;" (click)="close()">{{ 'Back To Shop' | translate }}</a>
+  </div>
+</div>

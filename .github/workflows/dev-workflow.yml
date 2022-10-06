@@ -1,0 +1,67 @@
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
+name: '[DEV] Build and deploy angular_website to Azure VM'
+
+on:
+  pull_request:
+    branches:
+      - development-old
+    types: [closed]
+  workflow_dispatch:
+
+jobs:
+  build:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    environment: development
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Node.js version
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14.x'
+      - name: npm install, build
+        run: |
+          npm install
+          npm run build:dev-ssr
+      - name: Upload to server via SSH
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USERNAME }}
+          port: 22
+          key: ${{ secrets.FTP_SSH_KEY }}
+          source: ./dist
+          target: '~/githubactions/angular_website/'
+      - name: Final Steps to update file and permission
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USERNAME }}
+          key: ${{ secrets.FTP_SSH_KEY }}
+          port: 22
+          script: |
+            echo "==================== Backing up the old deployment to create the new one ======================="
+            sudo cp -r ~/githubactions/angular_website/dist/. ~/githubactions/angular_website/backup/dist/
+            sudo cp /var/www/html/.htaccess ~/githubactions/angular_website/backup/.htaccess
+            sudo rm -r /var/www/html/dist
+            sudo mkdir /var/www/html/dist
+            sudo cp -r ~/githubactions/angular_website/dist/. /var/www/html/dist/
+              if [ ! -d "/var/www/html/dist" ]
+              then
+              echo "dist folder not found, restoring original"
+              sudo cp -r ~/githubactions/angular_website/backup/dist/. /var/www/html/dist/
+              fi
+            sudo cp ~/githubactions/angular_website/backup/.htaccess /var/www/html/.htaccess
+
+            echo "============ Permission set to -R 777 for /var/www/html/dist ============="
+            sudo chmod -R 777 /var/www/html/dist
+
+            echo "============ Insert node text on top of the main.js file ============="
+            x=`echo '#!/usr/bin/env node'; cat /var/www/html/dist/private-sellers-spa/server/main.js`
+            echo "$x" > /var/www/html/dist/private-sellers-spa/server/main.js
+
+            echo "======== Reload Node service ========="
+            sudo systemctl stop nodejsapp.service
+            sudo systemctl start nodejsapp.service

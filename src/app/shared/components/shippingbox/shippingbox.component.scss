@@ -1,0 +1,23 @@
+:host {
+  .ShippingBox {
+    .item-box {
+      margin-bottom: 20px;
+
+      .title {
+        font-family: 'FuturaBT-Medium';
+        font-size: 15px;
+        color: #00000066;
+        margin-bottom: 4px;
+      }
+
+      .item-description {
+        .paragraph {
+          font-family: 'FuturaBT-Light';
+          font-size: 15px;
+          color: var(--main-color-black);
+          margin-bottom: 15px;
+        }
+      }
+    }
+  }
+}

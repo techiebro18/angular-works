@@ -1,0 +1,104 @@
+:host {
+  .mat-dialog-title {
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    margin-bottom: 24px;
+  }
+
+  .mat-dialog-actions {
+    display: block;
+    padding: 5px 0 0 0;
+    margin: 0;
+    button {
+    }
+  }
+
+  @media only screen and (max-width: 767px) {
+    .mat-dialog-actions {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      button {
+        min-width: 80px;
+      }
+    }
+  }
+}
+
+::ng-deep .mat-dialog-container {
+  box-shadow: none;
+  border-radius: 0px;
+  min-width: 305px;
+}
+::ng-deep .mat-form-field {
+  width: 100%;
+}
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+  border-radius: 0;
+  padding: 0px 10px;
+  background: transparent;
+  border: 1px solid #000;
+  box-shadow: none;
+}
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-infix {
+  padding: 5px 0;
+  line-height: 20px;
+}
+
+::ng-deep .mat-form-field-type-mat-date-range-input .mat-form-field-infix {
+  padding: 5px 0 0 0;
+  line-height: 20px;
+}
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-underline::before {
+  height: 0px;
+}
+
+::ng-deep .mat-form-field.mat-form-field-invalid .mat-form-field-label {
+  color: #191919;
+}
+
+::ng-deep .mat-form-field.mat-form-field-invalid .mat-form-field-ripple,
+.mat-form-field.mat-form-field-invalid .mat-form-field-ripple.mat-accent {
+  background: transparent;
+}
+
+::ng-deep .cdk-overlay-container .cdk-global-overlay-wrapper .cdk-overlay-pane {
+  height: auto !important;
+  max-height: auto !important;
+  max-width: 100% !important;
+}
+
+::ng-deep .datePickerCenter .mat-datepicker-popup {
+  position: absolute;
+  z-index: 9;
+  background: #fff;
+}
+::ng-deep .datePickerDefault .mat-datepicker-popup {
+  position: fixed;
+  top: 50% !important;
+  left: 50% !important;
+  right: inherit !important;
+  transform: translate(-50%, -50%);
+  z-index: 9;
+  background: #fff;
+}
+
+::ng-deep .mat-datepicker-content {
+  box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%),
+    0px 1px 10px 0px rgb(0 0 0 / 12%);
+  background-color: #fff;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+::ng-deep .mat-calendar-content {
+  background: #fff;
+}
+::ng-deep .mat-datepicker-content .mat-calendar {
+  background: #fff;
+  display: inline-block;
+  height: auto !important;
+}
+::ng-deep .mat-calendar-controls {
+  margin: 0 !important;
+}

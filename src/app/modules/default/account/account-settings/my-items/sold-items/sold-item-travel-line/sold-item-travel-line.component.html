@@ -1,0 +1,129 @@
+<div *ngIf="!itemTravelLine && expanded" class="loading">{{ 'Loading' | translate }}...</div>
+
+<div class="timeline-div" [ngClass]="{ expanded: expanded, collapsed: !expanded }" *ngIf="itemTravelLine">
+  <ul>
+    <li class="fake-line desktop"><span class="detailleft"></span></li>
+
+    <ng-container *ngFor="let item of itemTravelLine | keyvalue">
+      <li *ngIf="item.value['status'] !== 'deliver_to_buyer'" [ngClass]="{ active: item.value['val'] == 1 }">
+        <span class="detailleft status-text" *ngIf="item.value['status'] == 'processing'">
+          {{ 'Sale' | translate }}
+        </span>
+
+        <span class="detailleft status-text" *ngIf="item.value['status'] == 'ship_from_seller'">
+          {{ 'Shipping' | translate }}
+        </span>
+
+        <span class="detailleft status-text" *ngIf="item.value['status'] == 'received_tvb'">
+          {{ 'Delivery' | translate }}
+        </span>
+
+        <span class="detailleft status-text" *ngIf="item.value['status'] == 'quality_control'">
+          {{ 'Authentication' | translate }}
+        </span>
+
+        <span class="detailleft status-text" *ngIf="item.value['status'] == 'ship_order_item'">
+          {{ 'Payment' | translate }}
+        </span>
+
+        <span
+          class="dot"
+          [ngClass]="{
+            hollow: orderItem.status == 'pending' && !!orderItem.payout_details.payment_due_date
+          }"
+        ></span>
+
+        <span class="detailright" *ngIf="item.value['status'] == 'processing' && item.value['val'] == 1">
+          {{ 'Sold on' | translate }} {{ item.value['tracking_created_at'] | date: 'dd-MM-yyyy HH:mm' }}
+
+          <br />
+
+          {{ 'Order Item ID' | translate }} {{ orderItem.id }}
+
+          <ng-container *ngIf="orderItem.status == 'processing'">
+            <br />
+            <a (click)="openCancelDialog()" class="link primary">{{ 'Cancel' | translate }}</a>
+          </ng-container>
+
+          <ng-container *ngIf="orderItem.status == 'cancelled'">
+            <br />
+            {{ 'Cancelled on' | translate }} {{ orderItem.updated_at | date: 'dd-MM-yyyy HH:mm' }}
+          </ng-container>
+
+          <ng-container *ngIf="orderItem.status == 'failed'">
+            {{ 'Failed on' | translate }} {{ orderItem.updated_at | date: 'dd-MM-yyyy HH:mm' }}
+          </ng-container>
+        </span>
+
+        <span class="detailright" *ngIf="item.value['status'] == 'ship_from_seller'">
+          <ng-container
+            *ngIf="
+              dhlShipmentLabelLink &&
+              dhlShipmentLabelLink !== '' &&
+              orderItem.status !== 'cancelled' && orderItem.status !== 'failed'
+            "
+          >
+            <a class="link primary" [href]="dhlShipmentLabelLink" target="_blank">
+              {{ 'Download shipping label' | translate }}
+            </a>
+
+            <br />
+            <br />
+          </ng-container>
+
+          <ng-container *ngIf="item.value['val'] == 1 && item.value['tracking_created_at']">
+            {{ 'Shipped to TVB on' | translate }} {{ item.value['tracking_created_at'] | date: 'dd-MM-yyyy HH:mm' }}
+          </ng-container>
+        </span>
+
+        <span class="detailright" *ngIf="item.value['status'] == 'received_tvb' && item.value['val'] == 1">
+          {{ 'Received by TVB on' | translate }} {{ item.value['tracking_created_at'] | date: 'dd-MM-yyyy HH:mm' }}
+        </span>
+
+        <span class="detailright" *ngIf="item.value['status'] == 'quality_control' && item.value['val'] == 1">
+          <ng-container *ngIf="orderItem.qa_status == 'approved'">
+            {{ 'Accepted on' | translate }}
+            {{ item.value['tracking_created_at'] | date: 'dd-MM-yyyy HH:mm' }}
+          </ng-container>
+
+          <ng-container *ngIf="orderItem.qa_status == 'declined'">
+            {{ 'Declined on' | translate }}
+            {{ item.value['tracking_created_at'] | date: 'dd-MM-yyyy HH:mm' }}
+          </ng-container>
+        </span>
+
+        <span class="detailright" *ngIf="item.value['status'] == 'ship_order_item' && item.value['val'] == 1">
+          <div class="text-center">
+            <ng-container *ngIf="orderItem.status == 'pending' && !!orderItem.payout_details.payment_due_date">
+              {{ 'To be Transferred on' | translate }}
+              {{ item.value['tracking_created_at'] | date: 'dd-MM-yyyy HH:mm' }}
+            </ng-container>
+
+            <ng-container *ngIf="orderItem.status == 'completed'">
+              {{ 'Transferred' | translate }}
+            </ng-container>
+          </div>
+
+          <div class="text-center" *ngIf="orderItem.status == 'cancelled'">
+            {{ 'Cancelled' | translate }}
+          </div>
+
+          <div class="text-center" *ngIf="orderItem.status == 'failed'">
+            {{ 'Failed' | translate }}
+          </div>
+
+          <div class="text-center" *ngIf="orderItem.status == 'refunded'">
+            {{ 'Refunded' | translate }}
+          </div>
+
+          <a class="link primary" target="_blank" [href]="commissionInvoiceLink" *ngIf="commissionInvoiceLink">
+            <br />
+            {{ 'Download Invoice' | translate }}
+          </a>
+        </span>
+      </li>
+    </ng-container>
+
+    <li class="fake-line desktop"><span class="detailleft"></span></li>
+  </ul>
+</div>

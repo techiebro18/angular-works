@@ -1,0 +1,271 @@
+.mobile {
+  display: none;
+}
+.bio-content {
+  margin-top: 10px;
+  font-family: 'FuturaBT-Light';
+  font-size: 16px;
+  color: #212529;
+
+  .cover-bg {
+    z-index: 1;
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    height: 111px;
+    background: #f5f4f0;
+
+    .cover-bg-mobile {
+      display: none;
+    }
+  }
+  .cover-image-bg {
+    z-index: 1;
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    img {
+      object-fit: cover;
+      width: 100%;
+      height: 216px;
+    }
+  }
+  .badge {
+    background: var(--main-color-gray-5);
+    font-family: 'Futura', 'Book';
+    font-size: 11px;
+    padding: 6px 12px;
+    border-radius: 15px;
+    text-transform: capitalize;
+    font-weight: 400;
+    height: 22px;
+    position: absolute;
+    bottom: 2em;
+    right: 2em;
+  }
+  .user-avatar {
+    z-index: 3;
+    max-width: 22%;
+    margin: -28px 0 0 15px;
+    padding-right: 160px;
+    &.cover-image {
+      background-color: unset;
+      margin: -28px 0 0 15px;
+    }
+    img {
+      object-fit: cover;
+      border-radius: 50%;
+      width: 142px;
+      height: 142px;
+    }
+    &.tvb {
+      line-height: 142px;
+      img {
+        width: 142px;
+        height: auto;
+        border: 1px solid var(--main-color-gray-5);
+      }
+    }
+  }
+  .user-bio {
+    margin: 30px 0 0 30px;
+    z-index: 3;
+    max-width: 72%;
+    .username {
+      font-family: 'Cormorant-Italic';
+      font-size: 30px;
+      margin-bottom: 5px;
+
+      &.cover-image {
+        color: var(--main-color-black);
+      }
+    }
+    .full-name {
+      margin-top: 10px;
+      font-size: 15px;
+      &.cover-image {
+        margin-top: 0px;
+      }
+      .country {
+        margin-right: 1em;
+        font-family: 'Manrope-Medium';
+        font-size: 12px;
+        &.cover-image {
+          color: var(--main-color-black);
+        }
+
+        img {
+          margin: 0 3px 3px 0;
+        }
+      }
+    }
+    .bio-description {
+      font-size: 14px;
+      font-family: 'FuturaBT-Light';
+      margin: 14px 0;
+    }
+    button.follow-btn {
+      vertical-align: bottom;
+    }
+  }
+}
+.followers-section {
+  border-top: 1px solid #eaeaea;
+  border-bottom: 1px solid #eaeaea;
+  font-family: 'FuturaBT-Light';
+  font-size: 15px;
+  margin-top: 20px;
+  padding: 14px 30px;
+  display: inline-block;
+  z-index: 1;
+  text-align: center;
+
+  .lbl-listed {
+    margin-right: 20px;
+    display: inline-grid;
+  }
+  .lbl-item {
+    margin-left: 0;
+    display: inline-grid;
+  }
+  .hit-number {
+    font-family: 'FuturaBT-Medium';
+    font-size: 20px;
+    margin-bottom: 3px;
+  }
+  .hit-label {
+    color: var(--text-input-grey);
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .badge {
+    right: 1em;
+  }
+  .bio-content {
+    &.cover-image {
+      left: -22px !important;
+    }
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .desktop {
+    display: none;
+  }
+  .mobile {
+    display: unset;
+  }
+  .bio-content {
+    max-width: unset;
+    padding: 0;
+    left: -34px;
+    margin: 0;
+    width: 125%;
+    overflow-x: hidden;
+
+    &.cover-image {
+      width: 125%;
+      max-width: unset;
+      padding: 0;
+      left: -28px;
+      margin: 0;
+    }
+    .cover-bg {
+      z-index: 1;
+      position: relative;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      .cover-bg-mobile {
+        display: flex;
+        object-fit: cover;
+        width: 100%;
+        height: 111px;
+        background-color: #f5f4f0;
+        background-position: center;
+        background-size: cover;
+        background-repeat: repeat;
+      }
+    }
+    .cover-image-bg {
+      right: 32px;
+      img {
+        height: 200px;
+      }
+    }
+    .badge {
+      bottom: 1em;
+      right: 2em;
+    }
+
+    @media only screen and (max-width: 400px) {
+      .badge {
+        right: 1em;
+      }
+    }
+
+    .user-avatar {
+      padding: 0;
+      display: inline-table;
+      text-align: center;
+      width: 100%;
+      min-width: 100%;
+      margin: -60px 0 0 -9px;
+      &.cover-image {
+        margin: -60px -33px 0 -33px !important;
+      }
+      img {
+        width: 119px !important;
+        height: 119px;
+      }
+      &.tvb {
+        line-height: 119px;
+      }
+    }
+    .user-bio {
+      margin: 5px 0 0 -8px;
+      width: 98%;
+      max-width: 98%;
+      padding-bottom: 16px;
+      text-align: center;
+      &.cover-image {
+        margin: 17px 0 0 -30px;
+      }
+
+      .bio-description {
+        padding: 0 20px;
+      }
+    }
+  }
+
+  .followers-section {
+    padding: 10px 1px;
+    width: 107%;
+    font-size: 14px;
+    margin-top: 5px;
+    overflow-x: hidden;
+
+    .lbl-listed,
+    .lbl-item {
+      margin-left: 0;
+      margin-right: 32px;
+      display: inline-grid;
+      text-align: center;
+    }
+    .lbl-item:last-child {
+      margin-right: 2px;
+    }
+    .hit-number {
+      font-size: 18px;
+      margin-bottom: 5px;
+    }
+  }
+
+  .badge {
+    margin-left: 10px !important;
+  }
+}

@@ -1,0 +1,37 @@
+.left-top {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  .lang-count {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    position: relative;
+  }
+  .lang-count > li {
+    display: inline-block;
+    padding: 10px 8px;
+    vertical-align: middle;
+    position: relative;
+  }
+  .lang-count > li:first-child {
+    padding-left: 0;
+  }
+  .lang-count > li > a {
+    display: inline-block;
+    vertical-align: middle;
+    color: #767676;
+    font-size: 13px;
+    text-decoration: none;
+    font-family: 'FuturaBT-Light';
+  }
+  .lang-count > li > a span {
+    font-family: 'FuturaBT-Light';
+  }
+}
+
+@media (min-width: 1200px) {
+  ::ng-deep .header-main .top-bar .container {
+    width: 1170px;
+  }
+}

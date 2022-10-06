@@ -1,0 +1,31 @@
+<div class="ais-Pagination">
+  <ul class="ais-Pagination-list">
+    <li
+      class="ais-Pagination-item ais-Pagination-item--previousPage"
+      [ngClass]="{ 'ais-Pagination-item--disabled': state.currentRefinement === 0 }"
+    >
+      <button (click)="decrementClick()" [disabled]="state.isFirstPage" class="ais-Pagination-link">‹</button>
+    </li>
+
+    <li
+      *ngFor="let page of state.pages; let $index"
+      class="ais-Pagination-item ais-Pagination-item--page"
+      [ngClass]="{ 'ais-Pagination-item--selected': $index === state.currentRefinement }"
+    >
+      <button (click)="clickFunction(page)" class="ais-Pagination-link ais-Pagination-item--selected">
+        <strong *ngIf="page === state.currentRefinement">{{ page + 1 }}</strong>
+        <span *ngIf="page !== state.currentRefinement">{{ page + 1 }}</span>
+      </button>
+    </li>
+
+    <li
+      *ngIf="state.pages"
+      class="ais-Pagination-item ais-Pagination-item--nextPage"
+      [ngClass]="{
+        'ais-Pagination-item--disabled': state.isLastPage
+      }"
+    >
+      <button (click)="incrementClick()" [disabled]="state.isLastPage" class="ais-Pagination-link">›</button>
+    </li>
+  </ul>
+</div>

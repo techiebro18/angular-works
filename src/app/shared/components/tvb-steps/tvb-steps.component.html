@@ -1,0 +1,24 @@
+<div class="tvb-steps">
+  <ul role="tablist">
+    <li *ngFor="let item of steps; let i = index" class="tvb-steps-item">
+      <a
+        class="tvb-menuitem-link"
+        [ngClass]="{
+          'tvb-step-spotlight': item.spotlight,
+          'tvb-step-disabled': item.disabled,
+          'tvb-step-available': item.available && !item.spotlight && !item.completed,
+          'tvb-step-completed': item.completed && !item.spotlight
+        }"
+        (click)="itemClick($event, item, i)"
+      >
+        <span class="tvb-steps-title">{{ item.label }}</span>
+
+        <span class="tvb-steps-dots">
+          <ng-container *ngIf="innerTextVisible">
+            <span class="tvb-steps-number">{{ i + 1 }}</span>
+          </ng-container>
+        </span>
+      </a>
+    </li>
+  </ul>
+</div>

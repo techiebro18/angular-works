@@ -1,0 +1,210 @@
+<!-- This is the PDP View Page -->
+<!-- it should have all components of PDP, such as cursole , similar products, etc -->
+
+<!-- Just for testing -->
+<!-- <p *ngIf="productData">{{productData | json}}</p> -->
+
+<loader></loader>
+
+<div class="container">
+  <div class="breadcrumbContainer">
+    <a class="breadcrumbLink breadcrumbText" routerLink="/">{{ 'Home' | translate }}</a>
+    <span class="chevron_forward">&nbsp;</span>
+    <a class="breadcrumbLink breadcrumbText" routerLink="/shop/{{ breadcrumbParentCatLink }}">
+      {{ breadcrumbParentCat | titlecase }}
+    </a>
+    <div class="chevron_forward">&nbsp;</div>
+    <a class="breadcrumbLink breadcrumbText" routerLink="/{{ breadcrumbParentCatLink }}/{{ breadcrumbChildCatLink }}">
+      {{ breadcrumbChildCat | titlecase }}
+    </a>
+    <div class="chevron_forward">&nbsp;</div>
+    <a
+      class="breadcrumbLink breadcrumbText"
+      *ngIf="this.productData"
+      routerLink="/{{ this.productData.motherpage_seo_url }}"
+    >
+      {{ breadcrumbProductName | titlecase }}
+    </a>
+  </div>
+  <br />
+  <br />
+  <div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+      <app-images-carousel *ngIf="images" [images]="images" [discovers]="productData.discovers"></app-images-carousel>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+      <div class="product-detail-info">
+        <app-product-details-heading
+          *ngIf="productData"
+          [product]="productData"
+          [language]="currentLanguage"
+          [currencyCode]="currencyConfig.plpCurrency"
+        ></app-product-details-heading>
+        <ng-container *ngIf="loggedInStatus && productData?.commission_user_id === user$?.value?.id">
+          <tvb-seller-vision
+            [makeOfferEnabled]="makeOfferEnabled"
+            [sellerOfferEnabled]="sellerOfferEnabled"
+            [product]="productData"
+            (reloadProduct)="reloadProduct()"
+          ></tvb-seller-vision>
+        </ng-container>
+        <ng-container
+          *ngIf="!loggedInStatus || (loggedInStatus && productData?.commission_user_id !== user$?.value?.id)"
+        >
+          <h3 class="ind-sell">
+            <div class="inline img-auth">
+              <img src="/assets/images/security.svg" aria-hidden="true" />
+            </div>
+            <div class="inline text-auth">
+              <a class="authlinebadge" (click)="openAuthenticityDialog()">
+                <div>{{ 'The Real Deal' | translate }}</div>
+              </a>
+              <div>{{ 'We authenticate all purchases before delivery' | translate }}</div>
+            </div>
+          </h3>
+
+          <div class="btngroup">
+            <div class="cta-btn btn-shoping" *ngIf="productData && productData.stock <= 0">
+              <a>{{ 'Out of stock' | translate }}</a>
+            </div>
+
+            <div class="cta-btn btn-shoping" *ngIf="productData && productData.stock > 0">
+              <a href="javascript:;" (click)="addToCartClick(productId)">
+                {{ 'Add to shopping' | translate }}
+              </a>
+            </div>
+
+            <div
+              class="cta-btn-group make-offer"
+              *ngIf="makeOfferEnabled && sellerOfferEnabled && productData && productData.stock > 0"
+            >
+              <app-make-offer-button
+                *ngIf="productData"
+                [product]="productData"
+                [language]="currentLanguage"
+                [offerPercentage]="offerSetting.value"
+                [currency]="currencyConfig.plpCurrency"
+                [currencySymbol]="currencyConfig.plpCurrencySymbol"
+                [sellerId]="sellerId"
+                [position]="position"
+                style="width: 100%"
+              ></app-make-offer-button>
+            </div>
+
+            <div class="cta-btn btn-wishlist">
+              <app-wishlist-button
+                *ngIf="productData"
+                [product]="productData"
+                [showAsLink]="true"
+                [invertHeart]="true"
+                [page]="'PDP'"
+                (callbackEvent)="getProductDetail()"
+              ></app-wishlist-button>
+            </div>
+          </div>
+          <div *ngIf="productData?.total_wishlisted > 0" class="label-saved">
+            {{ productData.total_wishlisted }} {{ 'people saved this item' | translate }}
+          </div>
+          <ng-container *ngIf="!followedPriceDrop">
+            <div class="box-price-drop" (click)="followPriceDrop()">
+              <img src="assets/images/icons/bell.svg" class="bell-icon" />
+              {{ 'Follow price reductions' | translate }}
+            </div>
+          </ng-container>
+          <ng-container *ngIf="followedPriceDrop">
+            <div class="box-price-drop" (click)="unfollowPriceDrop()">
+              <img src="assets/images/icons/bell_black.svg" class="bell-icon" />
+              {{ 'You follow price reductions' | translate }}
+            </div>
+          </ng-container>
+        </ng-container>
+        <tvb-seller-information
+          *ngIf="(sellerId == 0 || sellerId > 0) && productData"
+          [userId]="sellerId"
+          [product]="productData"
+        ></tvb-seller-information>
+
+        <app-product-details-tabs *ngIf="productData" [product]="productData"></app-product-details-tabs>
+      </div>
+    </div>
+  </div>
+
+  <!-- RECOMMENDED PRODUCTS -->
+  <div class="product-detail--recommended-products container">
+    <div class="row similar-products" *ngIf="similarProducts && similarProducts.data.length">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="title-heading">
+          <h2>{{ 'Similar Styles' | translate }}</h2>
+        </div>
+        <owl-carousel-o [options]="customOptions">
+          <ng-container *ngFor="let hit of similarProducts.data">
+            <ng-template carouselSlide [id]="hit.id">
+              <div class="ais-Hits-item">
+                <tvb-product-card
+                  class="hit-wrapper"
+                  [hit]="hit"
+                  [language]="currentLanguage"
+                  [currency]="currencyConfig.plpCurrency"
+                  [currencySymbol]="currencyConfig.plpCurrencySymbol"
+                  [newLayout]="true"
+                ></tvb-product-card>
+              </div>
+            </ng-template>
+          </ng-container>
+        </owl-carousel-o>
+      </div>
+    </div>
+
+    <div class="row you-may-also-like" *ngIf="sameBrandProducts && sameBrandProducts.data.length">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="title-heading">
+          <h2>{{ 'You may also like' | translate }}</h2>
+        </div>
+        <owl-carousel-o [options]="customOptions">
+          <ng-container *ngFor="let hit of sameBrandProducts.data">
+            <ng-template carouselSlide [id]="hit.id">
+              <div class="ais-Hits-item">
+                <tvb-product-card
+                  class="hit-wrapper"
+                  [hit]="hit"
+                  [language]="currentLanguage"
+                  [currency]="currencyConfig.plpCurrency"
+                  [currencySymbol]="currencyConfig.plpCurrencySymbol"
+                  [newLayout]="true"
+                ></tvb-product-card>
+              </div>
+            </ng-template>
+          </ng-container>
+        </owl-carousel-o>
+      </div>
+    </div>
+  </div>
+  <div
+    class="modal product-shopping-popup"
+    id="checkoutpopup"
+    [style.display]="trashModel ? 'block' : 'none'"
+    (click)="ClickedOut($event)"
+  >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="modal-header">
+            <h3>{{ 'ITEM SUCCESSFULLY ADDED' | translate }}</h3>
+          </div>
+          <div class="modal-body-inner">
+            <div class="product-detail-left" *ngIf="productData && productData.imgix_image_url">
+              <img src="{{ productData.imgix_image_url }}" />
+            </div>
+            <app-view-cart-popup
+              *ngIf="productData"
+              [product]="productData"
+              [language]="currentLanguage"
+              [currencyCode]="currencyConfig.plpCurrency"
+              (backToShop)="closePopup()"
+            ></app-view-cart-popup>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

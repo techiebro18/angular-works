@@ -1,0 +1,446 @@
+.account-details {
+  .form-title {
+    border-bottom: 1px solid var(--steps-gray);
+    padding-top: 20px;
+    margin-bottom: 40px;
+  }
+
+  .form-group-title {
+    font-size: 20px;
+    font-weight: 400;
+    padding-bottom: 15px;
+    font-family: 'Playfair Display', serif;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .get-paid-form {
+    padding: 0 50px;
+
+    .bank-account-row {
+      border-bottom: 1px solid var(--steps-gray);
+      margin-bottom: 20px;
+
+      .left-content {
+        margin: 20px 0;
+
+        .title-counter {
+          font-family: 'system-ui';
+          font-weight: 600;
+          font-size: 14px;
+        }
+      }
+
+      .right-content {
+        display: flex;
+        align-items: center;
+
+        a.stripe-action-btn {
+          padding: 10px 12px;
+        }
+      }
+    }
+
+    .add-new-bank-account-div {
+      margin: 20px auto;
+
+      a {
+        font-family: 'Playfair Display', serif;
+        font-size: 20px;
+        text-transform: uppercase;
+        text-decoration: none;
+      }
+    }
+
+    .submit-btn,
+    .back-btn {
+      min-width: 220px;
+      left: 20px;
+      float: right;
+    }
+  }
+
+  .top-sub-tabs {
+    font-size: 14px;
+    font-weight: inherit;
+    text-align: center;
+    margin-bottom: 40px;
+
+    span {
+      position: relative;
+      display: inline-block;
+      margin: 0 15px;
+    }
+
+    span:after {
+      content: '';
+      width: 11px;
+      height: 11px;
+      background-color: rgba(0, 0, 0, 0.3);
+      position: absolute;
+      border-radius: 30px;
+      margin: 10px auto;
+      left: 0;
+      right: 0;
+      top: 21px;
+    }
+
+    span.active:after {
+      background-color: rgba(0, 0, 0, 1);
+    }
+  }
+
+  .description {
+    margin-bottom: 15px;
+    margin-top: 30px;
+  }
+
+  .dropdown-date {
+    padding-top: 1px;
+    width: 100%;
+
+    .date-field {
+      height: 100%;
+      width: 85%;
+    }
+  }
+
+  .preference-tab {
+    margin-top: 50px;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .dropdown-input {
+    border: 1px solid var(--steps-gray);
+    width: 85%;
+    height: 50px;
+    padding: 10px;
+    box-sizing: inherit;
+  }
+
+  .dropdown-select {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .error-message {
+    font-size: 12px;
+    color: var(--form-error);
+  }
+
+  .dropdown-field-2 {
+    width: 85%;
+    height: 40px;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    height: 44px;
+    line-height: 30px;
+    width: 240px;
+    font-size: 12px;
+  }
+
+  .btn-submit {
+    float: right;
+    margin-left: 20px;
+  }
+
+  .buttons-row {
+    margin-top: 40px;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  input[type='tel'].secondary,
+  input[type='text'].secondary,
+  input[type='password'].secondary,
+  input[type='email'].secondary {
+    width: 85%;
+    border: 1px solid var(--steps-gray);
+    padding-left: 10px;
+  }
+
+  input[type='number'].secondary {
+    border: 1px solid var(--steps-gray);
+    padding-left: 10px;
+  }
+
+  .contact_info {
+    .form-group {
+      text-align: right;
+
+      .description,
+      .dropdown-field {
+        text-align: left;
+        padding-left: 15%;
+      }
+
+      span {
+        text-align: left;
+        display: inline-block;
+        width: 85%;
+      }
+    }
+
+    .form-group-title-2 {
+      padding-left: 15%;
+    }
+
+    .billing-address-group {
+      padding-left: 15%;
+
+      .form-group {
+        margin-bottom: 0;
+
+        span {
+          text-align: left;
+          display: inline-block;
+          width: 100%;
+        }
+      }
+
+      .description {
+        padding-left: 0;
+      }
+
+      .dropdown-field {
+        padding-left: 0;
+      }
+
+      .dropdown-select {
+        height: 40px;
+      }
+
+      input[type='text'].secondary,
+      input[type='password'].secondary,
+      input[type='email'].secondary,
+      input[type='number'].secondary,
+      input.mat-datepicker-input.secondary {
+        width: 100%;
+      }
+    }
+  }
+
+  .input-container.mobile-number {
+    display: flex;
+    justify-content: space-between;
+    width: 85%;
+    height: 40px;
+    border: none;
+    margin-left: unset;
+    padding: unset;
+
+    .phone-code {
+      display: flex;
+      width: unset;
+      flex-grow: 1;
+    }
+
+    .mobile-number {
+      margin-left: 10px;
+      display: flex;
+      flex-grow: 2;
+      width: auto;
+    }
+  }
+
+  .phone-code {
+    width: 30%;
+    height: 40px;
+    float: left;
+    font-size: 12px;
+
+    .phonecode-label {
+      font-size: 12px;
+    }
+
+    .phonecode-option {
+      font-size: 12px;
+      padding: 0 2px;
+    }
+  }
+
+  .add-bank-account-btns {
+    button {
+      width: auto;
+    }
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .account-details {
+    padding: 0 15px;
+
+    .get-paid-form {
+      padding: 0;
+
+      .bank-account-row {
+        .left-content {
+          .title-counter {
+          }
+        }
+
+        .right-content {
+          justify-content: center;
+          margin-bottom: 30px;
+
+          a.stripe-action-btn {
+            font-size: 15px;
+            padding: 10px 15px;
+          }
+        }
+      }
+    }
+
+    .submit-btn,
+    .back-btn {
+      float: none;
+      min-width: auto;
+      width: 100%;
+      flex: 1;
+      margin-top: 40px;
+    }
+
+    .form-title {
+      text-align: center;
+      padding-bottom: 15px;
+    }
+
+    .input-container.mobile-number {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      height: 40px;
+      border: none;
+      margin-left: unset;
+      padding: unset;
+
+      .mobile-number {
+        margin-left: 10px;
+        display: flex;
+        flex-grow: 2;
+      }
+
+      .phone-code {
+        width: unset;
+        display: flex;
+        flex-grow: 1;
+      }
+    }
+
+    .dropdown-input {
+      width: 100%;
+    }
+
+    .dropdown-date {
+      width: 100%;
+
+      .date-field {
+      }
+    }
+
+    .form-group-title {
+      margin-top: 50px;
+      margin-bottom: 30px;
+      padding-bottom: 0;
+    }
+
+    .dropdown-field-2 {
+      width: 100%;
+    }
+
+    input[type='tel'].secondary,
+    input[type='text'].secondary,
+    input[type='password'].secondary,
+    input[type='email'].secondary,
+    input[type='number'].secondary,
+    input.mat-datepicker-input.secondary {
+      width: 100%;
+    }
+
+    .dob-input {
+      width: 100%;
+    }
+
+    .contact_info {
+      .form-group {
+        text-align: left;
+
+        .description,
+        .dropdown-field {
+          text-align: left;
+          padding-left: 0%;
+        }
+      }
+
+      .form-group-title-2 {
+        padding-left: 0%;
+      }
+
+      .billing-address-group {
+        padding-left: 0%;
+      }
+    }
+  }
+}
+
+::ng-deep .ng-select .ng-arrow-wrapper .ng-arrow {
+  border: none;
+}
+
+::ng-deep .ng-select .ng-arrow-wrapper .ng-arrow:after {
+  content: '\f107';
+  display: inline-block;
+  font: normal normal normal 30px/1 FontAwesome;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translate(-0, -50%);
+  text-align: center;
+  color: var(--main-color-black);
+}
+
+::ng-deep .mat-form-field-underline {
+  display: none;
+}
+
+::ng-deep .ng-dropdown-panel.ng-select-top {
+  bottom: calc(100% - 0em);
+}
+
+::ng-deep .ng-dropdown-panel.ng-select-bottom {
+  top: calc(100% - 0em);
+}
+
+::ng-deep .ng-select {
+  padding-bottom: 0;
+}
+
+::ng-deep .ng-dropdown-panel {
+  z-index: 998 !important;
+}
+
+::ng-deep .ng-select.ng-select-opened .ng-select-container {
+  z-index: 998 !important;
+}
+
+::ng-deep tvb-badge {
+  position: static;
+  display: inline;
+  margin-left: 20px;
+
+  span.tvb-badge {
+    position: static !important;
+  }
+}
+
+::ng-deep .phone-code.ng-select.ng-select-single .ng-select-container .ng-value-container {
+  margin: auto;
+  border: none;
+
+  .ng-value {
+    margin: auto;
+  }
+}

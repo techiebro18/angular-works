@@ -1,0 +1,237 @@
+a {
+  margin: 0;
+  padding: 0;
+  color: #191919;
+}
+p {
+  line-height: 27px;
+  font-size: 16px;
+  color: #191919;
+}
+.week_para {
+  overflow-wrap: anywhere;
+}
+.allArticles {
+  position: relative;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 100%;
+  display: inline-block;
+  vertical-align: top;
+}
+.allArticles .container {
+  max-width: 1170px;
+}
+.archivesingleimage {
+  padding-bottom: 50%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: block;
+  height: 555px;
+  overflow: hidden;
+}
+.archivesingleimage img {
+  width: 100%;
+  object-fit: cover;
+  height: 500px;
+}
+.hoverContent {
+  background: white;
+  position: absolute;
+  top: 60px;
+  left: -80px;
+  padding: 50px;
+  height: 100%;
+  bottom: 0;
+  min-height: 500px;
+}
+.hoverContent {
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+  background: white;
+  position: absolute;
+  top: 60px;
+  left: -80px;
+  padding: 50px;
+  height: 100%;
+  bottom: 0;
+  min-height: 500px;
+}
+.hoverContent h2 {
+  font-size: 14px;
+  padding-top: 15px;
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+.hoverContent p.category {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 13px;
+  margin-top: 5px;
+  margin-bottom: 2px;
+  line-height: 20px;
+}
+.hoverContent p.postDate {
+  font-size: 12px;
+  margin: 0;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  color: #8a8a8a;
+}
+.hoverContent p.category {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 13px;
+  margin-top: 5px;
+  margin-bottom: 2px;
+}
+.hoverContent .archive-btn {
+  padding-top: 100px;
+}
+.hoverContent .archive-btn a {
+  border: 1px solid transparent;
+  text-align: center;
+  color: #fff;
+  text-transform: uppercase;
+  text-decoration: none;
+  background-color: #191919;
+  display: inline-block;
+  line-height: 38px;
+  padding: 0 10px;
+  min-width: 110px;
+  font-size: 14px;
+}
+.hoverContent .archive-btn a:hover {
+  background-color: #666;
+  color: #fff;
+}
+
+.page-title {
+  width: 100%;
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  text-align: center;
+}
+.page-title > h2 {
+  font-size: 18px;
+  padding-top: 15px;
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  display: none;
+}
+.content .articleImg {
+  display: block;
+  position: relative;
+  transition: all 0.2s ease-in;
+}
+
+.content .articleImg img {
+  mix-blend-mode: multiply;
+  min-width: 100%;
+  width: 100%;
+  object-fit: cover;
+  //   max-height: 500px;
+}
+.content .category {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 11px;
+  margin-top: 5px;
+  margin-bottom: 2px;
+  line-height: 20px;
+}
+.content .entry-title {
+  margin-top: 0;
+  margin-bottom: 5px;
+  font-size: 18px;
+  font-family: 'Playfair Display', serif;
+  color: #191919;
+  font-weight: 500;
+  line-height: 19.8px;
+}
+.content .postDate {
+  font-size: 10px;
+  margin: 0;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  color: #8a8a8a;
+}
+.masonry {
+  transition: all 0.5s ease-in-out;
+  column-gap: 30px;
+  column-fill: initial;
+}
+.masonry .brick {
+  margin-bottom: 30px;
+  display: inline-block;
+  vertical-align: top;
+}
+.masonry .brick img {
+  transition: all 0.5s ease-in-out;
+  backface-visibility: hidden;
+}
+.masonry .brick:hover img {
+  opacity: 0.75;
+}
+.masonry.bordered {
+  column-rule: 1px solid #eee;
+  column-gap: 50px;
+}
+.masonry.bordered .brick {
+  padding-bottom: 25px;
+  margin-bottom: 25px;
+  border-bottom: 1px solid #eee;
+}
+.masonry.gutterless {
+  column-gap: 0;
+}
+.masonry.gutterless .brick {
+  margin-bottom: 0;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+  .masonry {
+    column-count: 2;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .masonry {
+    column-count: 2;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .desc {
+    font-size: 1.25em;
+  }
+  .intro {
+    letter-spacing: 1px;
+  }
+  .masonry {
+    column-count: 3;
+  }
+}
+@media (max-width: 1023px) {
+  #categoryMenu {
+    z-index: 111 !important;
+  }
+  .gallery-wrapper {
+    margin-top: 5px;
+  }
+  .gallery-wrapper li img {
+    max-width: 100% !important;
+  }
+  .hoverContent {
+    padding-left: 0px;
+    padding-right: 0px;
+    left: 0;
+  }
+
+  .hoverContent .archive-btn a {
+    max-width: 100% !important;
+  }
+}

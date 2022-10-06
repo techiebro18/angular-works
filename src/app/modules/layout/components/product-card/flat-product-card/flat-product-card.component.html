@@ -1,0 +1,123 @@
+<div class="row col-md-12 flat-card desktop">
+  <div class="col-md-2 img-box">
+    <a
+      routerLink="/{{ hit.styles_seo_url_en }}"
+      [queryParams]="{ pdp: hit.id, position: hit.__position }"
+      [attr.data-price]="hit[regularPriceAttribute]"
+      [attr.data-discounted_price]="hit[discountedPriceAttribute]"
+    >
+      <ng-container *appShellNoRender>
+        <img
+          class="hit-img img-responsive"
+          *ngIf="hit.imgix_image_url"
+          src="{{ hit.imgix_image_url }}"
+          alt="{{ hit.name }}"
+        />
+        <img
+          class="hit-img img-responsive"
+          *ngIf="!hit.imgix_image_url && hit.imgix_image_url_uploads"
+          src="{{ hit.imgix_image_url_uploads }}"
+          alt="{{ hit.name }}"
+        />
+        <img
+          class="hit-img img-responsive"
+          *ngIf="!hit.imgix_image_url && !hit.imgix_image_url_uploads"
+          [src]="defaultImageUrl"
+          alt="{{ hit.name }}"
+        />
+      </ng-container>
+    </a>
+  </div>
+  <div class="col-md-2">
+    <span class="product-name" [title]="hit.name">{{ hit.name }}</span>
+  </div>
+  <div class="col-md-2" [ngClass]="{ 'line-through': hit.is_discount == 1 }">
+    {{ hit[regularPriceAttribute] | currency: currency }}
+  </div>
+  <div class="col-md-2" [ngClass]="{ discount: hit.is_discount == 1 }">
+    <ng-container *ngIf="hit[regularPriceAttribute] != hit[discountedPriceAttribute]">
+      {{ hit[discountedPriceAttribute] | currency: currency }}
+    </ng-container>
+  </div>
+  <div class="col-md-2" [ngClass]="{ discount: hit.is_discount == 1 }">
+    <ng-container *ngIf="hit.is_discount == 1">
+      {{ hit[regularPriceAttribute] - hit[discountedPriceAttribute] | currency: currency }}
+    </ng-container>
+  </div>
+  <div class="col-md-2">
+    <app-make-offer-button
+      [product]="hit"
+      [language]="language"
+      [offerPercentage]="offerSetting.value"
+      [currency]="currencyConfig.plpCurrency"
+      [currencySymbol]="currencyConfig.plpCurrencySymbol"
+      [sellerId]="hit.commission_user_id"
+      [ngStyle]="{ visibility: makeOfferEnabled ? 'visible' : 'hidden' }"
+      position="0"
+    ></app-make-offer-button>
+    <div class="remove">
+      <img src="assets/images/icons/trash.svg" (click)="unfollowPriceDrop()" />
+    </div>
+  </div>
+</div>
+
+<div class="row col-md-12 flat-card mobile">
+  <div class="col-4 img-box">
+    <a
+      routerLink="/{{ hit.styles_seo_url_en }}"
+      [queryParams]="{ pdp: hit.id, position: hit.__position }"
+      [attr.data-price]="hit[regularPriceAttribute]"
+      [attr.data-discounted_price]="hit[discountedPriceAttribute]"
+    >
+      <ng-container *appShellNoRender>
+        <img
+          class="hit-img img-responsive"
+          *ngIf="hit.imgix_image_url"
+          src="{{ hit.imgix_image_url }}"
+          alt="{{ hit.name }}"
+        />
+        <img
+          class="hit-img img-responsive"
+          *ngIf="!hit.imgix_image_url && hit.imgix_image_url_uploads"
+          src="{{ hit.imgix_image_url_uploads }}"
+          alt="{{ hit.name }}"
+        />
+        <img
+          class="hit-img img-responsive"
+          *ngIf="!hit.imgix_image_url && !hit.imgix_image_url_uploads"
+          [src]="defaultImageUrl"
+          alt="{{ hit.name }}"
+        />
+      </ng-container>
+    </a>
+  </div>
+  <div class="col-8 content-box">
+    <div class="col-12 brand">
+      {{ hit.brand_name }}
+      <div class="remove">
+        <img src="assets/images/icons/trash.svg" (click)="unfollowPriceDrop()" />
+      </div>
+    </div>
+    <div class="col-12">
+      {{ hit.name }}
+    </div>
+    <div class="col-12 regular-price" [ngClass]="{ 'line-through': hit.is_discount == 1 }">
+      Original price: {{ hit[regularPriceAttribute] | currency: currency }}
+    </div>
+    <div class="col-12" [ngClass]="{ discount: hit.is_discount == 1 }">
+      Price now: {{ hit[discountedPriceAttribute] | currency: currency }}
+    </div>
+  </div>
+  <div class="col-12 make-offer">
+    <app-make-offer-button
+      [product]="hit"
+      [language]="language"
+      [offerPercentage]="offerSetting.value"
+      [currency]="currencyConfig.plpCurrency"
+      [currencySymbol]="currencyConfig.plpCurrencySymbol"
+      [sellerId]="hit.commission_user_id"
+      [position]="hit.__position"
+      [ngStyle]="{ visibility: makeOfferEnabled ? 'visible' : 'hidden' }"
+    ></app-make-offer-button>
+  </div>
+</div>

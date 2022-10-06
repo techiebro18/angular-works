@@ -1,0 +1,195 @@
+:host {
+  .my-items-container {
+    flex: 1;
+    flex-direction: column;
+    .back-link {
+      cursor: pointer;
+      text-decoration: none;
+      color: black;
+      margin-bottom: 20px;
+    }
+  }
+  a {
+    text-decoration: none;
+    color: black;
+  }
+
+  .items-table-container {
+    width: 100%;
+    .payout-details-row {
+      .half {
+        width: 50%;
+      }
+      table {
+        border-spacing: 0px;
+        thead {
+          tr {
+            th {
+              border: 0px;
+              font-family: 'FuturaBT-Light';
+              white-space: nowrap;
+              color: #212529;
+              font-size: 12px;
+            }
+          }
+        }
+        tbody {
+          tr {
+            td {
+              border: 0px;
+              font-family: 'FuturaBT-Light';
+              font-size: 12px;
+            }
+            th {
+              border: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .items-container {
+    flex-direction: column;
+    flex-wrap: wrap;
+    .view-switch-toolbar {
+      justify-content: flex-end;
+      .mat-icon {
+        cursor: pointer;
+      }
+    }
+    .count {
+      margin-top: 5px;
+    }
+    .items-list-container {
+      flex-direction: row;
+      flex-wrap: wrap;
+      .product-item-wrapper {
+        justify-content: center;
+        margin-top: 50px;
+        .product-list-item {
+          flex: 0 0 300px;
+          margin-bottom: 50px;
+        }
+      }
+    }
+    .items-table-container {
+      table.item-list-table {
+        tr {
+          border: 0;
+          td,
+          th {
+            border: 0;
+            vertical-align: middle;
+            img {
+              cursor: pointer;
+            }
+          }
+          .seller_items_name {
+            cursor: pointer;
+          }
+          .seller_items_sku {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+    &.mobile {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      .product-item-wrapper {
+        .product-list-item {
+          flex: 0 0 400px;
+          height: 400px;
+        }
+      }
+    }
+    .confirmation-message-popup {
+      .modal-dialog {
+        height: 100%;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 100%;
+        .modal-content {
+          transform: translate(-50%, -50%);
+          .modal-header {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            border-bottom: 0px;
+            .close {
+              z-index: 1024;
+              position: absolute;
+              right: 10px;
+              top: 0;
+            }
+          }
+          .modal-body {
+            padding: 50px 0;
+            h2 {
+              text-align: center;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 992px) {
+    .items-container {
+      .items-list-container {
+        .product-item-wrapper {
+          margin-top: 0px;
+          .product-list-item {
+            min-height: auto;
+            height: auto;
+          }
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 767px) {
+    .view-switch-toolbar {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly !important;
+    }
+    .view-switch-toolbar > input {
+      margin-right: 15px;
+    }
+
+    .product-list-item {
+      margin-bottom: 0px;
+      height: auto;
+    }
+
+    .view-switch-toolbar.list-grid.flex.ng-star-inserted {
+      display: none;
+    }
+
+    .items-container .items-list-container .product-item-wrapper .product-list-item {
+      flex: 1 100%;
+      margin-bottom: 0px;
+      min-height: inherit;
+      height: auto;
+    }
+    .items-container .items-list-container .product-item-wrapper {
+      margin-top: 0px;
+    }
+
+    .mobile .product-item .product-data {
+      height: initial;
+    }
+    .confirmation-message-popup {
+      .modal-dialog {
+        max-width: 280px;
+      }
+    }
+    ::ng-deep .mat-paginator-container {
+      justify-content: space-between;
+    }
+  }
+}

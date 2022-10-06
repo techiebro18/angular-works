@@ -1,0 +1,155 @@
+<div
+  [hidden]="isHidden || (state?.items?.length == 0 && state?.isFromSearch == false)"
+  class="tvb-RefinementList ignore-click-outside"
+>
+  <!-- Title -->
+  <div *ngIf="platform$ | async as platfrm">
+    <div class="tvb-RefinementList--Header" role="tab" [ngClass]="{ active: !isCollapsed }">
+      <h4 class="title">
+        <!-- <button (click)="toggleCollapse()" class="collapseBtn" type="button" data-toggle="collapse" [attr.data-targe]="'#'+name"
+      [attr.aria-expanded]="!isCollapsed"> -->
+        <a
+          (click)="toggleCollapse()"
+          class="collapseBtn"
+          role="button"
+          data-toggle="collapse"
+          data-target="#{{ name }}"
+          [attr.aria-expanded]="isCollapsed"
+        >
+          <span>
+            {{ title | translate }}
+            <i
+              *ngIf="name == 'shoesSize' && platfrm === 'Desktop'"
+              (click)="openShoesDialog()"
+              class="fa fa-info-circle iclass"
+            ></i>
+            <i
+              *ngIf="name == 'clothingSize' && platfrm === 'Desktop'"
+              (click)="openDialog()"
+              class="fa fa-info-circle iclass"
+            ></i>
+          </span>
+          <svg
+            *ngIf="platfrm === 'Desktop'"
+            enable-background="new 0 0 100 100"
+            id="Layer_1"
+            version="1.1"
+            viewBox="0 0 100 100"
+            xml:space="preserve"
+            xmlns="https://www.w3.org/2000/svg"
+            xmlns:xlink="https://www.w3.org/1999/xlink"
+          >
+            <polygon
+              fill="#010101"
+              points="30.4,20.6 66.7,49.1 30.4,77.6 31.6,79.1 69.9,49.1 31.6,19.1 30.4,20.6 "
+            ></polygon>
+          </svg>
+
+          <svg
+            *ngIf="platfrm === 'Mobile'"
+            enable-background="new 0 0 100 100"
+            id="Layer_1"
+            version="1.1"
+            viewBox="0 0 100 100"
+            xml:space="preserve"
+            xmlns="https://www.w3.org/2000/svg"
+            xmlns:xlink="https://www.w3.org/1999/xlink"
+            class="mobile-arrow"
+            [class.active]="!isCollapsed"
+          >
+            <polygon
+              fill="#010101"
+              points="30.4,20.6 66.7,49.1 30.4,77.6 31.6,79.1 69.9,49.1 31.6,19.1 30.4,20.6 "
+            ></polygon>
+          </svg>
+        </a>
+        <!-- </button> -->
+      </h4>
+      <span *ngIf="platfrm === 'Mobile'">{{ shownamefinal }}</span>
+    </div>
+    <div
+      [ngClass]="
+        platfrm === 'Mobile' && !isCollapsed
+          ? 'tvb-RefinementList--ListContainer collapsed'
+          : 'tvb-RefinementList--ListContainer'
+      "
+      id="{{ name }}"
+      [class.collapsed]="isCollapsed"
+    >
+      <!-- SearchBox widget here -->
+      <div
+        class="tvb-SearchBox"
+        [hidden]="
+          (columnsNum == 1 && state?.items?.length < 6 && state?.isFromSearch == false) ||
+          (columnsNum == 2 && state?.items?.length / 2 < 6 && state?.isFromSearch == false)
+        "
+      >
+        <form novalidate="" class="tvb-SearchBox-form">
+          <input
+            autocapitalize="off"
+            autocorrect="off"
+            role="textbox"
+            spellcheck="false"
+            type="text"
+            class="tvb-SearchBox-input"
+            placeholder="{{ 'Search' | translate }} {{ name | camelToSentenceCase | translate }}..."
+            (input)="state.searchForItems($any($event.target).value)"
+          />
+        </form>
+      </div>
+
+      <ul class="tvb-RefinementList--list" *ngIf="columnsNum == 1">
+        <li *ngFor="let item of state.items" class="item" [ngClass]="{ selected: item.isRefined }">
+          <label class="label">
+            <input
+              class="checkbox ignore-click-outside"
+              type="checkbox"
+              (click)="updateFilterList($event, item.value, item.label, item.isRefined)"
+              [checked]="item.isRefined"
+            />
+            <span
+              class="item-color"
+              *ngIf="name == 'colors'"
+              [ngStyle]="{
+                'background-color': colorService.allcolors[item.value]
+              }"
+            ></span>
+            <span class="labelText ignore-click-outside">{{ item.label | replace: '-':' ' | catalogDictionary }}</span>
+            <span class="labelCount ignore-click-outside">{{ item.count }}</span>
+          </label>
+        </li>
+      </ul>
+      <div *ngIf="columnsNum == 2" class="tvb-RefinementList--list row">
+        <ul class="col">
+          <li *ngFor="let item of state.items; let i = index" class="item" [ngClass]="{ selected: item.isRefined }">
+            <label class="label" *ngIf="i < state.items.length / 2">
+              <input
+                class="checkbox ignore-click-outside"
+                type="checkbox"
+                (click)="updateFilterList($event, item.value, item.label, item.isRefined)"
+                [checked]="item.isRefined"
+              />
+
+              <span class="labelText ignore-click-outside">{{ item.label }}</span>
+              <span class="labelCount ignore-click-outside">{{ item.count }}</span>
+            </label>
+          </li>
+        </ul>
+        <ul class="col">
+          <li *ngFor="let item of state.items; let i = index" class="item" [ngClass]="{ selected: item.isRefined }">
+            <label class="label" *ngIf="i >= state.items.length / 2">
+              <input
+                class="checkbox ignore-click-outside"
+                type="checkbox"
+                (click)="updateFilterList($event, item.value, item.label, item.isRefined)"
+                [checked]="item.isRefined"
+              />
+              <span class="labelText ignore-click-outside">{{ item.label }}</span>
+              <span class="labelCount ignore-click-outside">{{ item.count }}</span>
+            </label>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

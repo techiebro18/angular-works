@@ -1,0 +1,127 @@
+:host {
+  position: relative;
+  width: 25.83vw;
+  height: 72vh;
+  margin-bottom: 30px;
+  max-width: 388px;
+  max-height: 490px;
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: absolute;
+    bottom: 0;
+    margin: 50px 0;
+  }
+
+  img {
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+  }
+
+  .title {
+    font-family: 'Cormorant', serif;
+    font-size: 2.1em;
+    text-transform: uppercase;
+    color: #fff;
+    margin: 0 50px;
+  }
+
+  .description {
+    font-family: 'Manrope', sans-serif;
+    font-size: 1em;
+    line-height: 1.2em;
+    color: #fff;
+    margin: 20px 50px;
+    text-align: justify;
+  }
+
+  // for devices that uses mouse or touchpad
+  @media (hover: hover) and (pointer: fine) {
+    &:hover,
+    :active {
+      .cta-btn {
+        visibility: visible;
+        margin-bottom: 20px;
+        opacity: 1;
+        transform: translateY(0);
+        -webkit-transform: translateY(0);
+      }
+    }
+  }
+
+  .cta-btn {
+    margin: 20px 50px 0 50px;
+
+    // for devices that uses mouse or touchpad
+    @media (hover: hover) and (pointer: fine) {
+      visibility: hidden;
+      margin-bottom: 0;
+      opacity: 0;
+      transition: all 0.3s ease;
+      -webkit-transition: all 0.3s ease;
+      transform: translateY(20px);
+      -webkit-transform: translateY(20px);
+    }
+
+    > a {
+      display: inline-block;
+      padding: 0 10px;
+      background-color: #fff;
+      font-size: 12px;
+      color: #191919;
+      text-transform: uppercase;
+      text-decoration: none;
+      height: 100%;
+      width: 100%;
+      max-height: 44px;
+      max-width: 222px;
+      text-align: center;
+      line-height: 40px;
+      border: 1px solid transparent;
+      font-family: Manrope, sans-serif;
+
+      &:hover {
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+// Up to phones and tablets
+@media (max-width: 991px) {
+  :host {
+    position: relative;
+    width: 65vw;
+    height: 61vh;
+    margin-bottom: 10px;
+
+    .info {
+      margin-bottom: 30px;
+    }
+
+    .title {
+      font-size: 22px;
+      margin: 0 30px 15px 30px;
+    }
+
+    .description {
+      font-size: 11px;
+      margin: 0 30px 20px 30px;
+    }
+
+    .cta-btn {
+      margin: auto 30px;
+
+      > a {
+        max-width: unset;
+      }
+    }
+  }
+}

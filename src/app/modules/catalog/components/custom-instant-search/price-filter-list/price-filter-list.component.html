@@ -1,0 +1,104 @@
+<div [hidden]="isHidden" class="tvb-RefinementList">
+  <!-- Title -->
+  <div
+    *ngIf="platform$ | async as platfrm"
+    class="tvb-RefinementList--Header"
+    role="tab"
+    [ngClass]="{ active: !isCollapsed }"
+  >
+    <h4 class="title">
+      <a
+        (click)="toggleCollapse()"
+        class="collapseBtn"
+        role="button"
+        data-toggle="collapse"
+        data-target="#{{ filter.name }}"
+        [attr.aria-expanded]="isCollapsed"
+      >
+        <span>{{ filter.label | translate }}</span>
+        <svg
+          *ngIf="platfrm === 'Desktop'"
+          enable-background="new 0 0 100 100"
+          id="Layer_1"
+          version="1.1"
+          viewBox="0 0 100 100"
+          xml:space="preserve"
+          xmlns="https://www.w3.org/2000/svg"
+          xmlns:xlink="https://www.w3.org/1999/xlink"
+        >
+          <polygon
+            fill="#010101"
+            points="30.4,20.6 66.7,49.1 30.4,77.6 31.6,79.1 69.9,49.1 31.6,19.1 30.4,20.6 "
+          ></polygon>
+        </svg>
+
+        <svg
+          *ngIf="platfrm === 'Mobile'"
+          enable-background="new 0 0 100 100"
+          id="Layer_1"
+          version="1.1"
+          viewBox="0 0 100 100"
+          xml:space="preserve"
+          xmlns="https://www.w3.org/2000/svg"
+          xmlns:xlink="https://www.w3.org/1999/xlink"
+          class="mobile-arrow"
+          [class.active]="!isCollapsed"
+        >
+          <polygon
+            fill="#010101"
+            points="30.4,20.6 66.7,49.1 30.4,77.6 31.6,79.1 69.9,49.1 31.6,19.1 30.4,20.6 "
+          ></polygon>
+        </svg>
+      </a>
+    </h4>
+  </div>
+  <div *ngIf="platform$ | async as platfrm">
+    <div
+      [ngClass]="
+        platfrm === 'Mobile' && !isCollapsed
+          ? 'tvb-RefinementList--ListContainer collapsed'
+          : 'tvb-RefinementList--ListContainer'
+      "
+      id="{{ filter.name }}"
+      [class.collapsed]="isCollapsed"
+    >
+      <!--numeric-menu Removed for now until we fix it is issues -->
+      <ng-container
+        *ngIf="(platfrm === 'Mobile' && isCollapsed) || (platfrm === 'Desktop' && !isCollapsed) || priceFilter"
+      >
+        <ais-numeric-menu
+          [attribute]="filter.attribute"
+          [items]="budgetFilter['EUR']"
+          [autoHideContainer]="true"
+          *ngIf="appService.getAppConfigurationValue()?.currencyCode === 'EUR'"
+        ></ais-numeric-menu>
+        <ais-numeric-menu
+          [attribute]="filter.attribute"
+          [items]="budgetFilter['DKK']"
+          [autoHideContainer]="true"
+          *ngIf="appService.getAppConfigurationValue()?.currencyCode === 'DKK'"
+        ></ais-numeric-menu>
+        <ais-numeric-menu
+          [attribute]="filter.attribute"
+          [items]="budgetFilter['USD']"
+          [autoHideContainer]="true"
+          *ngIf="appService.getAppConfigurationValue()?.currencyCode === 'USD'"
+        ></ais-numeric-menu>
+        <ais-numeric-menu
+          [attribute]="filter.attribute"
+          [items]="budgetFilter['GBP']"
+          [autoHideContainer]="true"
+          *ngIf="appService.getAppConfigurationValue()?.currencyCode === 'GBP'"
+        ></ais-numeric-menu>
+        <ais-numeric-menu
+          [attribute]="filter.attribute"
+          [items]="budgetFilter['SEK']"
+          [autoHideContainer]="true"
+          *ngIf="appService.getAppConfigurationValue()?.currencyCode === 'SEK'"
+        ></ais-numeric-menu>
+        <!-- <ais-range-slider [attribute]="filter.attribute" [pips]="false"></ais-range-slider> -->
+        <tvb-range-slider [attribute]="filter.attribute" [pips]="false"></tvb-range-slider>
+      </ng-container>
+    </div>
+  </div>
+</div>

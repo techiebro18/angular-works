@@ -1,0 +1,9 @@
+<div class="side-menu">
+  <ng-container *ngFor="let menuOption of menuOptions">
+    <div class="menu-option" [ngClass]="{ active: menuOption.active }" (click)="handleClickMenuOption(menuOption)">
+      <img class="menu-option-icon" [src]="menuOption.iconPath" />
+      <span class="menu-option-title">{{ menuOption.title | translate }}</span>
+      <img class="expand-arrow" src="assets/images/icons/help_and_support/arrow.svg" />
+    </div>
+  </ng-container>
+</div>

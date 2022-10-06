@@ -1,0 +1,26 @@
+<div class="tvb-dialog-container">
+  <i class="material-icons" (click)="close(false)">x</i>
+
+  <div class="tvb-dialog-body">
+    <div class="tvb-dialog-inner-body">
+      <div class="title-info">
+        <h3>{{ data.title }}</h3>
+
+        <ng-container *ngFor="let msg of data.messages">
+          <p [innerHTML]="msg"></p>
+        </ng-container>
+
+        <img class="main-image" *ngIf="image" [src]="image.link" [width]="image.width" [height]="image.height" />
+      </div>
+    </div>
+  </div>
+
+  <ng-container *ngIf="data.showActionButtons">
+    <div mat-dialog-actions>
+      <button class="btn btn-secondary" style="margin-right: 10px" (click)="cancel()">
+        {{ data.cancelText }}
+      </button>
+      <button class="btn primary" (click)="confirm()">{{ data.confirmText }}</button>
+    </div>
+  </ng-container>
+</div>

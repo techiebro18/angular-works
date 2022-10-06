@@ -1,0 +1,601 @@
+@mixin title {
+  .title {
+    justify-content: center;
+    width: 100%;
+    display: inline-block;
+    padding: 30px 0;
+    margin: 0;
+    font-family: 'Playfair Display', 'serif';
+    font-weight: 400;
+  }
+}
+
+@mixin select-container {
+  .select-container {
+    justify-content: center;
+    text-align: center;
+    margin: 0 auto;
+    display: inline-block;
+    width: 100%;
+    ng-select.ng-select {
+      width: 100%;
+      max-width: 100%;
+      .ng-placeholder {
+        left: 0;
+        right: 0;
+      }
+    }
+  }
+}
+
+:host {
+  input[type='tel'].secondary,
+  input[type='text'].secondary,
+  input[type='password'].secondary,
+  input[type='email'].secondary,
+  input[type='number'].secondary,
+  textarea,
+  ::ng-deep ng-select.ng-select .ng-select-container,
+  input.mat-datepicker-input.secondary {
+    border: 1px solid var(--steps-gray);
+  }
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  ng-select.ng-select {
+    max-width: 100%;
+    padding-bottom: 0;
+  }
+
+  .tvb-form-check.condition-options input[type='radio'] {
+    margin-right: 10px;
+
+    label {
+      font-size: 0.8rem;
+      font-family: Futura, serif;
+      text-transform: uppercase;
+      margin: 5px 0 5px 5px;
+    }
+  }
+
+  .title {
+    width: 100%;
+    margin: 20px 0 5px 0;
+  }
+
+  .description {
+    font-size: 0.8rem;
+    margin: 4px 0;
+  }
+
+  .subheader {
+    margin: 0 0 50px 0;
+    text-align: center;
+    border-bottom: 1px solid var(--main-color-gray);
+    padding-bottom: 40px;
+
+    h1 {
+      font-family: 'Playfair Display', 'serif';
+      font-size: 2rem;
+    }
+
+    h4 {
+      font-size: 0.8rem;
+      color: var(--main-color-gray-3);
+    }
+
+    p {
+      font-family: 'FuturaBT-Light', 'sans-serif';
+      width: 45%;
+      margin: 0 auto;
+    }
+  }
+
+  .description_textarea {
+    min-height: 285px;
+  }
+
+  .product-add-general {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .general-form-container {
+      .form-container-wrapper {
+        .error-message {
+          font-size: 14px;
+          text-align: left;
+          width: 100%;
+          display: inline-block;
+          font-family: 'FuturaBT-Light', 'sans-serif';
+          color: var(--form-error);
+          margin-top: 10px;
+        }
+        .form-title {
+          margin-bottom: 20px;
+          border-bottom: 1px solid var(--main-color-black);
+          padding: 10px 10px 10px 0;
+        }
+        .form-container {
+          .filed-group {
+            align-items: baseline;
+          }
+          .form-group {
+            margin-bottom: 5px;
+
+            .input-container {
+              margin-top: 20px;
+
+              .price {
+                text-align: center;
+              }
+
+              .for-you {
+                background-color: #f9f9f9;
+              }
+
+              .ng-select {
+                max-width: unset;
+              }
+
+              .ng-invalid,
+              .ng-invalid.ng-touched {
+                border: 1px solid var(--form-error);
+                ::placeholder {
+                  color: var(--form-error);
+                }
+
+                &.ng-select {
+                  border: unset;
+
+                  ::ng-deep .ng-select-container {
+                    border: 1px solid var(--form-error);
+                  }
+                }
+              }
+            }
+
+            &.measurements {
+              .form-group {
+                padding-left: 15px;
+                .measure-attribute-name {
+                  align-items: center;
+                  justify-content: center;
+                  width: 100%;
+                }
+                .secondary {
+                  width: 100%;
+                  text-align: center;
+                }
+              }
+              margin: 20px 0;
+              width: 100%;
+            }
+          }
+          .filed-group {
+            .form-group {
+              .input-container {
+                input[type='number'].secondary {
+                  width: 100%;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .account-container {
+        .categories {
+          .title {
+            justify-content: center;
+            display: flex;
+            margin: 0 0 30px 0;
+            font-family: 'Playfair Display', 'serif';
+            font-weight: 400;
+          }
+        }
+        .category-options {
+          .categories-radios {
+            margin-right: 60px;
+
+            label {
+              font-family: 'FuturaBT-Light', 'sans-serif';
+              font-size: 0.9rem;
+              text-transform: lowercase;
+              margin: 5px 0 5px 5px;
+
+              &::first-letter {
+                text-transform: uppercase;
+              }
+            }
+          }
+
+          .tab-section {
+            .nav-pills {
+              .nav-link {
+                border-radius: 0;
+                background: #000;
+                color: #fff;
+                margin-right: 15px;
+                border: 1px solid #000;
+              }
+            }
+          }
+          .btn.selectable {
+            margin: 1rem 0;
+            width: 19%;
+            min-width: unset;
+            font-size: 12px;
+          }
+        }
+        .designers {
+          display: inline-block;
+          width: 100%;
+          text-align: left;
+          margin: 0 auto;
+          vertical-align: top;
+          @include title;
+          @include select-container;
+        }
+        .subcategories {
+          display: inline-block;
+          width: 100%;
+          margin: 0 auto;
+          @include title;
+          @include select-container;
+        }
+      }
+
+      .form-title.title {
+        font-family: 'Playfair Display', 'serif';
+        font-weight: 400;
+      }
+
+      .form-container {
+        .dropdown-field-2 {
+          width: 100%;
+        }
+        .form-group {
+          .form-group-title {
+            font-family: 'Playfair Display', 'serif';
+            font-weight: 400;
+          }
+        }
+        .question-mark-block {
+          position: relative;
+
+          .serial-info-icon {
+            display: inline-block;
+            width: 16px;
+            vertical-align: middle;
+            margin-left: 6px;
+            margin-top: -4px;
+          }
+
+          .serial-number-title {
+            font-weight: 600;
+          }
+
+          .serial-number {
+            margin-left: 53px;
+            float: right;
+            font-size: 14px;
+            border: 1px solid #333;
+            width: 25px;
+            text-align: center;
+            border-radius: 30px;
+            height: 25px;
+            line-height: 25px;
+            font-family: 'FuturaBT-Light', 'sans-serif';
+          }
+
+          .serial-number-details-show {
+            position: absolute;
+            background-color: var(--main-color-white);
+            z-index: 10;
+            width: 290px;
+            left: 6px;
+            top: 25px;
+            padding: 15px;
+            font-size: 0.9rem;
+            font-family: 'FuturaBT-Light', 'sans-serif';
+            line-height: 20px;
+            text-align: left;
+            box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+          }
+        }
+        input[type='text'].secondary,
+        input[type='password'].secondary,
+        input[type='email'].secondary,
+        input[type='number'].secondary,
+        input.mat-datepicker-input.secondary,
+        textarea {
+          width: 100%;
+          border-radius: 0;
+          padding: 10px;
+        }
+      }
+
+      .after-form-container {
+        margin-top: 10px;
+        display: flex;
+        justify-content: flex-end;
+      }
+    }
+  }
+
+  @media (min-width: 320px) and (max-width: 992px) {
+    .product-add-general {
+      flex-direction: column;
+      .left-sidebar {
+        padding: 0;
+      }
+      .general-form-container {
+        .form-container-wrapper {
+          .form-container {
+            .filed-group {
+              padding-right: 0;
+            }
+          }
+        }
+        .account-container {
+          .category-options {
+            flex-direction: column;
+            .primary.btn.selectable {
+              width: unset;
+            }
+          }
+          .designers {
+            text-align: center;
+            padding: 0;
+            .title {
+              padding: 30px 0 30px 0;
+            }
+            .select-container {
+              width: 100%;
+            }
+          }
+          .subcategories {
+            text-align: center;
+            padding: 0;
+            .title {
+              padding: 30px 0 30px 0;
+            }
+            .select-container {
+              width: 100%;
+            }
+          }
+        }
+        .product-approval-form {
+          .form-container {
+            .dropdown-field-2 {
+              width: 100%;
+            }
+            input[type='text'].secondary,
+            input[type='password'].secondary,
+            input[type='email'].secondary,
+            input[type='number'].secondary,
+            input.mat-datepicker-input.secondary,
+            textarea {
+              width: 100%;
+            }
+          }
+        }
+        .form-container-wrapper {
+          border: 0;
+          .form-title {
+            text-align: center;
+          }
+          .form-container {
+            .form-group {
+              &.measurements {
+                .measure-attribute-input {
+                  flex: 0.6;
+                }
+                .measure-attribute-name {
+                  flex: 0.3;
+                }
+                width: 100%;
+              }
+            }
+          }
+        }
+      }
+
+      .submit-button-container {
+        width: 100%;
+        margin-top: 10px;
+
+        .btn.primary {
+          width: 100%;
+          float: none;
+        }
+      }
+    }
+  }
+
+  // Small screens, laptops
+  @media (min-width: 992px) and (max-width: 1440px) {
+    .subheader {
+      p {
+        width: 60%;
+      }
+    }
+  }
+
+  // iPads, Tablets
+  @media (min-width: 481px) and (max-width: 991px) {
+    .subheader {
+      p {
+        width: 65%;
+      }
+    }
+  }
+
+  // Phones, Mobile devices
+  @media (max-width: 480px) {
+    .subheader {
+      p {
+        width: 100%;
+      }
+    }
+
+    .product-add-general {
+      .general-form-container {
+        padding: 0;
+        .product-approval-form {
+          .form-container {
+            .contact_info {
+              .form-group {
+                .input-container {
+                  padding-bottom: 0;
+                  button.primary {
+                    min-width: 100%;
+                    font-size: 10px;
+                    line-height: 17px;
+                    height: 40px;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+::ng-deep .ng-select.ng-select-multiple .ng-select-container.ng-has-value .ng-arrow-wrapper,
+::ng-deep .ng-select.ng-select-multiple .ng-select-container.ng-has-value .ng-clear-wrapper {
+  border-top: none;
+}
+
+::ng-deep .product-add-general .ng-select .ng-arrow-wrapper .ng-arrow {
+  border: none;
+  cursor: pointer;
+  width: 19px;
+  height: 30px;
+}
+
+::ng-deep .ng-select .ng-arrow-wrapper .ng-arrow:after {
+  content: '\f107';
+  display: inline-block;
+  font: normal normal normal 30px/1 FontAwesome;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translate(-0px, -50%);
+  text-align: center;
+  color: var(--main-color-black);
+}
+
+::ng-deep
+  .select-container
+  .ng-select.ng-select-single
+  .ng-select-container
+  .ng-value-container
+  .ng-input {
+  position: inherit;
+}
+
+::ng-deep .select-container .ng-select.ng-select-single .ng-select-container .ng-value-container,
+::ng-deep
+  .select-container
+  .ng-select.ng-select-single
+  .ng-select-container
+  .ng-value-container
+  .ng-value {
+  overflow: visible;
+  text-overflow: inherit;
+}
+
+input[type='radio'].ng-invalid.invalid-data,
+input[type='number'].ng-invalid.invalid-data {
+  border: 1px solid var(--form-error);
+}
+
+::ng-deep ng-select.sellers-select.ng-select.invalid-data-select {
+  .ng-select-container {
+    border: 1px solid var(--form-error);
+  }
+}
+
+::ng-deep
+  ng-select.ng-select.sellers-select.ng-invalid.ng-select-placeholder
+  .ng-select-container.ng-has-value
+  .ng-value-container
+  .ng-placeholder {
+  display: block;
+}
+
+::ng-deep
+  ng-select.ng-select.sellers-select.ng-valid.ng-select-placeholder
+  .ng-select-container.ng-has-value
+  .ng-value-container
+  .ng-placeholder {
+  display: none;
+}
+
+::ng-deep
+  ng-select.ng-select.ng-select-multiple
+  .ng-select-container.ng-has-value
+  .ng-value-container {
+  border-top: none;
+}
+
+::ng-deep .ng-select .ng-select-container .ng-value-container .ng-placeholder {
+  color: rgba(0, 0, 0, 0.87);
+  font-size: 16px;
+  font-family: 'Roboto, Helvetica Neue', sans-serif;
+  opacity: 0.8;
+}
+::ng-deep .ng-untouched.ng-invalid.invalid-data {
+  border: 1px solid var(--form-error);
+}
+::ng-deep .ng-dropdown-panel.ng-select-top {
+  bottom: calc(100% - 0em) !important;
+}
+
+// radio button ---->
+
+::ng-deep input[type='radio'] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  box-shadow: unset;
+  height: 16px;
+  margin: 0 0.5rem 0 0;
+  outline: 0;
+  position: relative;
+  width: 16px;
+}
+
+::ng-deep input[type='radio']:checked:after {
+  background: #191919;
+  border-radius: 50%;
+  bottom: 0;
+  content: '';
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.condition-radio-label {
+  position: absolute;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.condition-description {
+  font-size: 0.7rem;
+  font-weight: 400;
+  margin-left: 28px;
+}

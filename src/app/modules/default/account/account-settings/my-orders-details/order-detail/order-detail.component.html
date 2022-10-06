@@ -1,0 +1,177 @@
+<tr class="orderbottom">
+  <td valign="center" class="order-image-block">
+    <div class="order-image">
+      <img src="{{ imageName }}" />
+      <p>{{ orderItem.name }}</p>
+    </div>
+  </td>
+  <td valign="center" class="description-block">
+    <div class="product-description">
+      <p>
+        <span>Description</span>
+        {{ orderItem.brand_name }}, {{ orderItem.name }}
+      </p>
+      <p>
+        <span>Quantity</span>
+        {{ orderItem.quantity }}
+      </p>
+      <p
+        *ngIf="
+          (orderItem.orderItemStatus === 'completed' ||
+            orderItem.orderItemStatus === 'refund_pending' ||
+            orderItem.orderItemStatus === 'refund_overdue' ||
+            orderItem.orderItemStatus === 'refunded') &&
+          orderItem.commission_user_type !== 'private' &&
+          invoice
+        "
+      >
+        <span>Invoice</span>
+        <i class="fa fa-file-pdf-o close-icon"></i>
+        <a href="{{ invoice }}" class="download-invoice">Download</a>
+      </p>
+      <p
+        *ngIf="
+          (orderItem.orderItemStatus === 'completed' ||
+            orderItem.orderItemStatus === 'refund_pending' ||
+            orderItem.orderItemStatus === 'refund_overdue' ||
+            orderItem.orderItemStatus === 'refunded') &&
+          orderItem.commission_user_type !== 'private' &&
+          shippingInvoice
+        "
+      >
+        <span>shipping invoice</span>
+        <i class="fa fa-file-pdf-o close-icon"></i>
+        <a href="{{ shippingInvoice }}" class="download-invoice">Download</a>
+      </p>
+
+      <p>
+        <span>Tracking number</span>
+        <a
+          *ngIf="
+            orderItem.return_shipment_tracking_number === '' ||
+            orderItem.return_shipment_tracking_number === null ||
+            orderItem.orderItemStatus === 'refund_pending' ||
+            orderItem.orderItemStatus === 'refund_overdue' ||
+            orderItem.orderItemStatus === 'refunded'
+          "
+          class="shipment-tracking-number"
+          target="_blank"
+          href="{{ orderItem.tracking_url }}"
+        >
+          {{ orderItem.shipment_tracking_number ? orderItem.shipment_tracking_number : 'N/A' }}
+        </a>
+      </p>
+
+      <p
+        *ngIf="
+          orderItem.return_shipment_tracking_number !== '' &&
+          orderItem.return_shipment_tracking_number !== null &&
+          orderItem.orderItemStatus == 'completed'
+        "
+      >
+        <span>Return Tracking Number</span>
+        <a style="cursor: pointer" target="_blank" href="{{ orderItem.return_tracking_url }}">
+          {{ orderItem.return_shipment_tracking_number ? orderItem.return_shipment_tracking_number : 'N/A' }}
+        </a>
+      </p>
+
+      <p
+        *ngIf="
+          orderItem.return_shipment_tracking_number !== '' &&
+          orderItem.return_shipment_tracking_number !== null &&
+          orderItem.orderItemStatus == 'completed'
+        "
+      >
+        <span>Return Label</span>
+        <i class="fa fa-file-pdf-o close-icon"></i>
+        <a class="download-invoice" target="_blank" href="{{ parcelSlip }}" download>Click here</a>
+      </p>
+      <p
+        *ngIf="
+          orderItem.orderItemStatus === 'refund_pending' ||
+          orderItem.orderItemStatus === 'refund_overdue' ||
+          orderItem.orderItemStatus === 'refunded'
+        "
+      >
+        <span>Refund Status</span>
+        {{ orderItem.orderItemStatus }}
+      </p>
+      <p *ngIf="orderItem.orderItemStatus === 'cancelled'">
+        <span>Order Item Status</span>
+        {{ orderItem.orderItemStatus }}
+      </p>
+
+      <ng-container *ngIf="availableForFreeResell && reminderCondition">
+        <div class="resell-button-buyer{{ orderItem.id }} pading-bottom-space">
+          <button type="button" class="reSellBtn btn proceed-btn" data-toggle="modal" (click)="onResellForFree()">
+            Relist For Free
+          </button>
+        </div>
+      </ng-container>
+
+      <ng-container
+        *ngIf="
+          orderItem.commission_user_type !== 'private' &&
+          orderItemStatus.indexOf(orderItem.orderItemStatus) !== -1 &&
+          hideCancelButton
+        "
+      >
+        <div class="cancel-button-buyer{{ orderItem.id }}">
+          <button type="button" class="cancelOrders returnBtn btn proceed-btn" (click)="cancelOrder(orderItem.id)">
+            CANCEL ORDER
+          </button>
+        </div>
+      </ng-container>
+
+      <button
+        *ngIf="
+          (orderItem.return_shipment_tracking_number === '' || orderItem.return_shipment_tracking_number === null) &&
+          orderItem.delivery_status == 'OK' &&
+          returnValidDate === true &&
+          orderItem.commission_user_type != 'private'
+        "
+        type="button"
+        class="returnorder returnBtn btn proceed-btn"
+        data-toggle="modal"
+        data-target="#myModal"
+        (click)="calculateReturn(orderItem.id)"
+      >
+        RETURN ORDER
+      </button>
+    </div>
+  </td>
+  <td valign="center" class="product-detail-block harish">
+    <div class="product-detail">
+      <p>
+        <span>Item total</span>
+        {{ itemTotal | currency: orderItem.currencycode }}
+      </p>
+      <p *ngIf="orderItem.item_discount !== 0">
+        <span>Discount code</span>
+        -{{ orderItem.item_discount | currency: orderItem.currencycode }}
+      </p>
+      <p>
+        <span>Shipping:</span>
+        {{
+          (orderItem.shipping_discount > 0 ? orderItem.shipping_discount : orderItem.shippeing_cost)
+            | currency: orderItem.currencycode
+        }}
+      </p>
+      <p>
+        <span>Shipping Discount:</span>
+        {{ orderItem.shipping_discount * -1 | currency: orderItem.currencycode }}
+      </p>
+      <p>
+        <span>Subtotal</span>
+        {{ itemSubTotal | currency: orderItem.currencycode }}
+      </p>
+      <p>
+        <span>Total incl. tax</span>
+        {{ itemTaxTotal | currency: orderItem.currencycode }}
+      </p>
+      <!-- <div class="flex justify-content-center" *ngIf="availableForFreeResell">
+        <button class="btn primary proceed-btn" (click)="onResellForFree()">Resell For Free</button>
+      </div> -->
+    </div>
+  </td>
+</tr>

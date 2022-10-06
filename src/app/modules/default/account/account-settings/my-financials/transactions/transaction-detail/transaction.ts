@@ -1,0 +1,91 @@
+export interface transaction {
+  base_currency: string;
+  brand_id: number;
+  brand_name: string;
+  buyer_shipping_status: number;
+  commission: string;
+  commission_user_id: number;
+  commission_user_type: string;
+  cost_of_good: number;
+  cost_of_good_DKK: number;
+  cost_of_good_EUR: number;
+  cost_of_good_GBP: number;
+  cost_of_good_NOK: number;
+  cost_of_good_SEK: number;
+  cost_of_good_USD: number;
+  country_of_origin: string;
+  country_return_amount: number;
+  country_return_id: null;
+  created_at: Date;
+  currency_code: string;
+  currency_id: number;
+  discount: number;
+  discounted_price_DKK: number;
+  discounted_price_EUR: number;
+  discounted_price_GBP: number;
+  discounted_price_NOK: number;
+  discounted_price_SEK: number;
+  discounted_price_USD: number;
+  fixed_discount: number;
+  id: number;
+  image_url: string;
+  is_discount: number;
+  is_return: number;
+  is_special_tax: string;
+  order_id: number;
+  partial_refund: number;
+  payout_details: sellerPaymentDetail;
+  position: number;
+  price: number;
+  price_type: string;
+  product_id: string;
+  product_name: string;
+  qa_status: string;
+  quantity: number;
+  refund_amount: number;
+  refund_qty: number;
+  regular_price: number;
+  regular_price_DKK: number;
+  regular_price_EUR: number;
+  regular_price_GBP: number;
+  regular_price_NOK: number;
+  regular_price_SEK: number;
+  regular_price_USD: number;
+  return_apply_date: Date;
+  return_item_amount: number;
+  return_policy: number;
+  return_reason: string;
+  seller_invoice_commission: invoice;
+  seller_invoice_complete: invoice;
+  seller_invoice_return: invoice;
+  shipping_invoice: invoice;
+  seller_sku: string;
+  seo_url: string;
+  shippeing_cost: number;
+  sku: string;
+  special_tax_percent: number;
+  status: string;
+  stock: number;
+  tarif_number: string;
+  tax: number;
+  total_return_amount: number;
+  tvb_invoice_complete: invoice;
+  updated_at: Date;
+}
+
+export interface invoice {
+  id: number;
+  invoice_type: number;
+  order_item_id: number;
+  pdf_invoice_url: URL;
+}
+
+export interface sellerPaymentDetail {
+  error_response: unknown;
+  transfer_amount: number;
+  payout_currency: string;
+  payout_amount: number;
+  payment_due_date: Date;
+  status: string;
+  tvb_commission: number;
+}

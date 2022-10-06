@@ -1,0 +1,31 @@
+<div class="product-create container col-12 d-flex flex-column">
+  <div class="user-information">You are logged in as {{ user?.first_name + ' ' + user?.last_name }}</div>
+
+  <div class="router-section col-sm-12 col-md-12 col-lg-12 p-0">
+    <ng-container *ngIf="!isAddressVerified">
+      <div class="verify-address-message">
+        {{ 'sell_an_item.verify_address.error_message' | translate }}
+        <br />
+        <br />
+        <a [routerLink]="['/account/get-paid']">
+          {{ 'sell_an_item.verify_address.error_cta_1_1' | translate }}
+        </a>
+        {{ 'sell_an_item.verify_address.error_cta_1_2' | translate }}
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="isAddressVerified">
+      <div class="steps-div col-12 col-md-12 col-lg-9">
+        <tvb-steps
+          [steps]="stepItems"
+          [readonly]="false"
+          [activeIndex]="currentStepIndex"
+          (stepClicked)="handleStepClick($event)"
+          *ngIf="shouldShowSteps()"
+        ></tvb-steps>
+      </div>
+
+      <router-outlet></router-outlet>
+    </ng-container>
+  </div>
+</div>

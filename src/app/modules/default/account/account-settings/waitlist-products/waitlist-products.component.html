@@ -1,0 +1,44 @@
+<div class="ProductListingPage" *ngIf="enableList">
+  <ais-instantsearch [config]="instantsearchConfig">
+    <div class="SortByItemsContainer row">
+      <!-- <ais-sort-by [items]="sortByItems"></ais-sort-by> -->
+      <div class="col-lg-3">
+        <tvb-sort-by [items]="sortByItems"></tvb-sort-by>
+      </div>
+      <div class="totalHitsContainer col-lg-9">
+        <ais-pagination></ais-pagination>
+        <!-- <ais-stats>
+                    <ng-template let-state="state">
+                        <div class="totalHits">
+                            {{state.nbHits}} Products
+                        </div>
+                    </ng-template>
+                </ais-stats> -->
+      </div>
+    </div>
+    <ais-configure [searchParameters]="searchParameters"></ais-configure>
+    <div class="productsList innerContainer">
+      <div class="productsList--columnProductList">
+        <ais-hits>
+          <ng-template let-hits="hits" let-results="results">
+            <ol class="row ais-Hits-list">
+              <li
+                *ngFor="let hit of hits"
+                class="col-6 col-lg-4 col-md-4 col-sm-4 col-xs-4 ais-Hits-item"
+              >
+                <tvb-product-card
+                  class="hit-wrapper"
+                  [hit]="hit"
+                  [language]="currentAppConfiguaration.languageShortName"
+                  [currency]="currentAppConfiguaration.currencyCode"
+                  [currencySymbol]="currentAppConfiguaration.currencySymbol"
+                ></tvb-product-card>
+              </li>
+            </ol>
+          </ng-template>
+        </ais-hits>
+        <ais-pagination></ais-pagination>
+      </div>
+    </div>
+  </ais-instantsearch>
+</div>

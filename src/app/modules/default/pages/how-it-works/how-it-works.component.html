@@ -1,0 +1,194 @@
+<div class="box-how-it-works">
+  <div class="article-box bg-image">
+    <div class="floating-text">
+      <h5>The Vintage Bar</h5>
+      <div class="slogan">SELL WHAT YOU DON'T USE. MAKE MONEY. IT'S SIMPLE.</div>
+      <button class="primary" (click)="goTo('sellers')">Start selling</button>
+    </div>
+    <img [src]="IMG_PATH + 'static/shared/top.png'" />
+  </div>
+
+  <div class="article-box">
+    <div class="img-box">
+      <img [src]="IMG_PATH + 'static/shared/blond-girl.jpg'" />
+    </div>
+    <div class="content-box desktop">
+      <h5 class="small-title">SHOP AND SELL AT THE SAME PLACE</h5>
+      <h3 class="big-title">Why The Vintage Bar?</h3>
+      <p class="text-description">
+        Here at The Vintage Bar we're on a mission to make fashion more sustainable together with our growing community.
+        The Vintage Bar is home to more than 200.000 other cool girls – just like you – who are here to sell what they
+        no longer use and buy the pieces, they've been dreaming of.
+      </p>
+      <button class="primary" (click)="goTo('discover/we-love')">Explore section</button>
+    </div>
+  </div>
+
+  <div class="article-box mobile">
+    <div class="content-box">
+      <h5 class="small-title">SHOP AND SELL AT THE SAME PLACE</h5>
+      <h3 class="big-title">Why The Vintage Bar?</h3>
+      <p class="text-description">
+        Here at The Vintage Bar we're on a mission to make fashion more sustainable together with our growing community.
+        The Vintage Bar is home to more than 200.000 other cool girls – just like you – who are here to sell what they
+        no longer use and buy the pieces, they've been dreaming of.
+      </p>
+      <button class="primary" (click)="goTo('discover/we-love')">Explore section</button>
+    </div>
+  </div>
+
+  <div class="full-box toogle">
+    <div class="article-box box-toogle">
+      <div class="toogle-option">
+        <div class="item-option" [ngClass]="{ active: option === 'seller' }" (click)="toogleOption('seller')">Sell</div>
+        <div class="item-option" [ngClass]="{ active: option === 'buyer' }" (click)="toogleOption('buyer')">Buy</div>
+      </div>
+    </div>
+    <div class="article-box box-title-option">
+      <p>How it works</p>
+    </div>
+    <ng-container *ngIf="option === 'seller'">
+      <div class="article-box box-option">
+        <div class="box-seller">
+          <div class="box-step">
+            <div class="number-step">01</div>
+            <div class="title-step">START UPLOADING NOW</div>
+            <div class="desc-step">
+              Sign up, upload your pictures and describe your items. We'll make sure they get online.
+            </div>
+          </div>
+        </div>
+        <div class="next-step desktop">
+          <img src="/assets/images/gallery/chevron_forward_rgb_black.svg" aria-hidden="true" />
+        </div>
+        <div class="box-seller">
+          <div class="box-step">
+            <div class="number-step">02</div>
+            <div class="title-step">LEAVE IT TO US</div>
+            <div class="desc-step">
+              Once your item has sold, we'll provide you with a pre-paid shipping label. We'll do quality control before
+              we ship it to the buyer.
+            </div>
+          </div>
+        </div>
+        <div class="next-step desktop">
+          <img src="/assets/images/gallery/chevron_forward_rgb_black.svg" aria-hidden="true" />
+        </div>
+        <div class="box-seller">
+          <div class="box-step">
+            <div class="number-step">03</div>
+            <div class="title-step">MAKE MONEY</div>
+            <div class="desc-step">
+              We hold on to the payment until the item has reached the buyer. You'll then get paid within 10 days.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="article-box box-option">
+        <button class="primary" (click)="goTo('sellers')">Start selling</button>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="option === 'buyer'">
+      <div class="article-box box-option">
+        <div class="box-seller">
+          <div class="box-step">
+            <div class="number-step">01</div>
+            <div class="title-step">QUALITY CONTROL</div>
+            <div class="desc-step">
+              As a marketplace our top priority is to make sure the products live up to their product description. When
+              an item is sold it will undergo quality control at our office, before we ship it to the buyer.
+            </div>
+          </div>
+        </div>
+        <div class="next-step desktop">
+          <img src="/assets/images/gallery/chevron_forward_rgb_black.svg" aria-hidden="true" />
+        </div>
+        <div class="box-seller">
+          <div class="box-step">
+            <div class="number-step">02</div>
+            <div class="title-step">AUTHENTICATION</div>
+            <div class="desc-step">
+              We have a team of brand experts who take every detail into account, methodically inspecting label, code,
+              stamp, hardware, stitching, material, symmetry, and overall craftsmanship to ensure authenticity.
+            </div>
+          </div>
+        </div>
+        <div class="next-step desktop">
+          <img src="/assets/images/gallery/chevron_forward_rgb_black.svg" aria-hidden="true" />
+        </div>
+        <div class="box-seller">
+          <div class="box-step">
+            <div class="number-step">03</div>
+            <div class="title-step">SHOP WITH CONFIDENCE</div>
+            <div class="desc-step">
+              If an item isn't as described by the seller, we'll let you know. The order will either be cancelled or we
+              might be able to negotiate a new price more suitable for the condition of the item.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="article-box box-option">
+        <button class="primary buyer" (click)="goTo('discover/we-love')">Explore now</button>
+      </div>
+    </ng-container>
+  </div>
+
+  <div class="article-box portrait-box">
+    <div class="img-portrait-container">
+      <img [src]="IMG_PATH + 'static/shared/paulinakurka.png'" />
+      <span class="empty-box"></span>
+      <img [src]="IMG_PATH + 'static/shared/bag-car.jfif'" />
+      <img [src]="IMG_PATH + 'static/shared/snjezi.jpg'" />
+      <img [src]="IMG_PATH + 'static/shared/sarez.jpg'" />
+      <img [src]="IMG_PATH + 'static/shared/yvux.png'" />
+    </div>
+    <div class="content-box">
+      <h5 class="small-title">BE A PART OF OUR COMMUNITY</h5>
+      <h3 class="big-title">Get inspired</h3>
+      <p class="text-description">
+        The Vintage Bar is a community of cool girls who like getting inspired as well as inspiring others. Tag us in
+        your pictures on Instagram and we might share them.
+      </p>
+      <ng-container *ngIf="!loggedIn">
+        <button class="primary" (click)="openSignInPopUp()">Join now</button>
+      </ng-container>
+      <ng-container *ngIf="loggedIn">
+        <button class="primary" (click)="goTo('account/my-items')">Join now</button>
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="article-box split-box">
+    <div class="content-box split-content">
+      <p class="title-description">
+        <a routerLink="/the-archive">Check out The Archive</a>
+        – it's filled with guides, trends, interviews and more.
+      </p>
+    </div>
+    <div class="split-img-box">
+      <a routerLink="/the-archive"><img [src]="IMG_PATH + 'static/shared/girl.jpg'" /></a>
+      <a routerLink="/the-archive">
+        <img class="desktop" [src]="IMG_PATH + 'static/shared/snjezi.jpg'" />
+      </a>
+    </div>
+  </div>
+
+  <div class="full-box real-deal">
+    <div class="article-box full real-deal">
+      <div class="img-box">
+        <a routerLink="/discover/we-love"><img [src]="IMG_PATH + 'static/shared/fendi.jpg'" /></a>
+      </div>
+      <div class="content-box real-deal">
+        <h5 class="small-title">WHAT YOU SEE IS WHAT YOU GET</h5>
+        <h3 class="big-title">The Real Deal</h3>
+        <p class="text-description">
+          Our brand experts take every detail into account, methodically inspecting a combination of elements: Label,
+          code, stamp, hardware, stitching, material, symmetry, and overall craftsmanship. To check each piece as
+          legitimate, they compare what they find with the respective house's established standards.
+        </p>
+        <button class="primary" (click)="goTo('discover/we-love')">Shop now</button>
+      </div>
+    </div>
+  </div>
+</div>

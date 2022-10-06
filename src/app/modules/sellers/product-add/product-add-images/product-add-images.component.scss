@@ -1,0 +1,240 @@
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.please-note {
+  font-family: 'FuturaBT-Light';
+  font-size: 0.9rem;
+}
+
+.clickable-photo-container {
+  width: 100%;
+  height: 100%;
+}
+
+::ng-deep #main-photo-badge span.tvb-badge {
+  position: absolute;
+  margin: 110px 0 0 15px;
+  z-index: 1;
+}
+
+.photos-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 300px;
+  width: 100%;
+}
+
+.photos-container .photos-section-1 {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  margin: -6px -6px 0px -6px;
+  max-height: unset;
+}
+
+.photos-container .photos-section-2 {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  margin: 0px -6px -6px -6px;
+  max-height: unset;
+}
+
+.photo-slot {
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--main-color-gray);
+
+  &:hover {
+    border: none;
+    padding: 1px;
+  }
+
+  .photo-uploader-container {
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: relative;
+
+    .photo-info-overlay-main {
+      position: absolute;
+      text-align: center;
+      padding: 15px;
+      border: 1px dashed var(--main-color-black);
+      flex-direction: column;
+      flex-wrap: wrap;
+      margin: 90px 350px;
+      transition: display 0.5s linear;
+      top: 90px;
+      left: 350px;
+
+      .overlay-info-text-1 {
+        font-weight: 500;
+        word-wrap: break-word;
+        margin-top: 5px;
+        font-size: 0.7rem;
+        transition: all linear 0.5s;
+      }
+
+      .overlay-info-text-2 {
+        font-size: 0.6rem;
+        transition: all linear 0.5s;
+      }
+    }
+  }
+}
+
+.main-photo {
+  display: flex;
+  flex: 1 1 50%;
+  margin: 5px;
+}
+
+.main-photo-only {
+  background-color: var(--main-color-gray-2);
+}
+
+.extra-photo {
+  display: flex;
+  flex: 1 1 40%;
+  margin: 5px;
+  height: 144px;
+
+  &.cdk-drag-placeholder {
+    height: 144px;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  }
+}
+
+.extra-photos-1-container {
+  display: flex;
+  flex: 1 0 50%;
+  flex-flow: row wrap;
+}
+
+.extra-photos-2-container {
+  display: flex;
+  flex: 1 0 100%;
+  flex-flow: row nowrap;
+}
+
+.submit-button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 30px;
+}
+
+// Up to Phone and Tablet screens
+@media (max-width: 992px) {
+  .mobile.photos-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: unset;
+
+    ::ng-deep #main-photo-badge span.tvb-badge {
+      position: absolute;
+      bottom: unset;
+      z-index: 1;
+      margin: 90px 0 0 10px;
+    }
+
+    .main-photo {
+      flex-basis: 100%;
+      height: 248px;
+      margin: 10px;
+      margin-top: 0;
+    }
+
+    .extra-photo {
+      display: flex;
+      flex: 1 0 40%;
+      margin: 10px;
+      height: 144px;
+
+      &.cdk-drag-placeholder {
+        height: 144px;
+        border: none;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+      }
+    }
+
+    .extra-photos-1-container,
+    .extra-photos-2-container {
+      display: flex;
+      flex: 1 0 50%;
+      flex-flow: row wrap;
+    }
+
+    .photos-section-1 {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      flex-basis: 50%;
+      margin: -6px -6px 0px -6px;
+    }
+
+    .photos-section-2 {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      flex-basis: 50%;
+    }
+
+    .photo-slot {
+      justify-content: stretch;
+      align-items: center;
+      border: 1px solid var(--main-color-gray);
+
+      &:hover {
+        border: none;
+        padding: 1px;
+      }
+
+      .photo-uploader-container {
+        width: 100%;
+        height: 100%;
+        display: block;
+        position: relative;
+
+        .photo-info-overlay-main {
+          position: absolute;
+          text-align: center;
+          padding: 15px;
+          flex-direction: column;
+          margin: 90px 350px;
+          transition: display 0.5s linear;
+          top: 90px;
+          left: 350px;
+
+          .overlay-info-text-1 {
+            font-weight: 500;
+            word-wrap: break-word;
+            margin-top: 5px;
+            font-size: 0.7rem;
+            transition: all linear 0.5s;
+          }
+
+          .overlay-info-text-2 {
+            font-size: 0.6rem;
+            transition: all linear 0.5s;
+          }
+        }
+      }
+    }
+  }
+
+  .submit-button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+  }
+
+  .submit-button-container button {
+    width: 100%;
+    margin: 0 4px;
+  }
+}

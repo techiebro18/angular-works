@@ -1,0 +1,103 @@
+<h1 *ngIf="!hideTitle">{{ 'Order Summary' | translate }}</h1>
+
+<mat-accordion *ngIf="products && products.length">
+  <mat-expansion-panel [expanded]="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>{{ 'Items' | translate }} ({{ products.length }})</mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <ul>
+      <li *ngFor="let product of products">
+        <div class="product-image">
+          <img [src]="product.catalog.imgix_image_url" alt="" />
+        </div>
+
+        <div>
+          <strong>{{ product.catalog.brand_name }}</strong>
+          <p>
+            {{ product.catalog.name }}
+          </p>
+
+          <p *ngIf="!!product.catalog.is_discount && (!product.offers || product.offers.statusId != 2)">
+            {{ 'Subtotal' }}:
+            <span class="discount">
+              {{ getDiscountProductPrice(product.catalog) | currency: appConfig.currencyCode }}
+            </span>
+            <span class="regular-price">
+              {{ getRegularProductPrice(product.catalog) | currency: appConfig.currencyCode }}
+            </span>
+            <span class="discount desktop-only">Save {{ getDiscountPercentage(product.catalog) }}%</span>
+          </p>
+          <p *ngIf="product.offers && product.offers.statusId == 2">
+            {{ 'Subtotal' }}:
+            <span class="discount">
+              {{ getProductOfferPrice(product) | currency: appConfig.currencyCode }}
+            </span>
+            <span class="regular-price">
+              {{ getRegularProductPrice(product.catalog) | currency: appConfig.currencyCode }}
+            </span>
+            <span class="discount desktop-only" *ngIf="getOfferPercentage(product) > 0">
+              Save {{ getOfferPercentage(product) }}%
+            </span>
+          </p>
+          <p *ngIf="!product.catalog.is_discount && (!product.offers || product.offers.statusId != 2)">
+            {{ 'Subtotal' }}:
+            {{ getProductPrice(product.catalog) | currency: appConfig.currencyCode }}
+          </p>
+          <p *ngIf="shippingValue">
+            {{ 'Shipping' | translate }}: {{ shippingValue | currency: appConfig.currencyCode }}
+          </p>
+        </div>
+      </li>
+    </ul>
+  </mat-expansion-panel>
+</mat-accordion>
+
+<div class="order-review">
+  <ng-container *ngIf="hasDiscount || hasOffer">
+    <div class="value-row mb-4">
+      <div class="title">
+        <span>{{ 'Item total' | translate }}:</span>
+      </div>
+      <div class="content">
+        <span class="regular-price">
+          {{ getRegularTotalAmount() | currency: appConfig.currencyCode }}
+        </span>
+        <span class="discount">{{ totalProductsValue | currency: appConfig.currencyCode }}</span>
+      </div>
+    </div>
+
+    <div class="value-row" *ngIf="hasDiscount">
+      <span>Discount:</span>
+      <span class="discount">
+        {{ (getRegularTotalAmount() - totalProductsValue) * -1 | currency: appConfig.currencyCode }}
+      </span>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="!hasDiscount && !hasOffer">
+    <div class="value-row mb-4">
+      <span>{{ 'Item total' | translate }}:</span>
+      <span>{{ totalProductsValue | currency: appConfig.currencyCode }}</span>
+    </div>
+  </ng-container>
+  <div class="value-row" *ngIf="discount > 0">
+    <span>{{ 'Coupon discount' | translate }}:</span>
+    <span class="discount">- {{ discount | currency: appConfig.currencyCode }}</span>
+  </div>
+
+  <div class="value-row" *ngIf="totalShippingValue">
+    <span>{{ 'Shipping' | translate }}:</span>
+    <span>{{ totalShippingValue | currency: appConfig.currencyCode }}</span>
+  </div>
+
+  <div class="value-row">
+    <span>{{ 'Subtotal' | translate }}:</span>
+    <span *ngIf="couponType != 3">{{ totalProductsValue - discount | currency: appConfig.currencyCode }}</span>
+    <span *ngIf="couponType == 3">{{ totalProductsValue | currency: appConfig.currencyCode }}</span>
+  </div>
+
+  <div class="total-row">
+    <span>{{ 'Total(incl. tax)' | translate }}</span>
+    {{ +totalShippingValue + totalProductsValue - discount | currency: appConfig.currencyCode }}
+  </div>
+</div>

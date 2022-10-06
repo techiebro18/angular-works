@@ -1,0 +1,123 @@
+.dhl {
+  display: flex;
+  max-width: 260px;
+
+  .logo {
+    width: 70px;
+    height: 24px;
+    background: #fecc01;
+    display: flex;
+    margin-right: 1em;
+
+    svg {
+      width: 100%;
+    }
+  }
+
+  .title {
+    font-family: 'FuturaBT-Medium';
+    font-size: 16px;
+    position: relative;
+
+    .items-model-up {
+      width: 430px;
+      position: absolute;
+      left: 120px;
+      top: -131px;
+      overflow: visible;
+      z-index: 1024;
+      box-shadow: 0px 3px 18px #00000029;
+
+      .shipping-info-modal {
+        position: relative;
+        display: block;
+        top: 0;
+        left: 0;
+        z-index: 1050;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        outline: 0;
+
+        .shipping-info-modal-dialog {
+          padding: 2em;
+          background: #fff;
+
+          .shipping-info-modal-content {
+            display: flex;
+            flex-direction: column;
+
+            .shipping-info-modal-close {
+              text-align: right;
+              font-size: 0;
+            }
+
+            h1 {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              font-family: 'FuturaBT-Medium';
+              font-size: 15px;
+
+              img {
+                width: 14px;
+                height: 14px;
+              }
+            }
+
+            p {
+              font-family: 'FuturaBT-Light';
+              font-size: 15px;
+              line-height: 19px;
+            }
+          }
+        }
+
+        .modal-header {
+          padding: 10px 1em;
+          background: #000;
+          color: #fff;
+
+          h2 {
+            margin-bottom: 0px;
+            font-family: 'Playfair Display';
+          }
+
+          button {
+            color: #fff;
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
+}
+
+.dhl_eps {
+  opacity: 0.6;
+}
+
+@media screen and (max-width: 767px) {
+  .dhl .title .items-model-up {
+    position: absolute;
+    left: 120px;
+    top: -131px;
+    overflow: visible;
+    z-index: 1024;
+    width: 100%;
+    min-width: 300px;
+    margin: 0 auto;
+    transform: translate(-50%, -50%);
+    box-shadow: 0px 3px 18px #00000029;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .dhl {
+    max-width: 100%;
+
+    .logo {
+      width: 50px;
+    }
+  }
+}

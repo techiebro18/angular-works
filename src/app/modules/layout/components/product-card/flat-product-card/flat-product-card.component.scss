@@ -1,0 +1,106 @@
+:host {
+  .mobile {
+    display: none;
+  }
+  .row {
+    padding: 0;
+    margin: 0;
+  }
+
+  .flat-card {
+    font-size: 15px;
+    font-family: 'FuturaBT-Light';
+    vertical-align: middle;
+    border-bottom: 1px solid var(--steps-gray);
+
+    span.product-name {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      padding-right: 10px;
+    }
+
+    div {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      margin: 0;
+      padding: 10px 0;
+
+      &.line-through {
+        text-decoration: line-through;
+      }
+      &.discount {
+        color: var(--sale);
+      }
+    }
+    .img-box {
+      img {
+        width: 80px;
+        object-fit: cover;
+      }
+    }
+
+    .remove {
+      cursor: pointer;
+
+      img {
+        width: 18px;
+      }
+    }
+    .btn-offer {
+      min-width: 134px;
+    }
+  }
+
+  @media only screen and (max-width: 1024px) {
+    ::ng-deep .makeoffer-btn {
+      width: 100% !important;
+    }
+
+    .desktop {
+      display: none;
+    }
+    .mobile {
+      display: flex !important;
+    }
+
+    .flat-card {
+      padding: 10px 0 30px 0;
+
+      div {
+        display: block;
+
+        &.brand {
+          text-transform: uppercase;
+          font-size: 19px;
+          font-family: 'Cormorant-Medium';
+          margin-bottom: -22px;
+          justify-content: space-between;
+          display: flex;
+        }
+        &.remove {
+          display: inline-flex;
+          padding: 10px 6px;
+        }
+        &.regular-price {
+          margin: 15px 0 -12px 0;
+        }
+        &.make-offer {
+          margin-top: 5px;
+        }
+
+        .img-box {
+          img {
+            width: 102px;
+          }
+        }
+      }
+    }
+  }
+}
+
+::ng-deep .makeoffer-btn {
+  width: max-content !important;
+  min-width: unset !important;
+}

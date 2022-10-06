@@ -1,0 +1,228 @@
+:host {
+  a {
+    text-decoration: none;
+    color: #333;
+  }
+
+  .form-container {
+    display: flex;
+    width: 100%;
+    .transaction-form {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      .transaction-sort {
+        padding-right: 0px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        .form-group {
+          margin-bottom: 0px;
+          .description {
+            text-align: left;
+            padding-left: 0%;
+            width: 100%;
+            margin-bottom: 5px;
+            min-height: 14px;
+          }
+          .dropdown-field {
+            text-align: left;
+            padding-left: 0%;
+            width: 100%;
+            margin-bottom: 5px;
+            input {
+              min-width: 170px;
+            }
+            .dropdown-select {
+              min-width: 170px;
+            }
+            .ng-select-container {
+              min-width: 0px !important;
+            }
+          }
+          .input-container {
+            input {
+              min-height: 33px;
+              border: 1px solid #333;
+              width: 100%;
+              padding: 5px;
+              font-size: 13px;
+            }
+            .primary {
+              min-width: 130px;
+              min-height: 33px;
+              width: 100%;
+              line-height: inherit;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .items-container {
+    flex-direction: column;
+    flex-wrap: wrap;
+    .items-table-container {
+      display: inline-block;
+      width: 100%;
+      overflow: auto;
+      .payout-details-row {
+        table {
+          border-spacing: 0px;
+          thead {
+            tr {
+              th {
+                border: 0px;
+                font-family: 'FuturaBT-Light';
+                white-space: nowrap;
+                color: #212529;
+                font-size: 12px;
+              }
+            }
+          }
+          tbody {
+            tr {
+              td {
+                border: 0px;
+                font-family: 'FuturaBT-Light';
+                font-size: 12px;
+                white-space: pre-wrap;
+                word-break: break-word;
+              }
+              .seller_items_name {
+                cursor: pointer;
+              }
+              .seller_items_sku {
+                cursor: pointer;
+              }
+            }
+          }
+        }
+      }
+    }
+    &.mobile {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      .product-item-wrapper {
+        .product-list-item {
+          flex: 0 0 400px;
+          height: 400px;
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 1200px) {
+    .form-container {
+      display: flex;
+      width: 100%;
+      .transaction-form {
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-bottom: 15px;
+        .transaction-sort {
+          justify-content: center;
+          flex-wrap: wrap;
+          flex: 0 0 33%;
+          .form-group {
+            width: 95%;
+            margin-bottom: 0px;
+
+            .description,
+            .dropdown-field {
+              min-width: 100%;
+              input {
+                min-width: 100%;
+                font-size: 13px;
+              }
+              .dropdown-select {
+                min-width: 100%;
+                font-size: 13px;
+              }
+            }
+            input {
+              min-width: 100%;
+              font-size: 13px;
+            }
+            .primary {
+              min-width: 100%;
+              font-size: 13px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 992px) {
+    .form-container {
+      .transaction-form {
+        .transaction-sort {
+          .form-group {
+            .description {
+              min-height: 20px;
+            }
+            .input-container {
+              input {
+                font-size: 13px !important;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    ::ng-deep .mat-paginator-container {
+      justify-content: space-between;
+    }
+  }
+
+  @media only screen and (max-width: 767px) {
+    .form-container {
+      display: flex;
+      width: 100%;
+      .transaction-form {
+        justify-content: center;
+        flex-wrap: no-wrap;
+        display: flex;
+        flex-direction: column;
+        .transaction-sort {
+          flex-wrap: wrap;
+          flex: 1;
+          flex-direction: row;
+          width: 100%;
+          justify-content: center;
+          .form-group {
+            .description {
+              padding: 10px 0 0px 0;
+              margin: 0;
+              min-height: auto;
+            }
+          }
+        }
+      }
+    }
+
+    ::ng-deep .mat-paginator-container {
+      justify-content: space-between;
+    }
+    ::ng-deep .ng-select {
+      padding-bottom: 0px;
+    }
+  }
+}
+
+::ng-deep .dropdown-field .ng-select.ng-select-single .ng-select-container {
+  height: 33px;
+  line-height: 11px;
+  min-height: 33px;
+}
+
+::ng-deep .ng-dropdown-panel.ng-select-top {
+  bottom: calc(100% - 0em);
+}
+::ng-deep .ng-dropdown-panel.ng-select-bottom {
+  top: calc(100% - 0em);
+}

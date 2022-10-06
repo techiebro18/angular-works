@@ -1,0 +1,180 @@
+:host {
+  .azdesignerlist {
+    position: relative;
+    padding-top: 0px;
+    display: block;
+    width: 100%;
+    padding-bottom: 30px;
+    .page-title {
+      width: 100%;
+      text-align: center;
+      h2 {
+        font-size: 22px;
+        margin: 0;
+        padding-bottom: 30px;
+        font-family: 'Cormorant-Light';
+        line-height: initial;
+      }
+    }
+    .categorylist {
+      width: 100%;
+      overflow: auto;
+      ul {
+        border-top: 1px solid #ccc;
+        padding: 20px 0;
+        border-bottom: 1px solid #ccc;
+        display: flex;
+        width: 100%;
+        min-width: 767px;
+        li {
+          list-style-type: none;
+          width: 100%;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+          a {
+            font-family: 'Manrope';
+            font-size: 14px;
+            color: var(--main-color-black);
+            text-decoration: none;
+          }
+        }
+      }
+    }
+    .stickydesigners {
+      position: fixed;
+      width: 100%;
+      top: 40px;
+      left: 0;
+      background-color: #fff;
+      padding-top: 0;
+      padding-bottom: 0;
+      z-index: 999;
+    }
+  }
+
+  .box-section {
+    width: 100%;
+    display: flex;
+    .container {
+      .row {
+      }
+    }
+  }
+
+  .item-section {
+    width: 50%;
+    font-family: 'Manrope';
+    font-size: 14px;
+    color: #d1d1d1;
+    border-bottom: 1px solid currentColor;
+    text-align: center;
+    padding-bottom: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+
+    &.active {
+      color: var(--main-color-black);
+    }
+
+    &:hover {
+      color: var(--main-color-black);
+    }
+  }
+
+  .azdesignerlisting {
+    padding-bottom: 30px;
+    position: relative;
+    .category-list-single {
+      padding-top: 0;
+      top: 10px;
+    }
+    .page-title {
+      h2 {
+        font-size: 16px;
+        margin: 0;
+        font-family: 'Manrope-Medium';
+      }
+    }
+    .categorylisting {
+      ul {
+        padding: 0 0 20px 0;
+        display: inline-block;
+        width: 100%;
+        margin: 0;
+        li {
+          float: left;
+          width: 25%;
+          list-style-type: none;
+          padding: 5px 0;
+          cursor: pointer;
+          a {
+            line-height: 20px;
+            cursor: pointer;
+            display: inline-block;
+            width: 100%;
+            color: var(--main-color-black);
+            font-family: 'Manrope-Light';
+            font-size: 13px;
+          }
+        }
+        .designer-main {
+          a {
+            font-family: 'Manrope-Light';
+            font-size: 13px;
+          }
+        }
+      }
+    }
+    .grayout {
+      opacity: 0.6;
+      filter: alpha(opacity = 60);
+      padding: 0 0 20px 0;
+      display: inline-block;
+    }
+  }
+  .setMargin {
+    margin-top: 0;
+  }
+
+  .no-javascript-links {
+    display: none;
+    a {
+      display: flex;
+    }
+  }
+
+  @media only screen and (max-width: 767px) {
+    .azdesignerlist {
+      .page-title {
+        h2 {
+          padding-left: 15px;
+        }
+      }
+      .stickydesigners {
+        top: 49px;
+      }
+    }
+    .setMargin {
+      margin-top: 90px;
+    }
+  }
+  @media only screen and (max-width: 480px) {
+    .azdesignerlisting {
+      .categorylisting {
+        ul {
+          li {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}
+
+::ng-deep .footer-main {
+  margin-top: 0px !important;
+}
+::ng-deep html {
+  scroll-behavior: smooth;
+}

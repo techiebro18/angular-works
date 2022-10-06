@@ -1,0 +1,81 @@
+<div [@slideInOut]="animationState" class="search-box ignore-click-outside">
+  <div
+    id="search_slidetoggle"
+    class="searchbar-toggle ignore-click-outside"
+    [ngClass]="{ searchbarhome: _currentUrl == '' }"
+    app-click-outside
+    (clickOutside)="hideSearchBox()"
+  >
+    <div class="close-btn"><i class="material-icons" (click)="hideSearchBox()">clear</i></div>
+    <div class="search-container ignore-click-outside">
+      <div class="col-lg-12 col-md-12 ignore-click-outside">
+        <div class="search-bar-field ignore-click-outside">
+          <div class="form-group ignore-click-outside" *ngIf="state.indices">
+            <i class="fa fa-search search-icon"></i>
+            <input
+              type="text"
+              #searchbox
+              class="form-control ignore-click-outside"
+              placeholder="{{ 'Search designer, styles' | translate }}"
+              (keyup)="handleChange($event)"
+              (keydown.enter)="onEnter(searchbox.value)"
+            />
+
+            <button (click)="clearSearch()" class="clear-search">Clear</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-12 col-md-12" id="search-style-list">
+      <div class="looking-for" id="designer-list" *ngIf="search && search.length">
+        <h3>{{ 'DESIGNERS' | translate }}</h3>
+        <ul class="p-relative-list" *ngFor="let index of state.indices || []; index as i">
+          <ng-container *ngIf="i == 0">
+            <li *ngFor="let option of index.hits.slice(0, 8)">
+              <a href="javascript:void(0)" (click)="brandNavigate(option.seo_url_en)">
+                {{ option.name_en }}
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" *ngIf="!index.hits.length">
+                {{ 'No designer found' | translate }}
+              </a>
+            </li>
+          </ng-container>
+        </ul>
+      </div>
+      <div class="looking-for" id="designer-list" *ngIf="search && search.length">
+        <h3>
+          {{ 'SUGGESTIONS FOR ' | translate }}
+          <span class="search_query">{{ search | uppercase }}</span>
+        </h3>
+        <ul class="p-relative-list" *ngFor="let index of state.indices || []; index as i">
+          <ng-container *ngIf="i == 1">
+            <li *ngFor="let option of index.hits.slice(0, 8)">
+              <a href="javascript:void(0)" (click)="queryNavigate(option.query)">
+                {{ option.objectID }}
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" *ngIf="!index.hits.length">
+                No suggestions found for {{ search }}
+              </a>
+            </li>
+          </ng-container>
+        </ul>
+      </div>
+      <div class="looking-for" id="designer-list" *ngIf="!search || !search.length">
+        <h3>{{ 'POPULAR SEARCHES' }}</h3>
+        <ul class="p-relative-list" *ngFor="let index of state.indices || []; index as i">
+          <ng-container *ngIf="i == 1">
+            <li *ngFor="let option of index.hits.slice(0, 8)">
+              <a href="javascript:void(0)" (click)="queryNavigate(option.query)">
+                {{ option.objectID }}
+              </a>
+            </li>
+          </ng-container>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

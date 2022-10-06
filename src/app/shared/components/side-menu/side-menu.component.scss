@@ -1,0 +1,41 @@
+.side-menu {
+  width: 300px;
+
+  .menu-option {
+    border-top: 1px solid var(--color-gray-6);
+    padding: 6px 0;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+      transition: all 0.25s linear;
+    }
+
+    &.active .menu-option-title {
+      font-family: FuturaBT-Medium;
+      transition: all 0.25s linear;
+    }
+
+    &:last-of-type {
+      border-bottom: 1px solid var(--color-gray-6);
+    }
+
+    .menu-option-icon {
+      width: 17px;
+      height: 17px;
+      margin: 10px 10px 10px 0;
+    }
+
+    .menu-option-title {
+      font-family: FuturaBT-Light;
+      font-size: 16px;
+      margin-left: 10px;
+    }
+
+    .expand-arrow {
+      display: inline;
+      float: right;
+      margin: 10px;
+    }
+  }
+}

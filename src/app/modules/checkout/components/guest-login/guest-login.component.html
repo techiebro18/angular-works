@@ -1,0 +1,25 @@
+<div class="register-container">
+  <div class="register-form private-seller-register">
+    <form id="registerForm" [formGroup]="guestLoginForm">
+      <div class="form-group">
+        <input type="email" placeholder="Email *" class="primary" formControlName="email" />
+        <div
+          *ngIf="guestLoginForm.controls.email.invalid && guestLoginForm.controls.email.touched"
+          class="invalid-message mb-10"
+        >
+          A valid e-mail is required
+        </div>
+        <re-captcha formControlName="recaptchaReactive" siteKey="{{ recaptcha_site_key }}"></re-captcha>
+      </div>
+    </form>
+    <div class="alert error-message" *ngIf="errorMessage" [innerHTML]="errorMessage"></div>
+    <div class="alert alert-success text-center" *ngIf="successMessage">
+      {{ successMessage }}
+    </div>
+    <div class="d-flex submit-button-container">
+      <button class="btn primary" (click)="onProcessRegister()" [disabled]="guestLoginForm.invalid">
+        Continue As Guest
+      </button>
+    </div>
+  </div>
+</div>

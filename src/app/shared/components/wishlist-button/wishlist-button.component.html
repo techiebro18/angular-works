@@ -1,0 +1,56 @@
+<div *ngIf="(authService.isLoggedInObs | async) && (user$ | async)?.role_id != 2; else elseBlock">
+  <button
+    class="wishlist-btn"
+    [ngClass]="{ link: showAsLink, compact: compact === true }"
+    (click)="toggleWishList()"
+  >
+    <span *ngIf="!compact && !invertHeart">
+      {{ isInWishList ? ('Added in wishlist' | translate) : ('Add this to wishlist' | translate) }}
+    </span>
+    <i
+      class="fa"
+      [ngClass]="{ 'fa-heart-o': !isInWishList, 'fa-heart': isInWishList }"
+      aria-hidden="true"
+    ></i>
+
+    <div *ngIf="isInWishList" class="heart-container">
+      <div class="heart">
+        <i
+          class="fa"
+          [ngClass]="{ 'fa-heart-o': !isInWishList, 'fa-heart': isInWishList }"
+          aria-hidden="true"
+        ></i>
+      </div>
+      <div class="heart">
+        <i
+          class="fa"
+          [ngClass]="{ 'fa-heart-o': !isInWishList, 'fa-heart': isInWishList }"
+          aria-hidden="true"
+        ></i>
+      </div>
+      <div class="heart">
+        <i
+          class="fa"
+          [ngClass]="{ 'fa-heart-o': !isInWishList, 'fa-heart': isInWishList }"
+          aria-hidden="true"
+        ></i>
+      </div>
+    </div>
+    <span *ngIf="!compact && invertHeart" [ngClass]="{ invert: invertHeart === true }">
+      {{ isInWishList ? ('Added in wishlist' | translate) : ('Add this to wishlist' | translate) }}
+    </span>
+  </button>
+</div>
+<ng-template #elseBlock>
+  <button
+    class="wishlist-btn"
+    [ngClass]="{ link: showAsLink, compact: compact === true }"
+    (click)="openPopup(true)"
+  >
+    <span *ngIf="!compact && !invertHeart">{{ 'Add this to wishlist' | translate }}</span>
+    <i class="fa fa-heart-o font-black" aria-hidden="true"></i>
+    <span *ngIf="!compact && invertHeart" [ngClass]="{ invert: invertHeart === true }">
+      {{ 'Add this to wishlist' | translate }}
+    </span>
+  </button>
+</ng-template>

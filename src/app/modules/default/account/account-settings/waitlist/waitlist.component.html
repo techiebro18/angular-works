@@ -1,0 +1,150 @@
+<ng-container *ngIf="waitlistItems?.length > 0; else elseBlock">
+  <div class="desktop tvb-table">
+    <div class="row tvb-header">
+      <div class="col col-md-1"></div>
+
+      <div class="col col-md-5 tvb-header-text">
+        {{ 'Tags' | translate | uppercase }}
+      </div>
+
+      <div class="col col-md-3 tvb-header-text">
+        {{ 'Items Available' | translate | uppercase }}
+      </div>
+
+      <div class="col col-md-3"></div>
+    </div>
+
+    <div class="tvb-body">
+      <ng-container *ngFor="let waitlistItem of waitlistItems">
+        <div class="row">
+          <div class="col col-md-1 col-delete-btn">
+            <div class="delete-btn" (click)="openDeletePopup(deleteWaitlistPopup, waitlistItem.id)">
+              <img src="assets/images/icons/trash.svg" />
+            </div>
+          </div>
+
+          <div class="col col-md-5">
+            <div class="tags" [title]="getTagsFormatted(waitlistItem)">
+              {{ getTagsFormatted(waitlistItem) }}
+            </div>
+          </div>
+
+          <div class="col col-md-3">
+            <a [routerLink]="['products/' + waitlistItem.id]" *ngIf="waitlistItem.count > 0">
+              {{ waitlistItem.count }} items
+            </a>
+
+            <span *ngIf="waitlistItem.count == 0">{{ waitlistItem.count }} items</span>
+          </div>
+
+          <div class="col col-md-3 col-see-items-btn">
+            <a class="see-items-btn" [routerLink]="['products/' + waitlistItem.id]">
+              <button class="btn-secondary see-items-btn">
+                {{ 'See Available Items' | translate | uppercase }}
+              </button>
+            </a>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="mobile">
+    <div class="listing">
+      <ng-container *ngFor="let waitlistItem of waitlistItems">
+        <div class="list-item">
+          <div class="row">
+            <div class="col col-10 tags-col">
+              <div class="tags" [title]="getTagsFormatted(waitlistItem)">
+                {{ getTagsFormatted(waitlistItem) }}
+              </div>
+            </div>
+
+            <div class="col col-2">
+              <div class="delete-btn" (click)="openDeletePopup(deleteWaitlistPopup, waitlistItem.id)">
+                <img src="assets/images/icons/trash.svg" />
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col col-12">
+              <a
+                *ngIf="waitlistItem.count > 0"
+                [routerLink]="['products/' + waitlistItem.id]"
+                class="see-available-items"
+              >
+                {{ waitlistItem.count }} items
+              </a>
+
+              <span *ngIf="waitlistItem.count == 0" class="see-available-items">{{ waitlistItem.count }} items</span>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col col-12">
+              <a [routerLink]="['products/' + waitlistItem.id]" class="see-items-btn">
+                <button class="btn btn-secondary see-items-btn">
+                  {{ 'See Available Items' | translate | uppercase }}
+                </button>
+              </a>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+  <br />
+  <br />
+
+  <div class="text-center">
+    <button class="btn btn-primary browse-new-arrivals-btn">
+      <a href="{{ baseRemoteUrl }}/new-in">{{ 'Browse new arrivals' | translate }}</a>
+    </button>
+  </div>
+</ng-container>
+
+<ng-template #elseBlock>
+  <div class="empty-warning">{{ 'Your Waitlist is empty' | translate }}</div>
+</ng-template>
+
+<br />
+<br />
+
+<ng-container *ngIf="errorMessage">
+  <div class="col-12 col-md-6 alert-danger error-message">
+    {{ errorMessage }}
+  </div>
+</ng-container>
+
+<ng-template #deleteWaitlistPopup>
+  <div class="createAlert">
+    <div class="col-md-12 modal-header">
+      <button type="button" class="close pull-right" aria-label="Close" (click)="closePopup()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-body-inner">
+        <form [formGroup]="form" (ngSubmit)="submitForm()" novalidate>
+          <div class="title-info">
+            <h3>{{ 'waitlist_confirm_message' | translate }}</h3>
+          </div>
+          <span class="error-message" *ngIf="error_checked == true">
+            {{ 'Please select one reason' }}
+          </span>
+          <ul class="checkbox-list">
+            <li class="checkbox" *ngFor="let res of Reasons; let i = index">
+              <input id="checkbox_options" type="checkbox" [value]="res.name" (change)="onCheckboxChange($event)" />
+              <label for="checkbox_options">{{ res.name }}</label>
+            </li>
+          </ul>
+          <div class="col-sm-12 submitbtn">
+            <button type="submit" class="btn proceed-btn">{{ 'confirm' | translate }}</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</ng-template>

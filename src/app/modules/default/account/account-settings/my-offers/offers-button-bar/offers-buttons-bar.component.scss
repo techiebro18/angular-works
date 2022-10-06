@@ -1,0 +1,73 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.buttons-bar {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  align-content: center;
+  align-items: center;
+  margin: 10px 0;
+  border-bottom: 1px solid var(--main-color-gray);
+
+  &:last-of-type {
+    border-bottom: none;
+  }
+
+  button {
+    margin: 0px 5px 0px 5px;
+    height: 44px;
+
+    &:first-of-type {
+      margin-left: 0;
+    }
+
+    &:last-of-type {
+      margin-right: 0;
+    }
+  }
+
+  .buy-btn,
+  .decline-btn,
+  .accept-btn,
+  .reject-btn,
+  .counter-offer-btn {
+    font-size: 0.8rem;
+    width: 100%;
+  }
+
+  .offer-history-btn {
+    margin: auto auto;
+    color: var(--main-color-black);
+    text-decoration: underline;
+  }
+}
+
+// UP TO Phones, Mobile devices
+@media (max-width: 480px) {
+  .buttons-bar {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+
+    button {
+      margin: 5px 0;
+      padding: 0;
+
+      &.btn-secondary {
+        flex: 1 0;
+        justify-content: space-between;
+      }
+    }
+  }
+
+  .btn-separator {
+    width: 10px;
+  }
+}

@@ -1,0 +1,172 @@
+div.container {
+  max-height: 85vh;
+  max-width: 95vw;
+}
+
+.header-title {
+  font-family: Cormorant;
+  font-size: 30px;
+  text-align: center;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+.mobile-only {
+  display: none;
+}
+
+.desktop-only {
+  display: block;
+}
+
+.buttons-bar {
+  padding: 20px 0;
+  margin-bottom: 10px;
+  border-bottom: 1px solid var(--main-color-gray);
+
+  .yes-no-btns {
+    display: flex;
+    justify-content: space-between;
+
+    .yes-btn,
+    .no-btn {
+      width: 49%;
+    }
+  }
+}
+
+.product-header {
+  display: flex;
+  border-bottom: 1px solid var(--main-color-black);
+
+  .product-image {
+    display: inline-flex;
+    padding: 10px;
+
+    img {
+      object-fit: cover;
+      margin: auto;
+    }
+  }
+
+  .product-info {
+    padding: 20px 0;
+
+    .brand-name {
+      font-family: Cormorant;
+      font-size: 19px;
+      text-transform: uppercase;
+    }
+
+    .offer-info {
+      font-family: FuturaBT-Light;
+      font-size: 15px;
+
+      &.for-you-price {
+        color: var(--sub-footer-copyright-color);
+      }
+    }
+  }
+
+  .warnings-texts {
+    color: var(--form-error);
+    font-size: 15px;
+    font-family: 'FuturaBT-Light';
+    margin: auto auto 20px 100px;
+    max-width: 150px;
+    word-break: break-word;
+
+    .time-to-expire {
+      margin: 0;
+    }
+
+    .last-offer-warning {
+      margin: 20px 0 0 0;
+    }
+  }
+}
+
+.history-box {
+  .history-title {
+    display: inline-block;
+    margin: 20px 0;
+    font-size: 19px;
+    font-family: Cormorant;
+    text-transform: uppercase;
+  }
+}
+
+// Up to SmartPhones, Mobile devices
+@media (max-width: 480px) {
+  :host {
+    overflow-x: hidden;
+  }
+
+  ::ng-deep .cdk-global-overlay-wrapper .cdk-overlay-pane.app-dialog .mat-dialog-container {
+    padding: 0;
+
+    div.container {
+      max-height: 80vh;
+      max-width: 95vw;
+    }
+  }
+
+  .desktop-only {
+    display: none;
+  }
+
+  .mobile-only {
+    display: block;
+  }
+
+  .header-title {
+    font-size: 25px;
+    line-height: 30px;
+  }
+
+  .fixed-footer.mobile-only {
+    position: sticky;
+    left: 0;
+    bottom: 0;
+    background-color: white;
+    border-top: 1px solid var(--sub-footer-copyright-color);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 5px 30px;
+
+    .content {
+      padding: 10px;
+
+      .buttons-bar {
+        padding: 10px 0;
+        margin-bottom: unset;
+        border-bottom: none;
+
+        .yes-no-btns {
+          display: flex;
+          justify-content: space-between;
+
+          .yes-btn,
+          .no-btn {
+            width: 49%;
+          }
+        }
+      }
+
+      .warnings-texts {
+        max-width: 90%;
+        margin: auto;
+        font-size: 14px;
+        font-family: 'FuturaBT-Light', sans-serif;
+        color: var(--form-error);
+        text-align: center;
+
+        &.time-to-expire {
+          margin: 20px auto 4px auto;
+        }
+
+        &.last-offer-warning {
+          margin-bottom: 6px;
+        }
+      }
+    }
+  }
+}

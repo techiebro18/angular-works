@@ -1,0 +1,98 @@
+<div [ngClass]="(isMobile$ | async) ? '' : 'container'">
+  <div class="form-container-wrapper col-lg-9 col-md-12 col-sm-12 col-xs-12 p-0">
+    <div class="form-title title uppercase">Photos</div>
+
+    <div class="please-note mt-2 mb-3">
+      Please note: We cannot approve items that use photos taken from the internet.
+    </div>
+
+    <div class="form-container" *ngIf="productForm">
+      <form [formGroup]="productForm" (ngSubmit)="submitForm()" id="imagesForm">
+        <div class="photos-container mobile" [ngClass]="{ mobile: isMobile$ | async }">
+          <div class="photos-section-1">
+            <div
+              id="mainImageCdkDropListContainer"
+              class="photo-slot main-photo"
+              [ngClass]="{
+                'main-photo-only': !isMainPhotoLoaded() && !isAnySecondaryPhotoUploaded()
+              }"
+            >
+              <tvb-badge
+                id="main-photo-badge"
+                label="Main Image"
+                *ngIf="isMainPhotoLoaded()"
+              ></tvb-badge>
+
+              <div class="photo-uploader-container">
+                <app-image-uploader
+                  [uploadedFile]="mainImage.file"
+                  [fixedOverlayInfo]="!isMainPhotoLoaded()"
+                  [compress]="true"
+                  (fileChange)="onMainPhotoChange($event, 'productImage')"
+                  (fileSizeError)="showErrorMessage('imageFileSize')"
+                  (fileTypeError)="showErrorMessage('imageFileType')"
+                ></app-image-uploader>
+              </div>
+            </div>
+
+            <div
+              id="fakeDataForDropListFirstLineElement"
+              class="extra-photos-1-container"
+              [ngClass]="{ 'd-none': !isAnySecondaryPhotoUploaded() && !isMainPhotoLoaded() }"
+            >
+              <div
+                class="photo-slot extra-photo"
+                *ngFor="let item of fakeDataForDropListFirstLine; let i = index"
+              >
+                <div class="photo-uploader-container">
+                  <app-image-uploader
+                    [uploadedFile]="item.file"
+                    [compress]="true"
+                    (fileChange)="onSecondaryPhotosChange($event, i)"
+                    (fileSizeError)="showErrorMessage('imageFileSize')"
+                    (fileTypeError)="showErrorMessage('imageFileType')"
+                  ></app-image-uploader>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="photos-section-2"
+            [ngClass]="{ 'd-none': !isAnySecondaryPhotoUploaded() && !isMainPhotoLoaded() }"
+          >
+            <div id="fakeDataForDropListSecondLineElement" class="extra-photos-2-container">
+              <div
+                class="photo-slot extra-photo"
+                *ngFor="let item of fakeDataForDropListSecondLine; let i = index"
+              >
+                <div class="photo-uploader-container">
+                  <app-image-uploader
+                    [uploadedFile]="item.file"
+                    [compress]="true"
+                    (fileChange)="onSecondaryPhotosChange($event, i + secondaryImages.length / 2)"
+                    (fileSizeError)="showErrorMessage('imageFileSize')"
+                    (fileTypeError)="showErrorMessage('imageFileType')"
+                  ></app-image-uploader>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="col-sm-12 col-xs-12 col-md-12 col-lg-12 alert-danger justify-content-center flex mt-2"
+          *ngIf="productUpdateErrorMessage"
+        >
+          {{ productUpdateErrorMessage }}
+        </div>
+
+        <div class="submit-button-container">
+          <button type="submit" class="btn primary" [disabled]="!isReadyForNextStep()">
+            Continue
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

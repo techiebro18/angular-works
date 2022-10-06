@@ -1,0 +1,55 @@
+<nav *ngIf="authService.isLoggedInObs | async; else elseBlock">
+  <ul>
+    <li class="active">
+      <a aria-disabled="true" disabled>{{ 'Log In' | translate }}</a>
+    </li>
+
+    <li
+      [ngClass]="{
+        selected: path === 'shipping-address',
+        active: isActiveRoute('shipping-address')
+      }"
+    >
+      <a [routerLink]="['shipping-address']">{{ 'Shipping' | translate }}</a>
+    </li>
+
+    <li
+      [ngClass]="{ selected: path === 'payment-method', active: isActiveRoute('payment-method') }"
+    >
+      <a
+        [routerLink]="['payment-method']"
+        [ngStyle]="{ 'pointer-events': !checkout.shippingAddress ? 'none' : null }"
+      >
+        {{ 'Payment' | translate }}
+      </a>
+    </li>
+
+    <li [ngClass]="{ selected: path === 'review-order', active: isActiveRoute('review-order') }">
+      <a
+        [routerLink]="['review-order']"
+        [ngStyle]="{ 'pointer-events': !checkout.paymentMethod ? 'none' : null }"
+      >
+        {{ 'Review' | translate }}
+      </a>
+    </li>
+  </ul>
+</nav>
+<ng-template #elseBlock>
+  <ul>
+    <li class="selected active">
+      <a [routerLink]="['login']">{{ 'Log In' | translate }}</a>
+    </li>
+
+    <li>
+      <a aria-disabled="true" disabled>{{ 'Shipping' | translate }}</a>
+    </li>
+
+    <li>
+      <a aria-disabled="true" disabled>{{ 'Payment' | translate }}</a>
+    </li>
+
+    <li>
+      <a aria-disabled="true" disabled>{{ 'Review' | translate }}</a>
+    </li>
+  </ul>
+</ng-template>

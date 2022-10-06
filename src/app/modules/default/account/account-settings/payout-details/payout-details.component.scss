@@ -1,0 +1,57 @@
+:host {
+  .payout-details-section {
+    padding-top: 0px;
+    .back-link {
+      color: #000;
+      font-size: 14px;
+      text-decoration: none;
+      cursor: pointer;
+      font-family: 'FuturaBT-Light';
+      margin-bottom: 20px;
+      display: inline-block;
+      margin-top: 15px;
+      width: 100%;
+    }
+    .payout-heading {
+      font-family: 'Playfair Display', serif;
+      text-align: center;
+      font-size: 36px;
+      width: calc(100% - 250px);
+    }
+    .payout-details-row {
+      table {
+        border-spacing: 0px;
+        thead {
+          tr {
+            th {
+              border: 0px;
+              font-family: 'FuturaBT-Light';
+              white-space: nowrap;
+              color: #212529;
+              font-size: 12px;
+            }
+          }
+        }
+        tbody {
+          tr {
+            td {
+              border: 0px;
+              font-family: 'FuturaBT-Light';
+              font-size: 12px;
+            }
+          }
+        }
+      }
+    }
+  }
+  @media only screen and (max-width: 960px) {
+    .payout-details-section h1.payout-heading {
+      width: 100%;
+    }
+  }
+  @media only screen and (max-width: 767px) {
+    .payout-details-section {
+      padding-top: 30px;
+    }
+  }
+}

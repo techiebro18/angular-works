@@ -1,0 +1,195 @@
+:host {
+  font-family: 'Manrope';
+}
+.accordion {
+  font-family: 'Manrope';
+  width: 103vw;
+  overflow: hidden;
+  margin: 10px auto;
+  color: var(--main-color-white);
+  padding: 0;
+}
+.accordion section {
+  float: left;
+  overflow: hidden;
+  cursor: pointer;
+  margin: 0;
+  object-fit: cover;
+  &:hover {
+    &:not(.opened) {
+      width: 13vw;
+    }
+  }
+  &.opened {
+    width: 60vw;
+    .box-member {
+      display: block;
+      clear: both;
+      position: relative;
+      top: 32.1vh;
+      left: 2vw;
+      .country {
+        font-size: 14px;
+        text-transform: uppercase;
+      }
+      .company-name {
+        height: 7vh;
+        padding-right: 1.5vw;
+        a {
+          font-size: 38px;
+          font-family: 'Cormorant';
+          text-transform: uppercase;
+          color: var(--main-color-white);
+          &:hover {
+            color: var(--main-color-white);
+            text-decoration: none;
+          }
+        }
+      }
+      .description {
+        margin-top: 1vh;
+        font-size: 14px;
+        width: 53%;
+        height: 9vh;
+      }
+      .items {
+        margin-top: 2vh;
+        float: left;
+        margin-right: 3vw;
+        .count {
+          font-size: 28px;
+          margin-top: 1vh;
+        }
+      }
+    }
+  }
+}
+
+.accordion section .box-member {
+  display: none;
+}
+.accordion section:after {
+  position: relative;
+  font-size: 24px;
+  color: #000;
+  font-weight: bold;
+}
+
+.accordion section.opened h2 {
+  width: 100%;
+  a {
+    display: none;
+  }
+  .avatar {
+    display: block;
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+    float: left;
+    margin-right: 23px;
+  }
+  .link-member {
+    display: block;
+    padding: 0;
+    font-family: 'Manrope';
+    line-height: 50px;
+    font-size: 14px;
+  }
+}
+
+.accordion section h2 a {
+  padding: 8px 10px;
+  display: block;
+  font-size: 16px;
+  font-weight: normal;
+  color: var(--main-color-white);
+  text-decoration: none;
+  text-transform: uppercase;
+  font-family: 'Manrope';
+}
+.horizontal section {
+  width: 10vw;
+  height: 80vh;
+  -moz-transition: width 0.3s linear;
+  -webkit-transition: width 0.3s linear;
+  -o-transition: width 0.3s linear;
+  transition: width 0.3s linear;
+}
+.horizontal section:after {
+  top: 140px;
+  left: 15px;
+}
+.horizontal section h2 {
+  -webkit-transform: rotate(270deg);
+  -moz-transform: rotate(270deg);
+  -o-transform: rotate(270deg);
+  transform: rotate(270deg);
+  width: 240px;
+  position: relative;
+  left: -100px;
+  top: 55vh;
+  .avatar,
+  .link-member {
+    display: none;
+  }
+}
+.horizontal .opened h2 {
+  top: 4vh;
+  left: 2vw;
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+
+@media screen and (max-width: 1024px) {
+  .horizontal section {
+    -moz-transition: width 0.2s linear;
+    -webkit-transition: width 0.2s linear;
+    -o-transition: width 0.2s linear;
+    transition: width 0.2s linear;
+
+    h2 {
+      top: 58vh;
+    }
+  }
+  .accordion section {
+    &.opened {
+      width: 80vw;
+      .box-member {
+        top: 36.1vh;
+        .company-name {
+          height: 9vh;
+        }
+        .description {
+          width: 90%;
+        }
+      }
+    }
+    &.member_3,
+    &.member_4 {
+      display: none;
+    }
+  }
+  .accordion section h2 {
+    a {
+      font-size: 14px;
+    }
+  }
+  .accordion section.opened h2 {
+    width: 100%;
+    a {
+      font-size: 14px;
+    }
+    .avatar {
+      width: 34px;
+      height: 34px;
+      margin-right: 15px;
+    }
+    .link-member {
+      font-size: 11px;
+      line-height: 34px;
+    }
+  }
+}

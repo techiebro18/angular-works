@@ -1,0 +1,259 @@
+<div class="container">
+  <header class="cart-header">
+    <h2 class="title">{{ 'My shopping Bag' | translate }}</h2>
+
+    <button *ngIf="products.length" class="btn primary" (click)="doCheckout()">
+      {{ 'Proceed to Checkout' | translate }}
+    </button>
+  </header>
+
+  <header class="list-header">
+    <div class="image">
+      {{ 'Items' | translate }}
+      <span class="product-quantity">({{ products.length }})</span>
+    </div>
+    <div class="box-save-all" *ngIf="products.length">
+      <a href="javascript:;" (click)="openLoginPopUp()" class="primary-link" *ngIf="!allFavorite">
+        <span class="label-save-all">{{ 'Save all items to wishlist' | translate }}</span>
+        <i class="fa fa-heart-o font-black" aria-hidden="true"></i>
+      </a>
+      <span *ngIf="allFavorite">
+        <span class="label-save-all">{{ 'All items were saved to the wishlist' | translate }}</span>
+        <i class="fa fa-heart font-black" aria-hidden="true"></i>
+      </span>
+    </div>
+  </header>
+
+  <div *ngIf="!products.length && isFetched" class="empty-cart">
+    {{ 'There is no item in Cart' | translate }}
+  </div>
+
+  <div *ngIf="showRemovedItemMessage" class="removed-item">
+    {{ 'Removed item from cart succesfully' | translate }}
+  </div>
+
+  <ul *ngIf="products.length == 0 && !isFetched" class="placeholder-container">
+    <li class="image">
+      <div class="placeholder"></div>
+    </li>
+    <li class="title-container">
+      <div class="placeholder"></div>
+    </li>
+    <li class="quantity-container">
+      <div class="placeholder"></div>
+    </li>
+    <li class="price-container">
+      <div class="placeholder"></div>
+    </li>
+    <li class="total-amount-container">
+      <div class="placeholder"></div>
+    </li>
+  </ul>
+
+  <ul *ngIf="products" class="products-list">
+    <li *ngFor="let product of products">
+      <div class="image">
+        <a
+          routerLink="/{{ product.catalog.seo_url ? product.catalog.seo_url : 'item' }}"
+          [queryParams]="{ pdp: product.catalog.id }"
+        >
+          <img class="img-fluid" src="{{ product.catalog.imgix_image_url }}" />
+        </a>
+      </div>
+
+      <div class="product-details-container">
+        <div class="title-container">
+          <a routerLink="/{{ getBrandUrl(product) }}" [queryParams]="" class="brand">
+            {{ product.catalog.brand_name }}
+          </a>
+
+          <span class="product-title">
+            <a
+              routerLink="/{{ product.catalog.seo_url ? product.catalog.seo_url : 'item' }}"
+              [queryParams]="{ pdp: product.catalog.id }"
+            >
+              {{ product.catalog.name }}
+            </a>
+          </span>
+          <div class="price-container">
+            <div class="box-price">
+              {{ 'Subtotal' | translate }}:
+              <ng-container *ngIf="product.offers && product.offers.statusId == 2">
+                <div class="discount-price">
+                  {{ getProductOfferPrice(product) | currency: currency }}
+                </div>
+                <div class="regular-price">
+                  {{ getRegularProductPrice(product.catalog) | currency: currency }}
+                </div>
+                <div class="discount-price" *ngIf="getOfferPercentage(product) > 0">
+                  Save {{ getOfferPercentage(product) }}%
+                </div>
+              </ng-container>
+              <ng-container
+                *ngIf="
+                  product.catalog.is_discount == 1 &&
+                  product.catalog.discount_price.length &&
+                  (!product.offers || product.offers.statusId != 2)
+                "
+              >
+                <div class="discount-price">
+                  {{ getProductPrice(product.catalog) | currency: currency }}
+                </div>
+                <div class="regular-price">
+                  {{ getRegularProductPrice(product.catalog) | currency: currency }}
+                </div>
+                <div class="discount-price">Save {{ getDiscountPercentage(product.catalog) }}%</div>
+              </ng-container>
+              <ng-container
+                *ngIf="
+                  (product.catalog.is_discount != 1 || !product.catalog.discount_price.length) &&
+                  (!product.offers || product.offers.statusId != 2)
+                "
+              >
+                {{ getRegularProductPrice(product.catalog) | currency: currency }}
+              </ng-container>
+            </div>
+          </div>
+        </div>
+
+        <div class="total-amount-container">
+          <div class="product-control">
+            <app-wishlist-button
+              [product]="product.catalog"
+              [showAsLink]="true"
+              [page]="'cart'"
+              (callbackEvent)="getWishlist()"
+            ></app-wishlist-button>
+          </div>
+
+          <a href="javascript: void(0);" (click)="cartMinus(product)" class="remove-button">
+            <span>{{ 'Remove item' | translate }}</span>
+            <i class="fa fa-trash font-black"></i>
+          </a>
+        </div>
+
+        <div class="mobile-only">
+          <div class="price-container-mobile">
+            <div class="box-price">
+              {{ 'Subtotal' | translate }}:
+              <ng-container *ngIf="product.offers && product.offers.statusId == 2">
+                <span class="discount-price">
+                  {{ getProductOfferPrice(product) | currency: currency }}
+                </span>
+                <span class="regular-price">
+                  {{ getRegularProductPrice(product.catalog) | currency: currency }}
+                </span>
+              </ng-container>
+              <ng-container
+                *ngIf="
+                  product.catalog.is_discount == 1 &&
+                  product.catalog.discount_price.length &&
+                  (!product.offers || product.offers.statusId != 2)
+                "
+              >
+                <span class="discount-price">
+                  {{ getProductPrice(product.catalog) | currency: currency }}
+                </span>
+                <span class="regular-price">
+                  {{ getRegularProductPrice(product.catalog) | currency: currency }}
+                </span>
+              </ng-container>
+              <ng-container
+                *ngIf="
+                  product.catalog.is_discount != 1 ||
+                  (!product.catalog.discount_price.length &&
+                    (!product.offers || product.offers.statusId != 2))
+                "
+              >
+                {{ getRegularProductPrice(product.catalog) | currency: currency }}
+              </ng-container>
+            </div>
+          </div>
+
+          <div class="controls-container">
+            <app-wishlist-button
+              [product]="product.catalog"
+              [showAsLink]="true"
+              (callbackEvent)="getWishlist()"
+            ></app-wishlist-button>
+
+            <a href="javascript: void(0);" (click)="cartMinus(product)" class="remove-button">
+              <span>{{ 'Remove item' | translate }}</span>
+              <i class="fa fa-trash"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+
+  <div *ngIf="products" class="checkout-summary">
+    <div class="total-price-container">
+      <ng-container *ngIf="hasDiscount || hasOffer">
+        <div class="total-price">
+          <div class="title">
+            <span>{{ 'Item total' | translate }}:</span>
+          </div>
+          <div class="content">
+            <span class="regular-price">{{ getRegularTotalAmount() | currency: currency }}</span>
+            <span class="discount-price">{{ getTotalAmount() | currency: currency }}</span>
+          </div>
+        </div>
+        <p class="total-price" *ngIf="hasDiscount">
+          <span>{{ 'Discount' | translate }}:</span>
+          <span class="discount-price">{{ getTotalDiscount() * -1 | currency: currency }}</span>
+        </p>
+      </ng-container>
+      <ng-container *ngIf="!hasDiscount && !hasOffer">
+        <p class="total-price">
+          <span>{{ 'Item total' | translate }}:</span>
+          <span>{{ getRegularTotalAmount() | currency: currency }}</span>
+        </p>
+      </ng-container>
+      <div class="subtotal-container">
+        <p class="subtotal-price">
+          <span>{{ 'Subtotal' | translate }}</span>
+          {{ getTotalAmount() | currency: currency }}
+        </p>
+      </div>
+      <p class="tax-hint">({{ 'excl. shipping costs' | translate }})</p>
+    </div>
+  </div>
+  <div class="row col-md-12 checkout-buttons">
+    <button class="btn btn-secondary" (click)="continueShopping()">
+      <i class="fa fa-long-arrow-left"></i>
+      {{ 'Back To Shopping' | translate }}
+    </button>
+
+    <button *ngIf="products.length" class="btn primary" (click)="doCheckout()">
+      {{ 'Proceed to Checkout' | translate }}
+    </button>
+  </div>
+
+  <div class="row box-checkout-info">
+    <div class="box-info">
+      <div class="main-info">{{ 'Worldwide Shipping' | translate }}</div>
+      <div class="desc-info">
+        We connect sellers and buyers from
+        <br />
+        all over the world and ship everywhere
+      </div>
+    </div>
+    <div class="box-info">
+      <div class="main-info">{{ 'Estimated delivery' | translate }}</div>
+      <div class="desc-info">
+        You can expect your item within 2-21
+        <br />
+        business days based on where the seller is located
+      </div>
+    </div>
+    <div class="box-info">
+      <div class="main-info">{{ 'Return policy' | translate }}</div>
+      <div class="desc-info">
+        You can always re-list your item for free within 72 hours or return it within 14 days,
+        <br />
+        if you bought it from a professional seller
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,55 @@
+.tvb-checkbox {
+  position: relative;
+  display: block;
+
+  .box-input {
+    float: left;
+    input {
+      display: none;
+    }
+    input[type='checkbox'] {
+      -webkit-appearance: none;
+      appearance: none; /* Remove most all native input styles */
+      background-color: var(--form-background); /* For iOS < 15 */
+      margin: 0; /* Not removed via appearance */
+      font: inherit;
+      color: #000;
+      width: 1.15em;
+      height: 1.15em;
+      border: 0.15em solid #000;
+      transform: translateY(-0.075em);
+      display: inline-grid;
+      place-content: center;
+    }
+
+    input[type='checkbox']::before {
+      content: '';
+      width: 0.4em;
+      height: 0.4em;
+      transform: scale(0);
+      transition: 120ms transform ease-in-out;
+      box-shadow: inset 1em 1em #000;
+      background-color: #000; /* Windows High Contrast Mode */
+    }
+
+    input[type='checkbox']:checked::before {
+      transform: scale(1);
+    }
+  }
+
+  .box-label {
+    width: 95%;
+    float: left;
+    label {
+      margin-top: 0px;
+      margin-left: 15px;
+      display: inline-block;
+      font-weight: 400;
+      cursor: pointer;
+
+      small {
+        font-size: 14px;
+      }
+    }
+  }
+}

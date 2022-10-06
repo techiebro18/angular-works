@@ -1,0 +1,118 @@
+<div class="{{ cssClass }}">
+  <ng-container *ngIf="!bottomTitle">
+    <div class="product-title" *ngIf="title != null">
+      <h3 [innerHTML]="title.title"></h3>
+      <h4 [innerHTML]="title.description"></h4>
+      <div class="cta-btn">
+        <a href="{{ title.link }}">{{ title.button }}</a>
+      </div>
+    </div>
+
+    <div class="bottom-popover" *ngIf="title">
+      <div class="popover-box">
+        <div class="imgbox newhoverimage">
+          <a href="{{ product.link }}">
+            <img
+              src="{{ env.UPLOADS_IMGIX_URL }}homepage/{{ product.image_url }}/large/{{
+                product.extension
+              }}"
+              class="img-responsive w-100 forOther"
+              alt="{{ product.image_url }}.{{ product.extension }}"
+              *appShellNoRender
+            />
+          </a>
+        </div>
+
+        <div class="popover-text">
+          <h2 class="title" [innerHTML]="product.title"></h2>
+          <p class="box-desktop" [innerHTML]="product.description"></p>
+          <div class="cta-btn text-center box-mobile" *ngIf="!buttonInside">
+            <a href="{{ product.link }}">{{ product.button }}</a>
+          </div>
+          <div class="cta-btn text-center" *ngIf="buttonInside">
+            <a href="{{ product.link }}">{{ product.button }}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom-button box-desktop" *ngIf="title">
+      <div class="cta-btn text-center" *ngIf="!buttonInside">
+        <a href="{{ product.link }}">{{ product.button }}</a>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="bottomTitle">
+    <div class="" *ngIf="title">
+      <div class="popover-box">
+        <div class="imgbox newhoverimage">
+          <a href="{{ product.link }}">
+            <img
+              src="{{ env.UPLOADS_IMGIX_URL }}homepage/{{ product.image_url }}/large/{{
+                product.extension
+              }}"
+              class="img-responsive w-100 forOther"
+              alt="{{ product.image_url }}.{{ product.extension }}"
+              *appShellNoRender
+            />
+          </a>
+        </div>
+
+        <div class="popover-text">
+          <h2 class="title" [innerHTML]="product.title"></h2>
+          <p class="box-desktop" [innerHTML]="product.description"></p>
+          <div class="cta-btn text-center box-mobile" *ngIf="!buttonInside">
+            <a href="{{ product.link }}">{{ product.button }}</a>
+          </div>
+          <div class="cta-btn text-center" *ngIf="buttonInside">
+            <a href="{{ product.link }}">{{ product.button }}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="box-desktop" *ngIf="title">
+      <div class="cta-btn text-center" *ngIf="!buttonInside">
+        <a href="{{ product.link }}">{{ product.button }}</a>
+      </div>
+    </div>
+
+    <div class="bottom-title product-title" *ngIf="title != null">
+      <h3 [innerHTML]="title.title"></h3>
+      <h4 [innerHTML]="title.description"></h4>
+      <div class="cta-btn">
+        <a href="{{ title.link }}">{{ title.button }}</a>
+      </div>
+    </div>
+  </ng-container>
+
+  <div class="popover-box" *ngIf="!title">
+    <div class="imgbox newhoverimage">
+      <a href="{{ product.link }}">
+        <img
+          src="{{ env.UPLOADS_IMGIX_URL }}homepage/{{ product.image_url }}/large/{{
+            product.extension
+          }}"
+          class="img-responsive w-100 forOther"
+          alt="{{ product.image_url }}.{{ product.extension }}"
+        />
+      </a>
+    </div>
+
+    <div class="popover-text">
+      <h2 class="title" [innerHTML]="product.title"></h2>
+      <p class="box-desktop" [innerHTML]="product.description"></p>
+      <div class="cta-btn text-center box-mobile" *ngIf="!buttonInside">
+        <a href="{{ product.link }}">{{ product.button }}</a>
+      </div>
+      <div class="cta-btn text-center" *ngIf="buttonInside">
+        <a href="{{ product.link }}">{{ product.button }}</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-btn text-center box-desktop" *ngIf="!buttonInside && !title">
+    <a href="{{ product.link }}">{{ product.button }}</a>
+  </div>
+</div>

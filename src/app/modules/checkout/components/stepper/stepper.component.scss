@@ -1,0 +1,54 @@
+ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-evenly;
+  padding: 0;
+  margin: 2em 0;
+  padding: 1em 0;
+  border-bottom: 1px solid #ddd;
+}
+
+li {
+  display: block;
+  position: relative;
+  flex: 1;
+  text-align: center;
+  font-family: 'Futura', Book;
+
+  &:after {
+    content: ' ';
+    display: block;
+    height: 1em;
+    width: 1em;
+    position: absolute;
+    border: 1px solid #bcbcbc;
+    background: #fff;
+    border-radius: 50%;
+    bottom: -22px;
+    left: calc(50% - 0.5em);
+    transition: all ease 0.5s;
+  }
+
+  a {
+    display: block;
+    color: #bcbcbc;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 13px;
+    line-height: 2em;
+    transition: all ease 0.5s;
+    letter-spacing: 0.8px;
+  }
+
+  &.active:after {
+    background-color: #bcbcbc;
+  }
+
+  &.selected:after {
+    background: #000;
+  }
+
+  &.selected a {
+    color: #000;
+  }
+}

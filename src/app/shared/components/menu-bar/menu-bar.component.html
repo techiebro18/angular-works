@@ -1,0 +1,12 @@
+<div class="menu-bar mobile">
+  <ng-container *ngFor="let menuOption of menuOptions">
+    <div
+      class="menu-option"
+      [ngClass]="{ active: menuOption.active }"
+      (click)="handleClickMenuOption(menuOption)"
+      [title]="menuOption.title | translate"
+    >
+      {{ menuOption.title | translate }}
+    </div>
+  </ng-container>
+</div>

@@ -1,0 +1,59 @@
+<div class="container" *ngIf="Archives">
+  <div class="row desktop">
+    <ng-container *ngFor="let archive of Archives; let i = index">
+      <div [ngClass]="i == 1 || i == 5 ? 'col-6 custom' : 'col-3 custom'">
+        <div class="archive-bx">
+          <div class="archive-img">
+            <img
+              src="{{ env.IMGIX_UPLOADS_URL }}dynamic/archive/{{ archive.featured_image }}.{{
+                archive.feature_img_extension
+              }}"
+            />
+          </div>
+          <div class="archive-text">
+            <small>{{ archive?.category?.category_title }}</small>
+            <h2>{{ archive.post_title }}</h2>
+            <p class="box-desktop description" innerHTML="{{ archive.description_for }}"></p>
+            <div class="cta-btn text-center archive-btn" *ngIf="archive.post_name">
+              <a routerLink="/the-archive/{{ archive.post_name }}">READ</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+
+  <div class="mobile box-slider">
+    <app-carousel thumbnails="true">
+      <ng-container *ngFor="let archive of Archives" class="slides">
+        <li class="archive-bx">
+          <div class="archive-img">
+            <img
+              src="{{ env.IMGIX_UPLOADS_URL }}dynamic/archive/{{ archive.featured_image }}.{{
+                archive.feature_img_extension
+              }}"
+            />
+          </div>
+          <div class="archive-text">
+            <small>{{ archive?.category?.category_title }}</small>
+            <h2>{{ archive.post_title }}</h2>
+            <div class="cta-btn text-center archive-btn" *ngIf="archive.post_name">
+              <a routerLink="/the-archive/{{ archive.post_name }}">READ</a>
+            </div>
+          </div>
+        </li>
+      </ng-container>
+      <ng-container *ngFor="let archive of Archives" class="thumbnails">
+        <li>
+          <div class="archive-img">
+            <img
+              src="{{ env.IMGIX_UPLOADS_URL }}dynamic/archive/{{ archive.featured_image }}.{{
+                archive.feature_img_extension
+              }}"
+            />
+          </div>
+        </li>
+      </ng-container>
+    </app-carousel>
+  </div>
+</div>

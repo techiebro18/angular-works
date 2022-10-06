@@ -1,0 +1,449 @@
+:host {
+  .mobile {
+    display: none !important;
+  }
+  .desktop {
+    display: initial !important;
+  }
+
+  .box-how-it-works {
+    .article-box {
+      width: 90%;
+      margin: 10px 50px 150px 10%;
+      z-index: 1;
+      display: flex;
+
+      button {
+        font-size: 12px;
+        font-family: 'Manrope';
+        text-transform: uppercase;
+      }
+
+      .floating-text {
+        background: var(--main-color-white);
+        text-align: center;
+        z-index: 2;
+        position: absolute;
+        top: 332px;
+        width: 575px;
+        padding: 85px 20px;
+
+        h5 {
+          font-family: 'Cormorant-Italic';
+          font-size: 25px;
+        }
+        .slogan {
+          font-family: 'Cormorant-Light';
+          font-size: 56px;
+        }
+        button {
+          margin: 30px auto 0 auto;
+        }
+      }
+
+      &.bg-image {
+        overflow: hidden auto;
+
+        img {
+          object-fit: cover;
+          width: 1293px;
+          height: 734px;
+          margin-left: 297px;
+        }
+      }
+
+      .img-box {
+        float: left;
+        width: 50%;
+        img {
+          object-fit: cover;
+          width: 575px;
+          height: 421px;
+        }
+      }
+
+      .content-box {
+        float: left;
+        width: 609px;
+        padding: 71px 73px;
+
+        .small-title {
+          font-family: 'Manrope';
+          font-size: 13px;
+          text-transform: uppercase;
+          margin-bottom: 15px;
+        }
+
+        .big-title {
+          font-family: 'Cormorant-Italic';
+          font-size: 47px;
+          margin-bottom: 40px;
+        }
+
+        .text-description {
+          font-family: 'Manrope';
+          font-size: 14px;
+          line-height: 20px;
+          margin-bottom: 30px;
+        }
+
+        .title-description {
+          font-family: 'Cormorant-Italic';
+          font-size: 41px;
+
+          a {
+            color: #212529;
+          }
+        }
+      }
+
+      &.box-toogle {
+        width: 80%;
+        margin-bottom: 80px;
+      }
+
+      &.box-title-option {
+        width: 80%;
+        margin-bottom: 60px;
+
+        p {
+          font-family: 'Cormorant-Italic';
+          font-size: 47px;
+          margin: 0 auto;
+        }
+      }
+
+      &.box-option {
+        width: 80%;
+        margin-bottom: -55px;
+
+        button {
+          margin: 0 auto;
+
+          &.buyer {
+            margin-top: 50px;
+          }
+        }
+      }
+
+      .next-step {
+        padding: 9.5% 20px;
+        img {
+          height: 13px;
+        }
+      }
+
+      .box-seller,
+      .box-buyer {
+        text-align: center;
+        padding: 0 20px;
+        width: 33%;
+
+        .number-step {
+          font-family: 'Manrope';
+          font-size: 45px;
+          margin-bottom: 20px;
+        }
+        .title-step {
+          font-family: 'Manrope-Bold';
+          font-size: 14px;
+          margin-bottom: 15px;
+        }
+        .desc-step {
+          font-family: 'Manrope';
+          font-size: 14px;
+          line-height: 20px;
+        }
+      }
+
+      .split-img-box {
+        img {
+          width: 306px;
+          height: 306px;
+          object-fit: cover;
+        }
+      }
+
+      &.portrait-box {
+        margin-top: 150px;
+        margin-bottom: 0;
+
+        .img-portrait-container {
+          width: 618px;
+          height: 412px;
+
+          .empty-box {
+            background: var(--main-color-gray-5);
+            margin: 121px 0 0 0;
+            padding: 92.1px 101.5px;
+            border-bottom: 2px solid var(--main-color-gray-5);
+          }
+          img {
+            width: 203px;
+            height: 203px;
+            object-fit: cover;
+            margin: 0;
+            padding: 0;
+            display: inline;
+          }
+        }
+      }
+
+      &.split-box {
+        margin-top: -6px;
+      }
+
+      &.full {
+        margin-bottom: 100px;
+        margin-top: 61px;
+      }
+    }
+
+    .full-box {
+      padding: 40px 0 1px 0;
+      background: var(--main-color-gray-5);
+
+      &.toogle {
+        padding-bottom: 140px;
+      }
+
+      .toogle-option {
+        font-family: 'Manrope';
+        font-size: 16px;
+        text-align: center;
+        width: 100%;
+
+        .item-option {
+          width: 50%;
+          border-bottom: 1px solid var(--main-color-black);
+          opacity: 0.3;
+          float: left;
+          cursor: pointer;
+          padding: 10px 0;
+
+          &.active {
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .mobile {
+      display: block !important;
+    }
+    .desktop {
+      display: none !important;
+    }
+
+    .box-how-it-works {
+      overflow-x: hidden;
+
+      .article-box {
+        width: 100%;
+        margin: 10px 0 50px 0;
+        z-index: 1;
+        display: flex;
+        flex-wrap: wrap;
+
+        button {
+          font-size: 12px;
+          font-family: 'Manrope';
+          text-transform: uppercase;
+        }
+
+        .floating-text {
+          top: 458px;
+          padding: 42px 0px;
+          width: 93%;
+          left: 12px;
+
+          h5 {
+            font-size: 20px;
+          }
+          .slogan {
+            font-size: 38px;
+          }
+          button {
+            margin: 30px auto 0 auto;
+          }
+        }
+
+        &.bg-image {
+          margin-bottom: 353px;
+
+          img {
+            width: 414px;
+            height: 325px;
+            margin-left: 0;
+          }
+        }
+
+        .img-box {
+          float: unset;
+          width: 100%;
+          margin: 0 auto;
+          width: 93%;
+
+          img {
+            width: 100%;
+            height: 247px;
+          }
+        }
+
+        .content-box {
+          float: unset;
+          margin: 0 auto;
+          width: 93%;
+          padding: 0;
+
+          &.split-content {
+            width: 60%;
+            padding: 60px 13px;
+
+            .title-description {
+              font-size: 25px !important;
+            }
+          }
+
+          &.real-deal {
+            margin-top: 80px;
+          }
+
+          .big-title {
+            font-size: 43px;
+          }
+
+          .title-description {
+            font-size: 41px;
+          }
+        }
+
+        &.box-toogle {
+          width: 100%;
+          padding: 0 20px;
+          margin-bottom: 80px;
+        }
+
+        &.box-title-option {
+          width: auto;
+          margin-bottom: 60px;
+
+          p {
+            font-size: 38px;
+          }
+        }
+
+        &.box-option {
+          width: auto;
+          margin-bottom: -13px;
+
+          button {
+            margin: 0 auto;
+
+            &.buyer {
+              margin-top: 0;
+            }
+          }
+        }
+
+        .split-img-box {
+          width: 40%;
+
+          img {
+            width: 161px;
+            height: 231px;
+          }
+        }
+
+        &.portrait-box {
+          margin-top: 50px;
+          margin-bottom: 0;
+
+          .img-portrait-container {
+            width: auto;
+            height: 360px;
+
+            .empty-box {
+              background: var(--main-color-gray-5);
+              margin: 121px 0 0 0;
+              padding: 60px 16.65%;
+              border-bottom: 4px solid var(--main-color-gray-5);
+            }
+            img {
+              width: 33.3%;
+              height: 139px;
+            }
+          }
+        }
+
+        &.split-box {
+          margin-top: 110px;
+        }
+
+        &.full {
+          margin-bottom: 100px;
+          margin-top: 61px;
+          &.real-deal {
+            margin-top: 22px;
+          }
+        }
+
+        .box-seller,
+        .box-buyer {
+          text-align: center;
+          padding: 0 20px;
+          margin-bottom: 65px;
+          width: auto;
+
+          .number-step {
+            font-size: 35px;
+            margin-bottom: 20px;
+          }
+          .title-step {
+            margin-bottom: 15px;
+          }
+          .desc-step {
+            font-family: 'Manrope';
+            font-size: 14px;
+            line-height: 20px;
+          }
+        }
+      }
+
+      .full-box {
+        padding: 40px 0 1px 0;
+        background: var(--main-color-gray-5);
+
+        &.toogle {
+          padding-bottom: 90px;
+        }
+
+        &.real-deal {
+          padding-top: 1px !important;
+        }
+
+        .toogle-option {
+          font-family: 'Manrope';
+          font-size: 16px;
+          text-align: center;
+          width: 100%;
+
+          .item-option {
+            width: 50%;
+            border-bottom: 1px solid var(--main-color-black);
+            opacity: 0.3;
+            float: left;
+            cursor: pointer;
+            padding: 10px 0;
+
+            &.active {
+              opacity: 1;
+            }
+          }
+        }
+      }
+    }
+  }
+}

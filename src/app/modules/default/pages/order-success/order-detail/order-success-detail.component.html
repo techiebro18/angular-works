@@ -1,0 +1,66 @@
+<tr class="orderbottom">
+  <td valign="center" class="order-image-block">
+    <div class="order-image">
+      <img src="{{ imageName }}" />
+      <p>{{ orderItem.name }}</p>
+    </div>
+  </td>
+  <td valign="center" class="description-block">
+    <div class="product-description">
+      <p>
+        <span>Description</span>
+        {{ orderItem.brand_name }}, {{ orderItem.name }}
+      </p>
+      <p>
+        <span>Quantity</span>
+        {{ orderItem.quantity }}
+      </p>
+    </div>
+  </td>
+  <td valign="center" class="product-detail-block harish">
+    <div class="product-detail">
+      <ng-container *ngIf="orderItem.is_discount">
+        <p>
+          <span>Item total:</span>
+          {{ orderItem['regular_price_' + orderItem.currencycode] | currency: orderItem.currencycode }}
+        </p>
+        <p class="discount-price">
+          <span class="price-lable">Discount:</span>
+          {{
+            (orderItem['regular_price_' + orderItem.currencycode] - itemTotal) * -1 | currency: orderItem.currencycode
+          }}
+        </p>
+      </ng-container>
+      <ng-container *ngIf="!orderItem.is_discount">
+        <p>
+          <span>Item total:</span>
+          {{ itemTotal | currency: orderItem.currencycode }}
+        </p>
+      </ng-container>
+      <p class="discount-price" *ngIf="orderItem.item_discount">
+        <span class="price-lable">Coupon discount:</span>
+        -
+        {{ orderItem.item_discount | currency: orderItem.currencycode }}
+      </p>
+      <p>
+        <span>Shipping:</span>
+        {{
+          (orderItem.shipping_discount > 0 ? orderItem.shipping_discount : orderItem.shippeing_cost)
+            | currency: orderItem.currencycode
+        }}
+      </p>
+      <p class="discount-price" *ngIf="orderItem.shipping_discount">
+        <span class="price-lable">Shipping Discount:</span>
+        {{ orderItem.shipping_discount * -1 | currency: orderItem.currencycode }}
+      </p>
+      <p>
+        <span>Subtotal:</span>
+        {{ itemSubTotal | currency: orderItem.currencycode }}
+      </p>
+      <p>
+        <span>Total (incl. tax):</span>
+        {{ itemTaxTotal | currency: orderItem.currencycode }}
+      </p>
+    </div>
+  </td>
+</tr>

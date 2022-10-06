@@ -1,0 +1,79 @@
+<div *ngIf="addresslist" class="container account-tab-page">
+  <div class="row tab-title" *ngFor="let address of addresslist; let index = index">
+    <div class="col-md-6">
+      <h2 class="tab-heading">Address {{ index + 1 }}</h2>
+      <div class="address-content">
+        <p>{{ address.name }}</p>
+        <p>{{ address.address_1 }}</p>
+        <p>{{ address.city }}</p>
+        <p>{{ address.state }}</p>
+        <p>{{ address.pin_code }}</p>
+        <p>{{ address.country_name }}</p>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <ul class="list-group list-group-horizontal actions">
+        <li class="list-group-item">
+          <a [routerLink]="['address-details/', address.id]">Edit</a>
+        </li>
+        <li class="list-group-item">
+          <a (click)="openPopUp(address.id, 'delete')">Delete</a>
+        </li>
+        <li *ngIf="address.default_address !== 'yes'" class="list-group-item">
+          <a (click)="openPopUp(address.id, 'set_default')">Set default</a>
+        </li>
+        <li *ngIf="address.default_address === 'yes'" class="list-group-item">Default Address</li>
+      </ul>
+    </div>
+  </div>
+  <div class="row tab-title">
+    <a [routerLink]="['address-add']"><h2 class="tab-heading">+ Add a new address</h2></a>
+  </div>
+  <div class="items-model-up">
+    <div class="modal" id="trash-pupup" [style.display]="trashModel ? 'block' : 'none'">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              (click)="displayButton ? hidePupUp() : reloadItems()"
+            >
+              &times;
+            </button>
+          </div>
+          <div class="modal-body">
+            <h2>{{ popUpHeading }}</h2>
+            <div class="buttom-box" [style.display]="'block'">
+              <button
+                type="button"
+                *ngIf="displayButton"
+                class="btn btn-dark yes-button"
+                (click)="
+                  action === 'delete'
+                    ? removeAddress()
+                    : action === 'set_default'
+                    ? setDefaultAddress()
+                    : ''
+                "
+              >
+                YES
+              </button>
+              <button
+                type="button"
+                *ngIf="displayButton"
+                class="btn btn-light no-button"
+                data-dismiss="modal"
+                (click)="displayButton ? hidePupUp() : reloadItems()"
+              >
+                NO
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<router-outlet></router-outlet>

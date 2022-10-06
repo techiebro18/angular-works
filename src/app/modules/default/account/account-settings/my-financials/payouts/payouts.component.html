@@ -1,0 +1,113 @@
+<div class="form-container">
+  <form class="payout-form" [formGroup]="searchForm" (ngSubmit)="searchList()">
+    <div class="payout-sort">
+      <div class="form-group">
+        <div class="description">Date</div>
+        <div class="input-container dropdown-field">
+          <!-- <input type="text" placeholder="Date Range"  [value]="dateRangeValue" /> -->
+
+          <input
+            matInput
+            [matDatepicker]="picker"
+            [max]="maxDate"
+            formControlName="arrival_date"
+            (focus)="picker.open()"
+            class="dropdown-input"
+            [placeholder]="'Date'"
+            (focus)="addPayoutClass()"
+          />
+          <mat-datepicker #picker startView="multi-year"></mat-datepicker>
+        </div>
+      </div>
+    </div>
+    <div class="payout-sort">
+      <div class="form-group">
+        <div class="description">Status</div>
+        <div class="input-container dropdown-field">
+          <ng-select
+            class="dropdown-select"
+            [items]="statusList"
+            [bindValue]="'value'"
+            [bindLabel]="'name'"
+            formControlName="status"
+            [clearable]="false"
+          ></ng-select>
+        </div>
+      </div>
+    </div>
+    <div class="payout-sort">
+      <div class="form-group">
+        <div class="description">{{ 'Stripe Payout Id' | translate }}</div>
+        <div class="input-container dropdown-field">
+          <input
+            type="text"
+            formControlName="stripe_id"
+            placeholder="{{ 'Stripe Payout Id' | translate }}"
+            (keyup)="disableSearchFields($event)"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="payout-sort">
+      <div class="form-group dropdown-field">
+        <div class="description"></div>
+        <div class="input-container dropdown-field">
+          <button type="submit" class="btn primary update-btn">Search</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="items-container flex" [ngClass]="{ mobile: isMobile$ | async }">
+  <div class="items-table-container" *ngIf="listVIewOption === 'grid'">
+    <div class="row table-responsive m-0 payout-details-row">
+      <table class="table">
+        <thead>
+          <tr>
+            <th colspan="4">
+              {{ 'Due to Project Wave, we recommend you to use your monthly invoice to check payouts' | translate }}
+            </th>
+          </tr>
+          <tr>
+            <th>{{ 'Date' | translate }}</th>
+            <th>{{ 'Value/Amount' | translate }}</th>
+            <th>{{ 'Status' | translate }}</th>
+            <th>{{ 'Stripe Payout Id' | translate }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngIf="payoutData" (click)="goToDetails(payoutData.id)">
+            <td class="seller_items_name">
+              {{ payoutData.arrival_date * 1000 | date: 'dd/MM/YYYY' }}
+            </td>
+            <td class="seller_items_name">
+              {{ payoutData.amount / 100 | currency: (payoutData.currency | uppercase) }}
+            </td>
+            <td class="seller_items_name">{{ payoutData.status }}</td>
+            <td class="seller_items_sku">{{ payoutData.id }}</td>
+          </tr>
+          <tr *ngFor="let payout of payoutList" (click)="goToDetails(payout.id)">
+            <td class="seller_items_name">
+              {{ payout.arrival_date * 1000 | date: 'dd/MM/YYYY' }}
+            </td>
+            <td class="seller_items_name">
+              {{ payout.amount / 100 | currency: (payout.currency | uppercase) }}
+            </td>
+            <td class="seller_items_name">{{ payout.status }}</td>
+            <td class="seller_items_sku">{{ payout.id }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="items-placeholder title mt-5 text-center" *ng-if="message != 'Payout list'">
+    {{ message | translate }}
+  </div>
+</div>
+<mat-paginator
+  [length]="pagination.total"
+  *ngIf="payoutList && payoutList.length"
+  [pageSize]="pagination.per_page"
+  (page)="getData($event)"
+  [pageSizeOptions]="[25, 50, 75, 100]"
+></mat-paginator>

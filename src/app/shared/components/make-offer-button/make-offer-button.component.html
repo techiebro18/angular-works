@@ -1,0 +1,10 @@
+<div *ngIf="(authService.isLoggedInObs | async) && (user$ | async)?.role_id != 2; else elseBlock">
+  <button class="btn-secondary makeoffer-btn" (click)="openOfferPopup()">
+    <span>{{ 'Make an Offer' | translate }}</span>
+  </button>
+</div>
+<ng-template #elseBlock>
+  <button class="btn-secondary makeoffer-btn" (click)="openPopup(true)">
+    {{ 'Make an Offer' | translate }}
+  </button>
+</ng-template>

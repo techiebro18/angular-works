@@ -1,0 +1,152 @@
+/**      styling for instant Search          **/
+.app-Pagination {
+  margin-top: 1em;
+  float: right;
+}
+.app-Pagination-list {
+  overflow: hidden;
+}
+
+.app-Pagination-link {
+  background: transparent !important;
+  color: #777;
+  box-shadow: unset !important;
+  border: 0;
+  border-bottom: 1px solid transparent !important;
+  transition: all 0.15s ease-in-out;
+}
+.app-Pagination-link:hover {
+  background: transparent !important;
+  box-shadow: unset !important;
+  color: #222 !important;
+  text-decoration: unset;
+  border-bottom: 1px solid #222 !important;
+}
+
+.app-Pagination-link:active,
+.app-Pagination-item--selected .app-Pagination-link {
+  color: #222 !important;
+}
+
+.app-Pagination-item--firstPage,
+.app-Pagination-item--lastPage {
+  display: none;
+}
+
+.app-Pagination-item--nextPage a,
+.app-Pagination-item--previousPage a {
+  font-family: 'FuturaBT-Light' !important;
+  font-size: 38px;
+  color: #222;
+  padding-bottom: 12px;
+}
+.app-Pagination-item--disabled a {
+  color: #999 !important;
+  cursor: not-allowed;
+  border-bottom: 1px solid transparent !important;
+  opacity: 0.6;
+}
+.app-Pagination-item--disabled a:hover {
+  color: #999 !important;
+  border-bottom: 1px solid transparent !important;
+}
+
+.ais-InstantSearch {
+  max-width: 960px;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.ais-Hits-item {
+  box-shadow: unset;
+  padding: 10px 5px 0 5px;
+
+  .hit-wrapper {
+    width: 100%;
+    height: 100%;
+    display: block;
+
+    .item-image {
+      position: relative;
+      text-align: center;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      vertical-align: middle;
+      height: 240px;
+      max-width: 100%;
+      width: 213px;
+    }
+    .item-image a {
+      margin: 0 auto;
+    }
+    .hit-img {
+      width: auto;
+      height: auto;
+      display: block;
+      max-width: 100%;
+      max-height: 240px;
+    }
+
+    .details {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+
+      .hit-name {
+        margin-bottom: 0.3em;
+        font-weight: 500;
+        font-size: 13px;
+        text-align: left;
+        color: #191919;
+        letter-spacing: 1px;
+        line-height: 25px;
+        height: 50px;
+        margin-bottom: 5px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        cursor: pointer;
+      }
+
+      .hit-description {
+        font-weight: 500;
+        font-size: 20px;
+        margin-bottom: 0.3em;
+        font-family: 'Playfair Display', serif;
+        text-align: left;
+        text-transform: uppercase;
+        cursor: pointer;
+        color: #212529;
+      }
+
+      .hit-name:hover,
+      .hit-description:hover {
+        text-decoration: underline;
+        color: currentColor;
+      }
+
+      .hit-price {
+        margin-bottom: 0.5em;
+        font-family: 'FuturaBT-Medium';
+        font-size: 12px;
+        text-align: left;
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .ais-Hits-item .hit-wrapper .hit-img {
+    max-height: 180px;
+  }
+  .ais-Hits-item .hit-wrapper .item-image {
+    height: 180px;
+  }
+}
+@media only screen and (max-width: 1024px) {
+  .hit-description {
+    height: 40px;
+  }
+}

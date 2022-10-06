@@ -1,0 +1,87 @@
+<div class="login-container">
+  <div class="title">
+    <h1 class="title-heading">
+      {{ 'Please login by entering your email and your password' | translate }}
+    </h1>
+  </div>
+  <div class="login-form">
+    <form id="loginForm" [formGroup]="loginForm">
+      <div class="form-group">
+        <input type="email" placeholder="Email *" class="primary" formControlName="email" />
+        <div
+          *ngIf="loginForm.controls.email.invalid && loginForm.controls.email.touched"
+          class="invalid-message"
+        >
+          A valid e-mail is required
+        </div>
+      </div>
+      <div class="form-group">
+        <input
+          type="password"
+          placeholder="Password *"
+          class="primary"
+          formControlName="password"
+        />
+        <div
+          *ngIf="loginForm.controls.password.invalid && loginForm.controls.password.touched"
+          class="invalid-message"
+        >
+          Password is required
+        </div>
+      </div>
+      <div class="d-flex submit-button-container">
+        <button
+          class="btn primary login-btn"
+          (click)="onProcessLogin()"
+          [disabled]="loginForm.invalid"
+        >
+          {{ 'LOG IN' | translate }}
+        </button>
+      </div>
+      <div class="form-group forgotten-password-container">
+        <div class="forgotten-password">
+          <a class="link primary" (click)="forgotPass()">Forgotten password</a>
+        </div>
+      </div>
+      <div class="form-group alert error-message" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+    </form>
+    <div class="d-flex or-container justify-content-center">or</div>
+    <div class="social-buttons private-seller-social">
+      <div class="btn-inline">
+        <button class="btn btn-secondary half" (click)="onFbLogin()">
+          <svg
+            id="dpdhl_icons"
+            xmlns="http://www.w3.org/2000/svg"
+            width="17"
+            height="17"
+            viewBox="0 0 48 48"
+          >
+            <path
+              d="M19.3667,44H26.73V25.78H32.872l.9194-7.1319H26.73V14.105c0-2.0586.5721-3.4644,3.5265-3.4644L34,10.64V4.28A50.2336,50.2336,0,0,0,28.5122,4c-5.4278,0-9.1455,3.313-9.1455,9.3989v5.2495H13.248V25.78h6.1187Z"
+            ></path>
+          </svg>
+          <span>Sign in with Facebook</span>
+        </button>
+        <button class="btn btn-secondary half" (click)="onGmailLogin()">
+          <svg
+            id="dpdhl_icons"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0px"
+            y="0px"
+            viewBox="0 0 210 210"
+            style="enable-background: new 0 0 210 210"
+            xml:space="preserve"
+          >
+            <path
+              d="M0,105C0,47.103,47.103,0,105,0c23.383,0,45.515,7.523,64.004,21.756l-24.4,31.696C133.172,44.652,119.477,40,105,40 c-35.841,0-65,29.159-65,65s29.159,65,65,65c28.867,0,53.398-18.913,61.852-45H105V85h105v20c0,57.897-47.103,105-105,105S0,162.897,0,105z"
+            ></path>
+          </svg>
+          <span>Sign in with Google</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

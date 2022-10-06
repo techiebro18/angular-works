@@ -1,0 +1,109 @@
+:host {
+  .user-content {
+    margin: 10px 0 0 3px;
+    border-bottom: 2px solid var(--text-input-grey);
+    padding: 5px 0 20px 0;
+
+    .avatar {
+      float: left;
+      margin: 0;
+      padding: 0 20px;
+      img {
+        object-fit: cover;
+        width: 47px;
+        height: 47px;
+        border-radius: 50px;
+      }
+    }
+
+    .name {
+      font-size: 22px;
+      color: var(--main-color-black);
+      font-family: 'Cormorant', serif;
+      text-transform: uppercase;
+      min-height: 22px;
+    }
+
+    .label {
+      color: #a8a8a8;
+      font-size: 15px;
+      font-family: 'FuturaBT-Light';
+      margin-top: 5px;
+    }
+  }
+  .inside-menu {
+    padding: 0 10px;
+    overflow-y: auto;
+    height: calc(100vh - 280px);
+
+    ul {
+      font-family: 'FuturaBT-Light';
+      font-size: 15px;
+
+      list-style: none;
+      padding: 1px 5px;
+
+      li {
+        padding: 20px 0;
+        border-bottom: 1px solid #e8e8e8;
+        &.no-border {
+          border-bottom: 0;
+        }
+        img {
+          margin-right: 30px;
+          margin-top: -5px;
+          width: 16px;
+        }
+
+        a {
+          text-decoration: none;
+          color: var(--main-color-black);
+          &.is-active {
+            font-family: 'FuturaBT-Medium';
+          }
+        }
+
+        a > img.arrow-expandable {
+          width: 9px;
+          float: right;
+          margin: 5px 0 0 0;
+        }
+
+        img.arrow-expandable {
+          transform: rotate(0deg);
+          transition: transform 0.2s linear;
+        }
+
+        img.arrow-expandable.expanded {
+          transform: rotate(180deg);
+          transition: transform 0.25s linear;
+        }
+
+        .sub-item {
+          display: none;
+          font-family: 'FuturaBT-Light';
+          font-size: 15px;
+          padding: 0;
+          margin: 20px 0 -15px 0;
+
+          &.expanded {
+            display: block;
+          }
+
+          li {
+            padding: 20px 51px;
+            &.top-border {
+              border-top: 1px solid #e8e8e8;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 400px) {
+    .inside-menu {
+      height: calc(100vh - 230px);
+    }
+  }
+}

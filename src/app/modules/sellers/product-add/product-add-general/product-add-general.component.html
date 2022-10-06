@@ -1,0 +1,514 @@
+<div class="product-add-general p-0">
+  <div class="general-form-container col-lg-9 col-md-12 col-sm-12 col-xs-12">
+    <div class="account-container">
+      <div class="subheader">
+        <h4 class="uppercase">Four Easy Steps</h4>
+        <h1>Sell with us</h1>
+        <p class="mt-4">
+          Give your pre-loved items new life. Share what you no longer wear with our community members and make money.
+          List it yourself – it’s easy and quick!
+        </p>
+      </div>
+
+      <div class="form-container-wrapper">
+        <div class="form-container">
+          <form [formGroup]="productForm" (ngSubmit)="submitForm()">
+            <div class="product-form">
+              <div class="categories">
+                <div class="title justify-content-start">What are you selling?</div>
+
+                <div class="category-options">
+                  <ng-container *ngFor="let category of availableCategories">
+                    <div class="categories-radios form-check form-check-inline col-12 col-md-4">
+                      <input
+                        [id]="category.name"
+                        formControlName="category"
+                        class="category-options"
+                        type="radio"
+                        [value]="category.id"
+                        [ngClass]="{
+                          'ng-untouched ng-pristine ng-invalid invalid-data': showErrorMsg('category')
+                        }"
+                      />
+                      <label class="radio-label" [for]="category.name">{{ category.name }}</label>
+                    </div>
+                  </ng-container>
+
+                  <span class="error-message" *ngIf="showErrorMsg('category')">Please select 'Category'</span>
+                </div>
+              </div>
+
+              <div class="designers col-sm-12 col-xs-12 col-md-12 col-lg-6 pl-lg-0 mt-3">
+                <div class="title">Designer *</div>
+                <div class="select-container">
+                  <ng-select
+                    id="brand_input"
+                    class="sellers-select"
+                    formControlName="brand_id"
+                    [items]="availableDesigners"
+                    [bindLabel]="'name'"
+                    [bindValue]="'id'"
+                    [placeholder]="'Select or type...'"
+                    [ngClass]="
+                      showErrorMsg('brand_id') ? 'ng-untouched ng-pristine ng-invalid invalid-data-select' : ''
+                    "
+                  ></ng-select>
+
+                  <span class="error-message" *ngIf="showErrorMsg('brand_id')">Please select 'Designer'</span>
+                </div>
+              </div>
+
+              <div class="subcategories col-sm-12 col-xs-12 col-md-12 col-lg-6 pr-lg-0 mt-3">
+                <div class="title">
+                  {{ availableSubcategories.length > 0 ? 'Subcategory *' : 'Subcategory' }}
+                </div>
+
+                <div class="select-container">
+                  <ng-select
+                    id="subcategories_input"
+                    class="sellers-select"
+                    formControlName="subcategories"
+                    [items]="availableSubcategories"
+                    [bindLabel]="'name'"
+                    [bindValue]="'id'"
+                    [multiple]="true"
+                    [placeholder]="'Select or type...'"
+                    [ngClass]="{
+                      'ng-untouched ng-invalid invalid-data-select':
+                        showErrorMsg('subcategories') && availableSubcategories.length > 0
+                    }"
+                  ></ng-select>
+
+                  <span
+                    class="error-message"
+                    *ngIf="showErrorMsg('subcategories') && availableSubcategories.length > 0"
+                  >
+                    Please select 'Subcategory'
+                  </span>
+                </div>
+              </div>
+              <div
+                class="col-sm-12 col-xs-12 col-md-12 col-lg-12 alert-danger justify-content-center flex"
+                *ngIf="productCreateErrorMessage"
+              >
+                {{ productCreateErrorMessage }}
+              </div>
+            </div>
+
+            <div class="condition-container mt-5">
+              <div class="title mb-4">Condition *</div>
+
+              <div class="row">
+                <div class="col col-12 col-md-6">
+                  <div class="tvb-form-check condition-options">
+                    <input
+                      id="condition_new_with_tags"
+                      type="radio"
+                      name="condition_rating"
+                      formControlName="condition_rating"
+                      class="condition-options"
+                      [ngClass]="{
+                        'ng-untouched ng-pristine ng-invalid invalid-data': showErrorMsg('condition_rating')
+                      }"
+                      value="1"
+                    />
+                    <label class="condition-radio-label" for="condition_new_with_tags">
+                      {{ 'NEW_WITH_TAGS' | translate }}
+                    </label>
+                  </div>
+
+                  <div>
+                    <p class="condition-description">{{ 'NEW_WITH_TAGS_DESC' | translate }}</p>
+                  </div>
+                </div>
+
+                <div class="col col-12 col-md-6">
+                  <div class="tvb-form-check condition-options">
+                    <input
+                      id="condition_good"
+                      type="radio"
+                      name="condition_rating"
+                      formControlName="condition_rating"
+                      class="condition-options"
+                      [ngClass]="{
+                        'ng-untouched ng-pristine ng-invalid invalid-data': showErrorMsg('condition_rating')
+                      }"
+                      value="4"
+                    />
+                    <label class="condition-radio-label" for="condition_good">
+                      {{ 'GOOD_BUT_USED' | translate }}
+                    </label>
+                  </div>
+
+                  <div>
+                    <p class="condition-description">{{ 'GOOD_BUT_USED_DESC' | translate }}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col col-12 col-md-6">
+                  <div class="tvb-form-check condition-options">
+                    <input
+                      id="condition_excellent"
+                      type="radio"
+                      name="condition_rating"
+                      formControlName="condition_rating"
+                      class="condition-options"
+                      [ngClass]="{
+                        'ng-untouched ng-pristine ng-invalid invalid-data': showErrorMsg('condition_rating')
+                      }"
+                      value="2"
+                    />
+                    <label class="condition-radio-label" for="condition_excellent">
+                      {{ 'EXCELLENT' | translate }}
+                    </label>
+                  </div>
+
+                  <div>
+                    <p class="condition-description">{{ 'EXCELLENT_DESC' | translate }}</p>
+                  </div>
+                </div>
+
+                <div class="col col-12 col-md-6">
+                  <div class="tvb-form-check condition-options">
+                    <input
+                      id="condition_love"
+                      type="radio"
+                      name="condition_rating"
+                      formControlName="condition_rating"
+                      class="condition-options"
+                      [ngClass]="{
+                        'ng-untouched ng-pristine ng-invalid invalid-data': showErrorMsg('condition_rating')
+                      }"
+                      value="5"
+                    />
+                    <label class="condition-radio-label" for="condition_love">
+                      {{ 'WORN_WITH_LOVE' | translate }}
+                    </label>
+                  </div>
+
+                  <div>
+                    <p class="condition-description">{{ 'WORN_WITH_LOVE_DESC' | translate }}</p>
+                  </div>
+                </div>
+              </div>
+
+              <span class="error-message" *ngIf="showErrorMsg('condition_rating')">Please select 'Condition'</span>
+            </div>
+
+            <div class="row">
+              <!-- COLOR, MATERIAL, SERIAL NUMBER, MEASUREMENTS -->
+              <div class="col col-12 col-md-6 mt-4">
+                <div class="row">
+                  <div class="col">
+                    <div class="title">Color *</div>
+
+                    <div class="description">Specify the main color of the item</div>
+
+                    <div class="form-group">
+                      <ng-select
+                        id="color_input"
+                        class="ng-select sellers-select ng-select-placeholder"
+                        formControlName="color_id"
+                        [placeholder]="'Select'"
+                        [items]="colors"
+                        [bindValue]="'id'"
+                        [bindLabel]="'color_en'"
+                        [clearable]="false"
+                        [ngClass]="{ 'invalid-data-select': showErrorMsg('color_id') }"
+                      ></ng-select>
+
+                      <span class="error-message" *ngIf="showErrorMsg('color_id')">Please select 'Color'</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col">
+                    <div class="title">Material *</div>
+
+                    <div class="description">Specify the item’s primary material.</div>
+
+                    <div class="form-group">
+                      <ng-select
+                        id="material_input"
+                        class="ng-select sellers-select ng-select-placeholder"
+                        formControlName="material_id"
+                        [items]="materials"
+                        [bindLabel]="'name_en'"
+                        [bindValue]="'id'"
+                        [clearable]="false"
+                        [placeholder]="'Select'"
+                        [ngClass]="showErrorMsg('material_id') ? 'invalid-data-select' : ''"
+                      ></ng-select>
+
+                      <span class="error-message" *ngIf="showErrorMsg('material_id')">Please select 'Material'</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col">
+                    <div class="title">
+                      Serial Number
+                      <span class="form-group-title title small question-mark-block">
+                        <img
+                          src="assets/images/info.svg"
+                          class="serial-info-icon material-icons"
+                          width="16"
+                          alt="question mark info"
+                          (mouseover)="serialNoDetails = true"
+                          (mouseout)="serialNoDetails = false"
+                        />
+
+                        <div *ngIf="serialNoDetails" class="serial-number-details-show">
+                          <span class="serial-number-title">What is a serial number?</span>
+                          <br />
+                          <span>
+                            If your Item has a serial number, a date code, or a style number, you can enter it here
+                          </span>
+                        </div>
+                      </span>
+                    </div>
+
+                    <div class="form-group">
+                      <input
+                        id="serial_number_input"
+                        type="text"
+                        class="secondary"
+                        placeholder="LVT-20101-202"
+                        formControlName="serial_number"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row mt-3">
+                  <div class="col">
+                    <div class="title">Measurements</div>
+
+                    <div class="form-group" *ngIf="showSizeInput()">
+                      <div class="description">Size *</div>
+
+                      <ng-select
+                        id="measurements_input"
+                        class="ng-select sellers-select ng-select-placeholder"
+                        [formControlName]="getFormControlNameForSizeField()"
+                        [multiple]="false"
+                        [items]="sizes"
+                        [clearable]="false"
+                        [bindLabel]="'size'"
+                        [bindValue]="'id'"
+                        [ngClass]="
+                          showErrorMsg(getFormControlNameForSizeField())
+                            ? 'ng-untouched ng-pristine ng-invalid invalid-data-select'
+                            : ''
+                        "
+                      ></ng-select>
+
+                      <span class="error-message" *ngIf="showErrorMsg(getFormControlNameForSizeField())">
+                        Please select 'Size'
+                      </span>
+                    </div>
+
+                    <div class="form-group">
+                      <div class="description">Width</div>
+                      <input
+                        type="number"
+                        inputmode="decimal"
+                        class="secondary"
+                        formControlName="measurement_width"
+                        placeholder="cm"
+                        id="measurement_width"
+                      />
+                    </div>
+
+                    <div class="form-group">
+                      <div class="description">Height</div>
+                      <input
+                        type="number"
+                        inputmode="decimal"
+                        class="secondary"
+                        formControlName="measurement_height"
+                        placeholder="cm"
+                        id="measurement_height"
+                      />
+                    </div>
+
+                    <div class="form-group">
+                      <div class="description">Depth</div>
+                      <input
+                        type="number"
+                        inputmode="decimal"
+                        class="secondary"
+                        formControlName="measurement_depth"
+                        placeholder="cm"
+                        id="measurement_depth"
+                      />
+                    </div>
+
+                    <div class="form-group" *ngIf="productForm.get('handle_drop')">
+                      <div class="description">Handle Drop:</div>
+                      <input
+                        type="text"
+                        class="secondary"
+                        formControlName="handle_drop"
+                        placeholder="cm"
+                        id="handle_drop"
+                      />
+                    </div>
+
+                    <div class="form-group" *ngIf="productForm.get('shoulder_drop')">
+                      <div class="description">Shoulder drop:</div>
+                      <input
+                        type="text"
+                        class="secondary"
+                        formControlName="shoulder_drop"
+                        placeholder="cm"
+                        id="shoulder_drop"
+                      />
+                    </div>
+
+                    <div class="form-group" *ngIf="productForm.get('chain_length')">
+                      <div class="description">Chain Length:</div>
+                      <input
+                        type="text"
+                        class="secondary"
+                        formControlName="chain_length"
+                        placeholder="cm"
+                        id="chain_length"
+                      />
+                    </div>
+
+                    <div class="form-group" *ngIf="productForm.get('pandant_measurement')">
+                      <div class="description">Pendant Measurement:</div>
+                      <input
+                        type="text"
+                        class="secondary"
+                        formControlName="pandant_measurement"
+                        placeholder="cm"
+                        id="pandant_measurement"
+                      />
+                    </div>
+
+                    <!-- <div class="form-group" *ngIf="productForm.get('ring_size')">
+                      <div class="description">Ring Size:</div>
+                      <input type="text" class="secondary" formControlName="ring_size" placeholder="cm" />
+                    </div> -->
+                  </div>
+                </div>
+              </div>
+
+              <!-- PRICE, DESCRIPTION -->
+              <div class="col col-12 col-md-6 mt-4">
+                <div class="row">
+                  <div class="col">
+                    <div class="title">Price *</div>
+
+                    <div class="form-group">
+                      <div class="description">Currency</div>
+                      <ng-select
+                        id="base_currency_input"
+                        class="ng-select sellers-select ng-select-placeholder"
+                        formControlName="base_currency"
+                        [items]="currencies"
+                        (change)="onCurrencyChange($event)"
+                        [bindValue]="'code'"
+                        [bindLabel]="'code'"
+                        [placeholder]="'Select'"
+                        [ngClass]="showErrorMsg('base_currency') ? 'invalid-data-select' : ''"
+                      ></ng-select>
+
+                      <span class="error-message" *ngIf="showErrorMsg('base_currency')">Please select 'Currency'</span>
+                    </div>
+
+                    <div class="form-group">
+                      <div class="description">Price</div>
+                      <input
+                        id="price_input"
+                        type="number"
+                        inputmode="decimal"
+                        class="secondary price"
+                        placeholder="e.g. 100"
+                        minLength="1"
+                        formControlName="price"
+                        [ngClass]="{ 'ng-touched ng-invalid invalid-data': showErrorMsg('price') }"
+                      />
+
+                      <span class="error-message" *ngIf="showErrorMsg('price')">Please inform 'Price'</span>
+                    </div>
+
+                    <div class="form-group">
+                      <div class="description">For you</div>
+                      <input
+                        id="price_for_you_input"
+                        type="number"
+                        class="secondary for-you price"
+                        placeholder="e.g. 95"
+                        readonly
+                        formControlName="cost_of_good"
+                        [ngClass]="{
+                          'ng-touched ng-invalid invalid-data': showErrorMsg('cost_of_good')
+                        }"
+                      />
+                    </div>
+
+                    <div class="form-group">
+                      <div class="description">Price displayed on the site</div>
+                      <input
+                        id="regular_price_input"
+                        type="number"
+                        inputmode="decimal"
+                        class="secondary"
+                        minLength="1"
+                        placeholder="e.g. 105"
+                        readonly
+                        formControlName="regular_price"
+                        [ngClass]="{
+                          'ng-touched ng-invalid invalid-data': showErrorMsg('regular_price')
+                        }"
+                      />
+
+                      <span class="error-message" *ngIf="showErrorMsg('regular_price')">Please inform 'Price'</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col">
+                    <div class="title">Description *</div>
+
+                    <div class="form-group">
+                      <textarea
+                        id="description_input"
+                        placeholder="Describe your item objectively and in detail here: list any defects, any alterations,the absence of labels (composition or brand name), etc."
+                        formControlName="description_text"
+                        [ngClass]="{ 'invalid-data': showErrorMsg('description_text') }"
+                        class="description_textarea"
+                      ></textarea>
+
+                      <span class="error-message" *ngIf="showErrorMsg('description_text')">
+                        Please enter 'Description'
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="after-form-container">
+              <ng-container *ngIf="productUpdateErrorMessage">
+                <div class="col-12 col-md-6 alert-danger">
+                  {{ productUpdateErrorMessage }}
+                </div>
+              </ng-container>
+
+              <button id="submit_button" type="submit" class="btn primary">Continue</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

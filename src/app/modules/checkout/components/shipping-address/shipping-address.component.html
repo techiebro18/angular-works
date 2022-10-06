@@ -1,0 +1,511 @@
+<div class="shipping-container">
+  <div class="address-list">
+    <div *ngFor="let address of addressList" id="address-{{ address.id }}">
+      <div class="address-actions">
+        <a (click)="editAddress(address.id)" class="edit-address">{{ 'Edit' | translate }}</a>
+        <a (click)="openDeletePopUp(address.id)" class="edit-address">{{ 'Delete' | translate }}</a>
+      </div>
+
+      <input
+        type="radio"
+        class="checkout-radiobutton"
+        name="addselect"
+        [value]="address.id"
+        [(ngModel)]="selectedAddress"
+        (ngModelChange)="selectedAddressChange()"
+        id="shipping_{{ address.id }}"
+      />
+      <label for="shipping_{{ address.id }}">
+        {{ address.fname }} {{ address.lname }}
+        <br />
+        {{ address.address_1 }} {{ address.address_2 ? ', ' + address.address_2 : '' }}
+        <br />
+        {{ address.phone_code }}{{ address.mobile_no }}
+        <br />
+        {{ address.pin_code }} {{ address.city }}
+        <br />
+        {{ address.country_name }}
+      </label>
+    </div>
+
+    <button class="btn btn-secondary" *ngIf="!addAddress" (click)="addNewAddress()">
+      <span class="material-icons md-17">add</span>
+      <span>{{ 'ADD NEW ADDRESS' | translate }}</span>
+    </button>
+
+    <button
+      type="button"
+      *ngIf="selectedAddress && !addAddress"
+      (click)="useAddress()"
+      id="submit_shipping_adrs"
+      class="btn primary shipping-btn"
+    >
+      {{ 'USE THIS ADDRESS' | translate }}
+    </button>
+  </div>
+</div>
+<div class="shipping-container" *ngIf="addAddress">
+  <span class="sub-heading">
+    {{ 'Please enter your shipping address in the form below' | translate }}
+  </span>
+  <div class="shipping-form">
+    <div class="shippingedit">
+      <form id="shippingForm" [formGroup]="shippingForm" autocomplete="off">
+        <div class="row">
+          <div class="col-sm-6 col-xs-6">
+            <div class="form-group">
+              <label>{{ 'First Name' | translate }} *</label>
+              <input type="text" id="fname" class="primary" formControlName="fname" (blur)="onShippingBlur($event)" />
+              <div
+                *ngIf="shippingForm.controls.fname.invalid && shippingForm.controls.fname.touched"
+                class="invalid-message"
+              >
+                {{ 'First Name' | translate }} {{ 'is requried.' | translate }}
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-xs-6">
+            <div class="form-group">
+              <label>{{ 'Last Name' | translate }} *</label>
+              <input type="text" id="lname" class="primary" formControlName="lname" (blur)="onShippingBlur($event)" />
+              <div
+                *ngIf="shippingForm.controls.lname.invalid && shippingForm.controls.lname.touched"
+                class="invalid-message"
+              >
+                {{ 'Last Name' | translate }} {{ 'is requried.' | translate }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6 col-xs-6">
+            <div class="form-group">
+              <label>{{ 'Address' | translate }} 1 *</label>
+              <input
+                type="text"
+                class="primary"
+                id="address_1"
+                formControlName="address_1"
+                (blur)="onShippingBlur($event)"
+              />
+              <div
+                *ngIf="shippingForm.controls.address_1.invalid && shippingForm.controls.address_1.touched"
+                class="invalid-message"
+              >
+                {{ 'Address' | translate }} 1 {{ 'is requried.' | translate }}
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-xs-6">
+            <div class="form-group">
+              <label>{{ 'Address' | translate }} 2</label>
+              <input
+                type="text"
+                class="primary"
+                id="address_2"
+                formControlName="address_2"
+                (blur)="onShippingBlur($event)"
+              />
+              <div
+                *ngIf="shippingForm.controls.address_2.invalid && shippingForm.controls.address_2.touched"
+                class="invalid-message"
+              >
+                {{ 'Address' | translate }} 2 {{ 'is requried.' | translate }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6 col-xs-6">
+            <div class="form-group">
+              <label>{{ 'Company name' | translate }} ({{ 'Optional' | translate }})</label>
+              <input
+                type="text"
+                class="primary"
+                maxlength="25"
+                id="company"
+                formControlName="company"
+                (blur)="onShippingBlur($event)"
+              />
+            </div>
+          </div>
+          <div class="col-sm-6 col-xs-6">
+            <div class="form-group mobile-number">
+              <label>{{ 'Mobile Number' | translate }} *</label>
+              <ng-select
+                #phonecodeSelect
+                id="phonecode"
+                formControlName="phonecode"
+                [items]="countryPhoneCodes"
+                [bindLabel]="'phonecode'"
+                [bindValue]="'phonecode'"
+                [clearable]="false"
+                [searchable]="false"
+                class="phone-code"
+                [(ngModel)]="selectedPhoneCode"
+                (change)="onChangePhoneCode($event, 'delivery_form_fields')"
+              >
+                <ng-template ng-header-tmp>
+                  <input
+                    style="width: 100%; line-height: 24px"
+                    type="text"
+                    (input)="phonecodeSelect.filter($any($event.target).value)"
+                  />
+                </ng-template>
+
+                <ng-template ng-label-tmp let-item="item">
+                  <span class="phonecode-label">+ {{ item.phonecode }}</span>
+                </ng-template>
+
+                <ng-template ng-option-tmp let-item="item">
+                  <span class="phonecode-option">+ {{ item.phonecode }}</span>
+                </ng-template>
+              </ng-select>
+              <input
+                type="number"
+                class="primary"
+                maxlength="25"
+                id="mobile_no"
+                formControlName="mobile_no"
+                (blur)="onShippingBlur($event)"
+              />
+              <div
+                *ngIf="shippingForm.controls.mobile_no.invalid && shippingForm.controls.mobile_no.touched"
+                class="invalid-message"
+              >
+                {{ 'Mobile Number' | translate }} {{ 'is requried.' | translate }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6 col-xs-6">
+            <div class="form-group">
+              <label>{{ 'Zip Code' | translate }} *</label>
+              <input
+                type="text"
+                class="primary"
+                id="pin_code"
+                formControlName="pin_code"
+                (blur)="onShippingBlur($event)"
+              />
+              <div
+                *ngIf="shippingForm.controls.pin_code.invalid && shippingForm.controls.pin_code.touched"
+                class="invalid-message"
+              >
+                {{ 'Zip Code' | translate }} {{ 'is requried.' | translate }}
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-xs-6">
+            <div class="form-group">
+              <label>{{ 'City' | translate }} *</label>
+              <input type="text" class="primary" id="city" formControlName="city" (blur)="onShippingBlur($event)" />
+              <div
+                *ngIf="shippingForm.controls.city.invalid && shippingForm.controls.city.touched"
+                class="invalid-message"
+              >
+                {{ 'City' | translate }} {{ 'is requried.' | translate }}
+              </div>
+              <div
+                *ngIf="shippingForm.controls.city.errors && shippingForm.controls.city.errors.specialCharacter"
+                class="invalid-message"
+              >
+                {{ 'Special character not allowed' | translate }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6 col-xs-6">
+            <div class="form-group">
+              <label>{{ 'Country' | translate }} *</label>
+              <ng-select
+                #countrySelect
+                formControlName="country"
+                id="country"
+                [items]="countries"
+                [bindLabel]="'name'"
+                [bindValue]="'id'"
+                [clearable]="false"
+                [searchable]="false"
+                class="dropdown-select"
+                [(ngModel)]="selectedCountry"
+                (change)="onChangeCountry($event, 'delivery_form_fields')"
+              >
+                <ng-template ng-header-tmp>
+                  <input
+                    style="width: 100%; line-height: 24px"
+                    type="text"
+                    (input)="countrySelect.filter($any($event.target).value)"
+                  />
+                </ng-template>
+              </ng-select>
+              <div
+                *ngIf="shippingForm.controls.country.invalid && shippingForm.controls.country.touched"
+                class="invalid-message"
+              >
+                {{ 'Country' | translate }} {{ 'is requried.' | translate }}
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-xs-6">
+            <div class="form-group">
+              <label>{{ 'State' | translate }}</label>
+              <input type="text" id="state" class="primary" formControlName="state" (blur)="onShippingBlur($event)" />
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <app-dhl-info></app-dhl-info>
+
+      <div class="row billing-section">
+        <div class="col-sm-12 col-xs-12">
+          <div *ngIf="!showBilling">
+            <label>
+              <strong>{{ 'Billing address' | translate }}</strong>
+            </label>
+            <div class="sub-text">
+              {{ 'If your billing address differs from your shipping address' | translate }},
+              {{ 'please click "add billing address".' | translate }}
+            </div>
+          </div>
+          <div *ngIf="showBilling">
+            <div class="title">
+              <h1>{{ 'BILLING ADDRESS' | translate }}</h1>
+            </div>
+            <span class="sub-heading">
+              {{ 'Please enter your billing address in the form below' | translate }}
+            </span>
+            <form id="billingForm" [formGroup]="billingForm" autocomplete="off">
+              <div class="row">
+                <div class="col-sm-6 col-xs-6">
+                  <div class="form-group">
+                    <label>{{ 'First Name' | translate }} *</label>
+                    <input type="text" id="fname" class="primary" formControlName="fname" />
+                    <div
+                      *ngIf="billingForm.controls.fname.invalid && billingForm.controls.fname.touched"
+                      class="invalid-message"
+                    >
+                      {{ 'First Name' | translate }} {{ 'is requried.' | translate }}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6 col-xs-6">
+                  <div class="form-group">
+                    <label>{{ 'Last Name' | translate }} *</label>
+                    <input type="text" id="lname" class="primary" formControlName="lname" />
+                    <div
+                      *ngIf="billingForm.controls.lname.invalid && billingForm.controls.lname.touched"
+                      class="invalid-message"
+                    >
+                      {{ 'Last Name' | translate }} {{ 'is requried.' | translate }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6 col-xs-6">
+                  <div class="form-group">
+                    <label>{{ 'Address' | translate }} 1 *</label>
+                    <input type="text" class="primary" id="address_1" formControlName="address_1" />
+                    <div
+                      *ngIf="billingForm.controls.address_1.invalid && billingForm.controls.address_1.touched"
+                      class="invalid-message"
+                    >
+                      {{ 'Address' | translate }} 1 {{ 'is requried.' | translate }}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6 col-xs-6">
+                  <div class="form-group">
+                    <label>{{ 'Address' | translate }} 2</label>
+                    <input type="text" class="primary" id="address_2" formControlName="address_2" />
+                    <div
+                      *ngIf="billingForm.controls.address_2.invalid && billingForm.controls.address_2.touched"
+                      class="invalid-message"
+                    >
+                      {{ 'Address' | translate }} 2 {{ 'is requried.' | translate }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6 col-xs-6">
+                  <div class="form-group">
+                    <label>{{ 'Company name' | translate }} ({{ 'Optional' | translate }})</label>
+                    <input type="text" class="primary" maxlength="25" id="company" formControlName="company" />
+                  </div>
+                </div>
+                <div class="col-sm-6 col-xs-6">
+                  <div class="form-group mobile-number">
+                    <label>{{ 'Mobile Number' | translate }} *</label>
+                    <ng-select
+                      #phonecodeSelect
+                      id="phonecode"
+                      formControlName="phonecode"
+                      [items]="countryPhoneCodes"
+                      [bindLabel]="'phonecode'"
+                      [bindValue]="'phonecode'"
+                      [clearable]="false"
+                      [searchable]="false"
+                      class="phone-code"
+                      [(ngModel)]="selectedPhoneCode"
+                      (change)="onChangePhoneCode($event, 'billing_form_fields')"
+                    >
+                      <ng-template ng-header-tmp>
+                        <input
+                          style="width: 100%; line-height: 24px"
+                          type="text"
+                          (input)="phonecodeSelect.filter($any($event.target).value)"
+                        />
+                      </ng-template>
+
+                      <ng-template ng-label-tmp let-item="item">
+                        <span class="phonecode-label">+ {{ item.phonecode }}</span>
+                      </ng-template>
+
+                      <ng-template ng-option-tmp let-item="item">
+                        <span class="phonecode-option">+ {{ item.phonecode }}</span>
+                      </ng-template>
+                    </ng-select>
+                    <input type="number" class="primary" maxlength="25" id="mobile_no" formControlName="mobile_no" />
+                    <div
+                      *ngIf="billingForm.controls.mobile_no.invalid && billingForm.controls.mobile_no.touched"
+                      class="invalid-message"
+                    >
+                      {{ 'Mobile Number' | translate }} {{ 'is requried.' | translate }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6 col-xs-6">
+                  <div class="form-group">
+                    <label>{{ 'Zip Code' | translate }} *</label>
+                    <input type="text" class="primary" id="pin_code" formControlName="pin_code" />
+                    <div
+                      *ngIf="billingForm.controls.pin_code.invalid && billingForm.controls.pin_code.touched"
+                      class="invalid-message"
+                    >
+                      {{ 'Zip Code' | translate }} {{ 'is requried.' | translate }}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6 col-xs-6">
+                  <div class="form-group">
+                    <label>{{ 'City' | translate }} *</label>
+                    <input type="text" class="primary" id="city" formControlName="city" />
+                    <div
+                      *ngIf="billingForm.controls.city.invalid && billingForm.controls.city.touched"
+                      class="invalid-message"
+                    >
+                      {{ 'City' | translate }} {{ 'is requried.' | translate }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6 col-xs-6">
+                  <div class="form-group">
+                    <label>{{ 'Country' | translate }} *</label>
+                    <ng-select
+                      #countrySelect
+                      formControlName="country"
+                      id="country"
+                      [items]="countries"
+                      [bindLabel]="'name'"
+                      [bindValue]="'id'"
+                      [clearable]="false"
+                      [searchable]="false"
+                      class="dropdown-select"
+                      [(ngModel)]="selectedCountry"
+                      (change)="onChangeCountry($event, 'billing_form_fields')"
+                    >
+                      <ng-template ng-header-tmp>
+                        <input
+                          style="width: 100%; line-height: 24px"
+                          type="text"
+                          (input)="countrySelect.filter($any($event.target).value)"
+                        />
+                      </ng-template>
+                    </ng-select>
+                    <div
+                      *ngIf="billingForm.controls.country.invalid && billingForm.controls.country.touched"
+                      class="invalid-message"
+                    >
+                      {{ 'Country' | translate }} {{ 'is requried.' | translate }}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6 col-xs-6">
+                  <div class="form-group">
+                    <label>{{ 'State' | translate }}</label>
+                    <input type="text" id="state" class="primary" formControlName="state" />
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div>
+            <button class="btn btn-secondary" (click)="toggleBilling()">
+              <span class="material-icons md-17">{{ !showBilling ? 'add' : 'remove' }}</span>
+              <span *ngIf="!showBilling">{{ 'ADD BILLING ADDRESS' | translate }}</span>
+              <span *ngIf="showBilling">{{ 'REMOVE BILLING ADDRESS' | translate }}</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12 col-xs-12">
+          <div class="form-group">
+            <button type="button" (click)="submitForm()" id="submit_shipping_adrs" class="btn primary next">
+              {{ 'NEXT' | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="address-modal">
+  <div class="modal" id="trash-pupup" [style.display]="trashModel ? 'block' : 'none'">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>{{ 'Address Verification' | translate }}</h2>
+          <button type="button" class="close" data-dismiss="modal" (click)="hidePupUp()">&times;</button>
+        </div>
+        <div class="modal-body">
+          {{ message | translate }}
+          <button type="button" class="btn btn-dark close-button" (click)="hidePupUp()">
+            {{ 'CLOSE' | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="delete-model">
+  <div class="modal delete-popup" id="trash-pupup" [style.display]="deleteModel ? 'block' : 'none'">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div>
+          <button type="button" class="close" data-dismiss="modal" (click)="hideDeletePopUp()">&times;</button>
+        </div>
+        <div class="modal-body">
+          <h2>{{ popUpHeading }}</h2>
+          <div class="buttom-box" [style.display]="'block'">
+            <button type="button" class="btn btn-dark yes-button" (click)="deleteAddress()">YES</button>
+            <button type="button" class="btn btn-light no-button" data-dismiss="modal" (click)="hideDeletePopUp()">
+              NO
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

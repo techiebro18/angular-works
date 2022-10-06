@@ -1,0 +1,97 @@
+<div class="auth-container d-flex">
+  <div class="left login-image-box">
+    <div class="terms-list">
+      <ul>
+        <li>JOIN +200.000 COOL GIRLS</li>
+        |
+        <li>CREATE ALERTS & GET NOTIFIED ABOUT PRICE DROPS</li>
+        |
+        <li>+1.000 NEW UPLOADS EVERY DAY</li>
+      </ul>
+    </div>
+  </div>
+  <div class="right">
+    <div class="tabs-container">
+      <div class="d-flex tabs-container-wrapper">
+        <div class="register-container">
+          <div class="title">
+            <h1 class="title-heading">JOIN OUR COMMUNITY</h1>
+            <p>
+              Join the coolest girls on the planet, who share your passion for secondhand fashion
+              and unlock exclusive membership features.
+              <br />
+              Buy, sell and inspire – you can do it all right here.
+            </p>
+          </div>
+          <div class="register-form">
+            <form id="registerForm" [formGroup]="registerForm">
+              <div class="form-group">
+                <input type="text" placeholder="Name *" class="primary" formControlName="fname" />
+                <div
+                  *ngIf="registerForm.controls.fname.invalid && registerForm.controls.fname.touched"
+                  class="invalid-message"
+                >
+                  Name is required
+                </div>
+              </div>
+              <div class="form-group">
+                <input type="email" placeholder="Email *" class="primary" formControlName="email" />
+                <div
+                  *ngIf="registerForm.controls.email.invalid && registerForm.controls.email.touched"
+                  class="invalid-message"
+                >
+                  A valid e-mail is required
+                </div>
+                <div *ngIf="incorrectEmail" class="error_message">
+                  <span>{{ emailErrorMessage | translate }}</span>
+                </div>
+              </div>
+              <div class="form-group">
+                <input
+                  [type]="hide ? 'password' : 'text'"
+                  placeholder="Password *"
+                  class="primary"
+                  formControlName="password"
+                />
+                <span (click)="hide = !hide" class="eye_icon">
+                  <i *ngIf="hide" class="fa fa-eye-slash"></i>
+                  <i *ngIf="!hide" class="fa fa-eye"></i>
+                </span>
+                <div
+                  *ngIf="
+                    registerForm.controls.password.invalid && registerForm.controls.password.touched
+                  "
+                  class="invalid-message"
+                >
+                  Password is required
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="remember-me">
+                  <app-checkbox name="news_letter" formControlName="news_letter">
+                    {{ 'Sign up to our newsletter for exclusive offers' | translate }}.
+                  </app-checkbox>
+                </div>
+              </div>
+              <div class="alert error-message" *ngIf="errorMessage">
+                {{ errorMessage }}
+              </div>
+              <div class="alert alert-success text-center" *ngIf="successMessage">
+                {{ successMessage }}
+              </div>
+            </form>
+          </div>
+          <div class="d-flex submit-button-container">
+            <button
+              class="btn primary"
+              (click)="onProcessRegister()"
+              [disabled]="registerForm.invalid"
+            >
+              JOIN NOW
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

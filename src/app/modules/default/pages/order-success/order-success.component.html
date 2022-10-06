@@ -1,0 +1,176 @@
+<div class="loader-wrapper" *ngIf="loading">
+  <div class="loader">
+    <mat-spinner></mat-spinner>
+  </div>
+</div>
+<div class="product-list account-tab-page order-detail">
+  <div class="container">
+    <div class="row" *ngIf="orderDetail">
+      <div class="col-md-12">
+        <div class="tabbable tabs-left">
+          <div class="col-md-12">
+            <div class="tab-content">
+              <div class="tab-pane active" id="your_orders">
+                <div class="tab_body">
+                  <div class="your-order" id="track-order2">
+                    <div class="track-order">
+                      <div class="icon">
+                        <img src="/assets/images/thankyou-icon.png" aria-hidden="true" />
+                      </div>
+                      <div class="header-title">
+                        <h2>{{ 'Thank you for your Purchase' }}!</h2>
+                        <h3>{{ 'Order' | translate }} #{{ orderDetail.order_id }}</h3>
+                        <p>
+                          {{ 'You placed this order on' | translate }}
+                          {{ orderDetail.orderDate | date: 'medium' }}
+                        </p>
+                        <a href="https://bfxuryjlu8n.typeform.com/to/F3Zvl3gr" target="_blank">
+                          <button class="btn btn-primary thank-you">How did you discover us?</button>
+                        </a>
+                        <h4>{{ 'Your order summary' | translate }}</h4>
+                      </div>
+                      <div class="order-summary-bottom">
+                        <table
+                          *ngFor="let order of orderItems.orders.order_item"
+                          class="order-summary-details desktopproductdetails"
+                        >
+                          <app-order-success-detail
+                            class="app-order-detail"
+                            [orderItem]="order"
+                            [country_data]="orderItems.country_data"
+                            [orderDetail]="orderItems.data"
+                          ></app-order-success-detail>
+                        </table>
+                        <table
+                          *ngFor="let order of orderItems.orders.order_item"
+                          class="order-summary-details mobileproductdetails"
+                        >
+                          <app-order-success-detail-mobile
+                            class="app-order-detail"
+                            [orderItem]="order"
+                            [country_data]="orderItems.country_data"
+                            [orderDetail]="orderItems.data"
+                          ></app-order-success-detail-mobile>
+                        </table>
+
+                        <table [ngStyle]="{ width: '100%' }">
+                          <tr class="addressbottom">
+                            <td valign="center">
+                              <div class="ordersummary">
+                                <h3>{{ 'Order Summary' | translate }}</h3>
+                                <p>{{ 'Order' | translate }}: #{{ orderDetail.order_id }}</p>
+                                <p>
+                                  {{ 'Order Date' | translate }}:
+                                  {{ orderDetail.orderDate | date: 'medium' }}
+                                </p>
+                                <p>
+                                  {{ 'Order Total' | translate }}:
+                                  {{ orderDetail.total_paid_amount | currency: orderDetail.currencycode }}
+                                </p>
+                              </div>
+                            </td>
+                            <td valign="center">
+                              <div class="shippingaddress">
+                                <h3>{{ 'Shipping Address' | translate }}</h3>
+                                <p>
+                                  <span>{{ orderDetail.name }}</span>
+                                  <span>
+                                    {{ orderDetail.phone_code ? '+' + orderDetail.phone_code : '' }}
+                                    {{ orderDetail.mobile_no }}
+                                  </span>
+                                  <span>
+                                    {{ orderDetail.company }} {{ orderDetail.address_1 }}
+                                    {{ orderDetail.address_2 }}
+                                  </span>
+                                  <span>{{ orderDetail.city }} {{ orderDetail.pin_code }}</span>
+                                  <span>{{ orderDetail.country_name }}</span>
+                                </p>
+                              </div>
+                            </td>
+                            <td valign="center">
+                              <div class="billingaddress">
+                                <h3>{{ 'Billing address' | translate }}</h3>
+                                <p>
+                                  <span>{{ orderDetail.billing_name }}</span>
+                                  <span *ngIf="orderDetail.billing_mobile_no != ''">
+                                    {{ orderDetail.billing_phone_code ? '+' + orderDetail.billing_phone_code : '' }}
+                                    {{ orderDetail.billing_mobile_no }}
+                                  </span>
+                                  <span *ngIf="orderDetail.billing_mobile_no == ''">
+                                    {{ orderDetail.phone_code ? '+' + orderDetail.phone_code : '' }}
+                                    {{ orderDetail.mobile_no }}
+                                  </span>
+                                  <span>
+                                    {{ orderDetail.billing_company }}
+                                    {{ orderDetail.billing_address_1 }}
+                                    {{ orderDetail.billing_address_2 }}
+                                  </span>
+                                  <span>
+                                    {{ orderDetail.billing_city }}
+                                    {{ orderDetail.billing_pin_code }}
+                                  </span>
+                                  <span>{{ orderDetail.billing_country_name }}</span>
+                                </p>
+                              </div>
+                            </td>
+                          </tr>
+                          <tr valign="center" class="bottomtext">
+                            <td colspan="3">
+                              <p>{{ 'orderconfirm1' | translate }}</p>
+                            </td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-order-confirmation">
+      <div class="row">
+        <div class="col-md-6 col-sm-6 col-xs-6">
+          <div class="footerleft">
+            <h3>{{ 'How to Reach Us' | translate }}</h3>
+            <p>
+              <i class="fa fa-phone" aria-hidden="true"></i>
+              +45 78 71 87 70
+            </p>
+            <p>
+              <a href="mailto:contact@thevintagebar.com">
+                <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                contact@thevintagebar.com
+              </a>
+            </p>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-6">
+          <div class="footerleft">
+            <h3>{{ 'Learn about Our' | translate }}</h3>
+            <p>{{ 'Return Policy' | translate }}</p>
+            <p>
+              <a routerLink="/{{ 'returns' | translate }}" class="read-more">
+                {{ 'Read more' | translate }}
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-container *ngIf="awinMerchantId">
+  <img
+    src="https://www.awin1.com/sread.img?tt=ns&tv=2&merchant={{ awinMerchantId }}&amount={{ orderItemTotal }}&cr={{
+      orderItems.data.currencycode
+    }}&ref={{ orderItems.data.order_id }}&parts=default:{{ orderItemTotal }}&vc={{ coupon }}&ch=aw&testmode={{
+      awinFlag
+    }}"
+    border="0"
+    width="0"
+    height="0"
+  />
+</ng-container>

@@ -1,0 +1,124 @@
+<div
+  class="createAlertBox"
+  *ngIf="(authService.isLoggedInObs | async) && (user$ | async)?.role_id != 2; else elseBlock"
+>
+  <button
+    type="button"
+    name="createAlertBtn"
+    class="btn btn-default createAlertbtn"
+    (click)="openModal(createAlertPopup)"
+    *ngIf="enableCreateAlert"
+  >
+    <i class="fa fa-bell"></i>
+    {{ 'JOIN THE WAITLIST' | translate }}
+  </button>
+</div>
+<ng-template #elseBlock>
+  <button
+    type="button"
+    name="createAlertBtn"
+    class="btn btn-default createAlertbtn"
+    (click)="openPopup(true)"
+    *ngIf="enableCreateAlert"
+  >
+    <i class="fa fa-bell"></i>
+    {{ 'JOIN THE WAITLIST' | translate }}
+  </button>
+</ng-template>
+
+<ng-template #createAlertPopup>
+  <div class="createAlert">
+    <div class="modal-body">
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <div class="modal-body-inner" *ngIf="this.activeCreateAlert">
+        <div class="title-info">
+          <h3>{{ 'JOIN THE WAITLIST' | translate }} HERE</h3>
+          <p class="secondheading">
+            {{ 'You are about to create an alert using the following criteria' | translate }}
+          </p>
+        </div>
+        <div class="filterselection">
+          <ul class="">
+            <ng-template [ngIf]="filterList.parent_category_seo_url">
+              <li class="">
+                <a href="#">{{ removeHyphen(filterList.parent_category_seo_url) }}</a>
+              </li>
+            </ng-template>
+            <ng-template [ngIf]="filterList.child_category_seo_url">
+              <li class="">
+                <a href="#">{{ removeHyphen(filterList.child_category_seo_url) }}</a>
+              </li>
+            </ng-template>
+            <ng-template [ngIf]="filterList.style_seo_url">
+              <li class="">
+                <a href="#">{{ removeHyphen(filterList.style_seo_url) }}</a>
+              </li>
+            </ng-template>
+            <ng-template [ngIf]="filterList.designer_seo_url">
+              <li class="">
+                <a href="#">{{ removeHyphen(filterList.designer_seo_url) }}</a>
+              </li>
+            </ng-template>
+            <ng-template [ngIf]="filterList.discover_seo_url">
+              <li class="">
+                <a href="#">{{ filterList.discover_seo_url }}</a>
+              </li>
+            </ng-template>
+            <ng-template [ngIf]="filterList.category.length">
+              <li class="" *ngFor="let item of filterList.category">
+                <a href="#">{{ removeHyphen(item) }}</a>
+              </li>
+            </ng-template>
+            <ng-template [ngIf]="filterList.subcategory.length">
+              <li class="" *ngFor="let item of filterList.subcategory">
+                <a href="#">{{ removeHyphen(item) }}</a>
+              </li>
+            </ng-template>
+            <ng-template [ngIf]="filterList.designer.length">
+              <li class="" *ngFor="let item of filterList.designer">
+                <a href="#">{{ removeHyphen(item) }}</a>
+              </li>
+            </ng-template>
+            <ng-template [ngIf]="filterList.style.length">
+              <li class="" *ngFor="let item of filterList.style">
+                <a href="#">{{ removeHyphen(item) }}</a>
+              </li>
+            </ng-template>
+            <ng-template [ngIf]="filterList.color.length">
+              <li class="" *ngFor="let item of filterList.color">
+                <a href="#">{{ item }}</a>
+              </li>
+            </ng-template>
+            <ng-template [ngIf]="filterList.shoes_size.length">
+              <li class="" *ngFor="let item of filterList.shoes_size">
+                <a href="#">{{ item }}</a>
+              </li>
+            </ng-template>
+            <ng-template [ngIf]="filterList.cloth_size.length">
+              <li class="" *ngFor="let item of filterList.cloth_size">
+                <a href="#">{{ item }}</a>
+              </li>
+            </ng-template>
+          </ul>
+        </div>
+        <div class="col-sm-12 submitbtn">
+          <button type="button" class="btn proceed-btn" (click)="saveCreateAlert()">
+            {{ 'Save changes' | translate }}
+          </button>
+        </div>
+        <br />
+        <p class="error" *ngIf="errorAlert">
+          <strong>{{ errorMsg ? errorMsg : '' }}</strong>
+        </p>
+      </div>
+      <div class="modal-body-inner" *ngIf="!this.activeCreateAlert">
+        <div class="title-info">
+          <h3>{{ 'THANK YOU FOR SIGNING UP' | translate }}</h3>
+          <p class="secondheading">{{ 'waitlist_title1' | translate }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

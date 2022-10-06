@@ -1,0 +1,415 @@
+<div class="container account-details">
+  <div class="form-container-wrapper">
+    <div class="form-container">
+      <form (ngSubmit)="onSubmit()" [formGroup]="accountFormGroup">
+        <div class="row">
+          <div class="col-md-6 personal-information section-1">
+            <div class="form-group">
+              <div class="photo-uploader-container">
+                <div class="bg-image">
+                  <app-image-uploader
+                    (fileChange)="onCoverImageChange($event, 'cover_image')"
+                    (fileSizeError)="
+                      showErrorMessage(
+                        'imageFileSize',
+                        'Your image is too large. Please upload a file with less then 10mb'
+                      )
+                    "
+                    (fileTypeError)="
+                      showErrorMessage(
+                        'imageFileType',
+                        'Your image it is not a JPG, PNG or a HEIC file. Please upload a file of one of those formats.'
+                      )
+                    "
+                    [fixedOverlayInfo]="true"
+                    [mainImageTemp]="user?.cover_image"
+                    [uploadedFile]="coverImage.file"
+                    [compress]="true"
+                    layoutTheme="cover-image"
+                    (maxFileUploadSize)="(maxUploadFileSize)"
+                  ></app-image-uploader>
+                  <app-image-uploader
+                    (fileChange)="onImageChange($event, 'profile_image')"
+                    (fileSizeError)="
+                      showErrorMessage(
+                        'imageFileSize',
+                        'Your image is too large. Please upload a file with less then 10mb'
+                      )
+                    "
+                    (fileTypeError)="
+                      showErrorMessage(
+                        'imageFileType',
+                        'Your image it is not a JPG, PNG or a HEIC file. Please upload a file of one of those formats.'
+                      )
+                    "
+                    [fixedOverlayInfo]="true"
+                    [mainImageTemp]="user?.image_id"
+                    [uploadedFile]="profileImage.file"
+                    [compress]="true"
+                    layoutTheme="profile-rounded"
+                    class="app-image"
+                  ></app-image-uploader>
+                </div>
+
+                <br />
+                <br />
+              </div>
+
+              <span *ngIf="imageErrorMessage" class="error-message profile-img">
+                {{ imageErrorMessage }}
+              </span>
+            </div>
+          </div>
+
+          <div class="col-md-6 personal-information section-1">
+            <div class="form-group-title">
+              {{ 'Profile detail' | translate }}
+            </div>
+
+            <div class="form-group">
+              <div class="description">{{ 'Username' | translate }} (will appear on your member page) *</div>
+              <div class="input-container">
+                <input
+                  class="secondary lower-case"
+                  formControlName="username"
+                  maxlength="25"
+                  minlength="5"
+                  placeholder="{{ 'Username' | translate }}"
+                  type="text"
+                  id="username"
+                />
+
+                <mat-error *ngIf="accountFormGroup.controls['username'].errors?.usernameTaken">
+                  {{ 'Username unavailable. Please try a different one.' | translate }}
+                </mat-error>
+              </div>
+
+              <span *ngIf="accountFormGroup.controls.username.errors?.required" class="error-message">
+                {{ 'Please enter a username' | translate }}
+              </span>
+
+              <span *ngIf="accountFormGroup.controls.username.errors?.whitespaceNotAllowed" class="error-message">
+                {{ 'Whitespaces are not allowed for the username field' | translate }}
+              </span>
+            </div>
+
+            <div class="form-group">
+              <div class="description">{{ 'Member page' | translate }}</div>
+              <div class="input-container">
+                <a href="{{ baseUrl }}community/members/{{ user.username }}" target="_blank">
+                  {{ baseUrl }}community/members/{{ accountFormGroup.controls['username'].value }}
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 personal-information section-2">
+            <div class="form-group">
+              <div class="description">{{ 'Description' | translate }} (Max 150 characters)</div>
+              <div
+                class="description"
+                *ngIf="
+                  accountFormGroup.controls.member_description &&
+                  accountFormGroup.controls.member_description.value &&
+                  150 - accountFormGroup.controls.member_description.value.length != 150
+                "
+              >
+                {{ 'Characters left' | translate }}:
+                {{ 150 - accountFormGroup.controls.member_description.value.length }}
+              </div>
+              <div class="input-container">
+                <input class="secondary" formControlName="member_description" type="text" id="member_description" />
+              </div>
+              <span *ngIf="accountFormGroup.controls.member_description.errors" class="error-message">
+                {{ 'Maximum characters allowed 150' | translate }}
+              </span>
+            </div>
+          </div>
+          <div class="col-md-12 personal-information">
+            <div class="form-group-title">
+              {{ 'Personal information' | translate }}
+            </div>
+          </div>
+
+          <div class="col-md-6 personal-information">
+            <div class="form-group">
+              <div class="description">{{ 'First Name' | translate }} *</div>
+              <div class="input-container">
+                <input
+                  class="secondary"
+                  formControlName="fname"
+                  placeholder="{{ 'First Name' | translate }}"
+                  type="text"
+                  id="first_name"
+                />
+              </div>
+
+              <span
+                *ngIf="accountFormGroup.controls.fname.errors && accountFormGroup.controls.fname.errors.required"
+                class="error-message"
+              >
+                {{ 'Please enter first name' | translate }}
+              </span>
+            </div>
+
+            <div class="form-group">
+              <div class="description">{{ 'Email Address' | translate }} *</div>
+              <div class="input-container">
+                <input
+                  [readonly]="true"
+                  class="secondary"
+                  formControlName="email"
+                  placeholder="{{ 'Email Address' | translate }}"
+                  type="email"
+                  id="email"
+                />
+              </div>
+
+              <span
+                *ngIf="accountFormGroup.controls.email.errors && accountFormGroup.controls.email.errors.required"
+                class="error-message"
+              >
+                {{ 'Please enter email' | translate }}
+              </span>
+
+              <span
+                *ngIf="accountFormGroup.controls.email.errors && accountFormGroup.controls.email.errors.email"
+                class="error-message"
+              >
+                {{ 'Please enter valid email' | translate }}
+              </span>
+            </div>
+          </div>
+
+          <div class="col-md-6 personal-information">
+            <div class="form-group">
+              <div class="description">{{ 'Last Name' | translate }} *</div>
+              <div class="input-container">
+                <input
+                  class="secondary"
+                  formControlName="lname"
+                  placeholder="{{ 'Last Name' | translate }}"
+                  type="text"
+                  id="last_name"
+                />
+              </div>
+
+              <span
+                *ngIf="accountFormGroup.controls.lname.errors && accountFormGroup.controls.lname.errors.required"
+                class="error-message"
+              >
+                {{ 'Please enter last name' | translate }}
+              </span>
+            </div>
+
+            <div class="form-group row mult-col">
+              <div class="col-xs-12 col-sm-12 col-md-6">
+                <div class="description">{{ 'Date of birth' | translate }} *</div>
+                <div class="input-container">
+                  <div class="dropdown-field dropdown-date">
+                    <input
+                      (click)="picker.open()"
+                      [matDatepicker]="picker"
+                      [max]="maxDate"
+                      class="dropdown-input"
+                      formControlName="dob"
+                      matInput
+                      placeholder="( {{ 'DD-MM-YYYY' | translate }} )"
+                      id="birthday"
+                    />
+                    <mat-datepicker #picker startView="multi-year"></mat-datepicker>
+                  </div>
+                </div>
+
+                <span
+                  *ngIf="
+                    accountFormGroup.controls.dob.errors &&
+                    (accountFormGroup.controls.dob.errors.required ||
+                      accountFormGroup.controls.dob.errors.matDatepickerMax)
+                  "
+                  class="error-message"
+                >
+                  {{ 'Please enter date of birth' | translate }}
+                </span>
+              </div>
+
+              <div class="col-xs-12 col-sm-12 col-md-6">
+                <div class="description">{{ 'Gender' | translate }}</div>
+                <div class="input-container">
+                  <div class="input-container dropdown-field">
+                    <ng-select
+                      [bindLabel]="'name'"
+                      [bindValue]="'id'"
+                      [clearable]="false"
+                      [items]="genders"
+                      class="ng-select dropdown-select"
+                      formControlName="gender"
+                      id="gender"
+                    ></ng-select>
+                  </div>
+
+                  <span
+                    *ngIf="accountFormGroup.controls.gender.errors && accountFormGroup.controls.gender.errors.required"
+                    class="error-message"
+                  >
+                    {{ 'Please select gender' | translate }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-12 contact_info section-3">
+            <div class="form-group-title">
+              {{ 'Address' | translate }}
+            </div>
+          </div>
+
+          <div class="col-md-6 contact_info">
+            <div class="form-group">
+              <div class="description">{{ 'Address' | translate }} *</div>
+              <div class="input-container">
+                <input
+                  class="secondary"
+                  formControlName="address"
+                  placeholder="{{ 'Address' | translate }}"
+                  type="text"
+                  id="address"
+                />
+              </div>
+
+              <span
+                *ngIf="accountFormGroup.controls.address.errors && accountFormGroup.controls.address.errors.required"
+                class="error-message"
+              >
+                {{ 'Address' | translate }}
+              </span>
+            </div>
+          </div>
+          <div class="col-md-6 contact_info">
+            <div class="form-group">
+              <div class="description">
+                {{ 'Country' | translate }}
+              </div>
+
+              <div class="input-container">
+                <div class="input-container dropdown-field dropdown-field2">
+                  <ng-select
+                    [bindLabel]="'name'"
+                    [bindValue]="'id'"
+                    [clearable]="false"
+                    [items]="countries"
+                    class="ng-select dropdown-select"
+                    formControlName="country_id"
+                    id="country"
+                  ></ng-select>
+                </div>
+
+                <span
+                  *ngIf="
+                    accountFormGroup.controls.country_id.errors && accountFormGroup.controls.country_id.errors.required
+                  "
+                  class="error-message"
+                >
+                  {{ 'Please enter country' | translate }}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-12 contact_info section-4">
+            <div class="form-group-title">
+              {{ 'Preferences' | translate }}
+            </div>
+          </div>
+
+          <div class="col-md-6 contact_info">
+            <div class="form-group">
+              <div class="description">
+                {{ 'Language' | translate }}
+              </div>
+
+              <div class="input-container">
+                <div class="input-container dropdown-field dropdown-field-2">
+                  <ng-select
+                    [bindLabel]="'name'"
+                    [bindValue]="'id'"
+                    [clearable]="false"
+                    [items]="languages"
+                    class="ng-select dropdown-select"
+                    formControlName="language_id"
+                    id="language"
+                  ></ng-select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 contact_info">
+            <div class="form-group">
+              <div class="description">
+                {{ 'Currency' | translate }}
+              </div>
+
+              <div class="input-container">
+                <div class="input-container dropdown-field dropdown-field-2">
+                  <ng-select
+                    [bindLabel]="'code'"
+                    [bindValue]="'id'"
+                    [clearable]="false"
+                    [items]="currencies"
+                    class="ng-select dropdown-select"
+                    formControlName="currency_id"
+                    id="currency"
+                  ></ng-select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 contact_info">
+            <div class="form-group">
+              <div *ngIf="offerService.getOfferGlobalStatus() | async" class="form-group">
+                <div class="description">
+                  {{ 'make_an_offer.my_account.details.open_to_offers' | translate }}
+                </div>
+
+                <div class="input-container">
+                  <div class="input-container dropdown-field dropdown-field-2">
+                    <ng-select
+                      [clearable]="false"
+                      [items]="openToOffersOptions"
+                      bindLabel="label"
+                      bindValue="value"
+                      class="ng-select dropdown-select"
+                      formControlName="openToOffers"
+                      id="open_to_offers"
+                    ></ng-select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="errorMessage" class="col-12 alert-danger justify-content-center flex mt-2">
+          {{ errorMessage }}
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group update-button-box">
+              <button
+                [disabled]="accountFormGroup.invalid"
+                class="btn primary update-btn"
+                type="submit"
+                id="save_button"
+              >
+                {{ 'Save' | translate }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,223 @@
+<div class="the-archive-detail-page">
+  <app-menu></app-menu>
+  <ng-container *ngIf="Article">
+    <div class="container small-container">
+      <div class="headline">
+        <div class="right-div">
+          <p class="text-center category">
+            <a routerLink="/the-archive/category/{{ Article?.category?.seo_url }}">
+              {{ Article?.category?.category_title }}
+            </a>
+          </p>
+          <div class="postDate">
+            <span class="day">{{ Article?.archive_date | date: 'dd' }}</span>
+            <span class="month">{{ Article?.archive_date | date: 'MMMM' }}</span>
+            <span class="year">'{{ Article?.archive_date | date: 'yy' }}</span>
+          </div>
+        </div>
+        <div class="archive-page-title">
+          <p class="category">
+            <a routerLink="/the-archive/category/{{ Article?.category?.seo_url }}">
+              {{ Article?.category?.category_title }}
+            </a>
+          </p>
+          <h2>{{ Article?.post_title }}</h2>
+          <div class="shortdescription" innerHTML="{{ Article?.post_content }}"></div>
+        </div>
+      </div>
+    </div>
+
+    <ng-container *ngFor="let content of Article.sections">
+      <section class="Hardware">
+        <div class="container" *ngIf="content?.type != 'fullwidthimage' && content.type != 'centerimage'">
+          <div class="row row-sticky">
+            <ng-container>
+              <div class="col-md-6" *ngIf="content?.type">
+                <div
+                  *ngIf="content?.type == 'text'"
+                  class="sticky-top sticky-text"
+                  innerHTML="{{ content?.text }}"
+                ></div>
+                <div *ngIf="content.type == 'image'" class="sticky-top sticky-image" style="position: sticky">
+                  <div class="imageContainer">
+                    <div class="imageinner" *ngFor="let picture of content?.image_url">
+                      <img
+                        src="{{ imagrUrl }}dynamic/archive/{{ picture?.value }}.{{ picture?.file }}"
+                        class="attachment-full img-responsive"
+                      />
+                      <p *ngIf="picture?.label" class="Titletext">{{ picture.label }}</p>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  *ngIf="content.type == 'instagram'"
+                  [innerHTML]="content?.instagram_id | safehtml"
+                  class="sticky-top sticky-text"
+                ></div>
+                <div *ngIf="content.type == 'product'" class="sticky-top sticly-image">
+                  <div class="newarchive">
+                    <div class="archieveboxone" *ngIf="content?.product_detail">
+                      <li class="product-item" *ngIf="content?.product_detail[0] as productitem">
+                        <div
+                          class="product-item-img imageContainer"
+                          *ngIf="productitem?.imgix_image_url !== undefined && productitem?.imgix_image_url !== ''"
+                        >
+                          <a href="{{ baseUrl }}{{ productitem?.motherpage_seo_url }}?pdp={{ productitem?.id }}">
+                            <img src="{{ productitem?.imgix_image_url }}" alt="" class="img-responsive" />
+                          </a>
+                        </div>
+                        <h3 *ngIf="productitem.brand_name">{{ productitem?.brand_name }}</h3>
+                        <p *ngIf="productitem.name">{{ productitem?.name }}</p>
+                      </li>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6" *ngIf="content?.type2">
+                <div
+                  *ngIf="content?.type2 == 'text'"
+                  class="sticky-top sticky-text"
+                  innerHTML="{{ content?.text2 }}"
+                ></div>
+                <div *ngIf="content?.type2 == 'image'" class="sticky-top sticky-image" style="position: sticky">
+                  <div class="imageContainer">
+                    <div class="imageinner" *ngFor="let picture of content?.image_url2">
+                      <img
+                        src="{{ env.IMGIX_UPLOADS_URL }}dynamic/archive/{{ picture.value }}.{{ picture.file }}"
+                        class="attachment-full img-responsive"
+                      />
+                      <p *ngIf="picture?.label" class="Titletext">{{ picture.label }}</p>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  *ngIf="content?.type2 == 'instagram'"
+                  [innerHTML]="content?.instagram_id2 | safehtml"
+                  class="sticky-top sticky-text"
+                ></div>
+                <div *ngIf="content?.type2 == 'product'" class="sticky-top sticly-image">
+                  <div class="newarchive">
+                    <div class="archieveboxone" *ngIf="content?.product_detail">
+                      <li
+                        class="product-item"
+                        *ngIf="
+                          content?.product_detail[1]
+                            ? content?.product_detail[1]
+                            : content?.product_detail[0] as productitem
+                        "
+                      >
+                        <div
+                          class="product-item-img imageContainer"
+                          *ngIf="productitem?.imgix_image_url !== undefined && productitem?.imgix_image_url !== ''"
+                        >
+                          <a href="{{ baseUrl }}{{ productitem?.motherpage_seo_url }}?pdp={{ productitem?.id }}">
+                            <img src="{{ productitem?.imgix_image_url }}" alt="" class="img-responsive" />
+                          </a>
+                        </div>
+                        <h3 *ngIf="productitem?.brand_name">{{ productitem?.brand_name }}</h3>
+                        <p *ngIf="productitem?.name">{{ productitem?.name }}</p>
+                      </li>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+        <div *ngIf="content?.type == 'fullwidthimage'">
+          <ng-container *ngFor="let picture of content?.image_url">
+            <div class="widerimage">
+              <img
+                src="{{ imagrUrl }}dynamic/archive/{{ picture?.value }}.{{ picture?.file }}"
+                alt="5f90171c09e99"
+                class="img-responsive"
+              />
+              <p class="Titletext">{{ picture?.label }}</p>
+            </div>
+          </ng-container>
+        </div>
+        <div *ngIf="content?.type == 'centerimage'">
+          <ng-container *ngFor="let centerpic of content?.image_url">
+            <div class="centerimage">
+              <img
+                src="{{ env.IMGIX_UPLOADS_URL }}dynamic/archive/{{ centerpic?.value }}.{{ centerpic?.file }}"
+                alt="5f90171c09e99"
+                class="img-responsive"
+              />
+              <p class="Titletext">{{ centerpic?.label }}</p>
+            </div>
+          </ng-container>
+        </div>
+      </section>
+    </ng-container>
+
+    <section class="writtenby">
+      <div class="container">
+        <div class="share-heading">
+          <h3>Share the story</h3>
+        </div>
+        <ul class="social-share-archive">
+          <li>
+            <a
+              class="fb-share"
+              href="https://www.facebook.com/dialog/share?app_id=790216044786291&amp;display=popup&amp;href={{
+                url_share
+              }}"
+              target="_blank"
+            >
+              <i class="fa fa-facebook-f"></i>
+            </a>
+          </li>
+          <li>
+            <a
+              class="twitter-share"
+              href="https://twitter.com/intent/tweet?text=Chanel's 15 Most Eccentric Novelty Bags&amp;url={{
+                url_share
+              }}"
+              target="_blank"
+            >
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a
+              class="pinterest-share"
+              href="https://pinterest.com/pin/create/a/?media={{ img_url_share }}"
+              target="_blank"
+            >
+              <i class="fa fa-pinterest"></i>
+            </a>
+          </li>
+          <li>
+            <a
+              class="mail-share"
+              href="mailto:?subject={{ Article?.post_title }}&amp;body={{
+                Article?.description_for
+              }}&amp;nbsp;. %0A%0A {{ url_share }}"
+              target="_blank"
+            >
+              <i class="fa fa-envelope"></i>
+            </a>
+          </li>
+        </ul>
+
+        <div class="heading">
+          <p class="author">
+            Written by :
+            <ng-container *ngIf="!Article?.author_field_name">
+              {{ Article?.post_author }}
+            </ng-container>
+            <ng-container *ngIf="Article?.author_field_name">
+              {{ Article?.author_field_name }}
+            </ng-container>
+          </p>
+          <p *ngIf="Article?.author_tag_line">{{ Article?.author_tag_line }}</p>
+        </div>
+        <p class="bottomtext">
+          The people pictured are not associated with The Archive or The Vintage Bar, and do not endorse the products
+          shown.
+        </p>
+      </div>
+    </section>
+  </ng-container>
+</div>

@@ -1,0 +1,59 @@
+<ng-container *ngIf="isPDP; else PlpTemplate">
+  <app-product-detail-view
+    [routeParam]="routeParamMap$ | async"
+    [currencyConfig]="currencyConfiguration$ | async"
+    [productId]="productId"
+    [position]="position"
+  ></app-product-detail-view>
+</ng-container>
+<!-- PLP PAGE  -->
+<ng-template #PlpTemplate>
+  <div class="container">
+    <div class="breadcrumbContainer" *ngIf="!is_childcategory">
+      <a class="breadcrumbLink breadcrumbText" routerLink="/">{{ 'Home' | translate }}</a>
+      <div class="chevron_forward">&nbsp;</div>
+      <span class="breadcrumbText">{{ breadcrumb | translate | catalogDictionary | titlecase }}</span>
+    </div>
+    <div class="breadcrumbContainer" *ngIf="is_childcategory">
+      <a class="breadcrumbLink breadcrumbText" routerLink="/">{{ 'Home' | translate }}</a>
+      <span class="chevron_forward">&nbsp;</span>
+      <a class="breadcrumbLink breadcrumbText" routerLink="/shop/{{ parentbreadcrumbLink }}">
+        {{ parentbreadcrumb | titlecase }}
+      </a>
+      <div class="chevron_forward">&nbsp;</div>
+      <span class="breadcrumbText">{{ breadcrumb | translate | titlecase }}</span>
+    </div>
+    <div class="topic-banner" *ngIf="topdescription">
+      <div class="container">
+        <div class="page-title bags-variety-info text-center">
+          <article>
+            <h1>{{ topname | translate }}</h1>
+            <p class="moretext" [innerHTML]="topdescription | translate"></p>
+          </article>
+        </div>
+      </div>
+    </div>
+    <div class="page-title bags-variety-info text-center" *ngIf="!topdescription">
+      <article>
+        <h1>{{ topname | translate }}</h1>
+        <p class="moretext">{{ topdescription | translate }}</p>
+      </article>
+    </div>
+    <app-listing-products
+      [instantsearchConfig]="instantsearchConfig"
+      [plpConfig]="plpConfig$ | async"
+    ></app-listing-products>
+    <div class="topic-banner" *ngIf="bottomdescription">
+      <div class="container">
+        <div class="shopbottom">
+          <div class="page-title bags-variety-info text-center">
+            <article>
+              <h2>{{ bottomname }}</h2>
+              <p class="moretext" [innerHTML]="bottomdescription"></p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

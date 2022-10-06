@@ -1,0 +1,134 @@
+.offer-date-box {
+  text-align: center;
+  margin: 15px 0;
+
+  .offer-details-text {
+    font-size: 0.8rem;
+    color: var(--main-color-gray-3);
+  }
+}
+
+.offer-value-box {
+  display: flex;
+  margin-bottom: 20px;
+
+  &.buyer-perspective-buyer-position,
+  &.seller-perspective-seller-position {
+    flex-direction: row-reverse;
+
+    .user-picture {
+      margin-left: 20px;
+    }
+  }
+
+  &.buyer-perspective-seller-position,
+  &.seller-perspective-buyer-position {
+    flex-direction: row;
+
+    .user-picture {
+      margin-right: 20px;
+    }
+  }
+
+  .user-picture {
+    display: inline-flex;
+    align-self: center;
+    width: 50px;
+    min-width: 50px;
+    height: 50px;
+    border: 1px solid var(--main-color-gray);
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .chat-balloon {
+    width: 100%;
+    padding: 16px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    font-family: FuturaBT-Light;
+    font-size: 15px;
+
+    &.buyer-perspective-buyer-position,
+    &.seller-perspective-seller-position {
+      flex-direction: row-reverse;
+      background-color: var(--offer-history-chat-sender-baloon-background);
+      color: #000;
+      border-bottom-right-radius: 0;
+      -webkit-border-bottom-right-radius: 0;
+      -moz-border-radius-bottomright: 0;
+    }
+
+    &.buyer-perspective-seller-position,
+    &.seller-perspective-buyer-position {
+      flex-direction: row;
+      background-color: #fff;
+      border: 1px solid var(--offer-history-chat-receiver-baloon-border);
+      color: #000;
+      border-bottom-left-radius: 0;
+      -webkit-border-bottom-left-radius: 0;
+      -moz-border-radius-bottomleft: 0;
+    }
+
+    .balloon-left-content {
+      display: inline-flex;
+      flex-direction: column;
+      align-self: center;
+
+      .chat-balloon-username {
+        margin-bottom: 5px;
+      }
+    }
+
+    .balloon-right-content {
+      display: inline-flex;
+      flex-direction: column;
+      align-self: center;
+    }
+  }
+}
+
+// UP TO Phones, Mobile devices
+@media (max-width: 480px) {
+  .offer-date-box {
+    margin: 15px;
+  }
+
+  .offer-value-box {
+    margin-bottom: 16px;
+    padding: 0;
+
+    .user-picture {
+      width: 30px;
+      min-width: 30px;
+      height: 30px;
+    }
+
+    &.buyer-perspective-buyer-position,
+    &.seller-perspective-seller-position {
+      .user-picture {
+        margin-left: 10px;
+      }
+    }
+
+    &.buyer-perspective-seller-position,
+    &.seller-perspective-buyer-position {
+      .user-picture {
+        margin-right: 10px;
+      }
+    }
+
+    .chat-balloon {
+      font-size: 12px;
+      padding: 10px;
+
+      .balloon-left-content .chat-balloon-username,
+      .balloon-right-content .chat-balloon-username {
+        margin-bottom: 0;
+      }
+    }
+  }
+}

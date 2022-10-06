@@ -1,0 +1,36 @@
+<div class="box-seller-info" *ngIf="seller">
+  <p class="title-about">
+    {{ 'About the seller' | translate }}
+    <span class="patch" *ngIf="product.commission_user_type">
+      {{ product.commission_user_type }} Seller
+    </span>
+  </p>
+
+  <div class="row col-md-12 seller-detail">
+    <div class="box-avatar" [ngClass]="{ tvb: tvbUser }">
+      <a routerLink="/community/members/{{ seller.username }}">
+        <img *ngIf="!seller.image_id" src="assets/images/avatar.svg" />
+        <img *ngIf="seller.image_id" [src]="seller.image_id" />
+      </a>
+    </div>
+    <div class="box-detail">
+      <a routerLink="/community/members/{{ seller.username }}" class="seller-name">
+        <div>
+          <ng-container>{{ displayedName }}</ng-container>
+        </div>
+      </a>
+      <div class="label-detail">{{ seller.country | translate }}</div>
+      <div class="label-detail">
+        {{ listedItems }} items listed
+        <span class="pipe">|</span>
+        {{ soldItems }} items sold
+      </div>
+    </div>
+  </div>
+</div>
+<div class="box-seller-info" *ngIf="!seller">
+  <p class="title-about">
+    {{ 'About the seller' | translate }}
+  </p>
+  <tvb-placeholder [rows]="2"></tvb-placeholder>
+</div>

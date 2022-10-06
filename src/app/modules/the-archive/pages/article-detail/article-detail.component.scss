@@ -1,0 +1,350 @@
+a {
+  color: #191919;
+}
+.the-archive-detail-page {
+  position: relative;
+  padding-top: 20px;
+  display: block;
+  width: 100%;
+}
+.small-container {
+  width: 910px;
+}
+.headline {
+  position: relative;
+  z-index: 2;
+  padding: 0px 14px;
+  text-align: center;
+  margin-bottom: 50px;
+  width: 100%;
+  display: inline-block;
+  vertical-align: top;
+}
+.row-sticky {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+.sticky-top {
+  padding-bottom: 30px;
+}
+.right-div {
+  position: absolute;
+  right: -36px;
+  z-index: 3;
+  top: 0;
+}
+.right-div p.text-center.category {
+  transform: rotate(180deg);
+  transform-origin: center;
+  -webkit-writing-mode: vertical-rl;
+  -ms-writing-mode: vertical-rl;
+  writing-mode: vertical-rl;
+  -webkit-font-smoothing: antialiased;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin: 0 auto;
+  line-height: 20px;
+}
+.right-div .postDate {
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+  margin-top: 10px;
+}
+.right-div .postDate span.day {
+  display: block;
+  line-height: 1;
+  font-size: 40px;
+  margin-bottom: 4px;
+}
+.right-div .postDate span.month {
+  display: block;
+  line-height: 1;
+  font-size: 12px;
+}
+.right-div .postDate span.year {
+  display: block;
+  line-height: 1;
+  font-size: 12px;
+}
+.archive-page-title {
+  text-align: center;
+}
+.archive-page-title .category {
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-size: 13px;
+  line-height: 20px;
+}
+.archive-page-title h2 {
+  text-align: center;
+  font-size: 36px;
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+.archive-page-title .shortdescription {
+  padding: 0 20px;
+}
+.archive-page-title .shortdescription p {
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.sticky-top.vintagebar h2 {
+  padding-top: 50px !important;
+}
+.sticky-text h2 {
+  position: relative;
+  font-family: 'Playfair Display', serif;
+  text-transform: uppercase;
+  padding: 20px 0px;
+  font-size: 26px;
+  color: #191919;
+}
+.sticky-text ul li {
+  margin-top: 10px;
+  padding-left: 20px;
+  list-style-type: none;
+  line-height: 27px;
+  position: relative;
+}
+.sticky-text ul li:before {
+  content: '\2714\0020';
+  color: #000;
+  left: 0;
+  top: 0;
+  position: absolute;
+}
+.sticky-text p {
+  line-height: 20px;
+  font-size: 16px;
+}
+.imageContainer {
+  width: 100%;
+  display: flex;
+  flex-flow: wrap;
+  justify-content: space-between;
+}
+.imageContainer img {
+  margin-bottom: 0px;
+  width: 100%;
+  height: auto !important;
+}
+.imageContainer .imageinner {
+  width: 100%;
+}
+.imageContainer .left {
+  width: 48%;
+}
+.imageContainer .left p {
+  padding: 0 30px;
+}
+.imageContainer .left img {
+  display: block;
+  margin-bottom: 20px;
+  padding: 0 30px;
+}
+.imageContainer .right {
+  width: 48%;
+  margin-top: 50px;
+}
+.imageContainer .right p {
+  padding: 0 30px;
+}
+.imageContainer .right img {
+  display: block;
+  margin-bottom: 20px;
+  padding: 0 30px;
+}
+.product-item-img img {
+  padding: 0 30px;
+}
+.newarchive .product-item {
+  margin-top: 0px;
+}
+.newarchive .product-item-img {
+  min-height: auto;
+  max-width: unset;
+}
+.newarchive li {
+  width: 25%;
+  list-style-type: none;
+  display: inline-block;
+}
+.newarchive2 li {
+  width: 49%;
+  list-style-type: none;
+  display: inline-block;
+}
+.newarchive .product-item h3 {
+  font-weight: 500;
+  font-size: 20px;
+  margin-bottom: 5px;
+  font-family: 'Playfair Display', serif;
+}
+.newarchive .product-item p {
+  line-height: 25px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 25px;
+  height: 50px;
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+.archieveboxone {
+  text-align: center;
+  overflow: hidden;
+}
+.archieveboxone.showArchiveList {
+  text-align: center;
+  height: auto;
+  overflow: none;
+}
+.archieveboxsecond {
+  display: none;
+  text-align: center;
+}
+.centerimage {
+  max-width: 600px;
+  margin: 0 auto;
+}
+.centerimage img {
+  width: 100% !important;
+}
+
+.writtenby h3 {
+  margin: 0 0 10.5px;
+  color: #000;
+  line-height: 1.73333em;
+  color: #777;
+  font-size: 13px;
+  text-align: center !important;
+  margin-bottom: 5px;
+}
+.writtenby p {
+  font-style: italic;
+  text-align: center;
+  color: #000;
+  font-size: 14px;
+  margin-top: 7px;
+  margin-bottom: 7px;
+}
+.writtenby .share {
+  margin-top: 25px;
+  text-align: center;
+}
+.writtenby .share h4 {
+  text-align: center;
+  margin: 0 0 20px 0;
+}
+.writtenby .share a i {
+  width: 35px;
+  height: 35px;
+  font-size: 20px;
+  line-height: 35px;
+}
+
+.writtenby .share-heading {
+  text-align: center;
+}
+.writtenby .share-heading h3 {
+  font-size: 22px;
+  font-family: 'Playfair Display', serif;
+  color: #000;
+}
+.writtenby .social-share-archive {
+  display: flex;
+  justify-content: center;
+  margin: 20px auto;
+  padding-inline-start: 0px;
+}
+.writtenby .social-share-archive li {
+  list-style-type: none;
+  margin-right: 15px;
+}
+.writtenby .social-share-archive li a {
+  font-size: 18px;
+}
+
+.widerimage img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+p {
+  line-height: 26px;
+}
+p.text-center.category {
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-size: 13px;
+}
+.page-title h1 {
+  margin-bottom: 30px;
+  margin-top: 30px;
+  font-weight: 400;
+  line-height: 1.1;
+  color: #222;
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+}
+.text-center.author,
+.text-center.author a,
+.alttext {
+  color: #777777;
+  font-size: 13px;
+}
+.the-author-page-single .author-left-single {
+  padding-right: 50px;
+}
+.archive-text .d-none.d-md-block {
+  margin-top: 10px;
+  font-size: 12px;
+  line-height: 1.2;
+}
+.archive-btn a {
+  min-width: 110px;
+  font-size: 14px;
+}
+
+.the-archive-detail-page .centerimage {
+  max-width: 600px;
+  margin: 0 auto;
+}
+.the-archive-detail-page .centerimage img {
+  width: 100% !important;
+}
+
+@supports ((position: -webkit-sticky) or (position: sticky)) {
+  .sticky-top {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 50px;
+    z-index: 1;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .right-div {
+    right: -6px;
+  }
+  .headline {
+    padding-right: 30px;
+    padding-left: 30px;
+    margin-top: 50px;
+  }
+  .right-div .postDate span.day {
+    font-size: 30px;
+  }
+  .small-container {
+    width: 100%;
+  }
+}

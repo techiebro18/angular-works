@@ -1,0 +1,187 @@
+<div class="payment-content">
+  <div class="payment-method">
+    <div>
+      <label class="input-option">
+        <input type="radio" name="payment_method" [(ngModel)]="paymentMethod" value="stripe" />
+        <span class="radio"></span>
+        <img src="/assets/images/visa-card.png" />
+        <img src="/assets/images/master-card.png" />
+      </label>
+    </div>
+
+    <div>
+      <label class="input-option">
+        <input
+          type="radio"
+          name="payment_method"
+          class="secondary"
+          [(ngModel)]="paymentMethod"
+          value="paypal"
+        />
+        <span class="radio"></span>
+        <img src="/assets/images/paypal-img.jpg" />
+      </label>
+    </div>
+
+    <ng-container *ngIf="!klarnaIssue">
+      <div>
+        <label class="input-option">
+          <input
+            type="radio"
+            name="payment_method"
+            class="secondary"
+            [(ngModel)]="paymentMethod"
+            value="klarna"
+          />
+          <span class="radio"></span>
+          <img src="/assets/images/klarna.jpg" />
+        </label>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="klarnaIssue">
+      <div>
+        <label class="input-option faded">
+          <input
+            type="radio"
+            name="payment_method"
+            class="secondary"
+            [(ngModel)]="paymentMethod"
+            value="klarna"
+            [disabled]="true"
+          />
+          <span class="radio"></span>
+          <img src="/assets/images/klarna.jpg" />
+        </label>
+        <label class="invalid-payment-method">
+          {{ 'Klarna is not available for this configuration' | translate }}
+        </label>
+      </div>
+    </ng-container>
+  </div>
+  <div class="payment-method-box">
+    <div class="credit-card-box" *ngIf="paymentMethod == 'stripe'">
+      <form id="checkoutForm" [formGroup]="checkoutForm">
+        <div class="form-group">
+          <div class="box-card">
+            <ngx-stripe-card
+              [options]="cardOptions"
+              [elementsOptions]="elementsOptions"
+              (change)="onCardChange($event)"
+            ></ngx-stripe-card>
+          </div>
+        </div>
+        <div class="form-group">
+          <div>
+            <label>{{ 'Name on card *' | translate }}</label>
+          </div>
+          <input
+            type="text"
+            class="field name"
+            placeholder="The same on the card"
+            id="card_name"
+            formControlName="card_name"
+          />
+          <div
+            *ngIf="
+              checkoutForm.controls.card_name.invalid && checkoutForm.controls.card_name.touched
+            "
+            class="invalid-message"
+          >
+            {{ 'Invalid' | translate }} {{ 'Name' | translate }}
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="form-group" [hidden]="hasOffer">
+      <form id="couponForm" [formGroup]="couponForm">
+        <div>
+          <label class="bold">{{ 'Promotions and gift cards.' | translate }}</label>
+        </div>
+        <div>
+          <label class="small">+ {{ 'Redeem a promo code or gift card' | translate }}</label>
+        </div>
+        <ng-container *ngIf="!couponApplied">
+          <input
+            type="text"
+            class="field coupon"
+            placeholder="Gift Card/Promo Code"
+            id="coupon_code"
+            formControlName="coupon_code"
+          />
+          <button
+            type="button"
+            (click)="addCoupon()"
+            class="btn btn-secondary btn-coupon"
+            [disabled]="couponForm.controls.coupon_code.invalid"
+          >
+            {{ 'APPLY' | translate }}
+          </button>
+          <div class="invalid-message">{{ couponMessage | translate }}</div>
+        </ng-container>
+        <ng-container *ngIf="couponApplied">
+          <input
+            type="text"
+            class="field coupon coupon-active"
+            placeholder="Gift Card/Promo Code"
+            value="Applied"
+          />
+          <button type="button" (click)="cancelCoupon()" class="btn btn-secondary btn-coupon">
+            {{ 'CANCEL' | translate }}
+          </button>
+        </ng-container>
+      </form>
+    </div>
+
+    <div class="row" *ngIf="invalidMessage">
+      <div class="col-sm-12 col-xs-12">
+        <p class="invalid-message">{{ invalidMessage }}</p>
+      </div>
+    </div>
+
+    <div class="paypal-box" *ngIf="paymentMethod == 'paypal'">
+      <div class="row">
+        <div class="col-sm-12 col-xs-12">
+          <div class="form-group">
+            <button
+              type="button"
+              (click)="addPaypal()"
+              id="submit_checkout"
+              class="btn primary next"
+            >
+              {{ 'NEXT' | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="klarna-box" *ngIf="paymentMethod == 'klarna'"></div>
+
+    <div class="row" *ngIf="paymentMethod == 'stripe'">
+      <div class="col-sm-12 col-xs-12">
+        <div class="form-group">
+          <button
+            type="button"
+            (click)="addCard()"
+            id="submit_checkout"
+            class="btn primary next"
+            [disabled]="checkoutForm.status === 'INVALID' || !validCard"
+          >
+            {{ 'NEXT' | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="paymentMethod == 'klarna'">
+      <div class="col-sm-12 col-xs-12">
+        <div class="form-group">
+          <button type="button" (click)="addKlarna()" id="submit_checkout" class="btn primary next">
+            {{ 'NEXT' | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

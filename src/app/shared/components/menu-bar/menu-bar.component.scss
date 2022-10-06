@@ -1,0 +1,36 @@
+// Up to SmartPhones, Mobile devices
+@media (max-width: 480px) {
+  .menu-bar {
+    display: flex;
+    flex-direction: row;
+    overflow-y: scroll;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+
+    &::-webkit-scrollbar {
+      display: none; /* Safari and Chrome */
+    }
+  }
+
+  .menu-option {
+    font-family: FuturaBT-Medium;
+    font-size: 14px;
+    text-transform: uppercase;
+    padding: 0 10px;
+    cursor: pointer;
+
+    &.active {
+      text-decoration: underline;
+    }
+
+    &:first-of-type {
+      padding-left: 0;
+    }
+
+    &:last-of-type {
+      padding-right: 0;
+    }
+  }
+}

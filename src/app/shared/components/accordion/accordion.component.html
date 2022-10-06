@@ -1,0 +1,15 @@
+<ng-container *ngFor="let topic of topics">
+  <div class="accordion-item" [ngClass]="{ active: topic.active }">
+    <div class="accordion-header" (click)="expandTopicRow(topic)">
+      <span class="accordion-arrow">
+        <img class="expand-arrow" src="assets/images/icons/help_and_support/arrow.svg" />
+      </span>
+
+      <div class="topic-title">{{ topic.title | translate }}</div>
+    </div>
+
+    <div class="topic-text">
+      <ng-container [ngComponentOutlet]="topic.component"></ng-container>
+    </div>
+  </div>
+</ng-container>

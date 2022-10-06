@@ -1,0 +1,158 @@
+::ng-deep .mat-dialog-container {
+  overflow-x: hidden;
+}
+
+h3 {
+  font-family: 'Playfair Display';
+  font-size: 20px;
+}
+
+.offer-submitted {
+  .product-name {
+    font-weight: 600;
+  }
+}
+
+.offer-form {
+  margin-bottom: auto;
+
+  .price-input-box {
+    .price-input-title {
+      font-size: 12px;
+      line-height: 14px;
+      text-align: right;
+      font-weight: 500;
+      align-items: center;
+      display: flex;
+    }
+  }
+
+  .tvb-button {
+    font-size: 12px;
+    min-width: auto;
+    width: 100%;
+  }
+
+  input[type='submit'].btn.tvb-button.btn-primary {
+    margin-top: 14px;
+  }
+
+  .tvb-button.btn-reverse {
+    background: #fff;
+    color: #191919;
+    border: 1px solid #191919;
+    line-height: 42px;
+    border-radius: 0px;
+    padding: 0px;
+    text-transform: uppercase;
+  }
+
+  .tvb-button.btn-reverse:hover {
+    background-color: #666;
+    color: #fff;
+  }
+
+  p.err-msg {
+    color: var(--form-error);
+    font-size: 12px;
+    margin: 0;
+
+    &.price-range-warning {
+      text-align: center;
+      margin-bottom: -20px;
+    }
+  }
+
+  p.offer-text {
+    max-width: 75%;
+    margin: auto;
+  }
+
+  .mobile-only .last-offer-warning {
+    display: none;
+  }
+
+  .amount-input:focus-visible {
+    outline: none;
+  }
+
+  .amount-input {
+    border: 1px solid #d8d8d8;
+    text-align: left;
+    letter-spacing: 0px;
+    color: #707070;
+    font-size: 12px;
+    line-height: 18px;
+    font-family: 'FuturaBT-Light';
+    width: 100%;
+    padding: 12px 50px 12px 20px;
+  }
+
+  span.amount-input-txt {
+    color: #999;
+    right: 30px;
+    position: absolute;
+    top: 50%;
+    font-size: 12px;
+    z-index: 1;
+  }
+
+  .product-name {
+    font-weight: 600;
+  }
+}
+
+.product-detail {
+  margin: 20px;
+
+  span.price {
+    display: block;
+  }
+}
+
+.price-wrapper-popup {
+  p {
+    font-size: 0.8rem;
+    margin: 0;
+  }
+
+  .normal-price {
+    text-decoration: line-through;
+    margin-right: 20px;
+  }
+
+  .actual-price {
+    color: #a10303;
+  }
+}
+
+.product-img {
+  max-height: 150px;
+}
+
+@media screen and (max-width: 1024px) {
+  input.amount-input {
+    margin-bottom: 10px;
+  }
+
+  .tvb-button {
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+
+  .offer-form {
+    .price-input-box {
+      &.counter-offer-price {
+        margin-top: 20px;
+      }
+
+      &.for-you-price {
+        margin-top: 40px;
+      }
+
+      .price-input-title {
+        font-size: 14px;
+      }
+    }
+  }
+}

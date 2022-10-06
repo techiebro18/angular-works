@@ -1,0 +1,157 @@
+<div class="container col-lg-10">
+  <form [formGroup]="productInformationForm" (ngSubmit)="submitForm()">
+    <div class="title">
+      <span class="uppercase">Your item summary</span>
+    </div>
+
+    <div class="content-container col-12">
+      <div class="photo-grid">
+        <div class="photos-line-1">
+          <div class="main-preview">
+            <img
+              [src]="productApproval?.productUpload?.large_url"
+              tvb-img-fallback
+              alt="Main Photo 1"
+            />
+          </div>
+        </div>
+
+        <div class="photos-line-2">
+          <div class="extra-preview-1">
+            <img
+              [src]="productApproval?.media_entities[0]?.medium_url"
+              tvb-img-fallback
+              alt="Extra Photo 1"
+            />
+          </div>
+
+          <div class="extra-preview-2">
+            <img
+              [src]="productApproval?.media_entities[1]?.medium_url"
+              tvb-img-fallback
+              alt="Extra Photo 2"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="summary">
+        <div class="summary-data">
+          <div class="form-group">
+            <div class="form-title uppercase bolder mb-0">{{ productApproval?.brand_name }}</div>
+            <p class="full-name">{{ getSubcategoriesNames(productApproval) }}</p>
+          </div>
+
+          <div class="form-group">
+            <div class="form-title bolder mb-0">
+              Condition:
+              <span class="info-description capitalize">{{ getCondition() }}</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="form-title bolder mb-0">
+              Price displayed on the site:
+              <span class="info-description">
+                {{ getPriceOnSite() | currency: productApproval?.base_currency }}
+              </span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="form-title bolder mb-0">
+              Price for you:
+              <span class="info-description">
+                {{ getPriceForYou() | currency: productApproval?.base_currency }}
+              </span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="form-title bolder mb-0">Description</div>
+            <p class="info-description">{{ productApproval?.description }}</p>
+          </div>
+
+          <div class="form-group">
+            <div class="bolder mb-0">Details</div>
+
+            <div class="details-row">
+              <span class="details-title">Material</span>
+              <span class="details-value">{{ getMaterialName() }}</span>
+            </div>
+
+            <div class="details-row">
+              <span class="details-title">Width</span>
+              <span class="details-value">{{ getWidth() }} cm</span>
+            </div>
+
+            <div class="details-row">
+              <span class="details-title">Height</span>
+              <span class="details-value">{{ getHeight() }} cm</span>
+            </div>
+
+            <div class="details-row">
+              <span class="details-title">Depth</span>
+              <span class="details-value">{{ getDepth() }} cm</span>
+            </div>
+
+            <div class="details-row" *ngIf="shouldShowSize()">
+              <span class="details-title">Size</span>
+              <span class="details-value">{{ size }}</span>
+            </div>
+
+            <ng-container *ngIf="shouldShowBagMeasurements()">
+              <div class="details-row">
+                <span class="details-title">Handle drop</span>
+                <span class="details-value">{{ productApproval?.handle_drop }} cm</span>
+              </div>
+
+              <div class="details-row">
+                <span class="details-title">Shoulder drop</span>
+                <span class="details-value">{{ productApproval?.shoulder_drop }} cm</span>
+              </div>
+            </ng-container>
+
+            <ng-container *ngIf="shouldShowJewelryMeasurements()">
+              <div class="details-row">
+                <span class="details-title">Chain Length</span>
+                <span class="details-value">{{ productApproval?.chain_length }} cm</span>
+              </div>
+
+              <div class="details-row">
+                <span class="details-title">Pendant Measurement</span>
+                <span class="details-value">{{ productApproval?.pandant_measurement }} cm</span>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="final-buttons-container">
+      <div class="tos-container">
+        <div class="tos">
+          <mat-checkbox formControlName="termsAndConditions">
+            I accept the Terms & Conditions.
+          </mat-checkbox>
+        </div>
+
+        <span class="read-more">
+          <a class="tvb-link" routerLink="/{{ 'terms-and-conditions' | translate }}">Read more</a>
+        </span>
+      </div>
+
+      <div class="after-form-container">
+        <ng-container *ngIf="errorMessage">
+          <div class="col-12 col-md-6 alert-danger">
+            {{ errorMessage }}
+          </div>
+        </ng-container>
+
+        <button type="submit" class="btn primary" [disabled]="disableStartSellingButton()">
+          Start Selling
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

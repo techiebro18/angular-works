@@ -1,0 +1,42 @@
+<ng-container *ngIf="member">
+  <div class="row col-md-12 bio-content" [ngClass]="{ 'cover-image': member.cover_image }">
+    <div [ngClass]="{ 'cover-image-bg': member.cover_image, 'cover-bg': !member.cover_image }">
+      <img src="{{ member.cover_image }}" *ngIf="member.cover_image" />
+      <div [ngClass]="{ 'cover-bg-mobile': !member.cover_image }" *ngIf="!member.cover_image"></div>
+      <span class="badge">{{ member.role_id === PROFESSIONAL_SELLER ? 'Professional' : 'Private' }} Seller</span>
+    </div>
+    <div
+      class="user-avatar"
+      [ngClass]="{ 'tvb': member.username == 'the-vintage-bar', 'cover-image': member.cover_image }"
+    >
+      <img src="{{ member.image_id }}" />
+    </div>
+    <div class="user-bio" [ngClass]="{ 'cover-image': member.cover_image }">
+      <h2 class="username" [ngClass]="{ 'cover-image': member.cover_image }">
+        {{ displayedName }}
+      </h2>
+      <p class="bio-description">
+        {{ member.member_description }}
+      </p>
+      <p class="full-name" [ngClass]="{ 'cover-image': member.cover_image }">
+        <span class="country" *ngIf="member.country" [ngClass]="{ 'cover-image': member.cover_image }">
+          <img src="assets/images/icons/pin.svg" />
+          {{ member.country }}
+        </span>
+      </p>
+    </div>
+  </div>
+  <div class="row col-md-12 followers-section" [ngClass]="{ 'cover-image': member.cover_image }">
+    <div>
+      <span class="lbl-listed">
+        <div class="hit-number">{{ member.listedItems | number }}</div>
+        <span class="hit-label">Items listed</span>
+      </span>
+
+      <span class="lbl-item">
+        <span class="hit-number">{{ member.totalItemsSold | number }}</span>
+        <span class="hit-label">Items sold</span>
+      </span>
+    </div>
+  </div>
+</ng-container>

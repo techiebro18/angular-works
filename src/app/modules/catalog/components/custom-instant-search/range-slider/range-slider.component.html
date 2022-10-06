@@ -1,0 +1,35 @@
+<div *ngIf="state.range" class="tvb-RangeSlider">
+  <div class="tvb-RangeSlider--sliderLabels">
+    <div class="caption leftmax">
+      <input
+        [disabled]="true"
+        type="text"
+        name="minPrice"
+        readonly=""
+        placeholder="Min"
+        [ngModel]="formatValue(state.start[0] < 0 ? state.range.min : state.start[0])"
+      />
+    </div>
+    <div class="caption rightmax">
+      <input
+        [disabled]="true"
+        type="text"
+        name="maxPrice"
+        readonly=""
+        placeholder="Max"
+        [ngModel]="formatValue(state.start[1] > state.range.max ? state.range.max : state.start[1])"
+      />
+    </div>
+  </div>
+
+  <ngx-slider
+    class="tvb-ngx-slider"
+    [value]="state.start[0] < 0 ? state.range.min : state.start[0]"
+    [highValue]="state.start[1] > state.range.max ? state.range.max : state.start[1]"
+    [options]="{
+      floor: state.range.min,
+      ceil: state.range.max
+    }"
+    (userChangeEnd)="onUserChangeEnd($event)"
+  ></ngx-slider>
+</div>

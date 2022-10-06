@@ -1,0 +1,146 @@
+.title-heading {
+  font-family: Cormorant, serif;
+  font-size: 35px;
+  color: #000;
+  margin: 60px 0;
+  text-align: center;
+}
+
+.form {
+  .password-input-container {
+    position: relative;
+
+    .eye_icon {
+      position: absolute;
+      margin: 5px 10px;
+      right: 0;
+    }
+  }
+
+  .primary {
+    border-color: var(--text-input-grey);
+    font-family: Manrope, sans-serif;
+  }
+
+  .invalid-message {
+    font-size: 11px;
+    text-align: center;
+    font-family: Manrope, sans-serif;
+    color: var(--form-error);
+  }
+
+  .ng-invalid.ng-touched {
+    border-color: #000 !important;
+  }
+}
+
+.or-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+  font-family: Manrope, sans-serif;
+}
+
+.social-buttons {
+  display: flex;
+  margin: 0 auto;
+  font-family: Manrope, sans-serif;
+
+  .btn-separator {
+    width: 40px;
+  }
+
+  .btn.social {
+    border-color: var(--text-input-grey);
+    height: 44px;
+    font-size: 12px;
+    width: 100%;
+    justify-content: center;
+
+    .social-buttons-image {
+      width: 12px;
+      height: 12px;
+      margin-right: 10px;
+    }
+
+    .social-buttons-text {
+      padding-top: 0;
+      display: inline-block;
+      font-family: Manrope, sans-serif;
+    }
+  }
+}
+
+.submit-button-container {
+  margin-top: 30px;
+
+  button {
+    width: 100%;
+    height: 44px;
+    line-height: 35px;
+    min-width: 220px;
+    font-size: 14px;
+    display: block;
+    margin: 0 auto;
+    background-color: #191919;
+    border-radius: 0;
+    font-family: Manrope, sans-serif;
+  }
+}
+
+@media (max-width: 767px) {
+  .title {
+    .title-heading {
+      margin: 80px 0;
+    }
+  }
+
+  .social-buttons {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 0 auto 100px;
+    font-family: Manrope, sans-serif;
+
+    &:first-of-type {
+      margin-bottom: 10px;
+    }
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+
+    .btn-separator {
+      display: none;
+    }
+
+    .btn.social {
+      justify-content: center;
+      border-color: var(--text-input-grey);
+      height: 44px;
+      font-size: 12px;
+      width: 100%;
+
+      &.facebook-btn {
+        margin-right: 0;
+      }
+
+      &.google-btn {
+        margin-top: 10px;
+        margin-left: 0;
+      }
+
+      .social-buttons-image {
+        width: 15px;
+        height: 15px;
+        margin-right: 20px;
+      }
+    }
+
+    .form-group {
+      text-align: center;
+      width: 100%;
+    }
+  }
+}

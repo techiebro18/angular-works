@@ -1,0 +1,139 @@
+<div class="mobile-showFilter-btn ignore-click-outside">
+  <div class="ignore-click-outside">
+    <button (click)="showFilter()" class="btn filter-btn-full ignore-click-outside">
+      <i class="icon-filter ignore-click-outside"></i>
+    </button>
+  </div>
+</div>
+
+<div class="member-list-page">
+  <ais-instantsearch [config]="instantsearchConfig">
+    <ais-configure [searchParameters]="plpConfig.searchParameters"></ais-configure>
+
+    <div
+      class="product-list"
+      [ngClass]="{ 'product-list--opened': ifResponsiveFiltersOpen }"
+      app-click-outside
+      (clickOutside)="hideFilter()"
+    >
+      <div class="product-list--inner--header">
+        <div class="mobile-filters-title">{{ 'Filter ' | translate }}</div>
+        <button type="button" class="close" (click)="hideFilter()">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+
+      <div class="productsList--colmunFilters--inner">
+        <div class="productsList--colmunFilters--inner--filters">
+          <ng-container *ngFor="let filter of plpConfig.filtersStructure">
+            <ng-container *ngIf="filter.name == 'categories'">
+              <!-- Parent Category -->
+              <tvb-refinment-list
+                [name]="filter.name"
+                [title]="filter.label"
+                [isCollapsed]="true"
+                (toggleChanged)="onToggleCollapse($event)"
+                [isHidden]="filter.isShowCategories == false"
+                [attribute]="filter.attribute"
+                [sortBy]="['count:desc', 'name:asc']"
+                [limit]="100"
+                [transformItems]="categoriesTransformItems"
+                [searchable]="true"
+                [columnsNum]="filter.columnsNum"
+              ></tvb-refinment-list>
+              <!-- Child categories -->
+              <tvb-refinment-list
+                [name]="'sub' + filter.name"
+                [title]="filter.childLabel"
+                [isCollapsed]="true"
+                (toggleChanged)="onToggleCollapse($event)"
+                [isHidden]="!isCategorySelected && !isSubCategorySelected"
+                [attribute]="filter.childAttribute"
+                [sortBy]="['count:desc', 'name:asc']"
+                [limit]="100"
+                [transformItems]="childCategoriesTransformItems"
+                [searchable]="true"
+                [columnsNum]="filter.columnsNum"
+              ></tvb-refinment-list>
+            </ng-container>
+            <!-- Price  -->
+            <ng-container *ngIf="filter.name == 'budgetAndPrice'">
+              <tvb-price-filter-list
+                [filter]="filter"
+                [isCollapsed]="true"
+                (toggleChanged)="onToggleCollapse($event)"
+              ></tvb-price-filter-list>
+            </ng-container>
+            <!-- Discount  -->
+            <ng-container *ngIf="filter.name == 'discount'">
+              <tvb-discount-filter-list
+                [filter]="filter"
+                [isCollapsed]="true"
+                (toggleChanged)="onToggleCollapse($event)"
+              ></tvb-discount-filter-list>
+            </ng-container>
+            <!-- All other multiple selection -->
+            <ng-container
+              *ngIf="filter.name != 'categories' && filter.name != 'budgetAndPrice' && filter.name != 'discount'"
+            >
+              <tvb-refinment-list
+                [name]="filter.name"
+                [title]="filter.label"
+                [attribute]="filter.attribute"
+                [isCollapsed]="true"
+                (toggleChanged)="onToggleCollapse($event)"
+                [sortBy]="['count:desc', 'name:asc']"
+                [limit]="100"
+                [autoHideContainer]="true"
+                [searchable]="true"
+                [columnsNum]="filter.columnsNum"
+              ></tvb-refinment-list>
+            </ng-container>
+          </ng-container>
+          <tvb-clear-refinements cssClass="btn btn-secondary"></tvb-clear-refinements>
+        </div>
+      </div>
+    </div>
+
+    <div class="productsList innerContainer">
+      <div class="productsList--columnProductList">
+        <ais-hits [transformItems]="transformItems">
+          <ng-template let-hits="hits">
+            <div class="row col-md-12 list-content">
+              <ol class="list-cards">
+                <ng-container *ngFor="let hit of hits; let i = index">
+                  <li class="item-card" *ngIf="hit.imgix_image_url || hit.imgix_image_url_uploads">
+                    <div class="member-card">
+                      <a routerLink="/{{ hit.styles_seo_url_en }}" [queryParams]="{ pdp: hit.id }">
+                        <ng-container *appShellNoRender>
+                          <img *ngIf="hit.imgix_image_url" src="{{ hit.imgix_image_url }}" alt="{{ hit.name }}" />
+                          <img
+                            *ngIf="!hit.imgix_image_url && hit.imgix_image_url_uploads"
+                            src="{{ hit.imgix_image_url_uploads }}"
+                          />
+                        </ng-container>
+                      </a>
+                      <p class="brand">{{ hit.brand_name }}</p>
+                      <p class="price">
+                        {{ hit['regular_price_' + plpConfig.currency + ''] | currency }}
+                      </p>
+                    </div>
+                  </li>
+                </ng-container>
+              </ol>
+            </div>
+
+            <div class="row" *ngIf="hits && !hits.length">
+              <div class="col-md-12 col-sm-12">
+                <div class="text-center no-hits">
+                  <h3>NOTHING WAS FOUND</h3>
+                  <div class="cta-btn shop-btn"><a routerLink="/new-in">Shop Now</a></div>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </ais-hits>
+      </div>
+    </div>
+  </ais-instantsearch>
+</div>

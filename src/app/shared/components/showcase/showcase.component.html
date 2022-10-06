@@ -1,0 +1,15 @@
+<div class="items">
+  <div class="item-box" *ngFor="let item of data?.items">
+    <ng-container
+      *ngIf="weLoveTemplateRef"
+      [ngTemplateOutlet]="weLoveTemplateRef"
+      [ngTemplateOutletContext]="{ $implicit: item }"
+    ></ng-container>
+
+    <ng-container
+      *ngIf="campaignsTemplateRef"
+      [ngTemplateOutlet]="campaignsTemplateRef"
+      [ngTemplateOutletContext]="{ $implicit: item }"
+    ></ng-container>
+  </div>
+</div>

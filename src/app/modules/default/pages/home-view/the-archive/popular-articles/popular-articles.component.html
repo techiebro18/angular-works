@@ -1,0 +1,88 @@
+<div class="container">
+  <div class="main-title">
+    <h2>The Archive</h2>
+    <h5>
+      {{ 'homepage_the_archive_title' | translate }}
+    </h5>
+  </div>
+
+  <div class="box-article" *ngIf="!isMobile$.value">
+    <a routerLink="/the-archive/{{ main_article.post_name }}">
+      <div
+        class="main-article"
+        style="background-image: 
+          url('{{ env.PRODUCT_IMGIX_URL }}dynamic/archive/{{ main_article.featured_image }}.{{
+          main_article.feature_img_extension
+        }}');"
+      >
+        <div class="small-title">
+          {{ main_article.archive_date | date: 'dd MMMM yyyy' }}
+          <span>|</span>
+          {{ main_article.category_title }}
+        </div>
+        <div class="title">{{ main_article.post_title }}</div>
+        <div class="article-desc" [innerHTML]="main_article.post_content"></div>
+      </div>
+    </a>
+  </div>
+
+  <div class="box-article" *ngIf="isMobile$.value">
+    <div
+      class="main-article"
+      style="background-image: 
+        url('{{ env.PRODUCT_IMGIX_URL }}dynamic/archive/{{ main_article.featured_image }}.{{
+        main_article.feature_img_extension
+      }}');"
+    >
+      <div class="small-title">
+        {{ main_article.archive_date | date: 'dd MMMM yyyy' }}
+        <span>|</span>
+        {{ main_article.category_title }}
+      </div>
+      <div class="title">{{ main_article.post_title }}</div>
+      <div class="article-desc" [innerHTML]="main_article.post_content"></div>
+      <div class="link">
+        <a routerLink="/the-archive/{{ main_article.post_name }}">Read more</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="box-article pop">
+    <div class="articles-title">
+      Popular post
+      <div>
+        <a routerLink="/the-archive">See all</a>
+      </div>
+    </div>
+    <ul class="articles">
+      <ng-container *ngFor="let article of other_articles">
+        <li class="item">
+          <div class="box-content">
+            <a routerLink="/the-archive/{{ article.post_name }}">
+              <img
+                src="{{ env.PRODUCT_IMGIX_URL }}dynamic/archive/{{ article.featured_image }}.{{
+                  article.feature_img_extension
+                }}"
+              />
+            </a>
+          </div>
+          <div class="box-content desc">
+            <div class="title">
+              {{ article.post_title }}
+            </div>
+            <div class="date">
+              {{ article.archive_date | date: 'dd MMMM yyyy' }}
+            </div>
+            <div class="description" [innerHTML]="article.post_content"></div>
+          </div>
+          <a routerLink="/the-archive/{{ article.post_name }}">
+            <div class="arrow">
+              <img src="/assets/images/icons/arrow.svg" />
+            </div>
+          </a>
+        </li>
+      </ng-container>
+    </ul>
+  </div>
+</div>
+<div class="clear"></div>

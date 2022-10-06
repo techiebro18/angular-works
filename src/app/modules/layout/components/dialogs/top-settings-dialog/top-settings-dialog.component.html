@@ -1,0 +1,120 @@
+<!-- The Modal -->
+<div class="settings-popup">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="col-sm-12">
+          <h2 class="popuptitle">
+            <span class="caret-mobile" (click)="closeDialog()">
+              <img src="assets/images/gallery/chevron_back_rgb_black.svg" />
+            </span>
+            {{ 'Preferences' | translate }}
+          </h2>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+            (click)="closeDialog()"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      </div>
+
+      <form [formGroup]="configFormGroup" autocomplete="off" (ngSubmit)="onSubmit()" novalidate>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="item form-group">
+                <label>{{ 'Country' | translate }}</label>
+                <ng-select
+                  #countrySelect
+                  [items]="countrySelectionData"
+                  [bindLabel]="'name'"
+                  [bindValue]="'id'"
+                  [placeholder]="'Select'"
+                  [clearable]="false"
+                  formControlName="country_id"
+                  [searchable]="false"
+                  class="tvb-select"
+                >
+                  <ng-template ng-header-tmp>
+                    <input
+                      class="ng-select-input"
+                      type="text"
+                      (input)="countrySelect.filter($any($event.target).value)"
+                    />
+                  </ng-template>
+                </ng-select>
+              </div>
+            </div>
+
+            <div class="col-md-12">
+              <div class="item form-group">
+                <label>{{ 'Language' | translate }}</label>
+                <ng-select
+                  #languageSelect
+                  [items]="languageSelectionData"
+                  [bindLabel]="'name'"
+                  [bindValue]="'id'"
+                  [placeholder]=""
+                  [clearable]="false"
+                  formControlName="language_id"
+                  class="tvb-select"
+                  [searchable]="false"
+                >
+                  <ng-template ng-header-tmp>
+                    <input
+                      class="ng-select-input"
+                      type="text"
+                      (input)="languageSelect.filter($any($event.target).value)"
+                    />
+                  </ng-template>
+                </ng-select>
+              </div>
+            </div>
+
+            <div class="col-md-12">
+              <div class="item form-group">
+                <label>{{ 'Currency' | translate }}</label>
+                <ng-select
+                  #currencySelect
+                  [items]="currencySelectionData"
+                  [bindLabel]="'name'"
+                  [bindValue]="'id'"
+                  [placeholder]=""
+                  [clearable]="false"
+                  formControlName="currency_id"
+                  class="tvb-select"
+                  [searchable]="false"
+                  dropdownPosition="top"
+                >
+                  <ng-template ng-header-tmp>
+                    <input
+                      class="ng-select-input"
+                      type="text"
+                      (input)="currencySelect.filter($any($event.target).value)"
+                    />
+                  </ng-template>
+                </ng-select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <div class="col-sm-12">
+            <button
+              type="submit"
+              [disabled]="appService.isSettingsPopupDisabled$ | async"
+              class="btn tvb-button primary"
+            >
+              {{ 'Save changes' | translate }}
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

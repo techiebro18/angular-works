@@ -1,0 +1,237 @@
+:host {
+  .shippingAddress {
+    .modal {
+      .modal-header {
+        padding: 10px 1em;
+        background: #000;
+        color: #fff;
+        h2 {
+          margin-bottom: 0px;
+          font-family: 'Playfair Display';
+        }
+        button {
+          color: #fff;
+          opacity: 1;
+        }
+        .items-model-up {
+          position: absolute;
+          left: 130px;
+          top: -131px;
+          overflow: visible;
+          z-index: 1024;
+          .modal {
+            position: relative;
+            .modal-header {
+              padding: 10px 1em;
+              background: #000;
+              color: #fff;
+              h2 {
+                margin-bottom: 0px;
+                font-family: 'Playfair Display';
+              }
+              button {
+                color: #fff;
+                opacity: 1;
+              }
+            }
+            .modal-body {
+              line-height: 20px;
+              font-size: 16px;
+              font-family: 'FuturaBT-Light';
+              button {
+                display: block;
+                margin-top: 20px;
+                width: 100%;
+                background-color: #000;
+                font-family: 'FuturaBT-Light';
+                border-radius: 0px;
+                font-size: 12px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .tvb-dialog-container {
+    top: 50%;
+    left: 50%;
+    bottom: auto;
+
+    .material-icons {
+      position: absolute;
+      top: 5px;
+      right: 10px;
+      cursor: pointer;
+      font-family: 'Roboto';
+      font-size: 14px;
+      font-size: 20px;
+      color: #ccc;
+    }
+
+    .tvb-dialog-body {
+      border: 1px solid #ccc;
+
+      .tvb-dialog-inner-body {
+        padding: 30px 30px;
+        text-align: center;
+
+        .title-info {
+          text-align: left;
+          position: relative;
+          width: 100%;
+          display: inline-block;
+          vertical-align: top;
+          h1 {
+            letter-spacing: var(--unnamed-character-spacing-0);
+            color: var(--unnamed-color-000000);
+            text-align: left;
+            letter-spacing: 0px;
+            color: #000000;
+            opacity: 1;
+            top: 589px;
+            left: 856px;
+            width: 368px;
+            height: 39px;
+            font-weight: bold;
+            font-size: 15px;
+            display: block;
+            font-family: 'Futura';
+          }
+          h4 {
+            padding-bottom: 20px;
+            margin: 0;
+            font-weight: 500;
+            line-height: 1.1;
+            color: inherit;
+            font-family: 'system-ui';
+          }
+          p {
+            top: 616px;
+            left: 856px;
+            height: 72px;
+            letter-spacing: var(--unnamed-character-spacing-0);
+            color: var(--unnamed-color-000000);
+            text-align: left;
+            font: normal normal 300 15px/19px Futura;
+            letter-spacing: 0px;
+            color: #000000;
+            opacity: 1;
+            margin: 0 0 10.5px;
+            font-size: 15px;
+            line-height: 24px;
+            font-family: 'FuturaBT-Light';
+          }
+        }
+      }
+    }
+  }
+
+  .shipping-info-modal {
+    box-shadow: 0px 3px 18px #00000029;
+    background: #fff;
+
+    .modal-dialog {
+      margin: 0;
+
+      h1 {
+        font-family: 'FuturaBT-Medium';
+      }
+
+      .material-icons img {
+        width: 12px;
+      }
+    }
+
+    .modal-content {
+      border: none;
+
+      .tvb-dialog-body {
+        border: none;
+      }
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .items-model-up {
+      height: 230px;
+      position: absolute;
+      left: 100px;
+      top: -131px;
+      overflow: visible;
+      z-index: 1024;
+      left: 50%;
+      position: fixed;
+      top: 50%;
+      width: 100%;
+      max-width: 330px;
+      margin: 0 auto;
+      transform: translate(-50%, -50%);
+    }
+  }
+  .invalid-message {
+    color: var(--form-error);
+    text-align: center;
+    font-size: 16px;
+    padding: 12px 0;
+  }
+}
+.shippingAddress {
+  display: flex;
+  font-size: 14px;
+  font-family: 'FuturaBT-Light';
+  line-height: 20px;
+  margin-bottom: 2em;
+
+  .address {
+    min-width: 260px;
+    margin-right: 2em;
+  }
+
+  .address {
+    min-width: 260px;
+    margin-right: 2em;
+  }
+
+  svg {
+    width: 100%;
+  }
+
+  .email-form {
+    font-family: 'FuturaBT-Light';
+    margin: 2em 0;
+
+    ::ng-deep small {
+      margin-left: 0.5em;
+    }
+  }
+}
+.btn {
+  width: 100%;
+}
+
+app-checkout-order-summary {
+  ::ng-deep .mat-accordion {
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 576px) {
+  .modal-dialog {
+    max-width: 500px;
+    margin: 1.75rem auto;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .shippingAddress {
+    display: block;
+
+    .address {
+      min-width: 100%;
+      padding-left: calc(50px + 1em);
+      margin-bottom: 1.5em;
+    }
+  }
+}

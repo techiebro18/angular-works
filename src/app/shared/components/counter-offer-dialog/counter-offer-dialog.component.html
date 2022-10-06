@@ -1,0 +1,86 @@
+<div class="modal-body">
+  <div class="modal-body-inner">
+    <h3>{{ 'COUNTER OFFER' | translate }}</h3>
+
+    <div class="image-box-" *ngIf="product?.imgix_image_url">
+      <img src="{{ product.imgix_image_url }}" class="product-img" />
+    </div>
+
+    <div class="offer-form" *ngIf="!offerSubmitted">
+      <p class="offer-text">
+        {{ 'Make a Counter Offer for the following item' | translate }}:
+        <br />
+        <span class="product-name">{{ product.brand_name }}, {{ product.name }}</span>
+        <br />
+        <span class="last-offer-warning" *ngIf="shouldShowLastOfferWarning()">
+          {{ 'make_an_offer.my_offers.warnings.last_offer' | translate }}
+        </span>
+      </p>
+
+      <form [formGroup]="offerFormGroup" (ngSubmit)="submitOffer()">
+        <div class="row">
+          <div class="col-md-6">
+            <input
+              type="text"
+              class="amount-input"
+              formControlName="offer_price"
+              placeholder="{{ 'Amount' | translate }}"
+              (keyup)="onKeyUp($event)"
+            />
+
+            <span class="amount-input-txt">{{ currencyCode }}</span>
+
+            <span
+              class="err-msg"
+              *ngIf="
+                offerFormGroup.dirty &&
+                offerFormGroup.controls.offer_price.errors &&
+                offerFormGroup.controls.offer_price.invalid
+              "
+            >
+              {{
+                'make_an_offer.my_offers.warnings.price_range'
+                  | translate
+                    : {
+                        price1: minimumOfferPrice | currency: currencyCode,
+                        price2: maximumOfferPrice | currency: currencyCode
+                      }
+              }}
+            </span>
+          </div>
+
+          <div class="col-md-6">
+            <button class="btn tvb-button primary" type="submit">
+              {{ 'Make Counter Offer' | translate }}
+            </button>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12 mt-2">
+            <span class="err-msg" *ngIf="errMessage.length">{{ errMessage }}</span>
+          </div>
+        </div>
+      </form>
+
+      <div class="product-detail">
+        <div class="price-wrapper-popup">
+          <p class="price">
+            Original Price:
+            {{ product.price | currency: currencyCode }}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="offer-form offer-submitted" *ngIf="offerSubmitted">
+      <div class="product-detail">
+        <span class="product-name">{{ product.brand_name }}, {{ product.name }}</span>
+      </div>
+
+      <br />
+
+      <p class="offer-text">{{ 'Counter Offer Submitted' | translate }}!</p>
+    </div>
+  </div>
+</div>

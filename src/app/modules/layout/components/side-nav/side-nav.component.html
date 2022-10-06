@@ -1,0 +1,296 @@
+<div class="sidenav" [ngClass]="{ transform: isShow == true, fadein: useTextBoxAsCTA }">
+  <div
+    class="parent"
+    [style.display]="isShow ? 'flex' : 'none'"
+    [ngClass]="{ 'ignore-click-outside': isMobile }"
+    *ngIf="menuService.menuListMobile$ | async as menuList"
+  >
+    <div
+      class="left-section lr-section"
+      [class.minus]="transitionPlus"
+      [class.plus]="transitionMinus"
+      [ngClass]="{ 'ignore-click-outside': isMobile }"
+    >
+      <div class="close-search">
+        <a href="javascript:void(0)" class="closebtn" (click)="openCloseNav(isShow)">&times;</a>
+      </div>
+      <ng-container *ngIf="!useTextBoxAsCTA">
+        <div class="register-sign" *ngIf="!isCancelButton">
+          <ul>
+            <li *ngIf="(authService.isLoggedInObs | async) && (user$ | async)?.role_id != 2; else elseBlock">
+              <a routerLink="/account/account-details" (click)="openCloseNav(isShow)">
+                <span class="underline">{{ (user$ | async)?.username | titlecase }}</span>
+              </a>
+            </li>
+            <ng-template #elseBlock>
+              <li>
+                <a href="javascript:void(0)" routerLinkActive="active">
+                  <span (click)="openPopup(true)">{{ 'Sign in' | translate }}</span>
+                  or
+                  <span (click)="openPopup(false)">{{ 'Register' | translate }}</span>
+                </a>
+              </li>
+            </ng-template>
+          </ul>
+        </div>
+        <div class="left-top for-mobile-lang" *ngIf="!isCancelButton">
+          <ul class="lang-count configPopup" *ngIf="!(_appService.isSettingsPopupDisabled$ | async)">
+            <li>
+              <a href="javascript:void(0)" (click)="openSettingPopup()">
+                <span>
+                  <img class="item-icon" src="assets/images/icons/globe.svg" />
+                  {{ selectedCountry }}
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" (click)="openSettingPopup()">
+                <span>
+                  <img class="item-icon chat-icon" src="assets/images/icons/chat-light.svg" />
+                  {{ selectedLanguage }}
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" (click)="openSettingPopup()">
+                <span>
+                  <img class="item-icon card-icon" src="assets/images/icons/card.svg" />
+                  {{ selectedCurrency }}
+                </span>
+              </a>
+            </li>
+          </ul>
+          <ul class="lang-count configPopup" *ngIf="_appService.isSettingsPopupDisabled$ | async">
+            <li>
+              <a href="javascript:void(0)">
+                <span>
+                  <i class="fa fa-globe"></i>
+                  {{ selectedCountry }}&nbsp;&nbsp;
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)">
+                {{ selectedLanguage }}
+                <span></span>
+              </a>
+            </li>
+            <li>
+              <span><i class="fa fa-credit-card-alt"></i></span>
+              <a href="javascript:void(0)">
+                {{ selectedCurrency }}
+                <span></span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </ng-container>
+
+      <div
+        class="slide-menu-box"
+        [ngClass]="{
+          'ignore-click-outside': isMobile,
+          'not-sign-in': !user$?.value,
+          'search-box': useTextBoxAsCTA
+        }"
+      >
+        <div class="menus" [ngClass]="{ 'ignore-click-outside': isMobile, 'search-box': useTextBoxAsCTA }">
+          <ng-container *ngIf="user$?.value && !useTextBoxAsCTA">
+            <div class="user-content">
+              <div class="avatar">
+                <img [src]="user$.value.image_id" *ngIf="user$.value.image_id && user$.value.image_id !== ''" />
+                <img src="assets/images/avatar.svg" *ngIf="!user$.value.image_id || user$.value.image_id === ''" />
+              </div>
+              <div class="name">{{ user$.value.first_name }} {{ user$.value.last_name }}</div>
+              <div class="label" (click)="openMyAccountMenu(true)">{{ 'View My Account' | translate }}</div>
+            </div>
+          </ng-container>
+          <ul *ngIf="!isCancelButton" [ngClass]="{ 'ignore-click-outside': isMobile }">
+            <ng-container *ngIf="!useTextBoxAsCTA">
+              <li *ngFor="let menu of menuList" [class.sale]="menu?.name == 'Sale'">
+                <ng-template [ngIf]="menu?.child?.length > 0" [ngIfElse]="noChildRecords">
+                  <a (click)="showChildMenu(menu?.name)">
+                    {{ menu?.name }}
+                    <span class="caret" *ngIf="menu?.child?.length > 0">
+                      <img src="assets/images/gallery/chevron_forward_rgb_black.svg" />
+                    </span>
+                  </a>
+                </ng-template>
+                <ng-template #noChildRecords>
+                  <span>
+                    <a
+                      routerLink="/shop/{{ menu?.seo_url }}"
+                      *ngIf="menu?.type == 'category'"
+                      (click)="openCloseNav(isShow)"
+                    >
+                      {{ menu?.name }}
+                    </a>
+                    <a
+                      routerLink="/discover/{{ menu?.seo_url }}"
+                      *ngIf="menu?.type == 'discover'"
+                      (click)="openCloseNav(isShow)"
+                    >
+                      {{ menu?.name }}
+                    </a>
+                    <a
+                      routerLink="/page/{{ menu?.seo_url }}"
+                      *ngIf="menu?.type == 'page'"
+                      (click)="openCloseNav(isShow)"
+                    >
+                      {{ menu?.name }}
+                    </a>
+                    <a routerLink="{{ menu?.seo_url }}" *ngIf="menu?.type == 'style'" (click)="openCloseNav(isShow)">
+                      {{ menu?.name }}
+                    </a>
+                    <a
+                      routerLink="javascript:void(0)"
+                      *ngIf="menu?.type == 'custom' && menu?.name == 'DESIGNERS'"
+                      (click)="openCloseNav(isShow)"
+                    >
+                      {{ menu?.name }}
+                    </a>
+                    <a
+                      routerLink="/{{ menu?.seo_url }}"
+                      *ngIf="menu?.type == 'custom' && menu?.name != 'DESIGNERS'"
+                      (click)="openCloseNav(isShow)"
+                    >
+                      {{ menu?.name == 'Sale' ? 'On Sale' : menu?.name }}
+                    </a>
+                  </span>
+                </ng-template>
+              </li>
+            </ng-container>
+          </ul>
+          <div *ngIf="isCancelButton || useTextBoxAsCTA">
+            <ais-instantsearch [config]="instantsearchConfig" *ngIf="isShow">
+              <app-search-box
+                #searchBarSlider
+                *ngIf="useTextBoxAsCTA"
+                [startsOpen]="isShow"
+                (onToggleSearch)="openCloseNav($event)"
+              ></app-search-box>
+            </ais-instantsearch>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ng-container *ngIf="!myAccountMenu">
+      <div class="right-section lr-section" [class.plus]="transitionMinus" [class.minus]="transitionPlus">
+        <div class="back-button">
+          <div class="sf-nav__back" (click)="backButton()">
+            <span>
+              <img src="assets/images/gallery/chevron_back_rgb_black.svg" />
+            </span>
+            BACK
+          </div>
+          <hr class="sf-nav__divider" />
+        </div>
+        <div class="slide-menu-box">
+          <div class="menus">
+            <ul>
+              <li *ngFor="let menu of menuList">
+                <div *ngIf="selectedMenuName == menu?.name && selectedMenuName">
+                  <div *ngFor="let child of menu?.child">
+                    <a class="style-bold">{{ child.name }}</a>
+                    <ul class="child-menu">
+                      <li *ngFor="let subchild of child.child">
+                        <!-- <a href="javascript:void(0);"> {{subchild.name}}</a> -->
+                        <a
+                          routerLink="/{{ menu?.seo_url }}/{{ subchild.seo_url }}"
+                          *ngIf="subchild.type == 'category'"
+                          (click)="openCloseNav(isShow)"
+                        >
+                          {{ subchild.name }}
+                        </a>
+                        <a
+                          routerLink="/page/{{ subchild.seo_url }}"
+                          *ngIf="subchild.type == 'page'"
+                          (click)="openCloseNav(isShow)"
+                        >
+                          {{ subchild.name }}
+                        </a>
+                        <a
+                          routerLink="/{{ subchild.seo_url }}"
+                          *ngIf="subchild.type == 'style'"
+                          (click)="openCloseNav(isShow)"
+                        >
+                          {{ subchild.name }}
+                        </a>
+                        <a
+                          routerLink="/designer/{{ subchild.seo_url }}"
+                          *ngIf="subchild.type == 'designer'"
+                          (click)="openCloseNav(isShow)"
+                        >
+                          {{ subchild.name }}
+                        </a>
+                        <a
+                          routerLink="/{{ subchild.seo_url | translate | lowercase }}"
+                          *ngIf="subchild.type == 'custom'"
+                          (click)="openCloseNav(isShow)"
+                        >
+                          {{ subchild.name | translate }}
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="myAccountMenu">
+      <div class="right-section-a lr-section-a" [class.plus]="transitionMinus" [class.minus]="transitionPlus">
+        <div class="back-button">
+          <div class="sf-nav__back" (click)="openMyAccountMenu(false)">
+            <span>
+              <img src="assets/images/gallery/chevron_back_rgb_black.svg" />
+            </span>
+            BACK
+          </div>
+          <hr class="sf-nav__divider" />
+        </div>
+        <tvb-user-mobile-menu [user]="user$.value" (itemClicked)="openCloseNav(isShow)"></tvb-user-mobile-menu>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="!useTextBoxAsCTA && selectedMenuName === '' && !myAccountMenu">
+      <div class="sticky-bottom">
+        <button (click)="navigateTo('how-it-works')" class="btn-secondary">
+          {{ 'How it works' | translate }}
+        </button>
+        <div class="item">
+          <a routerLink="/sellers" class="nav-link main-nav-link" (click)="trackSegmentEvent()">
+            {{ 'Sell an Item' | translate }}
+          </a>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>
+
+<div class="side-nav-toggle-menu" *ngIf="!useTextBoxAsCTA">
+  <button class="navbar-toggle" type="button" aria-expanded="false" (click)="openCloseNav(isShow)">
+    <span class="sr-only">Toggle navigatio2n</span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+  </button>
+</div>
+
+<button
+  *ngIf="useTextBoxAsCTA"
+  class="search-button ignore-click-outside"
+  aria-expanded="false"
+  (click)="openCloseNav(isShow)"
+>
+  <div class="search-icon">
+    <i class="fa fa-search close-icon-humberger"></i>
+  </div>
+
+  {{ 'Search designer, styles' | translate }}
+</button>

@@ -1,0 +1,627 @@
+<nav class="navbar navbar-inverse custom-navbar navbar-expand">
+  <div class="container-fluid navigation-wrapper justify-content-center">
+    <div class="row">
+      <div class="navbar-header col">
+        <app-side-nav class="mobile-slide-icon ignore-click-outside" *appShellNoRender></app-side-nav>
+
+        <div class="show-sticky">
+          <a class="navbar-brand" href=""><img src="assets/images/logo.jpg" alt="logo" /></a>
+        </div>
+
+        <div class="mobileBag">
+          <a routerLink="/cart/view-cart" routerLinkActive="active">
+            <span class="bagCount">{{ cartItemCount }}</span>
+            <svg
+              xmlns="https://www.w3.org/2000/svg"
+              xmlns:xlink="https://www.w3.org/1999/xlink"
+              version="1.1"
+              id="Capa_1"
+              x="0px"
+              y="0px"
+              viewBox="0 0 33 33"
+              style="enable-background: new 0 0 33 33"
+              xml:space="preserve"
+            >
+              <path
+                d="M28.313,33H4.688c-0.137,0-0.268-0.056-0.362-0.155c-0.094-0.099-0.144-0.232-0.138-0.369L5.313,8.851 c0.013-0.267,0.232-0.476,0.5-0.476h21.375c0.267,0,0.487,0.209,0.5,0.476l1.125,23.625c0.006,0.137-0.043,0.27-0.138,0.369 C28.58,32.944,28.449,33,28.313,33z M5.212,32h22.576L26.711,9.375H6.289L5.212,32z"
+              ></path>
+              <path
+                d="M21.905,11.375c-0.276,0-0.5-0.224-0.5-0.5v-4.97C21.405,3.201,19.205,1,16.5,1s-4.905,2.201-4.905,4.905v4.97 c0,0.276-0.224,0.5-0.5,0.5s-0.5-0.224-0.5-0.5v-4.97C10.595,2.649,13.244,0,16.5,0s5.905,2.649,5.905,5.905v4.97 C22.405,11.151,22.182,11.375,21.905,11.375z"
+              ></path>
+            </svg>
+          </a>
+        </div>
+        <div class="profileicon">
+          <a *ngIf="!(authService.isLoggedInObs | async)" href="javascript:void(0)" (click)="openPopup(true)">
+            <img src="assets/images/icons/user.svg" />
+          </a>
+          <a
+            *ngIf="(authService.isLoggedInObs | async) && (user$ | async)?.role_id != 2"
+            routerLink="/{{ accountSeo }}/account-details"
+          >
+            <img src="assets/images/icons/user.svg" />
+          </a>
+        </div>
+
+        <!--div class="mobileBag Hearticon">
+          <a *ngIf="!(authService.isLoggedInObs | async)" href="javascript:void(0)" (click)="openPopup(true)">
+            <i class="fa fa-heart-o" aria-hidden="true"></i>
+          </a>
+          <a
+            href="{{ baseRemoteUrl }}/{{ wishListSeo }}"
+            *ngIf="(authService.isLoggedInObs | async) && (user$ | async)?.role_id != 2"
+          >
+            <i class="fa fa-heart-o" aria-hidden="true"></i>
+          </a>
+        </div-->
+        <div class="hidden-lg mobile-search-toggle">
+          <a href="#search" class="search-form-tigger" data-toggle="search-form">
+            <i class="fa fa-search" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+      <div id="navbar" class="collapse navbar-collapse">
+        <div class="sf-nav__bar" id="nav-bar">
+          <ng-container *ngIf="menuItems">
+            <ul class="navbar-nav">
+              <li
+                *ngFor="let gitem of menuItems; let x = index"
+                class="nav-item"
+                [class.sale]="gitem.seo_url === 'sale'"
+                [ngClass]="{
+                  'dropdown mega-dropdown dropdown-toggle2':
+                    gitem.child?.length > 0 || gitem.name === 'The Archive'.toLowerCase()
+                }"
+                [attr.data-type]="gitem.type"
+                (click)="closeMenu()"
+              >
+                <!-- Main Categories: Bags, Accessories, Jewelry, Clothing, Shoes  -->
+                <a
+                  (mouseover)="activeMenu()"
+                  routerLink="/shop/{{ gitem.seo_url }}"
+                  *ngIf="gitem.type == 'category'"
+                  [ngClass]="{ 'dropdown-toggle': gitem.child?.length > 0 }"
+                  class="nav-link main-nav-link"
+                  [attr.data-toggle]="gitem.child?.length > 0 ? 'dropdown' : null"
+                >
+                  {{ gitem.name }}
+                  <span class="caret" *ngIf="gitem.child?.length > 0"></span>
+                </a>
+                <!-- Page, seems like not used any more! -->
+                <a
+                  routerLink="/page/{{ gitem.seo_url }}"
+                  *ngIf="gitem.type == 'page'"
+                  [ngClass]="{ 'dropdown-toggle': gitem.child?.length > 0 }"
+                  class="nav-link main-nav-link"
+                  [attr.data-toggle]="gitem.child?.length > 0 ? 'dropdown' : null"
+                >
+                  {{ gitem.name }}
+                  <span class="caret" *ngIf="gitem.child?.length > 0"></span>
+                </a>
+                <!-- Main Style  : New-mother-page, Not Used-->
+                <a
+                  routerLink="/{{ gitem.seo_url }}"
+                  *ngIf="gitem.type == 'style'"
+                  [ngClass]="{ 'dropdown-toggle': gitem.child?.length > 0 }"
+                  class="nav-link main-nav-link"
+                  [attr.data-toggle]="gitem.child?.length > 0 ? 'dropdown' : null"
+                >
+                  {{ gitem.name }}
+                  <span class="caret" *ngIf="gitem.child?.length > 0"></span>
+                </a>
+                <!-- Main Discover  : Discover page, Used-->
+                <a
+                  routerLink="/discover/{{ gitem.seo_url }}"
+                  *ngIf="gitem.type == 'discover'"
+                  [ngClass]="{ 'dropdown-toggle': gitem.child?.length > 0 }"
+                  class="nav-link main-nav-link"
+                  [attr.data-toggle]="gitem.child?.length > 0 ? 'dropdown' : null"
+                >
+                  {{ gitem.name }}
+                  <span class="caret" *ngIf="gitem.child?.length > 0"></span>
+                </a>
+                <!-- Main Custom : Designers -->
+                <a
+                  (mouseover)="activeMenu()"
+                  href="javascript:void(0)"
+                  *ngIf="gitem.type == 'custom' && gitem.name == 'DESIGNERS'.toLowerCase()"
+                  [ngClass]="{ 'dropdown-toggle': gitem.child?.length > 0 }"
+                  class="nav-link main-nav-link"
+                  [attr.data-toggle]="gitem.child?.length > 0 ? 'dropdown' : null"
+                >
+                  {{ gitem.name | translate }}
+                  <span class="caret" *ngIf="gitem.child?.length > 0"></span>
+                </a>
+                <!-- Main Custom  NOt-Designers, : new-arrivales, most-wanted- sale,  -->
+                <a
+                  (mouseover)="activeMenu()"
+                  routerLink="/{{ gitem.seo_url }}"
+                  *ngIf="
+                    gitem.type == 'custom' &&
+                    gitem.name !== 'DESIGNERS'.toLowerCase() &&
+                    gitem.name !== 'The Archive'.toLowerCase()
+                  "
+                  [ngClass]="{ 'dropdown-toggle': gitem.child?.length > 0 }"
+                  class="nav-link main-nav-link"
+                  [attr.data-toggle]="gitem.child?.length > 0 ? 'dropdown' : null"
+                >
+                  {{ gitem.name | translate | lowercase }}
+                  <span class="caret" *ngIf="gitem.child?.length > 0"></span>
+                </a>
+
+                <a
+                  (mouseover)="activeMenu()"
+                  routerLink="/{{ gitem.seo_url }}"
+                  *ngIf="gitem.type == 'custom' && gitem.name === 'The Archive'.toLowerCase()"
+                  [ngClass]="{ 'dropdown-toggle': menuArchive?.length > 0 }"
+                  class="nav-link main-nav-link"
+                  [attr.data-toggle]="menuArchive?.length > 0 ? 'dropdown' : null"
+                >
+                  {{ gitem.name | translate }}
+                  <span class="caret"></span>
+                </a>
+                <!-- TODO: add one for type=="discover" -->
+
+                <ul class="dropdown-menu mega-dropdown-menu">
+                  <li class="center-div">
+                    <ul class="mega-list">
+                      <li class="col-lg-2 col-md-6 col-sm-6" *ngFor="let pitem of gitem.child; let y = index">
+                        <!-- <div class="sf-nav__back" *ngIf="y === 0">Back</div>
+                                    <hr class="sf-nav__divider"> -->
+                        <span class="dropdown-header">{{ pitem.name | translate }}</span>
+                        <!-- [attr.href]="pitem.seo_url" -->
+                        <ul class="menu-list" *ngIf="pitem.child">
+                          <li *ngFor="let citem of pitem.child; let z = index" (click)="closeMenu()">
+                            <!-- child category : bags -> Designers -->
+                            <a routerLink="/{{ gitem.seo_url }}/{{ citem.seo_url }}" *ngIf="citem.type == 'category'">
+                              {{ citem.name }}
+                            </a>
+                            <!-- child page : Not used  -->
+                            <a routerLink="page/{{ citem.seo_url }}" *ngIf="citem.type == 'page'">
+                              {{ citem.name }}
+                            </a>
+                            <!-- child style: Bags -> Models list -->
+                            <a routerLink="/{{ citem.seo_url }}" *ngIf="citem.type == 'style'">
+                              {{ citem.name }}
+                            </a>
+                            <!-- child designer -> all child of designers except for azdesigners -->
+                            <a routerLink="/designer/{{ citem.seo_url }}" *ngIf="citem.type == 'designer'">
+                              {{ citem.name }}
+                            </a>
+                            <!-- an example is Designers azdesigners -->
+                            <a routerLink="/{{ citem.seo_url | translate | lowercase }}" *ngIf="citem.type == 'custom'">
+                              {{ citem.name | translate }}
+                            </a>
+                            <a
+                              routerLink="/discover/{{ citem.seo_url | translate | lowercase }}"
+                              *ngIf="citem.type == 'discover'"
+                            >
+                              {{ citem.name | translate }}
+                            </a>
+                          </li>
+                        </ul>
+                      </li>
+
+                      <ng-container *ngIf="gitem.name === 'The Archive'.toLowerCase()">
+                        <li class="col-lg-4 col-md-4 col-sm-4">
+                          <span class="dropdown-header">
+                            {{ menuArchive[0]?.name | translate }}
+                          </span>
+                          <ul class="menu-list" *ngIf="menuArchive[0]?.child">
+                            <li *ngFor="let item of menuArchive[0]?.child" (click)="closeMenu()">
+                              <a routerLink="/the-archive/{{ item.seo_url }}">{{ item.name }}</a>
+                            </li>
+                          </ul>
+                        </li>
+                        <li class="col-lg-4 col-md-4 col-sm-4">
+                          <span class="dropdown-header">
+                            {{ menuArchive[1]?.name | translate }}
+                          </span>
+                          <ul class="menu-list" *ngIf="menuArchive[1]?.child">
+                            <li *ngFor="let item of menuArchive[1]?.child" (click)="closeMenu()">
+                              <div class="box-img">
+                                <ng-container *ngIf="!(isMobile$ | async)">
+                                  <img [src]="item.image" alt="item.name" />
+                                </ng-container>
+                              </div>
+                              <div class="box-detail">
+                                <div class="detail-category">
+                                  {{ menuArchive[1]?.name | translate }}
+                                </div>
+                                <a routerLink="/the-archive/{{ item.seo_url }}">{{ item.name }}</a>
+                                <div class="detail-date">{{ item.date | date: 'dd MMM yyyy' }}</div>
+                              </div>
+                            </li>
+                          </ul>
+                        </li>
+                        <li class="col-lg-4 col-md-4 col-sm-4">
+                          <span class="dropdown-header">
+                            {{ menuArchive[2]?.name | translate }}
+                          </span>
+                          <ul class="menu-list" *ngIf="menuArchive[2]?.child">
+                            <li *ngFor="let item of menuArchive[2]?.child" (click)="closeMenu()">
+                              <div class="cover-img">
+                                <ng-container *ngIf="!(isMobile$ | async)">
+                                  <img [src]="item.image" alt="item.name" />
+                                </ng-container>
+                                <div class="box-text">
+                                  <div class="detail-category">
+                                    {{ menuArchive[1]?.name | translate }}
+                                  </div>
+                                  <div class="detail-name">{{ item.name }}</div>
+                                  <div class="detail-text">{{ item.text }}</div>
+                                  <a routerLink="/the-archive/{{ item.seo_url }}">
+                                    {{ 'Read the story' | translate }}
+                                  </a>
+                                </div>
+                              </div>
+                            </li>
+                          </ul>
+                        </li>
+                      </ng-container>
+
+                      <li
+                        class="col-lg-3 col-md-12 col-sm-12 float-right"
+                        *ngIf="
+                          gitem.name == 'DESIGNERS'.toLowerCase() ||
+                          gitem.name == 'DESIGNERE'.toLowerCase() ||
+                          gitem.name == 'DESIGNER'.toLowerCase()
+                        "
+                        (click)="closeMenu()"
+                      >
+                        <div class="newarrival">
+                          <div class="img-bx">
+                            <a routerLink="/designer/gucci">
+                              <ng-container *ngIf="!(isMobile$ | async)">
+                                <img
+                                  *appShellNoRender
+                                  src="{{ env.IMGIX_UPLOADS_URL }}static/menu/Designers-Gucci.webp"
+                                  alt="Designers-Gucci.webp"
+                                  class="img-responsive"
+                                />
+                              </ng-container>
+                            </a>
+                          </div>
+                          <h3 class="dd-title">
+                            <a routerLink="/designer/gucci">GUCCI</a>
+                            <a routerLink="/designer/gucci" class="shop-text">Shop Now</a>
+                          </h3>
+                        </div>
+                      </li>
+
+                      <li
+                        class="col-lg-3 col-md-12 col-sm-12 float-right"
+                        *ngIf="
+                          gitem.name.trim() == 'DESIGNERS'.toLowerCase() ||
+                          gitem.name.trim() == 'DESIGNERE'.toLowerCase() ||
+                          gitem.name.trim() == 'DESIGNER'.toLowerCase()
+                        "
+                        (click)="closeMenu()"
+                      >
+                        <div class="newarrival">
+                          <div class="img-bx">
+                            <a routerLink="/designer/louis-vuitton">
+                              <ng-container *ngIf="!(isMobile$ | async)">
+                                <img
+                                  *appShellNoRender
+                                  src="{{ env.IMGIX_UPLOADS_URL }}static/menu/Designers-Louis-Vuitton.webp"
+                                  alt="Designers-Louis-Vuitton.webp"
+                                  class="img-responsive"
+                                />
+                              </ng-container>
+                            </a>
+                          </div>
+                          <h3 class="dd-title">
+                            <a routerLink="/designer/louis-vuitton">LOUIS VUITTON</a>
+                            <a routerLink="/designer/louis-vuitton" class="shop-text">Shop Now</a>
+                          </h3>
+                        </div>
+                      </li>
+
+                      <li
+                        class="col-lg-6 col-md-12 col-sm-12 float-right"
+                        *ngIf="
+                          gitem.name.trim() == 'BAGS'.toLowerCase() ||
+                          gitem.name.trim() == 'TASKER'.toLowerCase() ||
+                          gitem.name.trim() == 'TASCHEN'.toLowerCase() ||
+                          gitem.name.trim() == 'BOLSOS'.toLowerCase() ||
+                          gitem.name.trim() == 'SACS'.toLowerCase() ||
+                          gitem.name.trim() == 'VÄSKOR'.toLowerCase() ||
+                          gitem.name.trim() == 'BORSE'.toLowerCase()
+                        "
+                        (click)="closeMenu()"
+                      >
+                        <div class="newarrival">
+                          <div class="img-bx">
+                            <a routerLink="/{{ bagCatImageSeo }}">
+                              <ng-container *ngIf="!(isMobile$ | async)">
+                                <img
+                                  *appShellNoRender
+                                  src="{{ env.IMGIX_UPLOADS_URL }}static/menu/Bags-Fendi-Baguette.webp"
+                                  alt="Bags-Fendi-Baguette.webp"
+                                  class="img-responsive"
+                                />
+                              </ng-container>
+                            </a>
+                          </div>
+                          <h3 class="dd-title">
+                            <a routerLink="/{{ bagCatImageSeo }}">Bags Fendi Baguette</a>
+                            <a routerLink="/{{ bagCatImageSeo }}" class="shop-text">Shop Now</a>
+                          </h3>
+                        </div>
+                      </li>
+
+                      <li
+                        class="col-lg-3 col-md-12 col-sm-12 float-right"
+                        *ngIf="
+                          gitem.name.trim() == 'ACCESSORIES'.toLowerCase() ||
+                          gitem.name.trim() == 'TILBEHØR'.toLowerCase() ||
+                          gitem.name.trim() == 'ZUBEHÖR'.toLowerCase() ||
+                          gitem.name.trim() == 'ACCESORIOS'.toLowerCase() ||
+                          gitem.name.trim() == 'ACCESSOIRES'.toLowerCase() ||
+                          gitem.name.trim() == 'TILLBEHÖR'.toLowerCase() ||
+                          gitem.name.trim() == 'ACCESSOARER'.toLowerCase()
+                        "
+                        (click)="closeMenu()"
+                      >
+                        <div class="newarrival">
+                          <div class="img-bx">
+                            <a routerLink="/{{ accCatImageSeoSec }}">
+                              <ng-container *ngIf="!(isMobile$ | async)">
+                                <img
+                                  *appShellNoRender
+                                  src="{{ env.IMGIX_UPLOADS_URL }}static/menu/Accessories-Sunglasses.webp"
+                                  alt="Accessories-Sunglasses.webp"
+                                  class="img-responsive"
+                                />
+                              </ng-container>
+                            </a>
+                          </div>
+                          <h3 class="dd-title">
+                            <a routerLink="/{{ accCatImageSeoSec }}">SUNGLASSES</a>
+                            <a routerLink="/{{ accCatImageSeoSec }}" class="shop-text">Shop Now</a>
+                          </h3>
+                        </div>
+                      </li>
+
+                      <li
+                        class="col-lg-3 col-md-12 col-sm-12 float-right"
+                        *ngIf="
+                          gitem.name.trim() == 'ACCESSORIES'.toLowerCase() ||
+                          gitem.name.trim() == 'TILBEHØR'.toLowerCase() ||
+                          gitem.name.trim() == 'ZUBEHÖR'.toLowerCase() ||
+                          gitem.name.trim() == 'ACCESORIOS'.toLowerCase() ||
+                          gitem.name.trim() == 'ACCESSOIRES'.toLowerCase() ||
+                          gitem.name.trim() == 'TILLBEHÖR'.toLowerCase() ||
+                          gitem.name.trim() == 'ACCESSOARER'.toLowerCase()
+                        "
+                        (click)="closeMenu()"
+                      >
+                        <div class="newarrival">
+                          <div class="img-bx">
+                            <a routerLink="/{{ accCatImageSeo }}">
+                              <ng-container *ngIf="!(isMobile$ | async)">
+                                <img
+                                  *appShellNoRender
+                                  src="{{ env.IMGIX_UPLOADS_URL }}static/menu/Accessories-Wallets.webp"
+                                  alt="Accessories-Wallets.webp"
+                                  class="img-responsive"
+                                />
+                              </ng-container>
+                            </a>
+                          </div>
+                          <h3 class="dd-title">
+                            <a routerLink="/{{ accCatImageSeo }}">Wallets</a>
+                            <a routerLink="/{{ accCatImageSeo }}" class="shop-text">Shop Now</a>
+                          </h3>
+                        </div>
+                      </li>
+
+                      <li
+                        class="col-lg-3 col-md-12 col-sm-12 float-right"
+                        *ngIf="
+                          gitem.name.trim() == 'JEWELRY'.toLowerCase() ||
+                          gitem.name.trim() == 'SMYKKER'.toLowerCase() ||
+                          gitem.name.trim() == 'DER SCHMUCK'.toLowerCase() ||
+                          gitem.name.trim() == 'JOYAS'.toLowerCase() ||
+                          gitem.name.trim() == 'BIJOUX'.toLowerCase() ||
+                          gitem.name.trim() == 'SMYCKEN'.toLowerCase() ||
+                          gitem.name.trim() == 'SCHMUCK'.toLowerCase()
+                        "
+                        (click)="closeMenu()"
+                      >
+                        <div class="newarrival">
+                          <div class="img-bx">
+                            <a routerLink="/{{ jewelCatImageSeoSec }}">
+                              <ng-container *ngIf="!(isMobile$ | async)">
+                                <img
+                                  *appShellNoRender
+                                  src="{{ env.IMGIX_UPLOADS_URL }}static/menu/jewelry-earrings1.webp"
+                                  alt="jewelry-earrings1.webp"
+                                  class="img-responsive"
+                                />
+                              </ng-container>
+                            </a>
+                          </div>
+                          <h3 class="dd-title">
+                            <a routerLink="/{{ jewelCatImageSeoSec }}">Earings</a>
+                            <a routerLink="/{{ jewelCatImageSeoSec }}" class="shop-text">Shop Now</a>
+                          </h3>
+                        </div>
+                      </li>
+                      <li
+                        class="col-lg-3 col-md-12 col-sm-12 float-right"
+                        *ngIf="
+                          gitem.name.trim() == 'JEWELRY'.toLowerCase() ||
+                          gitem.name.trim() == 'SMYKKER'.toLowerCase() ||
+                          gitem.name.trim() == 'DER SCHMUCK'.toLowerCase() ||
+                          gitem.name.trim() == 'JOYAS'.toLowerCase() ||
+                          gitem.name.trim() == 'BIJOUX'.toLowerCase() ||
+                          gitem.name.trim() == 'SMYCKEN'.toLowerCase() ||
+                          gitem.name.trim() == 'SCHMUCK'.toLowerCase()
+                        "
+                        (click)="closeMenu()"
+                      >
+                        <div class="newarrival">
+                          <div class="img-bx">
+                            <a routerLink="/{{ jewelCatImageSeoFirst }}">
+                              <ng-container *ngIf="!(isMobile$ | async)">
+                                <img
+                                  *appShellNoRender
+                                  src="{{ env.IMGIX_UPLOADS_URL }}static/menu/jewelry-necklaces1.webp"
+                                  alt="jewelry-necklaces1.webp"
+                                  class="img-responsive"
+                                />
+                              </ng-container>
+                            </a>
+                          </div>
+                          <h3 class="dd-title">
+                            <a routerLink="/{{ jewelCatImageSeoFirst }}">Necklaces</a>
+                            <a routerLink="/{{ jewelCatImageSeoFirst }}" class="shop-text">Shop Now</a>
+                          </h3>
+                        </div>
+                      </li>
+                      <li
+                        class="col-lg-3 col-md-12 col-sm-12 float-right"
+                        *ngIf="
+                          gitem.name.trim() == 'CLOTHING'.toLowerCase() ||
+                          gitem.name.trim() == 'KLEIDUNG'.toLowerCase() ||
+                          gitem.name.trim() == 'TØJ'.toLowerCase() ||
+                          gitem.name.trim() == 'ROPA'.toLowerCase() ||
+                          gitem.name.trim() == 'KLAMOTTEN'.toLowerCase() ||
+                          gitem.name.trim() == 'VÊTEMENTS'.toLowerCase() ||
+                          gitem.name.trim() == 'KLÄDER'.toLowerCase()
+                        "
+                        (click)="closeMenu()"
+                      >
+                        <div class="newarrival">
+                          <div class="img-bx">
+                            <a routerLink="/{{ clothingCatImageSeoSec }}">
+                              <ng-container *ngIf="!(isMobile$ | async)">
+                                <img
+                                  *appShellNoRender
+                                  src="{{ env.IMGIX_UPLOADS_URL }}static/menu/Clothing-outerwear.webp"
+                                  alt="Clothing-outerwear.webp"
+                                  class="img-responsive"
+                                />
+                              </ng-container>
+                            </a>
+                          </div>
+                          <h3 class="dd-title">
+                            <a routerLink="/{{ clothingCatImageSeoSec }}">Outerwear</a>
+                            <a routerLink="/{{ clothingCatImageSeoSec }}" class="shop-text">Shop Now</a>
+                          </h3>
+                        </div>
+                      </li>
+                      <li
+                        class="col-lg-3 col-md-12 col-sm-12 float-right"
+                        *ngIf="
+                          gitem.name.trim() == 'CLOTHING'.toLowerCase() ||
+                          gitem.name.trim() == 'KLEIDUNG'.toLowerCase() ||
+                          gitem.name.trim() == 'TØJ'.toLowerCase() ||
+                          gitem.name.trim() == 'ROPA'.toLowerCase() ||
+                          gitem.name.trim() == 'KLAMOTTEN'.toLowerCase() ||
+                          gitem.name.trim() == 'VÊTEMENTS'.toLowerCase() ||
+                          gitem.name.trim() == 'KLÄDER'.toLowerCase()
+                        "
+                        (click)="closeMenu()"
+                      >
+                        <div class="newarrival">
+                          <div class="img-bx">
+                            <a routerLink="/{{ clothingCatImageSeo }}">
+                              <ng-container *ngIf="!(isMobile$ | async)">
+                                <img
+                                  *appShellNoRender
+                                  src="{{ env.IMGIX_UPLOADS_URL }}static/menu/clothing1-tops.webp"
+                                  alt="clothing1-tops.webp"
+                                  class="img-responsive"
+                                />
+                              </ng-container>
+                            </a>
+                          </div>
+                          <h3 class="dd-title">
+                            <a routerLink="/{{ clothingCatImageSeo }}">Tops</a>
+                            <a routerLink="/{{ clothingCatImageSeo }}" class="shop-text">Shop Now</a>
+                          </h3>
+                        </div>
+                      </li>
+                      <li
+                        class="col-lg-6 col-md-12 col-sm-12 float-right"
+                        *ngIf="
+                          gitem.name.trim() == 'SHOES'.toLowerCase() ||
+                          gitem.name.trim() == 'SCHUHE'.toLowerCase() ||
+                          gitem.name.trim() == 'SKO'.toLowerCase() ||
+                          gitem.name.trim() == 'SKOR'.toLowerCase() ||
+                          gitem.name.trim() == 'ZAPATOS'.toLowerCase() ||
+                          gitem.name.trim() == 'CHAUSSURES'.toLowerCase()
+                        "
+                        (click)="closeMenu()"
+                      >
+                        <div class="newarrival">
+                          <div class="img-bx">
+                            <a routerLink="/{{ shoeCatImageSeo }}">
+                              <ng-container *ngIf="!(isMobile$ | async)">
+                                <img
+                                  *appShellNoRender
+                                  src="{{ env.IMGIX_UPLOADS_URL }}static/menu/shoes-flats.webp"
+                                  alt="shoes-flats.webp"
+                                  class="img-responsive"
+                                />
+                              </ng-container>
+                            </a>
+                          </div>
+                          <h3 class="dd-title">
+                            <a routerLink="/{{ shoeCatImageSeo }}">SANDALS</a>
+                            <a routerLink="/{{ shoeCatImageSeo }}" class="shop-text">Shop Now</a>
+                          </h3>
+                        </div>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="sell-with-us">
+                <a
+                  id="sell_an_item_link"
+                  routerLink="/sellers"
+                  class="nav-link main-nav-link"
+                  (click)="trackSegmentEvent()"
+                >
+                  Sell an Item
+                </a>
+              </li>
+            </ul>
+          </ng-container>
+        </div>
+      </div>
+      <div class="search-top slidetoggle_btn desktop-search ignore-click-outside">
+        <a
+          href="javascript:void(0)"
+          id="slide_btn_top"
+          class="search-button-link ignore-click-outside"
+          (click)="showSearchBarSlider()"
+        >
+          <i class="fa fa-search form-control-feedback ignore-click-outside">
+            <span aria-hidden="true">×</span>
+          </i>
+          <span #searchButtonText class="search-button-text ignore-click-outside">
+            {{ 'Search' | translate }}
+          </span>
+        </a>
+
+        <ng-container *ngIf="isMenuOpen">
+          <ais-instantsearch [config]="instantsearchConfig">
+            <app-search-box #searchBarSlider [startsOpen]="isMenuOpen"></app-search-box>
+          </ais-instantsearch>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+
+  <app-side-nav
+    class="mobile-slide-icon ignore-click-outside"
+    *appShellNoRender
+    [useTextBoxAsCTA]="true"
+  ></app-side-nav>
+</nav>

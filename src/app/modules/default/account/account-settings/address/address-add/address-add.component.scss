@@ -1,0 +1,368 @@
+:host {
+  .account-details {
+    .select-salutation {
+      label {
+        padding-right: 15px;
+        margin-bottom: 0;
+      }
+    }
+    .dob-input {
+      border: 1px solid var(--main-color-black);
+      width: 85%;
+      height: 50px;
+      padding: 10px;
+      background: none;
+    }
+    .form-title {
+      font-size: 20px;
+      font-weight: 400;
+      border-bottom: 1px solid #000;
+      margin-bottom: 25px;
+      padding-bottom: 5px;
+      font-family: 'Playfair Display', serif;
+    }
+    .form-group-title {
+      font-size: 20px;
+      font-weight: 400;
+      padding-bottom: 15px;
+      font-family: 'Playfair Display', serif;
+    }
+    .get-paid-form {
+      padding: 0 50px;
+    }
+    .top-sub-tabs {
+      font-size: 14px;
+      font-weight: inherit;
+      padding: 5px;
+      text-align: center;
+      margin-bottom: 40px;
+
+      span {
+        position: relative;
+        display: inline-block;
+        margin: 0 15px;
+      }
+      span:after {
+        content: '';
+        width: 11px;
+        height: 11px;
+        background-color: rgba(0, 0, 0, 0.3);
+        position: absolute;
+        border-radius: 30px;
+        margin: 10px auto;
+        left: 0;
+        right: 0px;
+        top: 21px;
+      }
+      span.active:after {
+        background-color: rgba(0, 0, 0, 1);
+      }
+    }
+    .description {
+      margin-bottom: 15px;
+      margin-top: 30px;
+    }
+    .secondary {
+      padding: 10px;
+    }
+    .preference-tab {
+      margin-top: 50px;
+      margin-bottom: 0px;
+      padding-bottom: 0px;
+    }
+    .dropdown-input {
+      border: 1px solid var(--main-color-black);
+      width: 85%;
+      height: 50px;
+      padding: 10px;
+    }
+    .dropdown-select {
+      width: 100%;
+      max-width: 100%;
+    }
+    .update-button-box {
+      margin-top: 20px;
+    }
+    span.error-message {
+      font-size: 12px;
+    }
+    .dropdown-field-2 {
+      width: 85%;
+      height: 40px;
+    }
+    input[type='text'].secondary,
+    input[type='password'].secondary,
+    input[type='email'].secondary,
+    input[type='number'].secondary,
+    input.mat-datepicker-input.secondary {
+      width: 85%;
+    }
+
+    .contact_info {
+      .form-group {
+        text-align: right;
+        .description,
+        .dropdown-field {
+          text-align: left;
+          padding-left: 15%;
+        }
+        span {
+          text-align: left;
+          display: inline-block;
+          width: 85%;
+        }
+      }
+      .form-group-title-2 {
+        padding-left: 15%;
+      }
+      .billing-address-group {
+        padding-left: 15%;
+
+        .form-group {
+          margin-bottom: 0px;
+          span {
+            text-align: left;
+            display: inline-block;
+            width: 100%;
+          }
+        }
+
+        .description {
+          padding-left: 0px;
+        }
+        .dropdown-field {
+          padding-left: 0px;
+        }
+        .dropdown-select {
+          padding-bottom: 0px;
+        }
+
+        input[type='text'].secondary,
+        input[type='password'].secondary,
+        input[type='email'].secondary,
+        input[type='number'].secondary,
+        input.mat-datepicker-input.secondary {
+          width: 100%;
+        }
+      }
+    }
+    .mobile-number {
+      width: 62%;
+      height: 40px;
+      border: 1px solid var(--main-color-black);
+      margin-left: 2%;
+      padding: 10px;
+    }
+    .phone-code {
+      width: 20%;
+      height: 40px;
+      float: left;
+      font-size: 12px;
+      .phonecode-label {
+        font-size: 12px;
+      }
+      .phonecode-option {
+        font-size: 12px;
+        padding: 0 2px;
+      }
+    }
+
+    .address-select {
+      label {
+        padding-right: 15px;
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .modal-dialog {
+    width: 500px;
+    height: 110px;
+    top: 0;
+    bottom: 0;
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    transform: translate(0, 0);
+    .modal-content {
+      border-radius: 0px;
+      .close {
+        opacity: 0.2;
+        padding-right: 10px;
+        padding-top: 10px;
+      }
+      .modal-body {
+        text-align: center;
+        h2 {
+          font-family: Playfair Display, serif;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 992px) {
+    .account-details {
+      margin-top: 15px;
+
+      .form-title {
+        text-align: center;
+        padding-bottom: 15px;
+      }
+      .dropdown-input {
+        width: 100%;
+      }
+      .form-group-title {
+        margin-top: 50px;
+        margin-bottom: 30px;
+        padding-bottom: 0px;
+      }
+      .update-button-box {
+        text-align: center;
+        margin-top: 50px;
+      }
+      .update-btn {
+        min-width: 220px;
+      }
+
+      .dropdown-field-2 {
+        width: 100%;
+      }
+
+      input[type='text'].secondary,
+      input[type='password'].secondary,
+      input[type='email'].secondary,
+      input[type='number'].secondary,
+      input.mat-datepicker-input.secondary {
+        width: 100%;
+      }
+
+      .dob-input {
+        width: 100%;
+      }
+
+      .contact_info {
+        .form-group {
+          text-align: left;
+          .description,
+          .dropdown-field {
+            text-align: left;
+            padding-left: 0%;
+          }
+        }
+        .form-group-title-2 {
+          padding-left: 0%;
+        }
+
+        .billing-address-group {
+          padding-left: 0%;
+        }
+      }
+      .mobile-number {
+        width: 73%;
+        margin-left: 2%;
+      }
+      .phone-code {
+        width: 25%;
+      }
+    }
+
+    .modal-dialog {
+      width: 100%;
+      margin: 0;
+      max-width: 100%;
+      height: 100%;
+      background: #fff;
+      padding: 0 10px;
+      .modal-content {
+        box-shadow: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 0px;
+      }
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .account-details {
+      .mobile-number {
+        width: 60%;
+        height: 40px;
+        border: 1px solid var(--main-color-black);
+        margin-left: 2%;
+        padding: 10px;
+      }
+      .phone-code {
+        width: 35%;
+      }
+    }
+  }
+}
+
+::ng-deep .ng-select .ng-arrow-wrapper .ng-arrow {
+  border: none;
+}
+
+::ng-deep .ng-select .ng-arrow-wrapper .ng-arrow:after {
+  content: '\f107';
+  display: inline-block;
+  font: normal normal normal 30px/1 FontAwesome;
+  position: absolute;
+  top: 50%;
+  right: 0px;
+  transform: translate(-0px, -50%);
+  text-align: center;
+  color: var(--main-color-black);
+}
+::ng-deep .mat-form-field-underline {
+  display: none;
+}
+::ng-deep .dropdown-select .ng-value,
+::ng-deep .dropdown-select .ng-value label {
+  height: 26px;
+}
+
+::ng-deep .ng-select .ng-arrow-wrapper .ng-arrow:after {
+  font-size: 20px;
+}
+::ng-deep .ng-select.ng-select-single .ng-select-container .ng-arrow-wrapper .ng-arrow {
+  height: 30px;
+  margin: 0;
+}
+
+::ng-deep .ng-dropdown-panel .ng-dropdown-header {
+  padding: 0 8px;
+  border: 0px;
+}
+
+::ng-deep .ng-dropdown-panel .ng-select input {
+  border: 1px solid #000;
+}
+::ng-deep .ng-dropdown-panel.ng-select-bottom {
+  top: calc(100% - 0em);
+}
+::ng-deep .ng-dropdown-panel.ng-select-top {
+  bottom: calc(100% - 0em);
+}
+::ng-deep .ng-dropdown-panel.ng-select-bottom {
+  top: calc(100% - 0em);
+}
+::ng-deep .ng-select.ng-select-single .ng-select-container {
+}
+::ng-deep .ng-select.ng-select-single .ng-select-container .ng-value-container {
+  padding: 2px 4px;
+}
+
+::ng-deep .ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+  padding: 0 5px;
+}
+::ng-deep .ng-dropdown-panel {
+  z-index: 998 !important;
+}
+::ng-deep .ng-select.ng-select-opened .ng-select-container {
+  z-index: 998 !important;
+}

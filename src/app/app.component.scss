@@ -1,0 +1,53 @@
+::host ::ng-deep {
+  .app-spinner {
+    color: #fff;
+    background-color: rgba(51, 51, 51, 0.8);
+  }
+}
+#consent-manager {
+  position: fixed !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  z-index: 100 !important;
+  background: #000 !important;
+}
+#consent-manager p {
+  color: #fff !important;
+  font-size: 12px !important;
+  display: inline !important;
+}
+#consent-manager div {
+  background: #000 !important;
+}
+#consent-manager p button {
+  text-decoration: none !important;
+}
+#consent-manager p button:hover {
+  text-decoration: underline !important;
+}
+#accept {
+  margin-left: 15px !important;
+  text-decoration: none !important;
+  right: 40px !important;
+  position: absolute !important;
+}
+#accept:hover {
+  text-decoration: underline !important;
+}
+.css-1c3imcp {
+  top: 49% !important;
+}
+.css-rits9q div {
+  float: right;
+  display: inline-flex;
+}
+.css-c7nl0w {
+  padding: 8px 16px !important;
+}
+.css-1g3391b {
+  padding: 8px 16px !important;
+}
+.css-pvnp1j {
+  padding: 8px 16px !important;
+}

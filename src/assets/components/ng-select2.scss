@@ -1,0 +1,29 @@
+/* Styling for select2 in setting popup  **/
+.firstpopup .modal-body .item select {
+  font-size: 15px;
+  line-height: 20px;
+  display: block;
+  width: 100% !important;
+  max-width: 100%;
+  height: 44px;
+  box-sizing: border-box;
+  padding: 0 28px 0 14px;
+  vertical-align: top;
+  cursor: pointer;
+  position: relative;
+}
+
+.firstpopup .modal-body .item select:before {
+  content: '\f105';
+  pointer-events: none;
+  position: absolute;
+  top: 14px;
+  right: 13px;
+  width: 7px;
+  height: 14px;
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: 20px;
+}

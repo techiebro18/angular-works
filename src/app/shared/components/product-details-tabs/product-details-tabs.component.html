@@ -1,0 +1,112 @@
+<div #tabs class="tabs">
+  <div #tablist class="tablist" role="tablist" aria-label="Sample Tabs">
+    <div class="section">
+      <p class="tab-section" (click)="changeTabs('detailTab', !detailTab)">
+        <span>{{ 'Details' | translate }}</span>
+        <img
+          class="arrow-expandable"
+          src="assets/images/gallery/chevron_down_rgb_black.svg"
+          [ngClass]="{ expanded: detailTab }"
+        />
+      </p>
+
+      <div class="info-tab" [ngClass]="{ opened: detailTab }">
+        <div class="grid-info" *ngIf="product.colors && product.colors.length">
+          <div class="info-label">{{ 'Color' | translate }}</div>
+          <div class="info-desc">{{ colors }}</div>
+        </div>
+
+        <div class="grid-info" *ngIf="product.material">
+          <div class="info-label">{{ 'Material' | translate }}</div>
+          <div class="info-desc">{{ product.material }}</div>
+        </div>
+
+        <div class="grid-info" *ngIf="product.measurement">
+          <div class="info-label">{{ 'Measurements' | translate }}</div>
+          <div class="info-desc">{{ product.measurement }}</div>
+        </div>
+
+        <div class="grid-info" *ngIf="product.sizes && product.sizes.length && size">
+          <div class="info-label">{{ 'Size' | translate }}</div>
+          <div class="info-desc">{{ size }}</div>
+        </div>
+
+        <div class="grid-info" *ngIf="product.heel_height && product.heel_height > 0">
+          <div class="info-label">{{ 'Heel Size' | translate }}</div>
+          <div class="info-desc">{{ product.heel_height }}</div>
+        </div>
+
+        <div class="grid-info" *ngIf="product.shaft_height && product.shaft_height > 0">
+          <div class="info-label">{{ 'Shaft Size' | translate }}</div>
+          <div class="info-desc">{{ product.shaft_height }}</div>
+        </div>
+
+        <div class="grid-info" *ngIf="product.chain_length && product.chain_length != 0">
+          <div class="info-label">Chain Length</div>
+          <div class="info-desc">{{ product.chain_length }}</div>
+        </div>
+
+        <div class="grid-info" *ngIf="product.pandant_measurement && product.pandant_measurement != 0">
+          <div class="info-label">Pendant Measurements</div>
+          <div class="info-desc">{{ product.pandant_measurement }}</div>
+        </div>
+
+        <div class="grid-info" *ngIf="product.shoulder_drop && product.shoulder_drop != 0">
+          <div class="info-label">{{ 'Shoulder drop' | translate }}</div>
+          <div class="info-desc">{{ product.shoulder_drop }}</div>
+        </div>
+
+        <div class="grid-info" *ngIf="product.handle_drop && product.handle_drop != 0">
+          <div class="info-label">Handle Drop</div>
+          <div class="info-desc">{{ product.handle_drop }}</div>
+        </div>
+
+        <div class="grid-info" *ngIf="product.date_code">
+          <div class="info-label">{{ 'DateCode' | translate }}</div>
+          <div class="info-desc">{{ product.date_code }}</div>
+        </div>
+
+        <div class="grid-info" *ngIf="product.sku">
+          <div class="info-label">{{ 'ItemNumber' | translate }}</div>
+          <div class="info-desc">{{ product.sku }}</div>
+        </div>
+
+        <div class="grid-info" *ngIf="product.country_of_origin">
+          <div class="info-label">{{ 'CountryofOrigin' | translate }}</div>
+          <div class="info-desc">{{ product.country_of_origin }}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <p class="tab-section" (click)="changeTabs('descriptionTab', !descriptionTab)">
+        <span>{{ 'Description' | translate }}</span>
+        <img
+          class="arrow-expandable"
+          src="assets/images/gallery/chevron_down_rgb_black.svg"
+          [ngClass]="{ expanded: descriptionTab }"
+        />
+      </p>
+      <div class="info-tab" [ngClass]="{ opened: descriptionTab }">
+        <div *ngIf="product.description" [innerHTML]="product.description"></div>
+        <div *ngIf="!product.description">
+          {{ 'No description provided by seller' | translate }}
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <p class="tab-section" (click)="changeTabs('deliveryTab', !deliveryTab)">
+        <span>{{ 'Delivery & Returns' | translate }}</span>
+        <img
+          class="arrow-expandable"
+          src="assets/images/gallery/chevron_down_rgb_black.svg"
+          [ngClass]="{ expanded: deliveryTab }"
+        />
+      </p>
+      <div class="info-tab" [ngClass]="{ opened: deliveryTab }" *ngIf="product">
+        <app-shippingbox [product]="productData"></app-shippingbox>
+      </div>
+    </div>
+  </div>
+</div>

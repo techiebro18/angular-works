@@ -1,0 +1,90 @@
+::ng-deep {
+  .dialog-header button {
+    padding: 0;
+  }
+}
+
+.modal-dialog {
+  margin: auto;
+  width: 35vw;
+  max-width: 90vw;
+
+  .modal-content {
+    border: none;
+
+    .modal-body {
+      padding: 0;
+
+      .title {
+        text-align: center;
+        font-family: Cormorant, serif;
+        font-size: 30px;
+        text-transform: uppercase;
+      }
+
+      .product-details {
+        margin: auto;
+        text-align: center;
+
+        .product-image {
+          text-align: center;
+        }
+
+        .product-brand {
+          font-family: 'Cormorant-Medium', serif;
+          font-size: 22px;
+          text-transform: uppercase;
+          margin: 5px 0;
+        }
+
+        .product-name {
+          font-size: 15px;
+          font-family: 'FuturaBT-Light', sans-serif;
+        }
+      }
+
+      .buttons-box {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        width: 100%;
+
+        button {
+          width: 100%;
+        }
+
+        .btn-separator {
+          width: 40px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 425px) {
+  .modal-dialog {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+
+    .modal-content {
+      .modal-body {
+        display: flex;
+        flex-direction: column;
+
+        .buttons-box {
+          display: flex;
+          flex-direction: column;
+
+          button {
+            width: 100%;
+          }
+
+          .btn-separator {
+            height: 10px;
+          }
+        }
+      }
+    }
+  }
+}

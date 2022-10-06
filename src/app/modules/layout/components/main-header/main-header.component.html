@@ -1,0 +1,96 @@
+<header class="header-main">
+  <div class="top-bar">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 col-md-6">
+          <app-nav-top-settings></app-nav-top-settings>
+        </div>
+        <div class="col-lg-6 col-md-6">
+          <div class="right-top">
+            <ul class="cart-sign">
+              <li *ngIf="authService.isLoggedInObs | async; else elseBlock">
+                <a
+                  id="account_details_link"
+                  href="javascript:void(0)"
+                  (click)="openUserAccountBox()"
+                  class="ignore-click-outside"
+                >
+                  {{ (user$ | async)?.first_name | titlecase }}
+                  {{ (user$ | async)?.last_name | titlecase }}
+                  {{
+                    !(user$ | async)?.first_name.length && !(user$ | async)?.last_name.length
+                      ? ('Your Account' | translate)
+                      : ''
+                  }}
+                </a>
+              </li>
+              <ng-template #elseBlock>
+                <li>
+                  <a href="javascript:void(0)" routerLinkActive="active">
+                    <span id="sign_in_link" (click)="openPopup(true)">
+                      {{ 'Sign in' | translate }}
+                    </span>
+                    /
+                    <span id="register_link" (click)="openPopup(false)">
+                      {{ 'Register' | translate }}
+                    </span>
+                  </a>
+                </li>
+              </ng-template>
+              <li *ngIf="(authService.isLoggedInObs | async) && (user$ | async)?.role_id != 2">
+                <a [routerLink]="wishListSeo">
+                  <i class="fa fa-heart-o" aria-hidden="true"></i>
+                </a>
+                &nbsp;
+              </li>
+              <li>
+                <a routerLink="/cart/view-cart" routerLinkActive="active">
+                  {{ 'My shopping Bag' | translate }}
+                  <span>({{ cartItemCount }})</span>
+                </a>
+              </li>
+              <li *ngIf="editUrl != null && editUrl != ''">
+                <a href="{{ editUrl }}">{{ 'Edit' | translate }}</a>
+              </li>
+            </ul>
+          </div>
+          <ng-container *ngIf="isAccountBoxOpen">
+            <tvb-account-box
+              #accountBox
+              [open]="isAccountBoxOpen"
+              [user]="user$"
+              (callBack)="closeUserAccountBox()"
+            ></tvb-account-box>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="logo">
+    <!-- TODO: logo href should point to the main website, considering the current subdomain -->
+    <a routerLink="/"><img src="assets/images/logo.jpg" alt="logo" /></a>
+  </div>
+  <app-nav [cartItemCount]="cartItemCount"></app-nav>
+
+  <ng-container *ngIf="flashBannerEnabled && flashBanner && flashBanner['text_' + languageCode].length">
+    <div class="flash-sale-banner">
+      <ng-container *ngIf="!flashBanner['fixed'] || flashBanner['fixed'] === '0'">
+        <marquee onmouseover="this.stop();" onmouseout="this.start();" scrollamount="1" height="30px">
+          <a
+            href="{{ flashBanner['link_' + languageCode] ? flashBanner['link_' + languageCode] : '#' }}"
+            *ngFor="let i of [].constructor(20)"
+            [innerHTML]="flashBanner['text_' + languageCode] | safehtml"
+          ></a>
+        </marquee>
+      </ng-container>
+      <ng-container *ngIf="flashBanner['fixed'] === '1'">
+        <a
+          href="{{ flashBanner['link_' + languageCode] ? flashBanner['link_' + languageCode] : '#' }}"
+          class="fixed"
+          [innerHTML]="flashBanner['text_' + languageCode] | safehtml"
+        ></a>
+      </ng-container>
+    </div>
+  </ng-container>
+</header>

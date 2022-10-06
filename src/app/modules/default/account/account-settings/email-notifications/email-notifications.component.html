@@ -1,0 +1,52 @@
+<div class="product-list email-notification-page">
+  <div class="container">
+    <div class="tabbable tabs-left">
+      <div class="col-md-12">
+        <div class="tab-content">
+          <form [formGroup]="mainForm" (ngSubmit)="onSubmit()" autocomplete="off" novalidate>
+            <div class="tab-pane active" id="email-notification">
+              <div class="tab_body">
+                <div class="email-notification">
+                  <h3 class="title">Email Notifications</h3>
+
+                  <p class="subtitle">
+                    Want to receive fewer emails? No problem, simply check the topics you wish to hear more about or
+                    uncheck the ones you don't.
+                  </p>
+
+                  <div class="email-notification-card">
+                    <app-checkbox [name]="'price_drop'" formControlName="price_drop">
+                      {{ 'Prices Drops' | translate }}
+                    </app-checkbox>
+                    <p class="checkbox-description">Alerts when one of your favorites drops in price.</p>
+
+                    <app-checkbox [name]="'waitlist'" formControlName="waitlist">
+                      {{ 'Waitlist' | translate }}
+                    </app-checkbox>
+                    <p class="checkbox-description">Alert for Waitlist.</p>
+
+                    <app-checkbox [name]="'news_letter'" formControlName="news_letter">
+                      {{ 'Newsletter' | translate }}
+                    </app-checkbox>
+                    <p class="checkbox-description">Newsletter Subscription.</p>
+
+                    <app-checkbox [name]="'other_emails'" formControlName="other_emails">
+                      {{ 'Other Emails' | translate }}
+                    </app-checkbox>
+                    <p class="checkbox-description">
+                      All our informational emails, like welcome series, dream designers...
+                    </p>
+                  </div>
+
+                  <div class="form-group submit-notify">
+                    <button class="btn primary">{{ 'Save' | translate }}</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

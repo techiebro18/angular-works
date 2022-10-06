@@ -1,0 +1,129 @@
+input,
+select,
+textarea {
+  border-color: var(--steps-gray) !important;
+}
+input:hover,
+select:hover,
+textarea:hover {
+  border-color: var(--text-input-grey) !important;
+}
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--main-color-black) !important;
+}
+.checkout-container {
+  width: 100%;
+  max-width: 1200px;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin: 0 auto;
+}
+
+.main {
+  display: flex;
+  column-gap: 4em;
+  justify-content: space-between;
+
+  div {
+    flex: 1;
+  }
+}
+
+.form-container {
+  width: 100%;
+  max-width: 50%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  text-transform: uppercase;
+  text-decoration: none;
+  margin: 1em 0;
+  padding: 1em 0;
+  font-size: 20px;
+  font-family: 'Playfair Display', serif;
+  border-bottom: 2px solid #bcbcbc;
+  color: #bcbcbc;
+  transition: all ease 0.5s;
+
+  &.disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+
+  &.active {
+    color: #000;
+    border-bottom: 2px solid #000;
+  }
+
+  span {
+    font-size: 12px;
+    text-transform: none;
+    font-family: 'FuturaBT-Light', sans-serif;
+    text-decoration: underline;
+    color: #000;
+  }
+}
+
+.login-checkout-summary {
+  padding-top: 24px;
+}
+
+.collapse-panel.closed {
+  max-height: 300px;
+  transition: all ease 0.5s;
+
+  &.closed {
+    max-height: 0;
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+.btn.next {
+  line-height: 25px;
+  width: 100%;
+}
+
+@media screen and (max-width: 1037px) {
+  .checkout-container {
+    overflow-x: hidden;
+  }
+  .btn.next {
+    width: 100%;
+  }
+}
+::ng-deep mat-accordion.mat-accordion {
+  margin-top: 2em;
+  width: 100%;
+  max-width: 100%;
+
+  mat-expansion-panel.mat-expansion-panel {
+    overflow: visible;
+  }
+  mat-expansion-panel.mat-expansion-panel > mat-expansion-panel-header.mat-expansion-panel-header {
+    border-top: 0 !important;
+    height: 60px;
+  }
+
+  .mat-content {
+    display: block;
+  }
+}
+
+// iPad Pro
+@media screen and (max-width: 1024px) {
+  .main {
+    padding: 0 0;
+    flex-direction: column;
+  }
+
+  .form-container,
+  app-checkout-order-summary {
+    max-width: 100%;
+    margin-bottom: 50px;
+  }
+}

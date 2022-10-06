@@ -1,0 +1,29 @@
+<tvb-filter-box
+  *ngIf="sections?.categories"
+  filterName="category"
+  title="Categories"
+  inputPlaceholder="Categories"
+  [options]="sections?.categories"
+  [appConfig]="appConfig"
+  (toggleSectionOption)="handleOptionToggling($event['name'], $event['value'])"
+></tvb-filter-box>
+
+<tvb-filter-box
+  *ngIf="sections?.subCategories && isAnyCategorySelected()"
+  filterName="sub"
+  title="Sub Categories"
+  inputPlaceholder="SubCategories"
+  [options]="sections?.subCategories"
+  [appConfig]="appConfig"
+  [isQuickSearchable]="true"
+  (toggleSectionOption)="handleOptionToggling($event['name'], $event['value'])"
+></tvb-filter-box>
+
+<tvb-filter-box
+  *ngIf="sections?.brands"
+  filterName="brands"
+  title="Designers"
+  [options]="sections?.brands"
+  [appConfig]="appConfig"
+  (toggleSectionOption)="handleOptionToggling($event['name'], $event['value'])"
+></tvb-filter-box>

@@ -1,0 +1,23 @@
+<div class="top-container">
+  <span class="header-title">{{ 'help_and_support.header_title' | translate }}</span>
+</div>
+
+<div class="container">
+  <div class="body-container">
+    <div class="left-container">
+      <div class="page-title-container desktop">
+        <span class="page-title">{{ 'help_and_support.page_title' | translate }}</span>
+      </div>
+
+      <tvb-side-menu [menuOptions]="menuOptions" class="desktop"></tvb-side-menu>
+      <tvb-menu-bar [menuOptions]="menuOptions" class="mobile"></tvb-menu-bar>
+    </div>
+
+    <div class="right-container">
+      <div class="content-title">{{ activeMenuOption?.title | translate }}</div>
+      <div class="body-content">
+        <tvb-accordion [topics]="activeMenuOption?.topics"></tvb-accordion>
+      </div>
+    </div>
+  </div>
+</div>

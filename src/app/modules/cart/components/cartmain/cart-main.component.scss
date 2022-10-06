@@ -1,0 +1,14 @@
+:host {
+  height: 100%;
+  .main {
+    flex: 1;
+    max-width: 100%;
+    .main-content {
+      flex: 1;
+    }
+    .footer-container {
+      display: inline-block;
+      width: 100%;
+    }
+  }
+}

@@ -1,0 +1,55 @@
+<div class="wrap-intro">
+  <div class="intro-section desktop">
+    <div class="col-lg-6 col-md-6 col-sm-6 imgbox">
+      <div class="virtial-text">
+        Join 200.000+ &nbsp; &nbsp; &nbsp; &nbsp;
+        <span class="coolgirl">cool girls</span>
+      </div>
+      <a href="{{ section_1.link }}">
+        <img
+          src="{{ env.UPLOADS_IMGIX_URL }}dynamic/homepage/{{ section_1.image_url }}.{{ section_1.extension }}"
+          class="img-responsive w-100 forOther"
+          alt="{{ section_1.image_url }}.{{ section_1.extension }}"
+          *appShellNoRender
+        />
+      </a>
+    </div>
+    <div class="col-lg-5 col-md-5 col-sm-5 product-title" *ngIf="section_2 != null">
+      <div class="text-section">
+        <div class="wrap">
+          <h3 [innerHTML]="section_2.title"></h3>
+          <h4 [innerHTML]="section_2.description"></h4>
+          <div class="cta-btn">
+            <a href="{{ section_2.link }}">{{ section_2.button }}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="intro-section mobile">
+    <div class="col-lg-5 col-md-5 col-sm-5 product-title" *ngIf="section_2 != null">
+      <div class="text-section">
+        <h3 [innerHTML]="section_2.title"></h3>
+        <h4 [innerHTML]="section_2.description"></h4>
+        <div class="cta-btn">
+          <a href="{{ section_2.link }}">{{ section_2.button }}</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 imgbox">
+      <div class="virtial-text">
+        Join 200.000+ &nbsp; &nbsp; &nbsp; &nbsp;
+        <span class="coolgirl">cool girls</span>
+      </div>
+      <a href="{{ section_1.link }}">
+        <img
+          src="{{ env.UPLOADS_IMGIX_URL }}dynamic/homepage/{{ section_1.image_url }}.{{ section_1.extension }}"
+          class="img-responsive w-100 forOther"
+          alt="{{ section_1.image_url }}.{{ section_1.extension }}"
+          *appShellNoRender
+        />
+      </a>
+    </div>
+  </div>
+</div>

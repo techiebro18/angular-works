@@ -1,0 +1,579 @@
+:host {
+  display: flex;
+  height: 100%;
+  .main {
+    flex: 1;
+    max-width: 100%;
+    .main-content {
+      flex: 1;
+    }
+    .footer-container {
+      display: inline-block;
+      width: 100%;
+    }
+  }
+}
+
+body {
+  background: #ddd;
+  min-height: 100vh;
+  vertical-align: middle;
+  display: flex;
+  font-family: sans-serif;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.product-quantity {
+  display: contents;
+}
+
+.mobile-only {
+  display: none;
+}
+
+header.list-header {
+  position: sticky;
+  top: 38px;
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+
+  .primary-link {
+    color: var(--main-color-dark);
+    text-decoration: underline;
+    transition: all 0.1s ease-out;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+  .label-save-all {
+    margin-right: 8px;
+  }
+}
+
+.container {
+  width: 100%;
+
+  header:not(.cart-header) {
+    display: flex;
+    border-top: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+    font-family: 'FuturaBT-Medium';
+    font-weight: 100;
+    line-height: 14px;
+    font-size: 14px;
+    div {
+      padding: 19px 0;
+    }
+    .box-save-all {
+      margin-right: 15px;
+    }
+  }
+
+  .placeholder-container {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+
+    li {
+      height: 40px;
+    }
+  }
+}
+
+.placeholder {
+  background-color: #e2e5e7;
+  height: 22px;
+  margin-right: 12px;
+  background-image: linear-gradient(90deg, rgba(#fff, 0), rgba(#fff, 0.5), rgba(#fff, 0));
+  background-size: 40px 100%;
+  background-repeat: no-repeat;
+  background-position: left -40px top 0;
+  animation: shine 1s ease infinite;
+}
+
+header.cart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0;
+  border: none;
+
+  h2.title {
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    font-size: 18px;
+    padding-top: 15px;
+  }
+
+  button {
+    margin: 0;
+  }
+}
+
+.title {
+  margin-bottom: 5vh;
+}
+
+.card {
+  margin: auto;
+  max-width: 950px;
+  width: 90%;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 1rem;
+  border: transparent;
+}
+
+.checkout-button {
+  max-width: 220px;
+  height: 40px;
+  margin: 0;
+  text-transform: uppercase;
+  line-height: 12px;
+  font-family: 'FuturaBT-Light';
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  transition: all 0.4s linear;
+
+  &:hover {
+    background-color: #666;
+    color: #fff;
+  }
+}
+
+.products-list {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  li {
+    display: flex;
+    padding: 20px 0 10px 0;
+    font-family: 'FuturaBT-Light';
+    font-size: 12px;
+    border-bottom: 1px solid #e5e5e5;
+    margin-bottom: 10px;
+  }
+}
+
+.title-container,
+.quantity-container,
+.image,
+.price-container,
+.total-amount-container {
+  display: flex;
+  flex-direction: column;
+  padding-right: 1em;
+  width: 95%;
+}
+
+.image {
+  width: 140px;
+  min-width: 140px;
+  padding-right: 1em;
+}
+
+.price-container,
+.price-container-mobile {
+  margin-top: 20px;
+  font-size: 14px;
+
+  .box-price {
+    display: flex;
+  }
+  .discount-price {
+    color: var(--sale);
+    margin: 0 5px;
+  }
+  .regular-price {
+    text-decoration: line-through;
+    padding: 0 5px;
+  }
+}
+.price-container-mobile {
+  margin-top: -5px;
+
+  .box-price {
+    display: block;
+  }
+  .discount-price {
+    color: var(--sale);
+    margin: 0 2px;
+  }
+  .regular-price {
+    text-decoration: line-through;
+  }
+}
+
+.total-amount-container {
+  min-width: 150px;
+  margin: -10px 0 0px 0;
+}
+
+.brand {
+  font-size: 15px;
+  font-family: 'FuturaBT-Medium';
+  padding: 0 0 5px;
+  display: block;
+}
+
+.product-title {
+  font-size: 14px;
+  line-height: 1;
+  font-family: 'FuturaBT-Light';
+  max-width: 96%;
+}
+
+.quantity {
+  width: 75px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  color: #555;
+  border: 1px solid #ccc;
+  background: #fff;
+  font-size: 16px;
+}
+
+.product-control {
+  font-size: 14px;
+  text-align: right;
+  margin-right: 3px;
+  a {
+    color: var(--text-input-grey);
+
+    span {
+      text-decoration: underline;
+    }
+  }
+}
+
+.removed-item {
+  display: inline-block;
+  padding: 0px 20px;
+  background-color: #191919;
+  font-size: 12px;
+  color: #ffffff;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+  line-height: 43px;
+  width: 255px;
+  text-align: center;
+  margin: 10px 0px;
+}
+
+.empty-cart {
+  margin: 1em 0;
+}
+
+.product-details-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+.remove-button {
+  text-decoration: underline;
+  display: inline-block;
+  margin-right: 0.25em;
+  font-size: 14px;
+  color: var(--text-input-grey);
+  transition: all 0.1s ease-out;
+  text-align: right;
+
+  i {
+    margin-left: 0.5em;
+  }
+  &:hover {
+    opacity: 0.8;
+    color: var(--text-input-grey);
+    text-decoration: underline;
+  }
+  .font-black {
+    color: var(--main-color-dark) !important;
+  }
+}
+
+.checkout-summary {
+  vertical-align: top;
+  width: 100%;
+  display: inline-block;
+  margin-bottom: 20px;
+  background-color: var(--footer-main-color);
+
+  .continue-button {
+    width: 100%;
+    max-width: 220px;
+    height: 40px;
+    margin: 20px 30px;
+    text-transform: uppercase;
+    font-family: 'FuturaBT-Light';
+    font-size: 12px;
+    color: #191919;
+    background-color: #fff;
+    border-color: #e5e5e5;
+    transition: all 0.4s linear;
+
+    &:hover {
+      background-color: #666;
+      color: #fff;
+    }
+  }
+
+  .total-price-container {
+    width: 350px;
+    text-align: right;
+    padding: 20px 30px;
+    background-color: var(--footer-main-color);
+    float: right;
+    margin: 0px;
+
+    .total-price {
+      display: flex;
+      justify-content: space-between;
+      font-family: 'FuturaBT-Light';
+      .title {
+        font-family: 'FuturaBT-Light';
+        text-align: left;
+        font-size: 14px;
+      }
+      .content {
+        font-family: 'FuturaBT-Light';
+        font-size: 14px;
+        .regular-price {
+          margin-right: 10px;
+        }
+      }
+    }
+    .total-regular-price {
+      display: block;
+      text-align: right;
+    }
+    .discount-price {
+      color: var(--sale);
+    }
+
+    .regular-price {
+      text-decoration: line-through;
+    }
+
+    .subtotal-container {
+      border-top: 1px solid var(--main-color-gray-3);
+      font-family: 'FuturaBT-Medium';
+      margin-top: 25px;
+      padding-top: 14px;
+
+      .subtotal-price {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+
+    .tax-hint {
+      margin-top: 15px;
+      font-size: 12px;
+      margin: 0 0 10.5px;
+      font-family: 'FuturaBT-Light';
+    }
+  }
+}
+
+.checkout-buttons {
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+  margin: 0;
+}
+
+.box-checkout-info {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  margin-top: 80px;
+
+  .box-info {
+    font-size: 13px;
+    width: 33%;
+    .main-info {
+      font-family: 'FuturaBT-Medium';
+      text-transform: uppercase;
+    }
+    .desc-info {
+      font-family: 'FuturaBT-Light';
+      margin-top: 7px;
+      font-size: 14px;
+    }
+  }
+}
+
+@keyframes shine {
+  to {
+    background-position: right -40px top 0;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .box-save-all {
+    margin-right: 0 !important;
+  }
+  .container {
+    header.cart-header {
+      flex-direction: column;
+      align-items: flex-start;
+      margin: 0;
+      border-bottom: 1px solid #e5e5e5;
+
+      h2.title {
+        padding-top: 0;
+      }
+
+      button {
+        margin: 0 auto 20px auto;
+        width: 100%;
+      }
+    }
+
+    .btn.checkout-button {
+      margin-top: 0;
+      margin-bottom: 2em;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .quantity-container,
+    .price-container,
+    .total-amount-container {
+      display: none;
+    }
+
+    .image {
+      width: 100px;
+      min-width: 100px;
+    }
+
+    .product-details-container {
+      flex-direction: column;
+      align-items: unset;
+    }
+
+    .mobile-only {
+      display: flex;
+      flex-direction: column;
+      margin: 2em 0 0;
+
+      .label {
+        display: inline-block;
+        font-family: 'FuturaBT-Medium';
+      }
+
+      .controls-container {
+        display: block;
+        align-items: center;
+        padding: 1em 0;
+        column-gap: 3em;
+        font-size: 12px;
+        justify-content: space-between;
+        text-align: left;
+      }
+      .remove-button {
+        font-size: 12px;
+        i {
+          margin-left: 0;
+        }
+        span {
+          margin-right: 6px;
+        }
+      }
+    }
+
+    .checkout-summary {
+      flex-direction: column;
+
+      .continue-button {
+        width: 100%;
+        max-width: calc(100% - 60px);
+      }
+
+      .total-price-container {
+        width: 100%;
+      }
+    }
+    .checkout-buttons {
+      display: flex;
+      flex-direction: column-reverse;
+      button {
+        width: 100%;
+        margin-bottom: 15px;
+      }
+    }
+    .box-checkout-info {
+      margin-top: 30px;
+      .box-info {
+        width: 100%;
+        margin-top: 30px;
+      }
+    }
+  }
+}
+
+.btn {
+  font-size: 12px;
+  line-height: unset;
+  height: 44px;
+  width: 255px;
+  i {
+    margin-right: 7px;
+  }
+}
+
+a {
+  color: black;
+}
+
+a:hover {
+  color: black;
+  text-decoration: none;
+}
+
+#code {
+  background-image: linear-gradient(to left, rgba(255, 255, 255, 0.253), rgba(255, 255, 255, 0.185)),
+    url('https://img.icons8.com/small/16/000000/long-arrow-right.png');
+  background-repeat: no-repeat;
+  background-position-x: 95%;
+  background-position-y: center;
+}
+
+@media screen and (max-width: 375px) {
+  .container .mobile-only .controls-container {
+    column-gap: 0;
+
+    & > a {
+      display: inline-block;
+      margin-left: 1em;
+
+      img {
+        width: 88px !important;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .container .mobile-only .controls-container {
+    column-gap: 0;
+
+    & > a {
+      display: inline-block;
+      margin-left: 0;
+    }
+  }
+}

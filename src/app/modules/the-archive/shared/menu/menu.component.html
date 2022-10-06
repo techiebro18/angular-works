@@ -1,0 +1,71 @@
+<ng-container *ngIf="categories">
+  <div id="categoryMenu" [ngClass]="{ 'menu-banner': (appService.getFlashBannerStatus() | async) }">
+    <div class="container">
+      <ul class="categoryMenuDisplay">
+        <li>
+          <span class="openMenu" (click)="toogleMenu()">
+            More
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30">
+              <path
+                d="M 5 12 C 3.343 12 2 13.343 2 15 C 2 16.657 3.343 18 5 18 C 6.657 18 8 16.657 8 15 C 8 13.343 6.657 12 5 12 z M 15 12 C 13.343 12 12 13.343 12 15 C 12 16.657 13.343 18 15 18 C 16.657 18 18 16.657 18 15 C 18 13.343 16.657 12 15 12 z M 25 12 C 23.343 12 22 13.343 22 15 C 22 16.657 23.343 18 25 18 C 26.657 18 28 16.657 28 15 C 28 13.343 26.657 12 25 12 z"
+              ></path>
+            </svg>
+          </span>
+        </li>
+        <li>
+          <a routerLink="/the-archive" *ngIf="image">
+            <img class="desktop" src="/assets/images/title-archive.jpg" alt="title-archive.jpg" />
+          </a>
+          <a routerLink="/the-archive">
+            <img class="mobile" src="/assets/images/logo_white.png" alt="logo_white.png" />
+          </a>
+        </li>
+        <ng-container *ngFor="let category of categories">
+          <li class="desktop">
+            <a routerLink="/the-archive/category/{{ category.seo_url }}" rel="bookmark" class="text-uppercase">
+              {{ category.category_title }}
+            </a>
+          </li>
+        </ng-container>
+      </ul>
+    </div>
+  </div>
+
+  <div class="category-menu-black {{ menuClass }}">
+    <ul class="menu-toggle">
+      <li>
+        <img src="/assets/images/title-archive.jpg" alt="title-archive.jpg" />
+      </li>
+      <ng-container *ngFor="let category of categories">
+        <li>
+          <a routerLink="/the-archive/category/{{ category.seo_url }}" rel="bookmark" class="text-uppercase">
+            {{ category.category_title }}
+          </a>
+        </li>
+      </ng-container>
+    </ul>
+    <span class="closeMenu" (click)="toogleMenu()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+        <path
+          style="
+            line-height: normal;
+            text-indent: 0;
+            text-align: start;
+            text-decoration-line: none;
+            text-decoration-style: solid;
+            text-decoration-color: #000;
+            text-transform: none;
+            block-progression: tb;
+            isolation: auto;
+            mix-blend-mode: normal;
+          "
+          d="M 4.7070312 3.2929688 L 3.2929688 4.7070312 L 10.585938 12 L 3.2929688 19.292969 L 4.7070312 20.707031 L 12 13.414062 L 19.292969 20.707031 L 20.707031 19.292969 L 13.414062 12 L 20.707031 4.7070312 L 19.292969 3.2929688 L 12 10.585938 L 4.7070312 3.2929688 z"
+          font-weight="400"
+          font-family="sans-serif"
+          white-space="normal"
+          overflow="visible"
+        ></path>
+      </svg>
+    </span>
+  </div>
+</ng-container>

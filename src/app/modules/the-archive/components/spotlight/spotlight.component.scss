@@ -1,0 +1,241 @@
+.mobile {
+  display: none;
+}
+.small-container {
+  padding: 70px 15px 0 15px;
+  width: 910px;
+}
+
+.home-slider-title {
+  position: absolute;
+  top: 75%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #fff;
+}
+.home-slider-title > h1 {
+  font-size: 34px;
+  margin-bottom: 40px;
+  text-transform: uppercase;
+  line-height: 40px;
+}
+.shop-btn {
+  margin: 30px 0;
+}
+.product-box {
+  text-align: center;
+}
+.product-title h3 {
+  font-family: 'FuturaBT-Light';
+  font-size: 30px;
+}
+.cta-btn {
+  margin: 30px 0;
+}
+.cta-btn > a {
+  display: inline-block;
+  padding: 0px 10px;
+  background-color: #191919;
+  font-size: 12px;
+  color: #ffffff;
+  text-transform: uppercase;
+  text-decoration: none;
+  max-width: 180px;
+  width: 100%;
+  text-align: center;
+  line-height: 40px;
+  border: 1px solid transparent;
+  font-family: 'FuturaBT-Light';
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+.cta-btn > a:hover {
+  background-color: #666;
+  color: #fff;
+}
+
+.banner-wrap {
+  position: relative;
+  margin: 0 auto;
+  padding: 0px 30px;
+  overflow: hidden;
+  display: block;
+}
+
+.custom {
+  float: left;
+  padding: 5px;
+}
+.archive-bx {
+  position: relative;
+  display: block !important;
+  width: 100%;
+}
+
+.archive-img {
+  position: relative;
+  height: 400px;
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+}
+
+.archive-img img {
+  min-height: 400px;
+  width: 100%;
+  max-width: 100%;
+  height: unset;
+  object-fit: cover;
+}
+.archive-bx:hover .archive-text {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.archive-text {
+  position: absolute;
+  opacity: 0;
+  visibility: hidden;
+  bottom: 60px;
+  background: white;
+  z-index: 11;
+  text-align: center;
+  left: 30px;
+  right: 30px;
+  padding: 20px 10px;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  transform: translateY(-20px);
+}
+
+.archive-text small {
+  text-transform: uppercase;
+  font-size: 13px;
+  padding-bottom: 10px;
+  display: inline-block;
+  width: 100%;
+}
+.archive-text h2 {
+  font-size: 12px;
+  font-family: 'Playfair Display', serif;
+  line-height: 26px;
+  color: #333;
+}
+.archive-text p {
+  line-height: 1.2;
+  margin-top: 10px;
+  font-size: 12px;
+  color: #191919;
+}
+
+.box-slider {
+  margin-top: 55px;
+}
+
+.description p {
+  max-height: 100px;
+  overflow-y: auto;
+}
+
+.description p::-webkit-scrollbar {
+  width: 11px;
+}
+.description p {
+  scrollbar-width: 0px;
+  scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+}
+.description p::-webkit-scrollbar-track {
+  background: var(--scrollbarBG);
+}
+.description p::-webkit-scrollbar-thumb {
+  background-color: var(--thumbBG);
+  border-radius: 6px;
+  border: 0px solid var(--scrollbarBG);
+}
+.description p::-webkit-scrollbar {
+  width: 0em;
+}
+.description p::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+.description p::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 0px solid slategrey;
+}
+
+@media only screen and (max-width: 910px) {
+  .banner-wrap {
+    padding: 0 15px !important;
+  }
+  .banner-wrap img {
+    min-height: 300px;
+    object-fit: cover;
+  }
+  .small-container {
+    width: auto !important;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .mobile {
+    display: block;
+  }
+  .desktop {
+    display: none !important;
+  }
+  .archive-bx {
+    height: 476px;
+  }
+  .archive-text {
+    transition: all 0.3s ease;
+    padding: 20px 10px;
+    bottom: 60px;
+    background: #fff;
+    z-index: 11;
+    text-align: center;
+    opacity: 1;
+    visibility: visible;
+    position: relative;
+    transform: inherit;
+    left: 0;
+    right: 00;
+    width: 95%;
+    margin: 0 auto;
+  }
+  .archive-text > small {
+    font-size: 13px;
+    padding-bottom: 10px;
+    display: inline-block;
+    width: 100%;
+    text-transform: uppercase;
+  }
+  .archive-text > h2 {
+    font-size: 12px;
+    font-family: 'Playfair Display', serif;
+    line-height: 26px;
+    margin: 0;
+  }
+  .archive-text p {
+    font-size: 12px;
+  }
+  .archive-text .archive-btn {
+    position: relative;
+    text-align: center;
+    margin: 0 !important;
+  }
+  .archive-text .archive-btn a {
+    border: 1px solid transparent;
+    text-align: center;
+    color: #fff;
+    text-transform: uppercase;
+    text-decoration: none;
+    background-color: #191919;
+    display: inline-block;
+    line-height: 38px;
+    padding: 0 10px;
+    min-width: 220px;
+    font-size: 14px;
+  }
+}

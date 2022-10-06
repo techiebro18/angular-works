@@ -1,0 +1,43 @@
+<div class="top-title">
+  <h2 class="designer">
+    <a [href]="url">{{ brand }}</a>
+  </h2>
+  <div class="sale-badge" *ngIf="product.is_discount == 1 && product.discounted_price != ''">
+    <tvb-badge
+      id="pdp-sale-badge"
+      label="{{ discountPercentage }}% OFF"
+      backgroundColor="#000"
+      color="#fff"
+      borderRadius="0px"
+      style="white-space: nowrap"
+    ></tvb-badge>
+  </div>
+</div>
+<h4 class="product-name">{{ product.name }}</h4>
+<h4 *ngIf="product.sizes[0]?.value">
+  {{ 'Size' | translate }}:
+  <a>
+    {{ product.sizes[0].value }} {{ product.sizes[0]?.definition == 'size_euro' ? 'EU' : '' }}
+    <i *ngIf="product_type == 'clothes'" (click)="openDialog()" class="fa fa-info-circle" aria-hidden="true"></i>
+    <i *ngIf="product_type == 'shoes'" (click)="openShoesDialog()" class="fa fa-info-circle" aria-hidden="true"></i>
+  </a>
+</h4>
+<h4>
+  {{ 'Condition' | translate }}
+  <a (click)="openConditionDialog()"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
+</h4>
+<ul class="condition-list" *ngIf="product.condition_rating">
+  <li [ngClass]="{ active: product.condition_rating === 5 }">{{ 'WORN_WITH_LOVE' | translate }}</li>
+  <li [ngClass]="{ active: product.condition_rating === 4 }">{{ 'GOOD_BUT_USED' | translate }}</li>
+  <li [ngClass]="{ active: product.condition_rating === 2 }">{{ 'EXCELLENT' | translate }}</li>
+  <li [ngClass]="{ active: product.condition_rating === 1 }">{{ 'NEW_WITH_TAGS' | translate }}</li>
+</ul>
+
+<div class="price-wrapper">
+  <h3 class="price" *ngIf="product.is_discount">
+    <span class="normal-price">{{ price | currency: currencyCode }}</span>
+    <span class="actual-price">{{ discountPrice | currency: currencyCode }}</span>
+  </h3>
+
+  <h3 class="price" *ngIf="!product.is_discount">{{ price | currency: currencyCode }}</h3>
+</div>

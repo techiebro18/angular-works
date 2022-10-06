@@ -1,0 +1,224 @@
+:host {
+  .register-container {
+    .title {
+      margin: 19px 0 10px 0;
+      .title-heading {
+        font-weight: 500;
+        font-family: 'FuturaBT-Light';
+        font-size: 12px;
+        color: #000;
+      }
+    }
+    .register-form {
+      .error-message {
+        font-size: 14px;
+        text-align: center;
+        font-family: 'FuturaBT-Light';
+        color: #000;
+      }
+      #registerForm {
+        .form-group {
+          &.forgotten-password-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+
+            label {
+              margin-bottom: 0px;
+            }
+          }
+
+          .primary {
+            border-color: var(--text-input-grey);
+            font-family: 'FuturaBT-Light';
+          }
+
+          .invalid-message {
+            font-size: 14px;
+            text-align: center;
+            font-family: 'FuturaBT-Light';
+            color: #000;
+          }
+          .ng-invalid.ng-touched {
+            border-color: #000 !important;
+          }
+        }
+      }
+    }
+
+    .or-container {
+      margin: 20px 0;
+      font-family: 'FuturaBT-Light';
+      font-size: 15px;
+    }
+    .social-buttons {
+      margin: 0 auto;
+      min-width: 50%;
+      font-family: 'FuturaBT-Light';
+      .form-group {
+        text-align: center;
+        .btn.social {
+          width: 80%;
+          justify-content: center;
+          border-color: var(--text-input-grey);
+          .social-buttons-image {
+            width: 20px;
+            text-align: left;
+            float: left;
+            border-radius: 50px 50px 50px 50px;
+            border-color: var(--text-input-grey);
+          }
+          .social-buttons-text {
+            padding-top: 0px;
+            display: inline-block;
+            min-width: 180px;
+            text-align: left;
+            padding-left: 10px;
+            font-family: 'FuturaBT-Light';
+          }
+        }
+      }
+    }
+    .btn-inline {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      margin: 0 -10px;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+    }
+
+    .btn {
+      font-family: futurabt-light, sans-serif;
+      font-weight: 400;
+      height: 44px;
+      font-size: 12px;
+      text-align: center;
+      cursor: pointer;
+      pointer-events: auto;
+      padding: 0px 30px;
+      vertical-align: middle;
+      min-width: 240px !important;
+      border-radius: 0px;
+      border: 1px solid #000000;
+    }
+    .btn.disabled,
+    .btn:disabled {
+      opacity: 0.65 !important;
+      cursor: not-allowed;
+      border: 1px solid var(--main-color-black);
+      background-color: var(--main-color-black);
+    }
+    .btn svg#dpdhl_icons {
+      vertical-align: middle;
+      margin-right: 10px;
+      width: 17px;
+    }
+
+    .btn span {
+      vertical-align: middle;
+      font-size: 12px;
+      color: #000;
+    }
+    .btn-inline .half {
+      margin: 0 10px;
+      width: 50%;
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      text-transform: uppercase;
+      color: #000000;
+    }
+    .member-cls {
+      margin: 20px 0 !important;
+      font-size: 15px;
+    }
+    .member-cls a {
+      color: #000;
+      font-family: 'FuturaBT-Medium';
+      text-decoration: underline;
+      font-size: 15px;
+    }
+    .remember-me {
+      font-size: 12px;
+      line-height: 10px;
+      height: 25px;
+    }
+
+    .terms-and-condition {
+      display: inline;
+      font-family: 'FuturaBT-Medium';
+      color: #000;
+      text-decoration: underline;
+    }
+
+    .submit-button-container {
+      button {
+        width: 100%;
+        line-height: 35px;
+        min-width: 220px;
+        font-size: 12px;
+        margin: 0 auto;
+        display: block;
+        background-color: #191919;
+        opacity: 1;
+        border-radius: 0px;
+        margin-top: 30px;
+        font-family: 'FuturaBT-Light';
+      }
+
+      .community-button {
+        width: 100%;
+        line-height: 44px;
+        min-width: 220px;
+        font-size: 12px;
+        margin: 0 auto;
+        display: block;
+        background-color: #191919;
+        opacity: 1;
+        border-radius: 0px;
+        margin-top: 30px;
+        font-family: 'FuturaBT-Light';
+        text-transform: uppercase;
+        color: #fff;
+      }
+
+      .guest-button {
+        width: 100%;
+        line-height: 44px;
+        min-width: 220px;
+        font-size: 12px;
+        margin: 0 auto;
+        display: block;
+        opacity: 1;
+        border-radius: 0px;
+        margin-top: 30px;
+        font-family: 'FuturaBT-Light';
+        text-transform: uppercase;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .register-container {
+    .btn-inline {
+      text-align: center;
+      display: inline-block !important;
+      .btn-secondary {
+        margin-bottom: 20px !important;
+      }
+    }
+    .guest-button {
+      margin-top: 20px !important;
+    }
+  }
+  .terms-and-condition {
+    display: inherit;
+    line-height: 8px;
+  }
+}

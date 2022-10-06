@@ -1,0 +1,340 @@
+:host {
+  flex: 1;
+
+  .auth-container {
+    flex: 1;
+    height: 100%;
+    background: #ede9e1;
+    margin-top: -30px;
+    margin-bottom: -70px;
+    .left {
+      flex: 1;
+      background: url('https://thevintagebar-uploads.imgix.net/shared/signup/gif') no-repeat;
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: flex-end;
+      .terms-list {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        justify-content: unset;
+        height: 50px;
+        background: #000;
+        ul {
+          padding: 0;
+          justify-content: space-around;
+          flex-direction: row;
+          display: flex;
+          align-items: center;
+          margin: 0;
+          height: 100%;
+          li {
+            justify-content: center;
+            text-transform: uppercase;
+            list-style-type: none;
+            color: #fff;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+          }
+        }
+      }
+    }
+
+    .right {
+      flex: 1;
+      align-items: center;
+      width: 50%;
+      padding: 20px;
+      .tabs-container {
+        display: flex;
+        justify-content: center;
+        flex: auto;
+        padding: 100px 70px;
+        .tabs-container-wrapper {
+          min-width: 50%;
+          justify-content: center;
+          .register-container {
+            min-width: 600px;
+            .title {
+              font-weight: 400;
+              font-size: 20px;
+              font-family: 'Playfair Display', serif;
+              margin: 60px 0 40px 0;
+              text-align: center;
+              .title-heading {
+                font-weight: 500;
+                font-family: 'Playfair Display', serif;
+                font-size: 32px;
+                color: #000;
+              }
+              p {
+                font-size: 15px;
+                font-family: 'FuturaBT-Light';
+              }
+            }
+            .register-form {
+              form {
+                .form-group {
+                  margin-bottom: 1rem;
+                  position: relative;
+                  .primary {
+                  }
+                  .fa-eye {
+                    position: absolute;
+                    right: 0;
+                    top: 5px;
+                  }
+                  span.eye_icon {
+                    position: absolute;
+                    right: 10px;
+                    top: 7px;
+                  }
+                  .remember-me {
+                    display: inline-block;
+                    width: 100%;
+                    .form-control {
+                    }
+                    input {
+                      width: 15px;
+                      height: 15px;
+                      float: left;
+                      margin-right: 10px;
+                    }
+                  }
+                }
+              }
+            }
+            .submit-button-container {
+              .primary {
+                width: 100%;
+                line-height: 35px;
+                min-width: 220px;
+                font-size: 14px;
+                margin: 0 auto;
+                display: block;
+                background-color: #191919;
+                opacity: 1;
+                border-radius: 0px;
+                margin-top: 30px;
+                font-family: 'FuturaBT-Light';
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 1200px) {
+    .auth-container {
+      .left {
+      }
+
+      .right {
+        .tabs-container {
+          padding: 70px 0;
+          .tabs-container-wrapper {
+            .register-container {
+              min-width: 100%;
+              .title {
+                .title-heading {
+                }
+                p {
+                }
+              }
+              .register-form {
+                form {
+                  .form-group {
+                    .primary {
+                    }
+                    .fa-eye {
+                    }
+                    .remember-me {
+                      .form-control {
+                      }
+                      input {
+                      }
+                    }
+                  }
+                }
+              }
+              .submit-button-container {
+                .primary {
+                }
+              }
+              .terms-list {
+                ul {
+                  li {
+                    font-size: 11px;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 991px) {
+    .auth-container {
+      flex-direction: column;
+      margin-top: 0px !important;
+      .left {
+        min-height: 300px;
+        min-height: 300px;
+        .terms-list {
+          ul {
+            li {
+            }
+          }
+        }
+      }
+
+      .right {
+        width: auto;
+        padding: 0 20px;
+        .tabs-container {
+          padding: 0 0 50px 0;
+          .tabs-container-wrapper {
+            .register-container {
+              min-width: 100%;
+              .title {
+                .title-heading {
+                  padding: 15px 0;
+                }
+                p {
+                }
+              }
+              .register-form {
+                form {
+                  .form-group {
+                    .primary {
+                    }
+                    .fa-eye {
+                    }
+                    .remember-me {
+                      .form-control {
+                      }
+                      input {
+                      }
+                    }
+                  }
+                }
+              }
+              .submit-button-container {
+                .primary {
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 600px) {
+    .auth-container {
+      flex-direction: column;
+
+      .left {
+        min-height: 300px;
+        min-height: 300px;
+        .terms-list {
+          flex-direction: column;
+          display: flex;
+          width: 100%;
+          justify-content: unset;
+          height: auto;
+          background: #000;
+          margin-bottom: -30px;
+          max-width: 93%;
+          margin: -60px auto;
+          padding: 25px 20px;
+          ul {
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 0;
+            justify-content: space-around;
+            display: flex;
+            margin: 0;
+            height: 100%;
+            line-height: 0;
+            border-left: 2px solid #fff;
+            li {
+              padding-left: 20px;
+              text-align: left;
+              position: relative;
+              line-height: 10px;
+              font-size: 12px;
+              padding-bottom: 15px;
+            }
+            li:last-child {
+              padding-bottom: 0px;
+            }
+            li:after {
+              content: ' ';
+              left: 0;
+              top: 15px;
+              position: absolute;
+              width: 10px;
+              height: 1px;
+              background: #000;
+            }
+          }
+        }
+      }
+
+      .right {
+        padding: 0 20px;
+        .tabs-container {
+          padding: 0 0 50px 0;
+          .tabs-container-wrapper {
+            .register-container {
+              min-width: 100%;
+              .title {
+                .title-heading {
+                  padding: 15px 0;
+                  line-height: 35px;
+                  min-width: 220px;
+                  margin: 0 auto;
+                  display: block;
+                  margin-top: 100px;
+                  font-size: 18px;
+                  color: #191919;
+                }
+                p {
+                  font-size: 15px;
+                  max-width: 300px;
+                  margin: 0 auto;
+                }
+              }
+              .register-form {
+                form {
+                  .form-group {
+                    .primary {
+                    }
+                    .fa-eye {
+                    }
+                    .remember-me {
+                      .form-control {
+                      }
+                      input {
+                      }
+                    }
+                  }
+                }
+              }
+              .submit-button-container {
+                .primary {
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,107 @@
+.modal-body {
+  width: 500px;
+  text-align: center;
+  font-family: 'FuturaBT-Light';
+  font-size: 14px;
+  font-weight: 300;
+  padding: 0px 1em;
+  .modal-body-inner {
+    h3 {
+      font-family: 'Playfair Display';
+      font-size: 20px;
+    }
+
+    .tvb-button {
+      font-size: 12px;
+      min-width: auto;
+      width: 100%;
+    }
+
+    .tvb-button.btn-reverse {
+      background: #fff;
+      color: #191919;
+      border: 1px solid #191919;
+      line-height: 42px;
+      border-radius: 0px;
+      padding: 0px;
+      text-transform: uppercase;
+    }
+
+    .tvb-button.btn-reverse:hover {
+      background-color: #666;
+      color: #fff;
+    }
+
+    .offer-form {
+      span.err-msg {
+        color: #dc3545;
+        font-size: 12px;
+      }
+      p.offer-text {
+        margin: auto auto;
+      }
+      p.product {
+        margin-bottom: 30px;
+        font-weight: 600;
+      }
+
+      .amount-input:focus-visible {
+        outline: none;
+      }
+      .amount-input {
+        border: 1px solid #d8d8d8;
+        text-align: left;
+        letter-spacing: 0px;
+        color: #707070;
+        font-size: 12px;
+        line-height: 18px;
+        font-family: 'FuturaBT-Light';
+        padding: 12px 20px;
+        width: 100%;
+        padding-right: 50px;
+      }
+
+      span.amount-input-txt {
+        color: #999;
+        font-size: 14px;
+        right: 30px;
+        position: absolute;
+        top: 14px;
+        font-size: 12px;
+        z-index: 1;
+      }
+    }
+    .product-detail {
+      margin-top: 10px;
+
+      span.price {
+        display: block;
+      }
+    }
+    .price-wrapper-popup {
+      .normal-price {
+        text-decoration: line-through;
+        margin-right: 10px;
+      }
+
+      .actual-price {
+        color: var(--form-error);
+      }
+    }
+    .product-img {
+      max-height: 150px;
+    }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .modal-body {
+    width: auto;
+  }
+  input.amount-input {
+    margin-bottom: 10px;
+  }
+  .tvb-button {
+    margin-bottom: 10px;
+  }
+}

@@ -1,0 +1,146 @@
+.createAlertbtn {
+  background: #000;
+  color: #fff;
+  border-radius: 0px;
+  float: right;
+  font-size: 12px;
+  padding: 12px 15px;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+.createAlertbtn i {
+  margin-right: 18px;
+  vertical-align: middle;
+}
+
+.createAlertbtn i {
+  margin-right: 18px;
+  vertical-align: middle;
+}
+.createAlert {
+  .modal-body {
+    padding: 30px 30px 30px 30px;
+    .close {
+      position: absolute;
+      right: 15px;
+      top: 15px;
+      span {
+        opacity: 0.2;
+      }
+    }
+    .modal-body-inner {
+      border: 1px solid #ccc;
+      padding: 30px 30px;
+      display: inline-block;
+      .title-info {
+        h3 {
+          font-weight: 400;
+          font-size: 20px;
+          display: block;
+          text-align: center;
+          border-bottom: 1px solid #ccc;
+          padding-bottom: 20px;
+          font-family: 'Playfair Display', serif;
+        }
+        p {
+          font-size: 16px;
+          font-family: 'FuturaBT-Light';
+        }
+      }
+      .filterselection {
+        ul {
+          display: flex;
+          padding: 10px 0;
+          justify-content: center;
+          flex-flow: wrap;
+          li {
+            float: left;
+            list-style-type: none;
+            display: grid;
+            position: relative;
+            margin: 0 15px 15px 0;
+            font-family: 'FuturaBT-Light';
+            a {
+              padding: 7px 15px 7px 15px;
+              position: relative;
+              border-radius: 2px;
+              border: 1px solid #ccc;
+              text-decoration: none;
+              font-size: 14px;
+              pointer-events: none;
+              color: #191919;
+            }
+          }
+        }
+      }
+      .submitbtn {
+        text-align: center;
+        .proceed-btn {
+          display: inline-block;
+          padding: 0px 20px;
+          background-color: #191919;
+          font-size: 16px;
+          color: #fff;
+          text-transform: uppercase;
+          text-decoration: none;
+          border: 1px solid transparent;
+          border-radius: 0;
+          line-height: 40px;
+          min-width: 220px;
+          font-family: 'FuturaBT-Light';
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .createAlertbtn {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  ::ng-deep .modal {
+    top: 0;
+    left: 0;
+    transform: inherit;
+    background: #fff;
+    height: 100%;
+    min-width: 100%;
+  }
+  ::ng-deep .modal-dialog {
+    max-width: 500px;
+    margin: 20px auto;
+    top: 0;
+    bottom: 0;
+    height: 437px;
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+  }
+
+  .createAlert {
+    .modal-body {
+      .modal-body-inner {
+        border: 0px solid #ccc;
+        .title-info {
+          p {
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+}
+
+.error {
+  font-size: 16px;
+  font-family: 'FuturaBT-Light';
+}
+@media screen and (max-width: 1024px) {
+  .createAlertbtn {
+    padding: 9px 15px;
+  }
+}

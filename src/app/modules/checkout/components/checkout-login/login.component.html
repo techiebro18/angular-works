@@ -1,0 +1,17 @@
+<div class="auth-container d-flex">
+  <div class="right">
+    <div class="tabs-container">
+      <div class="d-flex tabs-container-wrapper">
+        <tabset #loginTabs>
+          <tab heading="NEW MEMBER">
+            <app-onepage-register (loginEvent)="onLoginNavigationClick()"></app-onepage-register>
+          </tab>
+          <tab heading="RETURNING MEMBER">
+            <app-onepage-login (loginEvent)="loginEventClick($event)"></app-onepage-login>
+          </tab>
+        </tabset>
+      </div>
+    </div>
+  </div>
+  <div class="left login-image-box"></div>
+</div>

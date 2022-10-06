@@ -1,0 +1,74 @@
+.ps-table {
+  font-family: 'Open Sans', sans-serif;
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+  color: #222;
+  font-size: 14px;
+  position: relative;
+}
+.ps-table h2 {
+  text-transform: uppercase;
+  font-size: 24px;
+  border-bottom: 1px solid #e5e5e5;
+  padding: 15px;
+  margin: 0px;
+}
+.ps-table p {
+  padding: 20px 100px 5px 100px;
+  margin: 0px;
+}
+tr td {
+  font-size: 14px;
+  width: 10%;
+}
+tr th {
+  font-size: 14px;
+  width: 10%;
+}
+.table td,
+.table th {
+  padding: 10px 5px;
+  vertical-align: top;
+  border-top: 1px solid #dee2e6;
+}
+
+.table-bordered td,
+.table-bordered th {
+  border-top: 1px solid #dee2e6;
+  border-right: 1px solid #dee2e6;
+}
+
+.material-icons {
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+}
+
+.table-body {
+  padding: 15px;
+}
+table {
+  border: 1px solid #e5e5e5;
+  border-top: 0px;
+  border-right: 0px;
+  width: 100%;
+  border-spacing: 0px;
+}
+thead {
+  background: #f7f7f7;
+}
+thead tr th:first-child {
+  width: 15%;
+  background: #f7f7f7;
+}
+.grey-class {
+  background: #f7f7f7;
+}
+
+@media only screen and (max-width: 768px) {
+  .ps-table > p {
+    padding: 20px 20px 5px 20px;
+  }
+}

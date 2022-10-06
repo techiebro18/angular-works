@@ -1,0 +1,144 @@
+.desktop {
+  display: block;
+}
+
+.mobile {
+  display: none;
+}
+
+.top-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 250px;
+  margin-bottom: 60px;
+  background-image: url('https://tvbprodimages.azureedge.net/static/shared/help_and_support_bg.jpg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+
+  .header-title {
+    color: white;
+    font-size: 45px;
+    font-family: 'Cormorant-Italic';
+  }
+}
+
+.body-container {
+  display: flex;
+
+  .left-container {
+    display: flex;
+    flex-direction: column;
+
+    .page-title-container {
+      width: 300px;
+      padding: 20px 0;
+
+      .page-title {
+        text-transform: uppercase;
+        font-family: FuturaBT-Medium;
+        font-size: 15px;
+      }
+    }
+  }
+
+  .right-container {
+    width: 100%;
+    padding: 0 0 0 100px;
+
+    .content-title {
+      font-family: Cormorant-Italic;
+      font-size: 38px;
+      text-align: center;
+      height: 55px;
+    }
+
+    .body-content {
+      border-bottom: 1px solid var(--color-gray-6);
+      font-size: 15px;
+    }
+  }
+}
+
+::ng-deep {
+  .body-content tvb-accordion {
+    p {
+      line-height: 22px;
+      padding-right: 40px;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-family: FuturaBT-Medium;
+      font-size: 15px;
+      text-transform: uppercase;
+    }
+
+    ul li,
+    ol li {
+      line-height: 22px;
+    }
+
+    ol ol,
+    ol ul,
+    ul ol,
+    ul ul {
+      padding-inline-start: 20px;
+    }
+
+    a {
+      display: inline-block;
+    }
+  }
+
+  .privacy-policy-table {
+    th,
+    td {
+      padding: 4px;
+    }
+
+    th {
+      text-align: right;
+
+      &.address {
+        vertical-align: top;
+      }
+    }
+  }
+}
+
+// Up to SmartPhones, Mobile devices
+@media (max-width: 480px) {
+  .mobile {
+    display: block;
+  }
+
+  .desktop {
+    display: none;
+  }
+
+  .top-container {
+    height: 300px;
+    background-image: url('https://thevintagebar-uploads.imgix.net/shared/help_and_support_bg/jpg');
+    background-position: right 25% top 40%;
+    background-repeat: no-repeat;
+    background-size: 400%;
+  }
+
+  .body-container {
+    display: flex;
+    flex-direction: column;
+
+    .right-container {
+      padding: 60px 0;
+
+      .content-title {
+        height: 60px;
+      }
+    }
+  }
+}

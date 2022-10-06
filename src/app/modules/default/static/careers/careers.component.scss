@@ -1,0 +1,134 @@
+.topic-banner {
+  position: relative;
+  width: 100%;
+  display: inline-block;
+  vertical-align: top;
+  padding: 25px 0px;
+  .topic-img-bg img {
+    width: 100%;
+    min-height: auto;
+    object-fit: cover;
+  }
+}
+
+.navbar-center.page-nav {
+  ul.nav {
+    float: none;
+    margin: 0 auto;
+    display: table;
+    table-layout: fixed;
+    li {
+      padding-left: 20px;
+      padding-right: 20px;
+      float: left;
+    }
+    li.active a {
+      border-color: #191919;
+    }
+    a {
+      color: #191919;
+      font-size: 16px;
+      border-bottom: 1px solid transparent;
+      position: relative;
+      display: block;
+      padding: 10px 0px;
+      font-family: 'FuturaBT-Light';
+    }
+    a:hover {
+      text-decoration: none;
+      border-color: #191919;
+    }
+  }
+}
+
+.static-page-text {
+  a {
+    color: #000;
+  }
+  .page-title {
+    h1 {
+      font-size: 18px;
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+    h2 {
+      padding-bottom: 20px;
+      padding-top: 20px;
+      font-family: 'FuturaBT-Light';
+      font-size: 16px;
+    }
+    h3 {
+      font-family: 'Playfair Display', serif;
+      line-height: 24px;
+      padding-bottom: 15px;
+    }
+  }
+  .page-title-header {
+    p {
+      line-height: 27px;
+    }
+  }
+  .discover-opt {
+    .table-opportunities {
+      margin-bottom: 50px;
+      border-bottom: 1px solid #e5e5e5;
+      position: relative;
+      .table {
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 20px;
+        thead {
+          th {
+            border-top: 0;
+            border-bottom: 0px;
+            padding: 12px 10px;
+            font-size: 16px;
+            line-height: 22px;
+            vertical-align: top;
+          }
+        }
+        tbody {
+          td {
+            padding: 12px 10px;
+            font-size: 16px;
+            line-height: 22px;
+            vertical-align: top;
+            border-top: 1px solid #e5e5e5;
+            border-bottom: 0px;
+            a:hover {
+              color: #999;
+              text-decoration: none;
+              -webkit-transition: all 0.1s linear;
+              -o-transition: all 0.1s linear;
+              transition: all 0.1s linear;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .static-page-text {
+    .discover-opt {
+      .table-opportunities {
+        .table {
+          thead {
+            th {
+              padding: 12px 5px;
+              font-size: 14px;
+            }
+          }
+          tbody {
+            td {
+              padding: 12px 5px;
+              font-size: 14px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

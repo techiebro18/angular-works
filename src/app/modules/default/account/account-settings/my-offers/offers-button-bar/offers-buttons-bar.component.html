@@ -1,0 +1,48 @@
+<ng-container *ngIf="shouldShowButtonsBar(offer)">
+  <div class="row buttons-bar">
+    <button
+      *ngIf="shouldShowAcceptBtn(offer)"
+      (click)="handleClickAcceptOffer(offer)"
+      [disabled]="hasOfferExpired(offer)"
+      class="btn btn-primary accept-btn ml-0"
+    >
+      {{ 'make_an_offer.accept_btn' | translate }}
+    </button>
+
+    <button
+      *ngIf="shouldShowBuyBtn(offer)"
+      (click)="handleClickBuyProduct(offer)"
+      [disabled]="hasOfferExpired(offer)"
+      class="btn btn-primary buy-btn"
+    >
+      {{ 'make_an_offer.buy_btn' | translate }}
+    </button>
+
+    <button
+      *ngIf="shouldShowBuyerMakeCounterOfferBtn(offer)"
+      (click)="handleClickMakeCounterOfferBtn(offer)"
+      class="btn btn-secondary counter-offer-btn"
+    >
+      {{ 'make_an_offer.make_counter_btn' | translate }}
+    </button>
+
+    <button
+      *ngIf="shouldShowSellerMakeCounterOfferBtn(offer)"
+      (click)="handleClickMakeCounterOfferBtn(offer)"
+      class="btn btn-secondary counter-offer-btn"
+    >
+      {{ 'make_an_offer.make_counter_btn' | translate }}
+    </button>
+
+    <span *ngIf="OfferHelper.isSellerPerspective(userPerspective)" class="btn-separator"></span>
+
+    <button
+      *ngIf="shouldShowRejectBtn(offer)"
+      (click)="handleClickRejectOffer(offer)"
+      [disabled]="hasOfferExpired(offer)"
+      class="btn btn-secondary reject-btn"
+    >
+      {{ 'make_an_offer.reject_btn' | translate }}
+    </button>
+  </div>
+</ng-container>

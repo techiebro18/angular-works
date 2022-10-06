@@ -1,0 +1,138 @@
+<div class="row top-bar" *ngIf="paginationConfig.totalItems > 0">
+  <div class="search-box">
+    <i class="fa fa-search search-icon"></i>
+    <input
+      (keyup)="onQuickSearchItems()"
+      [(ngModel)]="quickSearchTerm"
+      [placeholder]="'make_an_offer.listing.search_placeholder' | translate"
+      class="primary search-field"
+      type="text"
+    />
+  </div>
+
+  <div class="box-pagination-header">
+    <pagination-controls (pageChange)="onPageChange($event)" nextLabel="" previousLabel=""></pagination-controls>
+  </div>
+</div>
+
+<ng-container *ngIf="items?.length > 0; else elseBlock">
+  <div class="desktop tvb-table">
+    <div class="row tvb-header">
+      <div class="col col-md-2 header-img"></div>
+
+      <div class="col col-md-3 header-name">
+        {{ 'my_items.for_sale.listing.header.name' | translate }}
+      </div>
+
+      <div class="col col-md-2">
+        {{ 'my_items.for_sale.listing.header.seller_sku' | translate }}
+      </div>
+
+      <div class="col col-md-2">
+        {{ 'my_items.for_sale.listing.header.price_on_site' | translate }}
+      </div>
+
+      <div class="col col-md-2">
+        {{ 'my_items.for_sale.listing.header.price_for_you' | translate }}
+      </div>
+
+      <div class="col-md-1 p-0 header-actions"></div>
+    </div>
+
+    <div class="tvb-body">
+      <ng-container *ngFor="let item of items | paginate: paginationConfig">
+        <div class="row">
+          <div class="col col-md-2 col-img">
+            <a routerLink="/sellers/product-add/general/{{ item.id }}">
+              <img src="{{ item.image_link || item.image_url || item.imgix_image_url }}" tvb-img-fallback />
+            </a>
+          </div>
+
+          <div class="col col-md-3 col-name">
+            <div class="text-overflow-ellipsis" [title]="item.name">{{ item.name }}</div>
+          </div>
+
+          <div class="col col-md-2">
+            {{ item.seller_sku ?? item.sku }}
+          </div>
+
+          <div class="col col-md-2 col-price-on-site">
+            <div [ngClass]="{ 'text-line-through': item.is_discount > 0 }">
+              {{ myItemsHelper.getPriceOnSite(item) | currency: item.base_currency }}
+            </div>
+            <div class="discount-price-text" *ngIf="item.is_discount > 0">
+              {{ myItemsHelper.getDiscountPrice(item) | currency: item.base_currency }}
+            </div>
+          </div>
+
+          <div class="col col-md-2">
+            {{ myItemsHelper.getPriceOnSite(item) | currency: item.base_currency }}
+          </div>
+
+          <div class="col col-md-1 col-actions">
+            <div class="delete-btn" (click)="onOpenDeleteDialog(item)">
+              <img src="assets/images/icons/trash.svg" />
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="mobile">
+    <div class="listing">
+      <ng-container *ngFor="let item of items">
+        <div class="list-item">
+          <div class="row">
+            <div class="col-4 product-img">
+              <a routerLink="/sellers/product-add/general/{{ item.id }}">
+                <img src="{{ item.image_link || item.image_url || item.imgix_image_url }}" tvb-img-fallback />
+              </a>
+            </div>
+
+            <div class="col-6 item-info">
+              <p class="brand-name">{{ item.brand_name }}</p>
+              <p class="item-text">{{ item.name }}</p>
+
+              <br />
+
+              <p class="item-text">SKU: {{ item.seller_sku ?? item.sku }}</p>
+
+              <div class="item-text">
+                <div>
+                  {{ 'Price on Site' | translate }}:
+                  <span [ngClass]="{ 'text-line-through': item.is_discount > 0 }">
+                    {{ myItemsHelper.getPriceOnSite(item) | currency: item.base_currency }}
+                  </span>
+                </div>
+
+                <div *ngIf="item.is_discount > 0">
+                  {{ 'Discounted Price' | translate }}:
+                  <span class="discount-price-text">
+                    {{ myItemsHelper.getDiscountPrice(item) | currency: item.base_currency }}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-2">
+              <div class="delete-btn" (click)="onOpenDeleteDialog(item)">
+                <img src="assets/images/icons/trash.svg" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #elseBlock>
+  <div class="empty-warning">{{ 'There are no items to list' | translate }}</div>
+</ng-template>
+
+<div class="row bottom-bar" *ngIf="paginationConfig.totalItems > 0">
+  <div class="box-pagination-footer">
+    <pagination-controls (pageChange)="onPageChange($event)" nextLabel="" previousLabel=""></pagination-controls>
+  </div>
+</div>

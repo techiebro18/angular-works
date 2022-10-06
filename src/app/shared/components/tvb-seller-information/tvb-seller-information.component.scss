@@ -1,0 +1,68 @@
+:host {
+  .box-seller-info {
+    margin: 35px 0;
+    border-top: 1px solid var(--steps-gray);
+    border-bottom: 1px solid var(--steps-gray);
+    padding: 20px 0;
+
+    .title-about {
+      font-size: 15px;
+      font-family: 'FuturaBT-Medium';
+
+      .patch {
+        float: right;
+        background: var(--main-color-gray-5);
+        font-family: 'Futura', 'Book';
+        font-size: 11px;
+        padding: 6px 12px;
+        border-radius: 15px;
+        text-transform: capitalize;
+        margin-top: -3px;
+      }
+    }
+    .seller-detail {
+      padding-top: 10px;
+    }
+    .box-avatar {
+      margin-right: 20px;
+      &.tvb {
+        padding: 20px 0;
+        img {
+          width: 70px;
+          object-fit: initial;
+          height: auto;
+          border-radius: 0;
+        }
+      }
+
+      img {
+        object-fit: cover;
+        border-radius: 50%;
+        width: 70px;
+        height: 70px;
+      }
+    }
+
+    .seller-name {
+      font-size: 15px;
+      font-family: 'FuturaBT-Medium';
+      color: var(--main-color-black);
+
+      div {
+        margin-bottom: 8px;
+      }
+    }
+
+    .label-detail {
+      font-size: 15px;
+      font-family: 'FuturaBT-Light';
+      margin-bottom: 6px;
+    }
+  }
+
+  @media only screen and (max-width: 1024px) {
+    .box-detail {
+      max-width: 71%;
+    }
+  }
+}

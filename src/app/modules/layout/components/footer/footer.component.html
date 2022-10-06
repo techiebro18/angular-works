@@ -1,0 +1,110 @@
+<footer class="footer-main" id="footerMain">
+  <div class="container">
+    <div class="row footer-row">
+      <div class="col-md-3 footer-column">
+        <div class="footer-title">
+          <h3>{{ 'footer.company' | translate }}</h3>
+        </div>
+
+        <ul class="footer-nav-list">
+          <li *ngFor="let item of columnOneItemList">
+            <a [routerLink]="item.routerLink">{{ item.translationKey | translate }}</a>
+          </li>
+
+          <li>
+            <a (click)="openModalBecomeProSeller()" class="link">
+              {{ 'footer.company.become_pro_seller' | translate | titlecase }}
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-md-3 footer-column">
+        <div class="footer-title">
+          <h3>{{ 'footer.help' | translate }}</h3>
+        </div>
+
+        <ul class="footer-nav-list">
+          <li *ngFor="let item of columnTwoItemList">
+            <a [routerLink]="item.routerLink">{{ item.translationKey | translate }}</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-md-6 footer-column">
+        <div class="footer-title">
+          <h3>{{ 'footer.newsletter' | translate }}</h3>
+        </div>
+
+        <div class="footer-newsletter">
+          <form [formGroup]="newsletterForm" autocomplete="off" (ngSubmit)="submitNewsletterForm()" novalidate>
+            <div class="form-group">
+              <input type="text" class="primary" placeholder="{{ 'Email' | translate }} *" formControlName="email" />
+            </div>
+
+            <div class="form-group">
+              <button class="btn newsletter-btn-full" type="submit">
+                {{ 'Subscribe' | translate }}
+              </button>
+            </div>
+
+            <p *ngIf="showNewsletterSuccessMessage" class="text-success">
+              {{ 'footer.subscribe_form.success_message' | translate }}
+            </p>
+
+            <p *ngIf="showNewsletterErrorMessage" class="text-error">
+              {{ 'footer.subscribe_form.error_message' | translate }}
+            </p>
+          </form>
+        </div>
+
+        <div class="footer-social-icons">
+          <ng-container *ngFor="let icon of socialMediaIconList">
+            <a [href]="icon.externalLink" target="_blank">
+              <img [src]="icon.filePath" [title]="icon.name" />
+            </a>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sub-footer">
+    <div class="container">
+      <div class="row sub-footer-row">
+        <div class="col-md-6 left-sub-footer">
+          <p class="copyright">
+            &copy; {{ 'copyright-1' | translate }} {{ currentDate }} {{ 'copyright-2' | translate }}
+          </p>
+        </div>
+
+        <div class="col-md-6 right-sub-footer">
+          <div class="current-language">
+            <p>{{ currentLanguage?.name }}</p>
+          </div>
+
+          <ul class="country-list">
+            <li *ngFor="let languageItem of languageList; let x = index">
+              <a
+                href="javascript:void(0)"
+                (click)="setLanguage(languageItem.id)"
+                [class]="{ 'current-language-code': currentLanguage?.id === languageItem?.id }"
+              >
+                {{ languageItem.code }}
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <iframe
+    *ngIf="uniqueUserId"
+    [src]="urlSafe"
+    width="1"
+    height="1"
+    scrolling="no"
+    frameBorder="0"
+    style="display: none"
+  ></iframe>
+</footer>

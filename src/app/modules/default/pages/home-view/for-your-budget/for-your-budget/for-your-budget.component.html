@@ -1,0 +1,88 @@
+<div class="title">Designer pieces for your budget</div>
+<div class="box-budget">
+  <a routerLink="/new-in" [queryParams]="{ price: budget[appConfig.currencyCode][0].param }">
+    <div class="half-image" style="background-image: url({{ env.UPLOADS_IMGIX_URL }}/static/home/under50.JPG);">
+      <span class="text">
+        {{ budget[appConfig.currencyCode][0].label }}
+      </span>
+    </div>
+  </a>
+  <a routerLink="/new-in" [queryParams]="{ price: budget[appConfig.currencyCode][1].param }">
+    <div
+      class="half-image"
+      style="
+        background-image: url({{ env.UPLOADS_IMGIX_URL }}/static/home/50-300.jpg);
+      "
+    >
+      <span class="text">
+        {{ budget[appConfig.currencyCode][1].label }}
+      </span>
+    </div>
+  </a>
+  <ng-container *ngIf="isMobile$?.value">
+    <a routerLink="/new-in" [queryParams]="{ price: budget[appConfig.currencyCode][2].param }">
+      <div
+        class="half-image"
+        style="
+          background-image: url({{ env.UPLOADS_IMGIX_URL }}/static/home/300-500.jpg);
+        "
+      >
+        <span class="text">
+          {{ budget[appConfig.currencyCode][2].label }}
+        </span>
+      </div>
+    </a>
+    <a routerLink="/new-in" [queryParams]="{ price: budget[appConfig.currencyCode][3].param }">
+      <div
+        class="half-image"
+        style="
+          background-image: url({{ env.UPLOADS_IMGIX_URL }}/static/home/500-1000.JPG);
+        "
+      >
+        <span class="text">
+          {{ budget[appConfig.currencyCode][3].label }}
+        </span>
+      </div>
+    </a>
+  </ng-container>
+  <a routerLink="/new-in" [queryParams]="{ price: budget[appConfig.currencyCode][4].param }">
+    <div
+      class="full-image"
+      style="
+        background-image: url({{ env.UPLOADS_IMGIX_URL }}/static/home/Exclusives.JPG);
+      "
+    >
+      <span class="text">
+        {{ budget[appConfig.currencyCode][4].label }}
+      </span>
+    </div>
+  </a>
+</div>
+<ng-container *ngIf="!isMobile$?.value">
+  <div class="box-budget bottom">
+    <a routerLink="/new-in" [queryParams]="{ price: budget[appConfig.currencyCode][2].param }">
+      <div
+        class="half-image"
+        style="
+          background-image: url({{ env.UPLOADS_IMGIX_URL }}/static/home/300-500.jpg);
+        "
+      >
+        <span class="text">
+          {{ budget[appConfig.currencyCode][2].label }}
+        </span>
+      </div>
+    </a>
+    <a routerLink="/new-in" [queryParams]="{ price: budget[appConfig.currencyCode][3].param }">
+      <div
+        class="half-image"
+        style="
+          background-image: url({{ env.UPLOADS_IMGIX_URL }}/static/home/500-1000.JPG);
+        "
+      >
+        <span class="text">
+          {{ budget[appConfig.currencyCode][3].label }}
+        </span>
+      </div>
+    </a>
+  </div>
+</ng-container>

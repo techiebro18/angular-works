@@ -1,0 +1,149 @@
+<div class="container">
+  <div class="header-title">{{ getHeaderTitle() }}</div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="product-header">
+        <div class="product-image">
+          <img [src]="product?.imgix_image_url" tvb-img-fallback width="150" />
+        </div>
+
+        <div class="product-info">
+          <span class="brand-name">{{ product?.brand_name }}</span>
+          <br />
+          <span class="product-name offer-info">{{ product?.name }}</span>
+          <br />
+          <span class="offer-info">
+            {{ 'make_an_offer.offers_history.starting_price' | translate }}: {{ appConfig.currencySymbol }}
+            {{ startingPrice }}
+          </span>
+          <br />
+          <br />
+          <span class="offer-info">
+            {{ 'make_an_offer.my_offers.listing.header.received_offer' | translate }}:&nbsp;
+            {{ lastOffer?.price[appConfig.currencyCode.toLowerCase()].value | currency: appConfig?.currencyCode }}
+          </span>
+          <br />
+          <span class="offer-info for-you-price" *ngIf="isSellerPerspective(userPerspective)">
+            ({{ 'make_an_offer.my_offers.listing.for_you' | translate }}:&nbsp;
+            {{
+              lastOffer?.price[appConfig.currencyCode.toLowerCase()].costOfGoods | currency: appConfig?.currencyCode
+            }})
+          </span>
+        </div>
+
+        <div *ngIf="offerHistory.length > 0 && lastOffer" class="desktop-only warnings-texts time-to-expire">
+          <p class="time-to-expire">{{ getTimeToExpireText(lastOffer, product) }}</p>
+          <p class="last-offer-warning" *ngIf="shouldShowLastOfferWarning()">
+            {{ 'make_an_offer.my_offers.warnings.last_offer' | translate }}
+          </p>
+        </div>
+      </div>
+
+      <div class="buttons-bar desktop-only" *ngIf="lastOffer && product && !hasCounterOfferBeenMade">
+        <tvb-counter-offer-form
+          *ngIf="isCounterOfferActionType()"
+          [buyerId]="buyerId"
+          [sellerId]="sellerId"
+          [product]="product"
+          [lastOfferPosition]="lastOffer.position"
+          [lastOfferPrice]="lastOffer.price"
+          [offerHistory]="offerHistory"
+          [languageShortName]="appConfig.languageShortName"
+          [currencyCode]="appConfig.currencyCode"
+          [currencySymbol]="appConfig.currencySymbol"
+          [userPerspective]="userPerspective"
+          (offerMade)="handleOfferMade($event)"
+        ></tvb-counter-offer-form>
+
+        <div
+          class="yes-no-btns"
+          *ngIf="
+            (isAcceptActionType() || isDeclineActionType()) &&
+            !hasCounterOfferBeenAccepted &&
+            !hasCounterOfferBeenDeclined
+          "
+        >
+          <button *ngIf="isAcceptActionType()" (click)="acceptOffer()" class="btn btn-primary yes-btn ml-0">
+            {{ 'yes' | translate }}
+          </button>
+
+          <button *ngIf="isDeclineActionType()" (click)="declineOffer()" class="btn btn-primary yes-btn ml-0">
+            {{ 'yes' | translate }}
+          </button>
+
+          <button (click)="cancelAndClose()" class="btn btn-secondary no-btn ml-0">
+            {{ 'no' | translate }}
+          </button>
+        </div>
+      </div>
+
+      <div class="history-box">
+        <span class="history-title">{{ 'make_an_offer.my_offers.history.title' | translate }}</span>
+
+        <ng-container *ngFor="let offer of offerHistory">
+          <tvb-offers-history-row
+            *ngIf="offerHistory.length > 0"
+            [buyerName]="offer.buyerName"
+            [buyerProfilePicture]="offer.buyerProfilePicture"
+            [sellerName]="offer.sellerName"
+            [sellerProfilePicture]="offer.sellerProfilePicture"
+            [currencyCode]="appConfig.currencyCode"
+            [currencySymbol]="appConfig.currencySymbol"
+            [expirationDate]="offer.createdAt"
+            [offerMadeAt]="offer.createdAt"
+            [offerPosition]="offer.position"
+            [offerValue]="offer.price[appConfig.currencyCode.toLowerCase()].value"
+            [isLastPosition]="offer.position == offerHistory.length"
+            [userPerspective]="userPerspective"
+          ></tvb-offers-history-row>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+
+  <div class="fixed-footer mobile-only row">
+    <div class="content">
+      <div *ngIf="offerHistory.length > 0" class="warnings-texts time-to-expire">
+        {{ getTimeToExpireText(lastOffer, product) }}
+      </div>
+
+      <div class="warnings-texts last-offer-warning" *ngIf="lastOffer && shouldShowLastOfferWarning()">
+        {{ 'make_an_offer.my_offers.warnings.last_offer' | translate }}
+      </div>
+
+      <div class="buttons-bar" *ngIf="lastOffer && product && !hasCounterOfferBeenMade">
+        <tvb-counter-offer-form
+          *ngIf="isCounterOfferActionType()"
+          [buyerId]="buyerId"
+          [sellerId]="sellerId"
+          [product]="product"
+          [lastOfferPosition]="lastOffer.position"
+          [lastOfferPrice]="lastOffer.price"
+          [offerHistory]="offerHistory"
+          [languageShortName]="appConfig.languageShortName"
+          [currencyCode]="appConfig.currencyCode"
+          [currencySymbol]="appConfig.currencySymbol"
+          [userPerspective]="userPerspective"
+          (offerMade)="handleOfferMade($event)"
+        ></tvb-counter-offer-form>
+
+        <div class="yes-no-btns" *ngIf="isAcceptActionType() || isDeclineActionType()">
+          <button *ngIf="isAcceptActionType()" (click)="acceptOffer()" class="btn btn-primary yes-btn ml-0">
+            {{ 'yes' | translate }}
+          </button>
+
+          <button *ngIf="isDeclineActionType()" (click)="declineOffer()" class="btn btn-primary yes-btn ml-0">
+            {{ 'yes' | translate }}
+          </button>
+
+          <button (click)="cancelAndClose()" class="btn btn-secondary no-btn ml-0">
+            {{ 'no' | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<loader></loader>

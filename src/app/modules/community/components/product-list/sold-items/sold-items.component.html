@@ -1,0 +1,20 @@
+<div class="productsList--columnProductList">
+  <div class="row col-md-12 list-content">
+    <ol class="list-cards">
+      <ng-container *ngFor="let item of soldItems">
+        <li class="item-card" *ngIf="item.image">
+          <div class="member-card">
+            <span class="sold-tag">Sold</span>
+            <ng-container *appShellNoRender>
+              <img src="{{ item.image }}" alt="{{ item.brandName }}" />
+            </ng-container>
+            <p class="brand">{{ item.brandName }}</p>
+            <p class="price">
+              {{ item.price }}
+            </p>
+          </div>
+        </li>
+      </ng-container>
+    </ol>
+  </div>
+</div>

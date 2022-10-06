@@ -1,0 +1,132 @@
+<div class="register-form" #target>
+  <div class="section1" *ngIf="isFirstSection">
+    <form class="tvb-form" [formGroup]="emailForm" autocomplete="off" (ngSubmit)="shownext()" novalidate>
+      <div *ngIf="!isWishlist" class="title-info">
+        <h3>BECOME A MEMBER</h3>
+      </div>
+      <div *ngIf="isWishlist" class="title-info">
+        <h3>ADD TO WISHLIST</h3>
+        <p>Enter your email to save for the future</p>
+      </div>
+      <div class="form-group" *ngIf="isWishlist">
+        <img class="productImg" src="{{ prdImage }}" />
+      </div>
+      <div class="form-group">
+        <input
+          type="email"
+          placeholder="{{ 'Email' | translate }} *"
+          class="form-control"
+          formControlName="email"
+          required
+          autofocus
+          (keyup)="incorrectEmail = false"
+        />
+        <div *ngIf="emailSubmitted && !incorrectEmail && email.invalid" class="error_message">
+          <span *ngIf="email.errors?.email">{{ 'Please enter a valid email' | translate }}</span>
+          <span *ngIf="email.errors?.required">{{ 'Email address is required' | translate }}</span>
+        </div>
+        <div *ngIf="incorrectEmail" class="error_message">
+          <span>{{ emailErrorMessage | translate }}</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn tvb-button primary">
+          {{ 'JOIN THE COMMUNITY' | translate }}
+        </button>
+      </div>
+
+      <app-social-login (socialloggedin)="onSocialLoggedIn()" [location]="location"></app-social-login>
+      <h3 class="signinshow">
+        Already a member?
+        <a href="javascript:void(0)" class="showRegisrationPopup" (click)="showLogin()">Log in</a>
+      </h3>
+    </form>
+  </div>
+  <div class="section2" *ngIf="!isFirstSection">
+    <form class="tvb-form" [formGroup]="registrationForm" autocomplete="off" (ngSubmit)="registerSubmit()" novalidate>
+      <div class="title-info">
+        <h3>BECOME A MEMBER</h3>
+      </div>
+      <div class="form-group">
+        <input
+          type="password"
+          placeholder="{{ 'Password' | translate }} *"
+          class="form-control"
+          formControlName="password"
+          required
+          autofocus
+        />
+        <div *ngIf="password.invalid && (password.dirty || password.touched)" class="error_message">
+          <span *ngIf="password.errors?.minlength">
+            {{ 'Password must be at least 6 characters' | translate }}
+          </span>
+          <span *ngIf="password.errors?.required">{{ 'Password is required' | translate }}</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <input
+          type="text"
+          placeholder="{{ 'Username' | translate }} *"
+          class="form-control"
+          formControlName="username"
+          required
+        />
+        <div *ngIf="username.invalid && (username.dirty || username.touched)" class="error_message">
+          <span *ngIf="username.errors?.required">{{ 'Username is required' | translate }}</span>
+        </div>
+        <div *ngIf="registrationForm.controls['username'].errors?.usernameTaken" class="error_message">
+          {{ 'This username is already taken' | translate }}
+        </div>
+      </div>
+
+      <ng-container *ngIf="isGuestUser">
+        <div class="form-group">
+          <input
+            type="text"
+            placeholder="{{ 'Validation Code' | translate }} *"
+            class="form-control"
+            formControlName="validationCode"
+            required
+          />
+          <div *ngIf="validationCode.invalid && (validationCode.dirty || validationCode.touched)" class="error_message">
+            <span *ngIf="validationCode.errors?.required">{{ 'Validation Code is required' | translate }}</span>
+          </div>
+          <div *ngIf="guestMessage" class="guest-message">
+            {{ guestMessage }}
+          </div>
+        </div>
+      </ng-container>
+
+      <re-captcha formControlName="recaptchaReactive" siteKey="{{ recaptcha_site_key }}"></re-captcha>
+
+      <app-checkbox name="news_letter" formControlName="news_letter" (change)="updateNewsLetterValue()">
+        {{ 'login_check_box' | translate }}.
+      </app-checkbox>
+
+      <div class="label-container form-group">
+        <small>
+          {{ 'registration_privacy_policy' | translate }}
+          <a class="tvb-link" href="/privacy-policy">
+            {{ 'Privacy
+            Policy' | translate }}
+          </a>
+          {{ 'and our' | translate }}
+          <a class="tvb-link" href="/terms-and-conditions">
+            {{ 'Terms and
+            Conditions' | translate }}
+          </a>
+        </small>
+      </div>
+
+      <div class="form-group text-center">
+        <button
+          type="submit"
+          class="btn tvb-button primary"
+          [attr.disabled]="registrationForm.invalid ? 'disabled' : null"
+        >
+          {{ 'JOIN THE COMMUNITY' | translate }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

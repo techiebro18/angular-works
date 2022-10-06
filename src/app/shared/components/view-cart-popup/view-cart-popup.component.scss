@@ -1,0 +1,353 @@
+.ind-sell {
+  font-size: 14px !important;
+  color: #000000 !important;
+}
+
+a.authlinebadge {
+  border-bottom: 1px #000 solid !important;
+  padding-bottom: 1px !important;
+  color: #000000 !important;
+}
+
+.product-detail--recommended-products .title-heading {
+  text-align: center;
+  position: relative;
+  max-width: 1170px;
+  width: 100%;
+  margin: auto;
+  margin: 30px 0;
+}
+
+.product-detail--recommended-products .title-heading:after {
+  content: '';
+  height: 1px;
+  background-color: #e5e5e5;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  z-index: -1;
+}
+
+.product-detail--recommended-products .title-heading h2 {
+  font-size: 18px;
+  text-transform: uppercase;
+  padding: 0 30px;
+  background-color: #fff;
+  position: relative;
+  display: inline-block;
+  font-family: 'FuturaBT-Light';
+  margin-bottom: 0;
+}
+
+.product-detail-slider {
+  width: 100%;
+  max-width: 540px;
+}
+
+.product-detail--controls {
+  padding: 30px 0px 30px 30px;
+}
+
+.product-detail-info {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+  padding: 30px 0px 30px 30px;
+  .ind-sell {
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    font-size: 14px;
+    a.authlinebadge {
+      border-bottom: 1px #000 solid;
+      padding-bottom: 1px;
+    }
+    a.authlinebadge:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+.product-details {
+  margin: 30px 0;
+}
+.btngroup {
+  position: relative;
+  display: block;
+}
+.btn-shoping {
+  margin: 0px 15px 18px 0;
+}
+.btn-shoping a {
+  font-size: 14px;
+}
+
+.btn-shoping {
+  margin: 0px 15px 18px 0;
+}
+.btn-shoping a {
+  font-size: 14px;
+}
+.cta-btn {
+  position: relative;
+}
+.cta-btn > a {
+  display: inline-block;
+  padding: 0px 20px;
+  background-color: #191919;
+  font-size: 16px;
+  color: #ffffff;
+  text-transform: uppercase;
+  text-decoration: none;
+  min-width: 249px;
+  text-align: center;
+  line-height: 40px;
+  border: 1px solid transparent;
+  font-family: FuturaBT-Light !important;
+}
+.cta-btn > a:hover {
+  background-color: #666;
+  color: #fff;
+}
+.product-detail-info > h2 {
+  font-size: 48px;
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 20px;
+}
+.product-detail-info > h3 {
+  font-size: 24px;
+  margin-bottom: 25px;
+  text-transform: uppercase;
+}
+
+.ais-Hits-item {
+  max-width: 360px;
+}
+
+.designer {
+  display: flex;
+  align-items: center;
+  font-size: 32px;
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 20px;
+  line-height: 1.1;
+
+  a {
+    color: #191919;
+
+    &:hover {
+      color: #191919;
+      text-decoration: underline;
+      outline: none;
+    }
+  }
+}
+
+.style {
+  font-size: 16px;
+  margin-bottom: 25px;
+  text-transform: uppercase;
+  font-family: 'FuturaBT-Light';
+  line-height: 1.1;
+}
+
+.price-wrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 3px;
+  line-height: 1.1;
+  font-family: 'FuturaBT-Light';
+  font-size: 16px;
+}
+.normal-price {
+  text-decoration: line-through;
+  margin-right: 20px;
+}
+.actual-price {
+  color: #a10303;
+}
+.item-image {
+  height: 100px;
+  width: 50px;
+}
+
+.breadcrumbContainer {
+  padding: 15px;
+}
+.breadcrumbContainer .breadcrumbLink {
+  text-decoration: none;
+  color: #808080;
+}
+.breadcrumbContainer .breadcrumbText {
+  color: #808080;
+}
+.chevron_forward {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 10px;
+  display: inline;
+  opacity: 0.8;
+  margin: 10px;
+}
+
+@media screen and (max-width: 1024px) {
+  .product-detail-info {
+    padding: 30px 0;
+  }
+
+  .product-detail--controls {
+    padding: 30px 0px 0px 0px;
+  }
+
+  .cta-btn {
+    margin: 0 0 18px;
+  }
+
+  .cta-btn > a {
+    width: 100%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}
+
+.product-shopping-popup {
+  background: rgb(10 10 10 / 60%);
+}
+
+.product-shopping-popup .modal-header {
+  border-bottom: 0px;
+}
+.product-shopping-popup .modal-dialog {
+  max-width: 800px;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.product-shopping-popup .modal-content {
+  border-radius: 0px;
+  border: 0px;
+}
+.product-shopping-popup .modal-content .closepopup {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  font-size: 20px;
+}
+
+.product-shopping-popup .modal-header h3 {
+  text-align: center;
+  width: 100%;
+  font-size: 24px;
+  font-family: 'Playfair Display', serif;
+}
+
+.product-shopping-popup .modal-body-inner {
+  display: flex;
+}
+.product-shopping-popup .product-detail-left {
+  width: 50%;
+  padding: 10px;
+}
+.product-shopping-popup .product-detail-left img {
+  width: 100%;
+  padding: 60px;
+}
+.product-shopping-popup .product-detail-left {
+  text-align: center;
+}
+
+.product-detail-right {
+  text-align: center;
+}
+
+.product-detail-right .brand {
+  font-size: 16px;
+  margin-bottom: 25px;
+  text-transform: uppercase;
+  font-family: 'FuturaBT-Medium';
+  line-height: 1.1;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 19px;
+}
+.product-detail-right .product-name {
+  font-size: 14px;
+  margin-bottom: 25px;
+  font-family: 'FuturaBT-Light';
+  line-height: 1.1;
+}
+.price-wrapper-popup {
+  margin-bottom: 30px;
+}
+
+.product-detail-right {
+  text-align: center;
+  // width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.product-detail-right .back-to-shop a {
+  background: #fff;
+  color: #191919;
+  border: 1px solid #191919;
+}
+.product-detail-right .back-to-shop > a:hover {
+  background-color: #666;
+  color: #fff;
+}
+.product-detail-right .cta-btn a {
+  font-family: 'FuturaBT-Medium';
+  font-size: 13px;
+}
+
+@media (max-width: 992px) {
+  .product-shopping-popup .modal-dialog {
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform: inherit;
+    height: 100%;
+    max-width: 100%;
+    margin: 0;
+    width: 100%;
+  }
+  .product-shopping-popup .modal-body-inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .product-shopping-popup .product-detail-left {
+    width: 100%;
+    padding: 0;
+    max-width: 200px;
+  }
+  .product-shopping-popup .product-detail-left img {
+    width: 100% !important;
+    max-width: 300px;
+    padding: 0px;
+  }
+  .product-detail-right {
+    width: 100%;
+    max-width: 300px;
+  }
+  .product-detail-right .brand {
+    margin-top: 15px;
+  }
+  .price-wrapper-popup {
+    margin-bottom: 25px;
+  }
+  .product-shopping-popup .modal-header h3 {
+    font-size: 20px;
+  }
+}

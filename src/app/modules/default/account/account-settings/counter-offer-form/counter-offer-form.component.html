@@ -1,0 +1,56 @@
+<div class="offer-form" *ngIf="!offerSubmitted">
+  <form [formGroup]="offerFormGroup" (ngSubmit)="submitOffer()">
+    <div class="row align-items-end">
+      <div class="col-12 col-md-6 price-input-box counter-offer-price">
+        <div class="col price-input-title">{{ 'make_an_offer.make_offer_dialog.counter_offer' | translate }}</div>
+        <input
+          type="text"
+          class="amount-input"
+          formControlName="offer_price"
+          placeholder="{{ 'Counter Offer value' | translate }}"
+          (keyup)="onKeyUp($event)"
+        />
+
+        <span class="amount-input-txt">{{ currencyCode }}</span>
+
+        <p class="err-msg price-range-warning" *ngIf="isFormInputInvalid('offer_price')">
+          {{
+            'make_an_offer.my_offers.warnings.price_range'
+              | translate
+                : {
+                    price1: minimumOfferPrice | currency: currencyCode,
+                    price2: maximumOfferPrice | currency: currencyCode
+                  }
+          }}
+        </p>
+      </div>
+
+      <div class="col-12 col-md-6 price-input-box for-you-price" *ngIf="isSellerPerspective()">
+        <div class="col price-input-title">{{ 'make_an_offer.make_offer_dialog.for_you' | translate }}</div>
+        <input
+          type="text"
+          class="amount-input"
+          formControlName="for_you_price"
+          placeholder="{{ 'For You' | translate }}"
+          (keyup)="onKeyUp($event)"
+        />
+
+        <span class="amount-input-txt">{{ currencyCode }}</span>
+      </div>
+
+      <br *ngIf="isSellerPerspective()" />
+
+      <div [ngClass]="{ 'col-12 mt-4': isSellerPerspective(), 'col-md-6': !isSellerPerspective() }">
+        <button class="btn tvb-button btn-primary" type="submit">
+          {{ 'make_an_offer.titles.make_counter' | translate }}
+        </button>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="errMessage.length > 0">
+      <div class="col-md-12 mt-2">
+        <span class="err-msg">{{ errMessage }}</span>
+      </div>
+    </div>
+  </form>
+</div>

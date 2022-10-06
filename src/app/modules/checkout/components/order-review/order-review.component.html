@@ -1,0 +1,74 @@
+<div class="shippingAddress" *ngIf="checkoutState?.shippingAddress as shippingAddress">
+  <div class="address">
+    <div>{{ shippingAddress.fname }}</div>
+    <div>{{ shippingAddress.pin_code }} {{ shippingAddress.address_1 }}</div>
+    <div>{{ shippingAddress.city }} {{ getCountryName(shippingAddress.country) }}</div>
+  </div>
+
+  <app-dhl-info></app-dhl-info>
+</div>
+
+<app-checkout-order-summary [currency]="currency" [hideTitle]="true"></app-checkout-order-summary>
+
+<form [formGroup]="EmailNotiFormGroup" novalidate class="email-form">
+  <app-checkbox
+    name="news_letter"
+    formControlName="news_letter"
+    (change)="updateEmailNotification()"
+  >
+    {{ 'Sign up to our newsletter for exclusive offers' | translate }}.
+  </app-checkbox>
+</form>
+
+<div class="row" *ngIf="invalidMessage">
+  <div class="col-sm-12 col-xs-12">
+    <p class="invalid-message">{{ invalidMessage }}</p>
+  </div>
+</div>
+
+<ng-container *ngIf="order.provider == 'stripe'">
+  <div class="row">
+    <div class="col-sm-12 col-xs-12">
+      <div class="form-group">
+        <button
+          type="button"
+          (click)="submitPayment()"
+          id="submit_checkout"
+          class="btn primary next"
+          [disabled]="!order?.order_id"
+        >
+          {{ 'PLACE ORDER' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="order.provider == 'paypal'">
+  <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+</ng-container>
+
+<ng-container *ngIf="order.provider == 'klarna'">
+  <div class="row">
+    <div class="col-sm-12 col-xs-12">
+      <div class="form-group">
+        <div id="klarna-payments-container"></div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 col-xs-12">
+      <div class="form-group">
+        <button
+          type="button"
+          (click)="submitKlarnaPayment()"
+          id="submit_klarna_checkout"
+          class="btn primary next"
+          [disabled]="!validKlarna"
+        >
+          {{ 'PLACE ORDER' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-container>

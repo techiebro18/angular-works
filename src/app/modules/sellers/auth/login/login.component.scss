@@ -1,0 +1,11 @@
+@import '../auth.component.common';
+
+.form {
+  .forgotten-password-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    font-family: Manrope, sans-serif;
+    margin-top: 20px;
+  }
+}

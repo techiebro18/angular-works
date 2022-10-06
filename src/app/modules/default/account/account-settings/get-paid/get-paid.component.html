@@ -1,0 +1,535 @@
+<div class="account-details">
+  <div class="top-sub-tabs">
+    <span [ngClass]="{ active: showFormOne === true }">
+      {{ 'Personal information' | translate }}
+    </span>
+    <span [ngClass]="{ active: showFormTwo === true }">{{ 'Transfer method' | translate }}</span>
+  </div>
+
+  <div class="form-container-wrapper">
+    <div class="form-title title"></div>
+
+    <div class="form-container get-paid-form">
+      <form *ngIf="showFormOne" [formGroup]="firstFormGroup" (ngSubmit)="toggleFormOne('hide'); toggleFormTwo('show')">
+        <div class="row">
+          <div class="col-lg-6 col-12">
+            <div class="form-group-title title medium">
+              {{ 'Personal information' | translate }}
+            </div>
+            <div class="form-group">
+              <div class="description">{{ 'Shipped From' | translate }}*</div>
+              <div class="input-container">
+                <div class="input-container dropdown-field dropdown-field-2">
+                  <ng-select
+                    class="ng-select dropdown-select"
+                    formControlName="shipped_from"
+                    [items]="countries"
+                    [bindValue]="'country_id'"
+                    [bindLabel]="'country.name'"
+                    [clearable]="false"
+                  ></ng-select>
+                </div>
+                <span
+                  class="error-message"
+                  *ngIf="
+                    firstFormGroup?.controls?.shipped_from.errors &&
+                    firstFormGroup?.controls?.shipped_from.errors.required
+                  "
+                >
+                  {{ 'Please enter shipped from country' | translate }}
+                </span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="description">{{ 'First Name' | translate }}*</div>
+              <div class="input-container">
+                <input
+                  type="text"
+                  class="secondary"
+                  formControlName="first_name"
+                  placeholder="{{ 'First Name' | translate }}"
+                />
+              </div>
+              <span
+                class="error-message"
+                *ngIf="
+                  firstFormGroup?.controls?.first_name.errors && firstFormGroup?.controls?.first_name.errors.required
+                "
+              >
+                {{ 'Please enter first name' | translate }}
+              </span>
+            </div>
+
+            <div class="form-group">
+              <div class="description">{{ 'Last Name' | translate }}*</div>
+              <div class="input-container">
+                <input
+                  type="text"
+                  class="secondary"
+                  formControlName="last_name"
+                  placeholder="{{ 'Last Name' | translate }}"
+                />
+              </div>
+              <span
+                class="error-message"
+                *ngIf="
+                  firstFormGroup?.controls?.last_name.errors && firstFormGroup?.controls?.last_name.errors.required
+                "
+              >
+                {{ 'Please enter last name' | translate }}
+              </span>
+            </div>
+
+            <div class="form-group">
+              <div class="description">{{ 'Date of birth' | translate }}*</div>
+              <div class="input-container">
+                <div class="dropdown-field dropdown-date">
+                  <input
+                    matInput
+                    formControlName="date_of_birth"
+                    [matDatepicker]="picker"
+                    [max]="maxDate"
+                    (click)="picker.open()"
+                    class="dropdown-input date-field"
+                    placeholder="( {{ 'DD-MM-YYYY' | translate }} )"
+                  />
+                  <mat-datepicker #picker startView="multi-year"></mat-datepicker>
+                </div>
+              </div>
+              <span
+                class="error-message"
+                *ngIf="
+                  firstFormGroup?.controls?.date_of_birth.errors &&
+                  (firstFormGroup?.controls?.date_of_birth.errors.required ||
+                    firstFormGroup?.controls?.date_of_birth.errors.matDatepickerMax)
+                "
+              >
+                {{ 'Please enter date of birth' | translate }}
+              </span>
+            </div>
+          </div>
+
+          <div class="col-lg-6 col-12 contact_info">
+            <div class="form-group-title form-group-title-2 title medium">
+              {{ 'Billing Address' | translate }}
+            </div>
+            <div class="form-group">
+              <div class="description">{{ 'Address' | translate }}*</div>
+              <div class="input-container">
+                <input
+                  type="text"
+                  class="secondary"
+                  formControlName="address"
+                  placeholder="{{ 'Address' | translate }}"
+                />
+              </div>
+              <span
+                class="error-message"
+                *ngIf="firstFormGroup?.controls?.address.errors && firstFormGroup?.controls?.address.errors.required"
+              >
+                {{ 'Please enter address' | translate }}
+              </span>
+            </div>
+
+            <div class="row billing-address-group">
+              <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                <div class="form-group">
+                  <div class="description">{{ 'Country' | translate }}*</div>
+                  <div class="input-container">
+                    <div class="input-container dropdown-field dropdown-field2">
+                      <ng-select
+                        class="ng-select dropdown-select"
+                        formControlName="country_id"
+                        [items]="countries"
+                        [bindValue]="'country_id'"
+                        [bindLabel]="'country.name'"
+                        [clearable]="false"
+                      ></ng-select>
+                    </div>
+                    <span
+                      class="error-message"
+                      *ngIf="
+                        firstFormGroup?.controls?.country_id.errors &&
+                        firstFormGroup?.controls?.country_id.errors.required
+                      "
+                    >
+                      {{ 'Please enter country' | translate }}
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                <div class="form-group">
+                  <div class="description">
+                    {{ 'State' | translate }}
+                  </div>
+                  <div class="input-container">
+                    <input
+                      type="text"
+                      class="secondary"
+                      formControlName="state"
+                      placeholder="{{ 'State' | translate }}"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row billing-address-group">
+              <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                <div class="form-group">
+                  <div class="description">{{ 'City' | translate }}*</div>
+                  <div class="input-container">
+                    <input
+                      type="text"
+                      class="secondary"
+                      formControlName="city"
+                      placeholder="{{ 'City' | translate }}"
+                    />
+                  </div>
+                  <span
+                    class="error-message"
+                    *ngIf="firstFormGroup?.controls?.city.errors && firstFormGroup?.controls?.city.errors.required"
+                  >
+                    {{ 'Please enter city' | translate }}
+                  </span>
+                  <span
+                    *ngIf="
+                      firstFormGroup?.controls?.city.errors && firstFormGroup?.controls?.city.errors.specialCharacter
+                    "
+                  >
+                    {{ 'Special characters are not allowed' | translate }}
+                  </span>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                <div class="form-group">
+                  <div class="description">{{ 'Postal Code' | translate }}*</div>
+                  <div class="input-container">
+                    <input
+                      type="text"
+                      class="secondary"
+                      formControlName="postal_code"
+                      placeholder="{{ 'Zip Code' | translate }}"
+                      (keypress)="keyPressAlphanumeric($event)"
+                    />
+                  </div>
+                  <span
+                    class="error-message"
+                    *ngIf="
+                      firstFormGroup?.controls?.postal_code.errors &&
+                      firstFormGroup?.controls?.postal_code.errors.required
+                    "
+                  >
+                    {{ 'Please enter post code' | translate }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+            <div class="form-group-title preference-tab">
+              {{ 'Contact Information' | translate }}
+            </div>
+            <div class="form-group">
+              <div class="description">{{ 'Email Address' | translate }}*</div>
+              <div class="input-container">
+                <input
+                  type="email"
+                  class="secondary"
+                  formControlName="email"
+                  placeholder="{{ 'Email Address' | translate }}"
+                />
+              </div>
+              <span
+                class="error-message"
+                *ngIf="firstFormGroup?.controls?.email.errors && firstFormGroup?.controls?.email.errors.required"
+              >
+                {{ 'Please enter email' | translate }}
+              </span>
+              <span
+                class="error-message"
+                *ngIf="firstFormGroup?.controls?.email.errors && firstFormGroup?.controls?.email.errors.email"
+              >
+                {{ 'Please enter a valid email address' | translate }}
+              </span>
+            </div>
+            <div class="form-group">
+              <div class="description">Mobile Number*</div>
+              <div class="input-container mobile-number">
+                <ng-select
+                  #phonecodeSelect
+                  formControlName="phone_code"
+                  [items]="countryPhoneCodes"
+                  [bindLabel]="'phonecode'"
+                  [bindValue]="'phonecode'"
+                  [clearable]="false"
+                  [searchable]="false"
+                  class="phone-code"
+                  [(ngModel)]="selectedPhoneCode"
+                >
+                  <ng-template ng-header-tmp>
+                    <input
+                      style="width: 100%; line-height: 24px"
+                      type="text"
+                      (input)="phonecodeSelect.filter($any($event.target).value)"
+                    />
+                  </ng-template>
+
+                  <ng-template ng-label-tmp let-item="item">
+                    <span class="phonecode-label">+ {{ item.phonecode }}</span>
+                  </ng-template>
+
+                  <ng-template ng-option-tmp let-item="item">
+                    <span class="phonecode-option">+ {{ item.phonecode }}</span>
+                  </ng-template>
+                </ng-select>
+                <input
+                  type="number"
+                  class="mobile-number secondary"
+                  formControlName="mobile_no"
+                  placeholder="Mobile number"
+                />
+              </div>
+
+              <span
+                *ngIf="
+                  firstFormGroup?.controls?.phone_code.errors && firstFormGroup?.controls?.phone_code.errors.required
+                "
+                class="error-message"
+              >
+                {{ 'Please enter phone code' | translate }}
+              </span>
+
+              <span
+                *ngIf="
+                  firstFormGroup?.controls?.mobile_no.errors && firstFormGroup?.controls?.mobile_no.errors.required
+                "
+                class="error-message"
+              >
+                {{ 'Please enter a valid mobile number' | translate }}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="row buttons-row">
+          <button
+            type="submit"
+            class="btn btn-primary btn-submit ml-3"
+            (click)="toggleFormOne('hide'); toggleFormTwo('show')"
+            [disabled]="firstFormGroup.invalid"
+          >
+            {{ 'Next' | translate }}
+          </button>
+        </div>
+      </form>
+
+      <ng-container *ngIf="showFormTwo">
+        <div class="form-group-title title medium mt-5">
+          {{ 'Transfer Information' | translate }}
+        </div>
+
+        <!-- EXISTING BANK ACCOUNTS -->
+        <ng-container *ngFor="let bankAccount of bankAccounts; index as i">
+          <div class="row bank-account-row">
+            <div class="col-12 col-lg-6 left-content">
+              <div class="title-counter">
+                {{ 'Bank Account' | translate }} {{ i + 1 }}
+
+                <tvb-badge
+                  id="default_bank_account"
+                  [label]="'Default for ' + bankAccount.currency.toUpperCase()"
+                  padding="5px 10px"
+                  *ngIf="bankAccount.default_for_currency"
+                ></tvb-badge>
+              </div>
+
+              <div class="form-group">
+                <div class="description">{{ 'Bank Country' | translate }}</div>
+
+                <div class="input-container">
+                  <div class="input-container dropdown-field dropdown-field-2">
+                    <input
+                      type="text"
+                      class="secondary"
+                      placeholder="{{ 'Bank Country' | translate }}"
+                      [value]="getCountryLabel(bankAccount.metadata['country_id'])"
+                      [disabled]="true"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="description">{{ 'Bank Account Number' | translate }}*</div>
+
+                <div class="input-container">
+                  <input
+                    type="text"
+                    class="secondary"
+                    placeholder="{{ 'Bank Account ID' | translate }}"
+                    [value]="bankAccount.metadata['iban']"
+                    [disabled]="true"
+                  />
+                </div>
+              </div>
+
+              <ngx-spinner
+                size="medium"
+                class="app-spinner"
+                type="ball-scale-multiple"
+                [name]="'spinner_bank_account_' + i"
+                [fullScreen]="false"
+              ></ngx-spinner>
+            </div>
+
+            <div class="col-12 col-lg-6 right-content">
+              <a
+                id="delete_stripe_bank_account_btn_{{ i }}"
+                class="link stripe-action-btn"
+                (click)="deleteStripeBankAccount(bankAccount, i)"
+                [ngClass]="
+                  shouldDisableStripeActionButtons(bankAccount) ? 'secondary disabled' : 'primary no-underline'
+                "
+              >
+                {{ 'Delete' | translate }}
+              </a>
+
+              <a
+                id="set_stripe_bank_account_as_default_btn_{{ i }}"
+                class="link stripe-action-btn"
+                (click)="setStripeDefaultBankAccount(bankAccount, i)"
+                [ngClass]="
+                  shouldDisableStripeActionButtons(bankAccount) ? 'secondary disabled' : 'primary no-underline'
+                "
+              >
+                {{ 'Set as default for' | translate }} {{ bankAccount.currency.toUpperCase() }}
+              </a>
+            </div>
+          </div>
+        </ng-container>
+
+        <div [formGroup]="bankAccountsFormGroup" *ngIf="bankAccountFormInputs">
+          <ng-container formArrayName="bankAccountFormInputs">
+            <ng-container *ngFor="let bankAccountForm of bankAccountFormInputs.controls; index as i">
+              <div class="row bank-account-row" [formGroup]="getAsValidFormGroup(bankAccountForm)">
+                <div class="col-12 col-lg-6 left-content">
+                  <div class="title-counter">{{ 'Bank Account' | translate }} {{ bankAccounts.length + i + 1 }}</div>
+
+                  <div class="form-group">
+                    <div class="description">{{ 'Bank Country' | translate }}</div>
+
+                    <div class="input-container">
+                      <div class="input-container dropdown-field dropdown-field-2">
+                        <ng-select
+                          class="ng-select dropdown-select"
+                          formControlName="bank_country_id"
+                          [items]="countries"
+                          [bindValue]="'country.id'"
+                          [bindLabel]="'country.name'"
+                          [clearable]="false"
+                        ></ng-select>
+                      </div>
+                    </div>
+
+                    <span
+                      class="error-message"
+                      *ngIf="
+                        bankAccountForm?.get('bank_country_id').touched &&
+                        bankAccountForm?.get('bank_country_id').errors &&
+                        bankAccountForm?.get('bank_country_id').errors.required
+                      "
+                    >
+                      {{ 'Please inform the Bank Country' | translate }}
+                    </span>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="description">{{ 'Bank Account Number' | translate }}*</div>
+
+                    <div class="input-container">
+                      <input
+                        type="text"
+                        class="secondary"
+                        formControlName="bank_account_number"
+                        placeholder="{{ 'Bank Account Number' | translate }}"
+                      />
+                    </div>
+
+                    <span
+                      class="error-message"
+                      *ngIf="
+                        bankAccountForm?.get('bank_account_number').touched &&
+                        bankAccountForm?.get('bank_account_number').errors &&
+                        bankAccountForm?.get('bank_account_number').errors.required
+                      "
+                    >
+                      {{ 'Please inform the Bank Account Number' | translate }}
+                    </span>
+
+                    <ngx-spinner
+                      size="medium"
+                      class="app-spinner"
+                      type="ball-scale-multiple"
+                      [name]="'spinner_bank_account_input_' + i"
+                      [fullScreen]="false"
+                    ></ngx-spinner>
+                  </div>
+
+                  <div class="form-group add-bank-account-btns">
+                    <button type="button" class="btn btn-secondary" (click)="deleteNewBankAccountFormSection(i)">
+                      {{ 'Cancel' | translate }}
+                    </button>
+
+                    <button
+                      type="submit"
+                      class="btn btn-primary ml-3"
+                      (click)="saveNewBankAccount(bankAccountForm, i)"
+                      [disabled]="bankAccountForm.invalid"
+                    >
+                      {{ 'Save Bank Account' | translate }}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </ng-container>
+        </div>
+
+        <div class="add-new-bank-account-div">
+          <a class="link primary" (click)="addNewBankAccountFormSection()">
+            {{ '+ Add new Banking Account' | translate }}
+          </a>
+        </div>
+
+        <div *ngIf="shouldShowNoBankAccountWarning" class="no-bank-account-warning text-center mt-4 text-error">
+          {{ 'Please register at least one bank account in order to finish your "Get Paid" information.' | translate }}
+        </div>
+
+        <div class="row buttons-row">
+          <button
+            type="button"
+            class="btn btn-secondary back-btn"
+            (click)="toggleFormOne('show'); toggleFormTwo('hide')"
+          >
+            {{ 'Back' | translate }}
+          </button>
+
+          <button
+            type="submit"
+            class="btn btn-primary btn-submit ml-3"
+            (click)="submitData()"
+            [disabled]="firstFormGroup.invalid"
+          >
+            {{ 'Submit' | translate }}
+          </button>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

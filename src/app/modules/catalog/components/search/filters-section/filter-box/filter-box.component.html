@@ -1,0 +1,39 @@
+<div class="filter-box">
+  <div [id]="'section_' + filterName" class="title" (click)="toggleSection()">
+    {{ title | translate }}
+    <img class="arrow-expandable" src="assets/images/icons/arrow.svg" [ngClass]="{ expanded: isExpanded }" />
+  </div>
+
+  <div class="search-box" *ngIf="isQuickSearchable">
+    <form novalidate="" class="search-box-form">
+      <input
+        autocapitalize="off"
+        autocorrect="off"
+        spellcheck="false"
+        type="text"
+        class="search-box-input"
+        placeholder="{{ 'Search' | translate }}{{ inputPlaceholder | camelToSentenceCase | translate }}..."
+        (keyup)="onQuickSearch($event['target']['value'])"
+      />
+    </form>
+  </div>
+
+  <div class="wrap listing-box" [ngClass]="{ expanded: isExpanded }" *ngIf="options">
+    <ng-container *ngFor="let item of visibleOptions; let i = index">
+      <div class="item">
+        <label for="{{ filterName }}_{{ i + 1 }}">
+          <input
+            type="checkbox"
+            class="checkbox ignore-click-outside"
+            id="{{ filterName }}_{{ i + 1 }}"
+            [value]="item[filterName + '_url_' + appConfig?.languageShortName]"
+            [checked]="shouldBeCheckboxChecked(filterName, item[filterName + '_url_' + appConfig?.languageShortName])"
+            (click)="onToggleSectionOption(filterName, $event['target']['value'])"
+          />
+          <div class="text">{{ item[filterName + '_name_' + appConfig?.languageShortName] }}</div>
+          <span class="tag-count">{{ item['count'] }}</span>
+        </label>
+      </div>
+    </ng-container>
+  </div>
+</div>

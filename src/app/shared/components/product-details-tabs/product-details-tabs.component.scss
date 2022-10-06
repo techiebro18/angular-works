@@ -1,0 +1,111 @@
+:host {
+  .tabs {
+    margin-top: 23px;
+    div[role='tabpanel'] {
+      padding: 10px 0;
+    }
+
+    .tablist {
+      display: block;
+
+      .section {
+        border-bottom: 1px solid var(--main-color-dark);
+        color: var(--main-color-dark);
+        font-family: 'FuturaBT-Light';
+        font-size: 15px;
+        padding: 10px 0;
+        line-height: 23px;
+        margin-bottom: 2px;
+        transition: all 0.5s linear;
+
+        .info-tab {
+          overflow: hidden;
+          transition: all 0.5s ease-in-out;
+          line-height: 0;
+          padding: 0;
+          height: 0px;
+
+          &.opened {
+            line-height: 1.5;
+            padding-top: 1em;
+            padding-bottom: 1em;
+            height: auto;
+          }
+          .grid-info {
+            border-top: 1px solid var(--steps-gray);
+            padding: 10px 0;
+            justify-content: space-between;
+            display: flex;
+
+            .info-label {
+              display: inline;
+              color: var(--text-input-grey);
+            }
+            .info-desc {
+              display: inline;
+              font-family: 'FuturaBT-Medium';
+              color: var(--main-color-black);
+              text-align: right;
+            }
+          }
+        }
+        .tab-section {
+          cursor: pointer;
+          margin-bottom: 0;
+        }
+        span {
+          color: var(--main-color-dark);
+          font-family: 'FuturaBT-Medium';
+          font-size: 15px;
+          padding: 0;
+        }
+        .arrow-expandable {
+          width: 13px;
+          float: right;
+          transition: all 0.25s linear;
+          margin-top: 7px;
+
+          &.expanded {
+            transform: rotate(180deg);
+            transition: transform 0.25s linear;
+          }
+        }
+
+        .expandable {
+          overflow: hidden;
+          transition: all 0.5s linear;
+
+          a > img.arrow-expandable {
+            width: 8px;
+            float: right;
+            margin-top: 5px;
+          }
+
+          a.is-active {
+            color: black;
+          }
+
+          a.expandable > img.arrow-expandable {
+            transform: rotate(0deg);
+            transition: transform 0.2s linear;
+          }
+
+          a.expandable > img.arrow-expandable.expanded {
+            transform: rotate(180deg);
+            transition: transform 0.25s linear;
+          }
+
+          .sub-items-wrapper.expanded {
+            visibility: visible;
+            max-height: 100%;
+          }
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 1024px) {
+    .tabs .tablist {
+    }
+  }
+}

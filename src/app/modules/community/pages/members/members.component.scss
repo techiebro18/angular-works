@@ -1,0 +1,78 @@
+.container-community {
+  padding: 0;
+}
+.not-found {
+  font-family: 'FuturaBT-Light';
+  text-align: center;
+  font-size: 22px;
+  margin-top: 50px;
+}
+
+.members-menu {
+  ol {
+    list-style-type: none;
+    margin: 42px 0 0 -38px;
+    li {
+      display: inline-flex;
+      margin-right: 35px;
+      font-size: 15px;
+      opacity: 0.6;
+      transition: all 0.6s ease;
+      cursor: pointer;
+      .icon {
+        margin: -2px 11px 0 0;
+        width: 14px;
+        height: 17px;
+      }
+      .icon-item {
+        background: url(../../../../../assets/images/items.svg) no-repeat;
+      }
+      .icon-sold-item {
+        background: url(../../../../../assets/images/items.svg) no-repeat;
+      }
+    }
+    .active {
+      opacity: 1;
+    }
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .desktop {
+    display: none !important;
+  }
+  .mobile {
+    display: block;
+  }
+  .container-community {
+    overflow-x: hidden;
+  }
+  .members-menu {
+    margin: -19px 0 43px 0;
+    top: 43px;
+    text-align: center;
+    ol {
+      margin: 32px 0 42px -58px;
+      li {
+        margin-right: 0;
+        border-bottom: 1px solid;
+        width: 50%;
+        display: inline-block;
+        text-align: center;
+        padding-bottom: 10px;
+        .icon {
+          margin: 5px 0 0 0;
+          padding: 0 7px;
+        }
+      }
+    }
+  }
+}
+@media only screen and (min-width: 1025px) {
+  .desktop {
+    display: block;
+  }
+  .mobile {
+    display: none !important;
+  }
+}

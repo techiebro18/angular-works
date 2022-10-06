@@ -1,0 +1,72 @@
+<div class="payout-details-section">
+  <a class="back-link" routerLink="/account/my-financials">< {{ 'BACK' | translate }}</a>
+  <div class="table-responsive payout-details-row">
+    <table class="table half" *ngIf="payoutOverview">
+      <tbody>
+        <tr>
+          <th>{{ 'Payout Id' | translate }}</th>
+          <td>{{ payoutOverview.id }}</td>
+        </tr>
+        <tr>
+          <th>{{ 'Date' | translate }}</th>
+          <td>{{ payoutOverview.arrival_date * 1000 | date: 'dd/MM/YYYY' }}</td>
+        </tr>
+        <tr>
+          <th>{{ 'Status' | translate }}</th>
+          <td>{{ payoutOverview.status }}</td>
+        </tr>
+        <tr>
+          <th>{{ 'Amount' | translate }}</th>
+          <td>
+            {{ payoutOverview.amount / 100 | currency: (payoutOverview.currency | uppercase) }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="table" border="1">
+      <thead>
+        <tr>
+          <th>{{ 'Order Item No' | translate }}</th>
+          <th>{{ 'Purchase Date' | translate }}</th>
+          <th>{{ 'Seller SKU' | translate }}</th>
+          <th>{{ 'value-amount' | translate }}</th>
+          <th>{{ 'Status' | translate }}</th>
+          <th>{{ 'Stripe Payment Id' | translate }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of payoutDetail; let i = index">
+          <td>
+            <span *ngIf="data.order_item_id">{{ data.order_item_id }}</span>
+          </td>
+          <td>{{ data.purchase_date | date: 'dd/MM/YYYY' }}</td>
+          <td>{{ data.seller_sku }}</td>
+          <td>
+            <span *ngIf="paymentDetail">
+              {{ getAmount(data) | currency: (getCurrency(data) | uppercase) }}
+            </span>
+          </td>
+          <td>
+            <span *ngIf="paymentDetail">{{ getStatus(data) }}</span>
+          </td>
+          <td>
+            <span *ngIf="paymentDetail">{{ getPaymentId(data) }}</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div
+    *ngIf="payoutDetail == '' || payoutDetail === undefined || !payoutDetail.length"
+    class="items-placeholder title mt-5 text-center"
+  >
+    {{ message | translate }}
+  </div>
+</div>
+<mat-paginator
+  *ngIf="payoutDetail && payoutDetail.length"
+  [length]="balanceTransactionList.total"
+  [pageSize]="pagination.per_page"
+  (page)="getData($event)"
+  [pageSizeOptions]="[5, 10, 25, 100]"
+></mat-paginator>

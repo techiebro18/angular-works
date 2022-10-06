@@ -1,0 +1,68 @@
+<h1 class="title-heading">Join TVB community</h1>
+
+<div class="form private-seller-register">
+  <form id="form" [formGroup]="registerForm">
+    <div class="form-group">
+      <input type="text" placeholder="Username *" class="primary" formControlName="username" />
+
+      <div *ngIf="username.errors?.required && username.touched" class="invalid-message">Username is required</div>
+      <div *ngIf="username.errors?.usernameTaken" class="invalid-message">This username is already taken</div>
+    </div>
+
+    <div class="form-group">
+      <input type="email" placeholder="Email *" class="primary" formControlName="email" />
+
+      <div *ngIf="registerForm.controls.email.invalid && registerForm.controls.email.touched" class="invalid-message">
+        A valid e-mail is required
+      </div>
+    </div>
+
+    <div class="form-group password-input-container">
+      <span (click)="hide = !hide" class="eye_icon">
+        <img [src]="getEyeIcon()" width="16" height="16" />
+      </span>
+
+      <input [type]="hide ? 'password' : 'text'" placeholder="Password *" class="primary" formControlName="password" />
+
+      <div
+        *ngIf="registerForm.controls.password.invalid && registerForm.controls.password.touched"
+        class="invalid-message"
+      >
+        Password is required
+      </div>
+    </div>
+  </form>
+
+  <div class="alert error-message" *ngIf="errorMessage" [innerHTML]="errorMessage"></div>
+
+  <div class="alert alert-success text-center" *ngIf="successMessage">
+    {{ successMessage }}
+  </div>
+
+  <div class="submit-button-container">
+    <button class="btn primary" (click)="onProcessRegister()" [disabled]="registerForm.invalid">
+      JOIN THE COMMUNITY
+    </button>
+  </div>
+
+  <div class="already-member-container">
+    Already a member?
+    <span class="already-member-text">Log in</span>
+  </div>
+
+  <div class="or-container">or</div>
+
+  <div class="social-buttons private-seller-social">
+    <button class="btn social facebook-btn" (click)="onFbLogin()">
+      <img class="social-buttons-image" src="/assets/images/facebook-f.svg" />
+      <span class="social-buttons-text">JOIN WITH FACEBOOK</span>
+    </button>
+
+    <span class="btn-separator"></span>
+
+    <button class="btn social google-btn" (click)="onGmailLogin()">
+      <img class="social-buttons-image" src="/assets/images/google-g.svg" />
+      <span class="social-buttons-text">JOIN WITH GOOGLE</span>
+    </button>
+  </div>
+</div>

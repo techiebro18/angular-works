@@ -1,0 +1,34 @@
+<div class="my-items-container flex">
+  <div class="tabs-container" *ngIf="!(isMobile$ | async)">
+    <div class="d-flex tabs-container-wrapper">
+      <tabset>
+        <tab heading="{{ 'Transactions' | translate }}" [active]="transactionTab">
+          <app-transactions [isMobile$]="isMobile$" [criteria]="searchCritera"></app-transactions>
+        </tab>
+        <tab heading="{{ 'Payouts' | translate }}" [active]="payoutTab">
+          <app-payouts [isMobile$]="isMobile$" [criteria]="searchCritera"></app-payouts>
+        </tab>
+      </tabset>
+    </div>
+  </div>
+  <div class="mobile-container" *ngIf="isMobile$ | async">
+    <mat-accordion class="accordion-container" multi>
+      <mat-expansion-panel class="accordion-item">
+        <mat-expansion-panel-header class="category-header title small">
+          <mat-panel-title>
+            {{ 'Transactions' | translate }}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <app-transactions [isMobile$]="isMobile$" [criteria]="searchCritera"></app-transactions>
+      </mat-expansion-panel>
+      <mat-expansion-panel class="accordion-item">
+        <mat-expansion-panel-header class="category-header title small">
+          <mat-panel-title>
+            {{ 'Payouts' | translate }}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <app-payouts [isMobile$]="isMobile$" [criteria]="searchCritera"></app-payouts>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</div>

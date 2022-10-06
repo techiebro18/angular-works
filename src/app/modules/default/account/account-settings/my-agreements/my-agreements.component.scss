@@ -1,0 +1,67 @@
+.container {
+  font-family: 'Manrope';
+  .box-commission {
+    &.bottom {
+      margin: 30px 0;
+    }
+    border: 1px solid var(--main-color-gray-3);
+    padding: 0;
+    text-align: center;
+    .header-title {
+      line-height: 40px;
+      font-family: 'Manrope-Medium';
+      font-size: 15px;
+      border-bottom: 1px solid var(--main-color-gray-3);
+    }
+    .header {
+      line-height: 40px;
+      display: flex;
+      div {
+        width: 50%;
+        &:nth-child(odd) {
+          border-right: 1px solid var(--main-color-gray-3);
+        }
+      }
+    }
+    .rows {
+      line-height: 40px;
+      display: flex;
+      border-top: 1px solid var(--main-color-gray-3);
+      div {
+        width: 50%;
+        background: var(--main-color-light);
+        &:nth-child(odd) {
+          border-right: 1px solid var(--main-color-gray-3);
+        }
+      }
+    }
+  }
+
+  .text {
+    padding-bottom: 30px;
+    font-size: 14px;
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 30px;
+    line-height: 24px;
+  }
+  .paragraph {
+    margin-bottom: 16px;
+  }
+  .list {
+    margin-left: 30px;
+  }
+  .update-btn {
+    margin-top: 10px;
+  }
+  .disable {
+    opacity: 0.6;
+  }
+  .already-accepted {
+    font-size: 17px;
+  }
+  .warn {
+    font-size: 15px;
+    margin-bottom: 15px;
+  }
+}

@@ -1,0 +1,16 @@
+<div class="ais-NumericMenu ng-star-inserted">
+  <ul class="ais-NumericMenu-list">
+    <li class="ais-NumericMenu-item ng-star-inserted" *ngFor="let item of state.items; index as i">
+      <label class="ais-NumericMenu-label">
+        <input
+          type="radio"
+          name="{{ attribute }}"
+          class="ais-NumericMenu-radio"
+          [checked]="item.isRefined"
+          (change)="onChangeNumericMenu(item.value, i)"
+        />
+        <span class="ais-NumericMenu-labelText">{{ item.label }}</span>
+      </label>
+    </li>
+  </ul>
+</div>

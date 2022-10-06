@@ -1,0 +1,31 @@
+<div class="payout-details-section">
+  <h1 class="payout-heading">{{ 'Payout Details' | translate }}</h1>
+  <a class="back-link" routerLink="/account/my-financials">< {{ 'BACK' | translate }}</a>
+  <div class="table-responsive payout-details-row">
+    <table class="table" border="1">
+      <thead>
+        <tr>
+          <th>{{ 'Order Item No' | translate }}</th>
+          <th>{{ 'Purchase Date' | translate }}</th>
+          <th>{{ 'Seller SKU' | translate }}</th>
+          <th>{{ 'value-amount' | translate }}</th>
+          <th>{{ 'Status' | translate }}</th>
+          <th>{{ 'Stripe Payment Id' | translate }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of payoutDetail">
+          <td>{{ data.order_item_id }}</td>
+          <td>{{ data.purchaseDate }}</td>
+          <td>{{ data.seller_sku }}</td>
+          <td>{{ data.payout_currency + ' ' + data.payout_amount }}</td>
+          <td>{{ data.status }}</td>
+          <td>{{ data.txn_id }}</td>
+        </tr>
+        <tr *ngIf="!payoutDetail.length" class="text-center">
+          <td colspan="6">{{ 'Data Not Found' | translate }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

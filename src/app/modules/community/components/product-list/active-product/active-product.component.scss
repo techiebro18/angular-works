@@ -1,0 +1,57 @@
+.list-content {
+  font-family: 'FuturaBT-Light';
+  font-size: 16px;
+  color: #191919;
+  .list-cards {
+    list-style-type: none;
+    padding: 0;
+    margin-left: -20px;
+    .item-card {
+      display: inline-flex;
+      margin-left: 25px;
+      margin-top: 10px;
+      .member-card {
+        float: left;
+        img {
+          object-fit: cover;
+          width: 310px;
+          height: 310px;
+          margin-bottom: 15px;
+        }
+        .brand {
+          font-family: 'Playfair Display';
+          text-transform: uppercase;
+          margin-bottom: 8px;
+        }
+        .price {
+          font-size: 13px;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .list-content {
+    width: 112%;
+    .list-cards {
+      margin-left: -10px;
+      .item-card {
+        margin-left: 10px;
+        .member-card {
+          img {
+            width: 166px;
+            height: 200px;
+          }
+          .brand {
+            font-size: 15px;
+          }
+          .price {
+            font-size: 12px;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,65 @@
+html {
+  --scrollbarBG: #fff;
+  --thumbBG: #fff;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+  scrollbar-width: 0px;
+  scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+  overflow-x: hidden;
+}
+body::-webkit-scrollbar {
+  width: 11px;
+}
+body::-webkit-scrollbar-track {
+  background: var(--scrollbarBG);
+}
+body::-webkit-scrollbar-thumb {
+  background-color: var(--thumbBG);
+  border-radius: 6px;
+  border: 0px solid var(--scrollbarBG);
+}
+body::-webkit-scrollbar {
+  width: 0em;
+}
+body::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+body::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 0px solid slategrey;
+}
+body {
+  .client-facing-website {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    line-height: 1;
+    font-family: 'FuturaBT-Light' !important;
+  }
+}
+body.noScroll {
+  overflow: hidden !important;
+  position: fixed !important;
+}
+body.noHorizontalScroll {
+  overflow-x: hidden;
+}
+html.noVerticalScroll,
+body.noVerticalScroll {
+  overflow-y: hidden !important;
+  position: fixed !important;
+}
+.displayNone {
+  display: none;
+}
+a {
+  cursor: pointer;
+}

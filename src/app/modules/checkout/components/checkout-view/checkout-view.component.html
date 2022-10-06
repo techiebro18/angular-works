@@ -1,0 +1,94 @@
+<div class="checkout-container">
+  <app-stepper [path]="path"></app-stepper>
+
+  <div *ngIf="user$ | async; else elseBlock">
+    <div class="main">
+      <div class="form-container">
+        <span class="sub-heading">
+          {{ 'You are checking out as' | translate }} {{ (user$ | async).email }}
+        </span>
+
+        <mat-accordion>
+          <mat-expansion-panel
+            [disabled]="true"
+            [expanded]="path === 'shipping-address'"
+            hideToggle
+          >
+            <mat-expansion-panel-header>
+              <a
+                class="header"
+                [routerLink]="['shipping-address']"
+                [ngClass]="{ active: path === 'shipping-address' }"
+              >
+                {{ 'SHIPPING ADDRESS' | translate }}
+                <span *ngIf="isActiveRoute('shipping-address')">{{ 'Edit' | translate }}</span>
+              </a>
+            </mat-expansion-panel-header>
+
+            <app-shipping-address></app-shipping-address>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel [disabled]="true" [expanded]="path === 'payment-method'" hideToggle>
+            <mat-expansion-panel-header>
+              <ng-container *ngIf="checkoutState?.shippingAddress">
+                <a
+                  class="header"
+                  [routerLink]="['payment-method']"
+                  [ngClass]="{ active: path === 'payment-method' }"
+                >
+                  {{ 'Payment' | translate }}
+                  <span *ngIf="isActiveRoute('payment-method')">{{ 'Edit' | translate }}</span>
+                </a>
+              </ng-container>
+
+              <ng-container *ngIf="!checkoutState?.shippingAddress">
+                <span class="header disabled">{{ 'Payment' | translate }}</span>
+              </ng-container>
+            </mat-expansion-panel-header>
+
+            <app-payment-method></app-payment-method>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel [disabled]="true" [expanded]="path === 'review-order'" hideToggle>
+            <mat-expansion-panel-header>
+              <ng-container *ngIf="checkoutState?.order">
+                <a
+                  class="header"
+                  [routerLink]="['review-order']"
+                  [ngClass]="{ active: path === 'review-order' }"
+                >
+                  {{ 'Review Order' | translate }}
+                  <span *ngIf="isActiveRoute('review-order')">{{ 'Edit' | translate }}</span>
+                </a>
+              </ng-container>
+
+              <ng-container *ngIf="!checkoutState?.order">
+                <span class="header disabled">{{ 'Review Order' | translate }}</span>
+              </ng-container>
+            </mat-expansion-panel-header>
+
+            <app-order-review
+              [currency]="currencyConfig.plpCurrency"
+              *ngIf="path === 'review-order'"
+            ></app-order-review>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+      <div class="form-container">
+        <app-checkout-order-summary *ngIf="path !== 'review-order'"></app-checkout-order-summary>
+      </div>
+    </div>
+  </div>
+  <ng-template #elseBlock>
+    <div class="main">
+      <div class="form-container">
+        <app-checkout-login></app-checkout-login>
+      </div>
+      <div class="login-checkout-summary">
+        <app-checkout-order-summary
+          [currency]="currencyConfig.plpCurrency"
+        ></app-checkout-order-summary>
+      </div>
+    </div>
+  </ng-template>
+</div>

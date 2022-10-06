@@ -1,0 +1,65 @@
+<div class="ProductListingPage" *ngIf="enableList">
+  <div class="row col-md-5">
+    <div class="row col-md-12 search-box">
+      <i class="fa fa-search search-icon"></i>
+      <input
+        type="text"
+        class="primary search-field"
+        [placeholder]="'make_an_offer.listing.search_placeholder' | translate"
+        [(ngModel)]="searchItems"
+        (keyup)="filterProducts()"
+      />
+    </div>
+  </div>
+
+  <ais-instantsearch [config]="instantsearchConfig">
+    <ais-configure [searchParameters]="searchParameters"></ais-configure>
+    <div class="box-pagination">
+      <ais-pagination></ais-pagination>
+    </div>
+
+    <div class="price-drop-header" *ngIf="productsId?.length">
+      <div class="row col-md-12">
+        <div class="col-md-2 header-cell offer-date-col"></div>
+        <div class="col-md-2 header-cell offer-date-col">{{ 'Name' | translate }}</div>
+        <div class="col-md-2 header-cell">{{ 'Original price' | translate }}</div>
+        <div class="col-md-2 header-cell">{{ 'New Price' | translate }}</div>
+        <div class="col-md-2 header-cell">{{ 'Discount' | translate }}</div>
+        <div class="col-md-2 header-cell">{{ 'Offer' | translate }}</div>
+      </div>
+    </div>
+
+    <ais-hits [transformItems]="transformItems">
+      <ng-template let-hits="hits" let-results="results">
+        <ng-container *ngIf="sellers">
+          <ng-container *ngFor="let hit of hits">
+            <tvb-flat-product-card
+              [makeOfferEnabled]="isMakeOfferEnabled(hit)"
+              class="hit-wrapper"
+              [hit]="hit"
+              [language]="currentLanguage"
+              [currencyConfig]="currencyConfiguration$ | async"
+              [offerSetting]="offerSetting"
+              [currency]="currentAppConfiguaration.currencyCode"
+              source="price-drop"
+              [currencySymbol]="currentAppConfiguaration.currencySymbol"
+              (callBack)="loadPriceDropSubscriptions()"
+              style="display: flex; width: 102.513%"
+            ></tvb-flat-product-card>
+          </ng-container>
+          <div class="box-footer">
+            <div class="box-items">
+              <label>Items per page:</label>
+              <select [(ngModel)]="itemsPerPage" (change)="changeItemsPerPage()">
+                <option [value]="10">10</option>
+                <option [value]="25">25</option>
+                <option [value]="50">50</option>
+              </select>
+            </div>
+            <ais-pagination></ais-pagination>
+          </div>
+        </ng-container>
+      </ng-template>
+    </ais-hits>
+  </ais-instantsearch>
+</div>

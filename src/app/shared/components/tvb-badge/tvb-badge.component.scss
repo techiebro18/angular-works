@@ -1,0 +1,11 @@
+:host {
+  .tvb-badge {
+    display: inline;
+    position: absolute;
+    background-color: var(--main-color-black);
+    color: var(--main-color-white);
+    padding: 2px 15px;
+    font-size: 0.7rem;
+    text-align: center;
+  }
+}

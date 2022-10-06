@@ -1,0 +1,197 @@
+<div class="row top-bar">
+  <div class="search-box">
+    <i class="fa fa-search search-icon"></i>
+    <input
+      (keyup)="onSearchItems()"
+      [(ngModel)]="searchItems"
+      [placeholder]="'make_an_offer.listing.search_placeholder' | translate"
+      class="primary search-field"
+      type="text"
+    />
+  </div>
+
+  <div class="box-pagination-header">
+    <pagination-controls (pageChange)="currentPage = $event" nextLabel="" previousLabel=""></pagination-controls>
+  </div>
+</div>
+
+<div class="section-tab">
+  <div class="item-tab" [ngClass]="{ active: activeOffers }" (click)="changeOfferVision(true)">
+    {{ 'my_offers.active_offers' | translate }}
+  </div>
+  <div class="item-tab" [ngClass]="{ active: !activeOffers }" (click)="changeOfferVision(false)">
+    {{ 'my_offers.expired_offers' | translate }}
+  </div>
+</div>
+
+<ng-container *ngIf="!offers?.length">
+  <div>{{ 'make_an_offer.listing.not_found' | translate }}</div>
+</ng-container>
+
+<div *ngIf="offers?.length" class="row offer-header">
+  <div class="col-md-2 p-0"></div>
+  <div class="col-md-2 header-cell">
+    {{ 'make_an_offer.my_offers.listing.header.name' | translate }}
+  </div>
+  <div class="col-md-2 header-cell offer-date-col">
+    {{ 'make_an_offer.my_offers.listing.header.date' | translate }}
+  </div>
+  <div class="col-md-1 header-cell">
+    {{ 'make_an_offer.my_offers.listing.header.status' | translate }}
+  </div>
+  <div class="col-md-2 header-cell right-aligned">
+    {{ 'make_an_offer.my_offers.listing.header.starting_price' | translate }}
+  </div>
+  <div class="col-md-3 header-cell right-aligned">
+    {{ 'make_an_offer.my_offers.listing.header.received_offer' | translate }}
+  </div>
+</div>
+
+<ng-container
+  *ngFor="
+    let offer of offers
+      | filter: searchItems
+      | paginate: { itemsPerPage: 15, currentPage: currentPage, totalItems: offers?.length }
+  "
+>
+  <ng-container *ngIf="offer.product">
+    <!-- DESKTOP -->
+    <div class="row card-item">
+      <div class="desktop">
+        <div class="col-md-2 product-cell">
+          <a
+            [queryParams]="{ pdp: offer.product.id }"
+            [routerLink]="['/' + offer.product.seoUrl]"
+            class="product-img-link"
+          >
+            <img [src]="offer.product.imageUrl" tvb-img-fallback />
+          </a>
+        </div>
+
+        <div class="col-md-2 offer-cell">
+          <a
+            [queryParams]="{ pdp: offer.product.id }"
+            [routerLink]="['/' + offer.product.seoUrl]"
+            [title]="offer.product.name"
+            class="product-name"
+            target="_blank"
+          >
+            {{ offer.product.name }}
+          </a>
+        </div>
+        <div
+          [ngClass]="{ 'sold-out': offer.product.stock <= 0 }"
+          [title]="'Offer made at ' + (offer.createdAt | date: 'dd-MM-yy HH:mm')"
+          class="col-md-2 offer-cell offer-date"
+        >
+          <p>{{ getTimeToExpireText(offer, offer.product) }}</p>
+        </div>
+
+        <div
+          [ngClass]="{ 'sold-out': offer.product.stock <= 0 }"
+          [title]="getTextAccordingToStatus(offer, true)"
+          class="col-md-1 offer-cell offer-status"
+        >
+          <p>{{ getTextAccordingToStatus(offer, false) }}</p>
+        </div>
+
+        <div class="col-md-2 offer-cell price-format">
+          {{ offer.product.price.value | currency: appConfig?.currencyCode }}
+        </div>
+
+        <div class="col-md-3 offer-cell price-format">
+          <ng-container *ngIf="isSellerPerspective(userPerspective)">
+            <p class="buyer-name">{{ offer.buyerName }}</p>
+          </ng-container>
+
+          <p>{{ offer.price[appConfig.currencyCode.toLowerCase()].value | currency: appConfig?.currencyCode }}</p>
+
+          <p class="for-you-price" *ngIf="isSellerPerspective(userPerspective)">
+            {{ 'make_an_offer.my_offers.listing.for_you' | translate }}:&nbsp;
+            {{ offer.price[appConfig.currencyCode.toLowerCase()].costOfGoods | currency: appConfig?.currencyCode }}
+          </p>
+        </div>
+      </div>
+
+      <!-- MOBILE -->
+      <div class="mobile">
+        <div class="col-4 product-cell">
+          <a
+            [queryParams]="{ pdp: offer.product.id }"
+            [routerLink]="['/' + offer.product.seoUrl]"
+            class="product-img-link"
+          >
+            <img [src]="offer.product.imageUrl" tvb-img-fallback decoding="async" />
+          </a>
+        </div>
+
+        <div class="col-8 card-description">
+          <p class="product-name">{{ offer.product.name }}</p>
+
+          <p
+            [ngClass]="{ 'sold-out': offer.product.stock <= 0 }"
+            [title]="'Offer made at ' + (offer.createdAt | date: 'dd-MM-yy HH:mm')"
+            class="offer-details"
+          >
+            {{ getTimeToExpireText(offer, offer.product) }}
+          </p>
+
+          <p
+            [ngClass]="{ 'sold-out-through': offer.product.stock <= 0 }"
+            [title]="getTextAccordingToStatus(offer, true)"
+            class="offer-details"
+          >
+            Status:&nbsp;{{ getTextAccordingToStatus(offer, false) }}
+          </p>
+
+          <br />
+
+          <p class="offer-details">
+            {{ 'make_an_offer.my_offers.listing.header.starting_price' | translate }}:&nbsp;
+            {{ offer.product.price.value | currency: appConfig?.currencyCode }}
+          </p>
+
+          <p class="offer-details">
+            {{ 'make_an_offer.my_offers.listing.header.received_offer' | translate }}:&nbsp;
+            {{ offer.price[appConfig.currencyCode.toLowerCase()].value | currency: appConfig?.currencyCode }}
+          </p>
+
+          <ng-container *ngIf="isSellerPerspective(userPerspective)">
+            <p class="offer-details for-you-price">
+              {{ 'make_an_offer.my_offers.listing.for_you' | translate }}:&nbsp;
+              {{ offer.price[appConfig.currencyCode.toLowerCase()].costOfGoods | currency: appConfig?.currencyCode }}
+            </p>
+          </ng-container>
+        </div>
+      </div>
+
+      <tvb-offers-buttons-bar
+        *ngIf="offer && offer.product.stock > 0"
+        (acceptAction)="handleClickAcceptOffer($event)"
+        (buyAction)="handleClickBuyProduct($event)"
+        (counterOfferAction)="handleClickMakeCounterOffer($event)"
+        (rejectAction)="handleClickRejectOffer($event)"
+        [appConfig]="appConfig"
+        [offerSettings]="offerSettings"
+        [offer]="offer"
+        [product]="offer.product"
+        [userPerspective]="userPerspective"
+      ></tvb-offers-buttons-bar>
+    </div>
+  </ng-container>
+</ng-container>
+
+<div class="row bottom-bar">
+  <div class="box-pagination-footer">
+    <pagination-controls (pageChange)="currentPage = $event" nextLabel="" previousLabel=""></pagination-controls>
+  </div>
+</div>
+
+<br />
+<br />
+
+<ng-container *ngIf="errorMessage">
+  <div class="col-12 col-md-6 alert-danger error-message">
+    {{ errorMessage }}
+  </div>
+</ng-container>

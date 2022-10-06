@@ -1,0 +1,92 @@
+.signin-with {
+  width: 100%;
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+
+  .or {
+    position: relative;
+    text-align: center;
+    z-index: 1;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+
+    span {
+      background-color: #fff;
+      padding: 0px 15px;
+    }
+  }
+
+  ul {
+    list-style: none;
+    position: relative;
+    text-align: center;
+    min-width: 240px;
+    width: 100%;
+    margin: auto;
+    padding: 0px;
+
+    li {
+      border-radius: 0px;
+      margin-bottom: 15px;
+      display: inline-block;
+      width: 50%;
+      background-color: #fff;
+
+      .btn.half {
+        text-align: center;
+        display: inline-block;
+        padding: 4px 4px;
+        border: none;
+        background-color: transparent;
+        text-transform: uppercase;
+        color: #000000;
+        border: 1px solid #000000;
+        font-weight: 400;
+        height: 44px;
+        font-size: 10px;
+        text-align: center;
+        cursor: pointer;
+        pointer-events: auto;
+        padding: 0px;
+        vertical-align: middle;
+        border-radius: 0px;
+        width: 98%;
+        svg#dpdhl_icons {
+          vertical-align: middle;
+          margin-right: 10px;
+          width: 17px;
+        }
+
+        span {
+          text-align: center;
+          padding-top: 2px;
+          display: inline-block;
+          color: #333;
+          font-family: 'FuturaBT-Light';
+        }
+      }
+      .btn:hover {
+        color: #333;
+        background-color: #e6e6e6;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .signin-with {
+    ul {
+      li {
+        width: 100%;
+        .btn.half {
+          width: 100%;
+          span {
+          }
+        }
+        .btn:hover {
+        }
+      }
+    }
+  }
+}

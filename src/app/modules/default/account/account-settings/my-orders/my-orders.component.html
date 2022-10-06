@@ -1,0 +1,141 @@
+<div class="tab-content">
+  <div class="tab-pane active" id="your_orders">
+    <div class="tab_body">
+      <div class="your-order" id="track-order2">
+        <div class="previous-orders">
+          <div class="panel-group" id="accordion_inner" role="tablist" aria-multiselectable="true">
+            <div class="panel recentorder" *ngIf="ordersRecentLength">
+              <div
+                class="panel-heading active"
+                role="tab"
+                id="headingOne"
+                (click)="showHideRecentOrderTab()"
+              >
+                <h4 class="panel-title panel-title2">
+                  {{ 'Recent Orders' | translate }} ({{ ordersRecentLength }})
+                  <span class="accordion-icon">
+                    <i [ngClass]="recentOrdersTab ? 'fa fa-angle-up' : 'fa fa-angle-down'"></i>
+                  </span>
+                </h4>
+              </div>
+              <div id="collapseOne" [style.display]="recentOrdersTab ? 'block' : 'none'">
+                <div class="panel-body">
+                  <div class="table-reponsive order-detail-tab">
+                    <table class="table">
+                      <tr class="order-detail-one" *ngFor="let orderrecent of ordersRecent">
+                        <td>
+                          <div class="order-detail">
+                            <p>
+                              <b>{{ 'Order' | translate }}: {{ orderrecent.orderId }}</b>
+                            </p>
+                            <p>
+                              <span>
+                                {{ 'Order Date' | translate }}: {{ orderrecent.orderDate }}
+                              </span>
+                            </p>
+                            <p>
+                              <span>
+                                {{ 'Order Total' | translate }}:
+                                {{
+                                  orderrecent.orderTotalAmount | currency: orderrecent.currency_code
+                                }}
+                              </span>
+                            </p>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="status">
+                            <p>
+                              {{ 'Status' | translate }}:
+                              {{ orderrecent.orderStatus.replace('_', ' ') | titlecase }}
+                            </p>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="order-details">
+                            <p>
+                              <a
+                                href="javascript:void(0)"
+                                class="track-my-order"
+                                (click)="goToDetails(orderrecent.orderId)"
+                              >
+                                {{ 'Order Details' | translate }}
+                              </a>
+                            </p>
+                          </div>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel previousorder" *ngIf="ordersLength">
+              <div
+                class="panel-heading"
+                role="tab"
+                id="headingTwo"
+                (click)="showHidePreviousOrderTab()"
+              >
+                <h4 class="panel-title panel-title2">
+                  {{ 'Previous Orders' | translate }} ({{ ordersLength }})
+                  <span class="accordion-icon">
+                    <i [ngClass]="previousOrderTab ? 'fa fa-angle-up' : 'fa fa-angle-down'"></i>
+                  </span>
+                </h4>
+              </div>
+              <div id="collapseTwo" [style.display]="previousOrderTab ? 'block' : 'none'">
+                <div class="panel-body">
+                  <div class="table-reponsive order-detail-tab">
+                    <table class="table">
+                      <tr class="order-detail-one" *ngFor="let order of orders">
+                        <td>
+                          <div class="order-detail">
+                            <p>
+                              <b>{{ 'Order' | translate }}: {{ order.orderId }}</b>
+                            </p>
+                            <p>
+                              <span>{{ 'Order Date' | translate }}: {{ order.orderDate }}</span>
+                            </p>
+                            <p>
+                              <span>
+                                {{ 'Order Total' | translate }}:
+                                {{ order.orderTotalAmount | currency: order.currency_code }}
+                              </span>
+                            </p>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="status">
+                            <p>
+                              {{ 'Status' | translate }}:
+                              {{ order.orderStatus.replace('_', ' ') | titlecase }}
+                            </p>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="order-details">
+                            <p>
+                              <a
+                                href="javascript:void(0)"
+                                class="track-my-order"
+                                (click)="goToDetails(order.orderId)"
+                              >
+                                {{ 'Order Details' | translate }}
+                              </a>
+                            </p>
+                          </div>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

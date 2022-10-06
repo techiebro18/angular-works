@@ -1,0 +1,93 @@
+.tvb-steps {
+  position: relative;
+  font-size: 0.7rem;
+
+  ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    display: flex;
+  }
+
+  li {
+    text-decoration: none;
+
+    &.tvb-steps-item {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      flex: 1 1 auto;
+    }
+
+    &::before {
+      content: ' ';
+      border-top: 1px solid var(--steps-gray);
+      width: 100%;
+      top: 100%;
+      left: 0;
+      display: block;
+      position: absolute;
+      margin-top: -0.4rem;
+    }
+
+    a.tvb-menuitem-link {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      overflow: hidden;
+      text-decoration: none;
+      transition: box-shadow 0.2s;
+      border-radius: 3px;
+      background-color: var(--main-color-white);
+      color: var(--main-color-black);
+      cursor: pointer;
+
+      .tvb-steps-dots {
+        color: var(--steps-gray);
+        background-color: var(--main-color-white);
+        border: 1px solid var(--main-color-black);
+        height: 0.8rem;
+        width: 0.8rem;
+        line-height: 0;
+        font-size: 1rem;
+        z-index: 1;
+        border-radius: 50%;
+      }
+
+      &.tvb-step-spotlight {
+        .tvb-steps-dots {
+          background-color: var(--main-color-black);
+          border: 1px solid var(--main-color-black);
+        }
+      }
+
+      &.tvb-step-disabled {
+        cursor: default;
+
+        .tvb-steps-dots {
+          background-color: var(--main-color-white);
+          border: 1px solid var(--steps-gray);
+        }
+      }
+
+      &.tvb-step-available {
+        .tvb-steps-dots {
+          background-color: var(--main-color-white);
+          border: 1px solid var(--main-color-black);
+        }
+      }
+
+      &.tvb-step-completed {
+        .tvb-steps-dots {
+          background-color: var(--steps-gray);
+          border: 1px solid var(--steps-gray);
+        }
+      }
+    }
+
+    .tvb-steps-title {
+      white-space: nowrap;
+      color: var(--main-color-black);
+    }
+  }
+}

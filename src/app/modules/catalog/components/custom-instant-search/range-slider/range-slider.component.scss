@@ -1,0 +1,48 @@
+.tvb-RangeSlider {
+  margin-bottom: 20px;
+
+  &--sliderLabels {
+    position: relative;
+    display: table;
+    width: 100%;
+
+    .caption {
+      display: table-cell;
+      font-size: 14px;
+      position: relative;
+      text-transform: uppercase;
+      width: calc(50% - 8px);
+      input {
+        width: 100%;
+        margin-top: 20px;
+        font-weight: 800;
+        color: #333;
+        font-size: 12px;
+        border: 0;
+        background-color: #f5f5f5;
+        padding: 10px;
+        -webkit-border-radius: 6px;
+        -moz-border-radius: 6px;
+        border-radius: 6px;
+      }
+      &.leftmax {
+        float: left;
+      }
+      &.rightmax {
+        float: right;
+      }
+    }
+
+    // &:after {
+    //   content: " ";
+    //   left: 0;
+    //   right: 0;
+    //   width: 10px;
+    //   height: 4px;
+    //   margin: 0 auto;
+    //   background-color: #333;
+    //   position: absolute;
+    //   top: 26px;
+    // }
+  }
+}

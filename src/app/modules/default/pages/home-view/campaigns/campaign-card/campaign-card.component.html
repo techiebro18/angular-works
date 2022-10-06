@@ -1,0 +1,10 @@
+<img [src]="getImageLink()" [alt]="campaign.title" />
+<div class="info">
+  <div class="title">{{ campaign.title }}</div>
+  <div class="description">{{ campaign.description }}</div>
+  <div class="cta-btn" *ngIf="campaign.link">
+    <a [href]="campaign.link">
+      {{ campaign.button }}
+    </a>
+  </div>
+</div>

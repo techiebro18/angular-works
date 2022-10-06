@@ -1,0 +1,135 @@
+/* Header Style */
+
+:host {
+  display: block;
+  position: -webkit-sticky;
+  position: sticky;
+  top: -94px;
+  z-index: 999;
+
+  ::ng-deep {
+    .italic {
+      font-style: italic;
+    }
+    .bold {
+      font-family: 'FuturaBT-Medium';
+    }
+    .underline {
+      text-decoration: underline;
+    }
+  }
+}
+
+.header-main {
+  width: 100%;
+  display: block;
+  min-height: auto;
+  z-index: 999;
+  margin-bottom: 0;
+  border-bottom: 0px solid #e5e5e5;
+  .flash-sale-banner {
+    align-items: center;
+    background-color: #ede9e1;
+    display: flex;
+    font-size: 12px;
+    height: 30px;
+    justify-content: space-around;
+    marquee {
+      display: flex;
+    }
+    a {
+      color: #000 !important;
+      text-decoration: none !important;
+      margin: 0 1%;
+      left: -96%;
+      position: relative;
+      font-size: 13px;
+      line-height: 30px;
+      &.fixed {
+        left: unset;
+        margin: 0 auto;
+      }
+    }
+  }
+  .top-bar {
+    position: relative;
+    width: 100%;
+    display: inline-block;
+    vertical-align: middle;
+    padding-top: 0px;
+    top: 30px;
+    .right-top {
+      position: relative;
+      display: inline-block;
+      text-align: right;
+      width: 100%;
+      .cart-sign {
+        list-style: none;
+        display: inline-block;
+        vertical-align: middle;
+        padding: 0;
+        margin: 0;
+      }
+      .cart-sign > li {
+        display: inline-block;
+        padding: 10px 0;
+        vertical-align: middle;
+        position: relative;
+      }
+      .cart-sign > li:first-child:after {
+        content: ' | ';
+        padding: 0 10px;
+        font-size: 10px;
+      }
+      .cart-sign > li > a {
+        display: inline-block;
+        vertical-align: middle;
+        color: #767676;
+        font-size: 13px;
+        text-decoration: none;
+        font-family: 'FuturaBT-Light';
+      }
+    }
+  }
+  /* Logo */
+  .logo {
+    position: relative;
+    left: 0;
+    right: 0;
+    margin: auto;
+    z-index: 1;
+    max-width: 250px;
+    img {
+      max-width: 100%;
+    }
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  :host {
+    top: 0;
+  }
+
+  .header-main {
+    margin-bottom: 16px;
+    top: 0;
+    margin-bottom: 0;
+    .top-bar {
+      display: none;
+    }
+    .logo {
+      top: 30px;
+      max-width: 190px;
+      z-index: 1;
+      position: absolute;
+    }
+  }
+}
+
+@media only screen and (max-width: 1025px) {
+  .header-main {
+    .logo {
+      display: none;
+    }
+  }
+}

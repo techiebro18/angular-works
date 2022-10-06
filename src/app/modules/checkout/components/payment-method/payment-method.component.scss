@@ -1,0 +1,162 @@
+:host {
+  .payment-content {
+    .payment-method {
+      div {
+        padding: 5px 0;
+        margin-bottom: 10px;
+        img {
+          margin-left: 15px;
+        }
+      }
+      .faded {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+      .invalid-payment-method {
+        color: var(--form-error);
+        font-size: 13px;
+      }
+    }
+    .payment-method-box {
+      .form-group {
+        label {
+          font-family: 'FuturaBT-Light';
+          font-size: 14px;
+        }
+      }
+      #couponForm {
+        margin-top: 40px;
+
+        .bold {
+          font-family: 'FuturaBT-Medium';
+          font-size: 14px;
+          margin-bottom: 0px;
+        }
+        .small {
+          font-family: 'FuturaBT-Light';
+          font-size: 14px;
+          font-weight: 300;
+          line-height: 19px;
+          margin-bottom: 15px;
+        }
+      }
+    }
+    .credit-card-box {
+      .card-icon {
+        padding: 9px 0;
+        border: 1px solid var(--steps-gray);
+        border-right: 0;
+        width: 7%;
+        float: left;
+        text-align: center;
+        img {
+          vertical-align: sub;
+        }
+      }
+      .number {
+        border-right: 0;
+        border-left: 0;
+        width: 69%;
+      }
+      .expiration {
+        border-right: 0;
+        border-left: 0;
+        width: 14%;
+      }
+      .cvc {
+        border-left: 0;
+        width: 10%;
+        border-right-color: var(--steps-gray) !important;
+      }
+      .name {
+        width: 100%;
+      }
+      .credit-card:focus {
+        outline: unset;
+      }
+      .invalid {
+        border-color: #ff0033 !important;
+      }
+      .invalid-message {
+        margin-top: 5px;
+      }
+      .cvc:hover,
+      .cvc:focus {
+        border-right-color: var(--steps-gray) !important;
+      }
+      .box-card {
+        border: 1px solid var(--steps-gray);
+        padding: 11px 10px;
+      }
+      .box-card:hover {
+        border-color: var(--text-input-grey);
+      }
+    }
+    input {
+      border: 1px solid;
+      height: 40px;
+      padding: 5px 10px;
+      font-size: 14px !important;
+      color: #707070;
+      font-family: 'FuturaBT-Light';
+    }
+    .coupon {
+      width: 60%;
+      margin-right: 10%;
+    }
+    .btn-coupon {
+      width: 30%;
+      line-height: 38px;
+      padding: 0;
+      margin-top: -2px;
+    }
+    .coupon-active {
+      background: var(--main-color-black);
+      cursor: not-allowed;
+      color: var(--main-color-light);
+    }
+    .coupon-active:hover {
+      border-color: unset;
+    }
+  }
+
+  .invalid-message {
+    color: var(--form-error);
+    text-align: center;
+    font-size: 16px;
+  }
+
+  @media screen and (max-width: 1037px) {
+    .payment-content {
+      .credit-card-box {
+        .card-icon {
+          width: 14%;
+        }
+        .field {
+          font-size: 14px !important;
+        }
+        .number {
+          width: 50%;
+        }
+        .expiration {
+          width: 20%;
+        }
+        .cvc {
+          width: 16%;
+        }
+        .name {
+          width: 100%;
+        }
+      }
+      .coupon {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+      .btn-coupon {
+        width: 100%;
+        line-height: 38px;
+        padding: 0;
+      }
+    }
+  }
+}

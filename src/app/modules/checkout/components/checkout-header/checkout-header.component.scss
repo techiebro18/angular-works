@@ -1,0 +1,212 @@
+header {
+  padding: 20px 0;
+  border-bottom: 1px solid #bcbcbc;
+
+  .container {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .logo {
+    width: auto;
+    max-height: 50px;
+    max-width: 180px;
+  }
+
+  .secure-header {
+    span {
+      line-height: 30px;
+      font-size: 14px;
+      padding: 0 15px 0 0;
+    }
+
+    img {
+      width: auto;
+      max-height: 50px;
+      max-height: 30px;
+      filter: brightness(0.01);
+    }
+  }
+
+  a {
+    max-height: 50px;
+    padding: 15px 0;
+  }
+}
+.checkpopup {
+  left: 0;
+  right: inherit;
+  bottom: inherit;
+  position: absolute;
+  background-color: rgba(1, 1, 1, 0.6);
+}
+.checkpopup .modal-dialog {
+  width: 100%;
+  width: 500px;
+  margin: 100px auto;
+}
+.checkpopup .modal-content {
+  border-radius: 0px;
+  border: 1px solid #ccc;
+}
+.checkpopup p {
+  margin: 40px 0 40px 0;
+  line-height: 1.42857143;
+  font-weight: bold;
+  font-size: 14px;
+  display: block;
+  text-align: center;
+  border-bottom: 0px solid #ccc;
+  padding: 0px;
+}
+.checkpopup .modal-header {
+  border: none;
+  padding: 10px 5px;
+}
+.checkpopup .modal-body {
+  padding: 0 30px 30px 30px;
+}
+.checkpopup .secondbox {
+  display: inline-block;
+  position: relative;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.checkpopup .thirdboxbox {
+  display: inline-block;
+  position: relative;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.checkpopup .modal-footer {
+  text-align: center;
+  padding-bottom: 0px;
+}
+.checkpopup .checkpopuppopup label {
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+.checkpopup .checkpopuppopup .sellerinput {
+  max-width: 140px;
+  margin: 0 auto;
+  margin-bottom: 35px;
+  height: 35px;
+}
+.checkpopup .modal-body-inner .updatebtn {
+  background: transparent;
+  margin: 0 0 30px 0;
+  display: inline-block;
+  padding: 0px 20px;
+  font-size: 12px;
+  color: #191919;
+  text-decoration: none;
+  border: 1px solid #191919;
+  border-radius: 0;
+  line-height: 35px;
+  min-width: 160px;
+}
+.checkpopup .modal-body-inner .updatebtn:hover {
+  background-color: #191919;
+  color: #fff;
+  border-color: #191919;
+}
+.btn.active,
+.btn:active {
+  background-image: none;
+  outline: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.btn.active.focus,
+.btn.active:focus,
+.btn.focus,
+.btn:active.focus,
+.btn:active:focus,
+.btn:focus {
+  outline: 0px auto -webkit-focus-ring-color;
+  outline-offset: 0px;
+}
+.form-control {
+  -webkit-appearance: none;
+}
+.title-heading {
+  text-align: center;
+  position: relative;
+  max-width: 1170px;
+  width: 100%;
+  margin: auto;
+}
+.title-info {
+  position: relative;
+  width: 100%;
+  display: inline-block;
+  vertical-align: top;
+}
+.title-info h2 {
+  font-size: 36px;
+}
+.title-info h3 {
+  font-size: 14px;
+  font-family: 'FuturaBT-Medium';
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  line-height: 24px;
+}
+.title-info p {
+  line-height: 24px;
+}
+.proceed-btn {
+  display: inline-block;
+  padding: 0px 20px;
+  background-color: #191919;
+  font-size: 16px;
+  color: #ffffff;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: 0;
+  line-height: 40px;
+  min-width: 220px;
+}
+.proceed-btn.focus,
+.proceed-btn:focus,
+.proceed-btn:hover {
+  color: #fff;
+}
+.proceed-btn:hover {
+  background-color: #666;
+  color: #fff;
+  border-color: #e5e5e5;
+}
+
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+
+@media (max-width: 767px) {
+  .checkpopup .modal-dialog {
+    width: 100%;
+    max-width: 90%;
+  }
+}

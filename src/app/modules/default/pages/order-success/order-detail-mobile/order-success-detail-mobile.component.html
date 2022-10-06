@@ -1,0 +1,59 @@
+<tr class="orderbottom">
+  <td valign="center" class="order-image-block">
+    <div class="order-image">
+      <img src="{{ imageName }}" />
+      <p>{{ orderItem.name }}</p>
+    </div>
+  </td>
+  <td valign="center" class="product-detail-block harish">
+    <div class="product-detail">
+      <p>
+        <span>Description</span>
+        {{ orderItem.brand_name }}, {{ orderItem.name }}
+      </p>
+      <p>
+        <span>Quantity</span>
+        {{ orderItem.quantity }}
+      </p>
+      <ng-container *ngIf="orderItem.is_discount">
+        <p>
+          <span>Item total:</span>
+          {{
+            orderItem['regular_price_' + orderItem.currencycode] | currency: orderItem.currencycode
+          }}
+        </p>
+        <p class="discount-price">
+          <span>Discount:</span>
+          -
+          {{
+            orderItem['regular_price_' + orderItem.currencycode] - itemTotal
+              | currency: orderItem.currencycode
+          }}
+        </p>
+      </ng-container>
+      <ng-container *ngIf="!orderItem.is_discount">
+        <p>
+          <span>Item total:</span>
+          {{ itemTotal | currency: orderItem.currencycode }}
+        </p>
+      </ng-container>
+      <p class="discount-price" *ngIf="orderItem.item_discount">
+        <span>Coupon discount:</span>
+        -
+        {{ orderItem.item_discount | currency: orderItem.currencycode }}
+      </p>
+      <p>
+        <span>Shipping:</span>
+        {{ orderItem.shippeing_cost | currency: orderItem.currencycode }}
+      </p>
+      <p>
+        <span>Subtotal:</span>
+        {{ itemSubTotal | currency: orderItem.currencycode }}
+      </p>
+      <p>
+        <span>Total (incl. tax):</span>
+        {{ itemTaxTotal | currency: orderItem.currencycode }}
+      </p>
+    </div>
+  </td>
+</tr>

@@ -1,0 +1,22 @@
+<div class="auth-container">
+  <div class="login-image-box"></div>
+
+  <div class="login-container">
+    <div class="tabs-container">
+      <tabset>
+        <tab id="new_member_tab" heading="New Member" class="tab-title">
+          <app-register></app-register>
+        </tab>
+
+        <tab id="returning_member_tab" heading="Returning Member" class="tab-title">
+          <app-forgotten-password
+            (forgotPassEvent)="forgotPassEvent($event)"
+            *ngIf="forgotEvent === true"
+          ></app-forgotten-password>
+
+          <app-login (forgotPassEvent)="forgotPassEvent($event)" *ngIf="forgotEvent === false"></app-login>
+        </tab>
+      </tabset>
+    </div>
+  </div>
+</div>

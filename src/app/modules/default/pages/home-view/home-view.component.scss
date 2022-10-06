@@ -1,0 +1,278 @@
+:host {
+  position: relative;
+  overflow-x: hidden;
+}
+.mobile {
+  display: none;
+}
+.desktop {
+  display: block;
+}
+.slider-container {
+  .banner-wrap {
+    position: relative;
+    margin: 0 auto;
+    padding: 0;
+    overflow: hidden;
+    display: block;
+
+    img {
+      height: 800px;
+      object-fit: cover;
+    }
+
+    .slider-link {
+      color: #fff;
+      font-family: Manrope-Light, sans-serif;
+    }
+
+    .home-slider-title-div {
+      position: absolute;
+      color: #fff;
+      text-align: left;
+      bottom: 5%;
+
+      @media (min-width: 1024px) {
+        margin-left: 50px;
+      }
+      @media (min-width: 1280px) {
+        margin-left: 85px;
+      }
+      @media (min-width: 1366px) {
+        margin-left: 130px;
+      }
+      @media (min-width: 1440px) {
+        margin-left: 165px;
+      }
+      @media (min-width: 1600px) {
+        margin-left: 245px;
+      }
+      @media (min-width: 1920px) {
+        margin-left: 405px;
+      }
+
+      .the-vintage-bar-title {
+        text-transform: uppercase;
+        color: #fff;
+        font-family: Manrope-Light, sans-serif;
+        font-size: 12px;
+        margin-bottom: 20px;
+      }
+
+      > h1 {
+        font-size: 38px;
+        margin-bottom: 40px;
+        line-height: 40px;
+        font-family: Cormorant-Italic, serif;
+        color: #fff;
+        text-transform: none;
+      }
+    }
+  }
+
+  .shop-btn {
+    margin: 30px 0;
+  }
+
+  .cta-btn {
+    margin: 30px 0;
+
+    > a {
+      display: inline-block;
+      padding: 0 10px;
+      background-color: #fff;
+      font-size: 12px;
+      color: #000;
+      text-transform: uppercase;
+      text-decoration: none;
+      min-width: 160px;
+      width: 222px;
+      height: 44px;
+      text-align: center;
+      line-height: 40px;
+      border: 1px solid transparent;
+      font-family: Manrope, sans-serif;
+
+      &:hover {
+        font-weight: 700;
+      }
+    }
+  }
+}
+
+#we-love-box {
+  margin-top: 90px;
+
+  .showcase-container {
+    display: flex;
+
+    &::ng-deep .items {
+      &::-webkit-scrollbar-thumb {
+        border-width: 0;
+      }
+
+      &::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 0 rgba(255, 255, 255, 0);
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: rgba(255, 255, 255, 0);
+      }
+    }
+  }
+
+  #we-love-header {
+    margin-bottom: 25px;
+
+    #we-love-title {
+      font-family: Cormorant-Italic, serif;
+      font-size: 42px;
+      margin-left: -5px;
+    }
+
+    a#see-all-link {
+      font-family: Manrope, sans-serif;
+      font-size: 14px;
+      float: right;
+      //margin: auto 300px auto auto;
+      line-height: 4;
+    }
+  }
+}
+
+#campaigns-box {
+  margin-top: 90px;
+  display: flex;
+  ::ng-deep .items {
+    &::-webkit-scrollbar-thumb {
+      border-width: 0;
+    }
+
+    &::-webkit-scrollbar-track {
+      -webkit-box-shadow: inset 0 0 0 rgba(255, 255, 255, 0);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba(255, 255, 255, 0);
+    }
+  }
+}
+
+.small-container {
+  padding: 90px 15px 0 15px;
+
+  .product-box {
+    text-align: center;
+  }
+}
+
+.explore {
+  font-size: 35px;
+  text-align: center;
+  font-family: 'Cormorant-Italic', serif;
+  margin-top: 90px;
+  margin-bottom: 30px;
+}
+
+@media only screen and (min-width: 1024px) {
+  .box-desktop {
+    display: block;
+  }
+  .box-mobile {
+    display: none !important;
+  }
+}
+
+@media only screen and (max-width: 1023px) {
+  .slider-container {
+    overflow-x: hidden;
+
+    .banner-wrap {
+      padding: 0;
+
+      img {
+        height: 522px;
+        min-height: 522px;
+        object-fit: cover;
+      }
+
+      .home-slider-title-div {
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: none;
+        text-align: left;
+        color: #fff;
+        margin: 250px 20px 0 15px;
+
+        #the-vintage-bar-title {
+          font-size: 11px;
+          margin-bottom: 10px;
+        }
+
+        > h1 {
+          font-size: 30px;
+        }
+      }
+    }
+
+    .shop-btn {
+      position: absolute;
+      top: 0;
+      left: 0;
+      text-align: center;
+      margin: 420px 20px 0 15px;
+    }
+
+    .box-desktop {
+      display: none !important;
+    }
+
+    .box-mobile {
+      display: block;
+    }
+  }
+
+  .small-container {
+    width: auto !important;
+    padding: 30px 0 0 0 !important;
+  }
+  #campaigns-box {
+    display: block;
+  }
+  #we-love-box {
+    margin-top: 90px;
+
+    .showcase-container {
+      display: block;
+    }
+    #we-love-header {
+      &.container {
+        padding-right: 0;
+      }
+
+      #we-love-title {
+        font-size: 26px;
+        line-height: 1.6;
+      }
+
+      a#see-all-link {
+        font-size: 14px;
+        float: right;
+        margin: auto 10px auto auto;
+      }
+    }
+  }
+  .explore {
+    font-size: 24px;
+    font-family: 'Cormorant-Italic', serif;
+    margin-top: 85px;
+    margin-bottom: 3vh;
+  }
+  .mobile {
+    display: block;
+  }
+  .desktop {
+    display: none;
+  }
+}

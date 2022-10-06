@@ -1,0 +1,102 @@
+.tvb-RefinementList {
+  box-sizing: border-box;
+  border-top: 1px solid #f5f5f5;
+  font-family: 'FuturaBT-Light';
+  color: #191919;
+  padding-bottom: 1em;
+
+  &--Header {
+    padding: 20px 0px 15px 0;
+
+    .title {
+      margin: 0px;
+      padding: 0px;
+      font-family: 'FuturaBT-Light';
+
+      .collapseBtn {
+        color: inherit;
+        text-decoration: none;
+        width: 100%;
+        display: inline-block;
+
+        span {
+          font-size: 14px;
+          font-weight: bold;
+        }
+
+        svg {
+          width: 18px;
+          -webkit-transform: rotate(90deg);
+          -moz-transform: rotate(90deg);
+          transform: rotate(90deg);
+          text-align: right;
+          float: right;
+          transition: all 0.5s ease-in-out;
+          font-weight: lighter;
+          margin-top: 2px;
+
+          &.mobile-arrow {
+            -webkit-transform: rotate(-90deg);
+            -moz-transform: rotate(-90deg);
+            transform: rotate(-90deg);
+          }
+        }
+      }
+    }
+
+    &.active {
+      svg {
+        -webkit-transform: rotate(-90deg) !important;
+        -moz-transform: rotate(-90deg) !important;
+        transform: rotate(-90deg) !important;
+
+        &.mobile-arrow {
+          -webkit-transform: rotate(90deg) !important;
+          -moz-transform: rotate(90deg) !important;
+          transform: rotate(90deg) !important;
+        }
+      }
+    }
+  }
+
+  &--ListContainer {
+    max-height: 300px;
+    transition: all ease 0.5s;
+
+    &.collapsed:not(.show) {
+      max-height: 0;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    ::ng-deep .ais-NumericMenu-radio {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 50%;
+      box-shadow: unset;
+      height: 16px;
+      margin: 0 0.5rem 0 0;
+      outline: 0;
+      position: relative;
+      width: 16px;
+    }
+
+    ::ng-deep .ais-NumericMenu-radio:checked:after {
+      background: #191919;
+      border-radius: 50%;
+      bottom: 0px;
+      content: '';
+      left: 0px;
+      position: absolute;
+      right: 0px;
+      top: 0px;
+    }
+
+    ::ng-deep .ais-RangeSlider {
+      margin-bottom: 20px;
+    }
+  }
+}

@@ -1,0 +1,98 @@
+<div class="my-items-container flex">
+  <a class="back-link" routerLink="/account/my-financials">< {{ 'BACK' | translate }}</a>
+</div>
+<div *ngIf="transactionList" class="items-container flex">
+  <div class="items-table-container" *ngIf="listVIewOption === 'grid'">
+    <div class="row table-responsive m-0 payout-details-row">
+      <table class="table half">
+        <tbody>
+          <tr>
+            <th>{{ 'Order Item No' | translate }}</th>
+            <td class="seller_items_name">{{ transactionList.id }}</td>
+          </tr>
+          <tr>
+            <th>{{ 'Purchase Date' | translate }}</th>
+            <td class="seller_items_name">{{ transactionList.created_at | date: 'yyyy-MM-dd' }}</td>
+          </tr>
+          <tr>
+            <th>{{ 'Seller SKU' | translate }}</th>
+            <td class="seller_items_name">{{ transactionList.seller_sku }}</td>
+          </tr>
+          <tr>
+            <th>{{ 'Value/Amount' | translate }}</th>
+            <td class="seller_items_name">
+              {{
+                transactionList.currency_code != null || transactionList.currency_code != ''
+                  ? (transactionList.cost_of_good | currency: transactionList.currency_code)
+                  : '0.00'
+              }}
+            </td>
+          </tr>
+          <tr>
+            <th>{{ 'Status' | translate }}</th>
+            <td class="seller_items_name">{{ transactionList.status }}</td>
+          </tr>
+          <tr *ngIf="billing_address">
+            <th>{{ 'Buyer full name' | translate }}</th>
+            <td class="seller_items_name">{{ billing_address.name }}</td>
+          </tr>
+          <tr *ngIf="billing_address">
+            <th>{{ 'Buyer Address' | translate }}</th>
+            <td class="seller_items_name">
+              <span *ngIf="billing_address.address_1">{{ billing_address.address_1 }}&nbsp;</span>
+              <span *ngIf="billing_address.address_2">{{ billing_address.address_2 }}&nbsp;</span>
+              <span *ngIf="billing_address.city">{{ billing_address.city }}&nbsp;</span>
+              <span *ngIf="billing_address.pin_code">{{ billing_address.pin_code }}&nbsp;</span>
+            </td>
+          </tr>
+          <tr *ngIf="billing_address">
+            <th>{{ 'Buyer Country' | translate }}</th>
+            <td class="billing_address.buyerBillingCountryName">{{ billing_address.buyerBillingCountryName }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>{{ 'Invoice Type' | translate }}</th>
+            <th>{{ 'Invoice No' | translate }}</th>
+            <th>{{ 'Date' | translate }}</th>
+            <th>{{ 'Amount' | translate }}</th>
+            <th>{{ 'Stripe ID' | translate }}</th>
+            <th>{{ 'Download' | translate }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let xb of invoice">
+            <tr>
+              <td class="seller_items_name" *ngIf="xb.invoice_type == 7">{{ 'Refund' | translate }}</td>
+              <td class="seller_items_name" *ngIf="xb.invoice_type == 2 || xb.invoice_type == 3">
+                {{ 'Commission' | translate }}
+              </td>
+              <td class="seller_items_name">{{ xb.id }}</td>
+              <td class="seller_items_sku">
+                {{ xb.created_at | date: 'yyyy-MM-dd' }}
+              </td>
+              <td>
+                {{ xb.revenue_incl_vat | currency: xb.order_currency_code }}
+              </td>
+              <td>NA</td>
+              <td>
+                <a
+                  *ngIf="xb.pdf_invoice_url"
+                  href="{{ env.Finance_Base_Url + 'invoice/' + xb.pdf_invoice_url + '/pdf' }}"
+                  target="_blank"
+                >
+                  <i class="fa fa-download" aria-hidden="true"></i>
+                </a>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div *ngIf="!invoice" class="items-placeholder title mt-5 text-center">
+    {{ 'No transactions available' | translate }}
+  </div>
+</div>

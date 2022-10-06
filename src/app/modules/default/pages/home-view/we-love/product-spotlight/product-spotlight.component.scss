@@ -1,0 +1,153 @@
+:host {
+  position: relative;
+  width: 15.6vw;
+  max-width: 248px;
+
+  .img-box {
+    display: flex;
+    height: 39vh;
+
+    .img-link {
+      margin: auto;
+
+      .img {
+        margin: auto;
+        width: 11vw;
+        max-width: 176px;
+        height: 100%;
+        object-fit: contain;
+      }
+    }
+  }
+
+  .info {
+    padding: 0;
+    background-color: #ffffff;
+
+    .brand {
+      font-size: 22px;
+      font-family: Cormorant, serif;
+      text-transform: uppercase;
+    }
+
+    .name,
+    .price {
+      font-size: 14px;
+      font-family: Manrope, sans-serif;
+    }
+
+    .name {
+      padding: 6px 0;
+    }
+
+    .price {
+      font-family: Manrope-SemiBold, sans-serif;
+
+      > a > .discount-price {
+        color: var(--sale);
+        margin-top: 2px;
+        margin-left: 0;
+      }
+    }
+  }
+
+  ::ng-deep {
+    app-wishlist-icon {
+      color: #333;
+      position: absolute;
+      right: 10px;
+      top: 10px;
+
+      // wishlist counter
+      > span {
+        margin-left: 6px;
+      }
+    }
+
+    tvb-badge {
+      position: absolute;
+      margin: 10px 0 0 10px;
+
+      span.tvb-badge {
+        padding: 10px 25px !important;
+        font-family: Manrope, sans-serif;
+      }
+
+      &.we-love-badge {
+        position: relative;
+        margin: 0;
+
+        > span.tvb-badge {
+          border-radius: 50px;
+          padding: 5px 0 5px 0 !important;
+          width: 75px;
+          font-size: 11px;
+          color: #000;
+          background-color: var(--color-gray-5);
+          display: block;
+          position: relative;
+          margin-bottom: 8px;
+        }
+      }
+    }
+  }
+}
+
+// Up to phones and tablets
+@media (max-width: 991px) {
+  :host {
+    position: relative;
+    width: 136px;
+    height: 340px;
+
+    .img-box {
+      display: flex;
+      height: 210px;
+
+      .img-link {
+        .img {
+          width: 130px;
+          height: 130px;
+        }
+      }
+    }
+
+    .info {
+      height: 60px;
+      padding: 5px;
+      background-color: #fff;
+
+      .brand {
+        font-size: 14px;
+      }
+
+      .name,
+      .price {
+        font-size: 11px;
+      }
+    }
+
+    ::ng-deep {
+      app-wishlist-icon {
+        width: 12px;
+        height: 12px;
+        top: 6px;
+
+        // wishlist counter
+        > div.wishlist-icon > span > a > i {
+          font-size: 15px !important;
+        }
+
+        > span {
+          margin-left: 3px;
+        }
+      }
+
+      tvb-badge {
+        span.tvb-badge {
+          padding: 5px 15px !important;
+        }
+      }
+    }
+  }
+}

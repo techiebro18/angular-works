@@ -1,0 +1,13 @@
+@import '../auth.component.common';
+
+.already-member-container {
+  margin: 20px 0 0 0;
+  font-family: Manrope, sans-serif;
+  display: flex;
+  justify-content: flex-start;
+
+  .already-member-text {
+    margin-left: 5px;
+    text-decoration: underline;
+  }
+}

@@ -1,0 +1,118 @@
+.mat-dialog-actions {
+  button {
+    height: 44px;
+    line-height: 0;
+    flex-grow: 1;
+  }
+}
+
+.tvb-dialog-container {
+  bottom: auto;
+
+  .material-icons {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    cursor: pointer;
+    font-family: 'Roboto';
+    font-size: 14px;
+    font-size: 20px;
+    color: #ccc;
+  }
+
+  .tvb-dialog-body {
+    .tvb-dialog-inner-body {
+      padding: 30px 30px;
+      text-align: left;
+      min-height: 300px;
+
+      .title-info {
+        position: relative;
+        width: 100%;
+        display: inline-block;
+        vertical-align: top;
+
+        h3 {
+          font-weight: 400;
+          font-size: 20px;
+          display: block;
+          text-align: center;
+          padding-bottom: 20px;
+          font-family: 'Playfair Display', serif;
+        }
+
+        h4 {
+          padding-bottom: 20px;
+          margin: 0;
+          font-weight: 500;
+          line-height: 1.1;
+          color: inherit;
+          font-family: 'FuturaBT-Light';
+        }
+
+        p {
+          color: #191919;
+          font-size: 8px;
+          font-family: 'FuturaBT-Light';
+        }
+
+        a {
+          margin: 0;
+          padding: 0;
+          color: #191919;
+        }
+      }
+    }
+  }
+}
+
+.example-radio-button {
+  margin: 5px;
+}
+
+.botton-title-info {
+  text-align: center;
+}
+
+.remove-padding {
+  padding: 0px;
+}
+
+@media only screen and (max-width: 767px) {
+  .tvb-dialog-container {
+    position: relative;
+    top: 0;
+    left: 0;
+  }
+  .mat-dialog-actions {
+    flex-wrap: unset;
+  }
+  button.btn-secondary {
+    min-width: 48%;
+  }
+  button.primary {
+    width: auto;
+    min-width: 49%;
+    font-size: 12px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  ::ng-deep .mat-dialog-container {
+    max-width: 100%;
+    width: 100%;
+  }
+  ::ng-deep .cdk-overlay-pane {
+    max-width: 100vw !important;
+    height: 100vh;
+    width: 100vw;
+  }
+}
+
+::ng-deep .mat-dialog-container {
+  position: relative;
+  padding: 30px;
+  max-width: 900px;
+  width: 100%;
+  border-radius: 0px;
+}

@@ -1,0 +1,229 @@
+:host {
+  .tab-content {
+    .tab-pane {
+      .tab_body {
+        .your-order {
+          .previous-orders {
+            h1 {
+              font-family: 'Playfair Display', serif;
+              text-align: center;
+              font-size: 36px;
+              width: calc(100% - 250px);
+            }
+            .order-title {
+              margin: 0 0 20px 0;
+              color: #191919;
+              font-size: 16px;
+              text-align: center;
+              line-height: 27px;
+              width: calc(100% - 250px);
+            }
+            .panel-group {
+              .recentorder {
+                .panel-heading {
+                  cursor: pointer;
+                  border-radius: 0;
+                  background-color: transparent;
+                  border-bottom: 1px solid #e5e5e5;
+                  border-top: 1px solid #e5e5e5;
+                  h4 {
+                    margin-bottom: 0px;
+                    padding: 15px 0;
+                    line-height: 24px;
+                    text-decoration: none;
+                    display: inline-block;
+                    width: 100%;
+                    font-size: 16px;
+                    font-family: 'FuturaBT-Light';
+                    text-transform: capitalize;
+                    .accordion-icon {
+                      float: right;
+                      i {
+                        font-size: 22px;
+                        opacity: 0.6;
+                      }
+                    }
+                  }
+                }
+                .panel-body {
+                  .order-detail-tab {
+                    table {
+                      margin: 0;
+                      tr.order-detail-one {
+                        td {
+                          vertical-align: middle;
+                          border: 0;
+                          border-bottom: 1px solid #ccc;
+                          padding: 25px 0;
+                          .order-detail {
+                            p {
+                              margin: 0;
+                              font-size: 12px;
+                              color: #000;
+                              line-height: 1.42;
+                              font-family: 'FuturaBT-Light';
+                            }
+                          }
+                        }
+                        td {
+                          .status {
+                            min-width: 130px;
+                            p {
+                              font-family: 'FuturaBT-Light';
+                              font-size: 12px;
+                            }
+                          }
+                        }
+                        td {
+                          .order-details {
+                            p {
+                              a {
+                                text-decoration: underline;
+                                line-height: 1.42;
+                                font-family: 'FuturaBT-Light';
+                                color: #000;
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+              .previousorder {
+                .panel-heading {
+                  cursor: pointer;
+                  border-radius: 0;
+                  background-color: transparent;
+                  border-bottom: 1px solid #e5e5e5;
+                  h4 {
+                    margin-bottom: 0px;
+                    padding: 15px 0;
+                    line-height: 24px;
+                    text-decoration: none;
+                    display: inline-block;
+                    width: 100%;
+                    font-size: 16px;
+                    font-family: 'FuturaBT-Light';
+                    text-transform: capitalize;
+                    .accordion-icon {
+                      float: right;
+                      i {
+                        font-size: 22px;
+                        opacity: 0.6;
+                      }
+                    }
+                  }
+                }
+                .panel-body {
+                  .order-detail-tab {
+                    table {
+                      margin: 0;
+                      tr.order-detail-one {
+                        td {
+                          vertical-align: middle;
+                          border: 0;
+                          border-bottom: 1px solid #ccc;
+                          padding: 25px 0;
+                          .order-detail {
+                            p {
+                              margin: 0;
+                              font-size: 12px;
+                              color: #000;
+                              line-height: 1.42;
+                              font-family: 'FuturaBT-Light';
+                            }
+                          }
+                        }
+                        td {
+                          .status {
+                            min-width: 130px;
+                            p {
+                              font-family: 'FuturaBT-Light';
+                              font-size: 12px;
+                            }
+                          }
+                        }
+                        td {
+                          .order-details {
+                            p {
+                              a {
+                                text-decoration: underline;
+                                line-height: 1.42;
+                                font-family: 'FuturaBT-Light';
+                                color: #000;
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  @media only screen and (max-width: 960px) {
+    .tab-content {
+      .tab-pane {
+        .tab_body {
+          .your-order {
+            .previous-orders {
+              h1 {
+                width: 100%;
+              }
+              .order-title {
+                width: 100%;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  @media only screen and (max-width: 480px) {
+    .tab-content {
+      .tab-pane {
+        .tab_body {
+          .your-order {
+            .previous-orders {
+              .panel-group {
+                .recentorder {
+                  .panel-body {
+                    .order-detail-tab {
+                      tr.order-detail-one {
+                        td {
+                          .status {
+                            min-width: 100px !important;
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+                .previousorder {
+                  .panel-body {
+                    .order-detail-tab {
+                      tr.order-detail-one {
+                        td {
+                          .status {
+                            min-width: 100px !important;
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

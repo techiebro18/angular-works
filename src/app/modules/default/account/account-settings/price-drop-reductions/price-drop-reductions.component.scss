@@ -1,0 +1,111 @@
+:host {
+  .search-box {
+    margin-bottom: 30px;
+
+    .search-field {
+      padding-left: 28px;
+      border-bottom: 1px solid var(--main-color-black);
+
+      &::placeholder {
+        color: var(--main-color-black);
+      }
+      &::-ms-input-placeholder {
+        color: var(--main-color-black);
+      }
+    }
+
+    .search-icon {
+      position: absolute;
+      top: 8px;
+      color: var(--main-color-black);
+    }
+  }
+
+  .row {
+    padding: 0;
+    margin: 0;
+  }
+  .box-pagination {
+    margin-bottom: 25px;
+    display: flow-root;
+  }
+  .price-drop-header {
+    border-bottom: 2px solid var(--text-input-grey);
+    padding: 5px 0 15px 0;
+    margin-bottom: 20px;
+    font-family: 'FuturaBT-Medium';
+
+    .header-cell {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 0;
+      margin: 0;
+      letter-spacing: 1px;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+
+      &.centered {
+        justify-content: center;
+      }
+    }
+
+    div {
+      font-weight: 600;
+      text-align: left;
+    }
+  }
+
+  .flat-card {
+    width: 102.513%;
+    display: flex;
+  }
+
+  .box-footer {
+    display: flex;
+    justify-content: flex-end;
+    width: 104%;
+
+    .box-items {
+      margin: 5px 15px 0 0;
+      display: inline-flex;
+
+      label {
+        margin-right: 10px;
+        font-size: 15px;
+        margin-top: 16px;
+      }
+
+      select {
+        border: 0;
+        border-bottom: 1px solid #aaa;
+        font-family: 'Futura';
+        font-size: 12px;
+        padding: 0 20px;
+        height: 37px;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 1024px) {
+    .search-box {
+      .search-field {
+        padding-bottom: 15px;
+      }
+      .search-icon {
+        top: 1px;
+      }
+    }
+
+    .price-drop-header,
+    .box-items {
+      display: none !important;
+    }
+    .box-pagination {
+      margin-bottom: 0;
+      display: flow-root;
+      border-bottom: 1px solid var(--steps-gray);
+      padding-bottom: 21px;
+    }
+  }
+}

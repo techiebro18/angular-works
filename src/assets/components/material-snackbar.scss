@@ -1,0 +1,18 @@
+.mat-snack-bar-container {
+  background-color: var(--main-color-white);
+  border-radius: 0 !important;
+
+  .mat-simple-snackbar {
+    span {
+      color: var(--main-color-black);
+      font-font: 'FuturaBT-Light';
+    }
+
+    .mat-simple-snackbar-action {
+      button.mat-button > span.mat-button-wrapper {
+        color: var(--main-color-black);
+        font-weight: bold;
+      }
+    }
+  }
+}

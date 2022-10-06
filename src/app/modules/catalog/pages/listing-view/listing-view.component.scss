@@ -1,0 +1,69 @@
+.topic-banner {
+  position: relative;
+  width: 100%;
+  display: inline-block;
+  vertical-align: top;
+  padding: 46px 0px;
+}
+
+.bags-variety-info {
+  position: relative;
+  max-width: 910px;
+  margin: 0 auto;
+  display: block;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.moretext {
+  display: block;
+  overflow: hidden;
+  width: 100%;
+  max-height: 100%;
+  min-height: auto;
+  font-family: FuturaBT-Light;
+  font-size: 12px;
+  line-height: 20px;
+  color: #191919;
+}
+
+.shopbottom {
+  border-top: 1px solid #e5e5e5;
+  padding-top: 30px;
+}
+
+.page-title h1,
+.page-title h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  text-transform: uppercase;
+  color: #191919;
+}
+
+.breadcrumbContainer {
+  padding: 15px;
+}
+.breadcrumbContainer .breadcrumbLink {
+  text-decoration: none;
+  color: #808080;
+}
+.breadcrumbContainer .breadcrumbText {
+  color: #808080;
+}
+.chevron_forward {
+  background-image: url('../../../../../assets/images/chevron_forward_rgb_black.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 10px;
+  display: inline;
+  opacity: 0.8;
+  margin: 10px;
+}
+
+@media screen and (max-width: 1024px) {
+  .container {
+    overflow-x: hidden;
+  }
+}

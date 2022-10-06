@@ -1,0 +1,75 @@
+<div class="container col-md-10">
+  <a (click)="location.back()" class="back-btn">&lt; {{ 'generic.back_button' | translate }}</a>
+  <br />
+  <br />
+  <br />
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="product-header">
+        <div class="product-image">
+          <img [src]="product?.imgix_image_url" width="100" />
+        </div>
+
+        <div class="product-info">
+          <span class="product-brand-name">{{ product?.brand_name }}</span>
+          <span class="product-brand-name" *ngIf="product?.name">, {{ product?.name }}</span>
+          <br />
+          <br />
+          <span>
+            {{ 'make_an_offer.offers_history.starting_price' | translate }}: {{ appConfig.currencySymbol }}
+            {{ product?.price }}
+          </span>
+        </div>
+
+        <div class="time-to-expire" *ngIf="offerHistory.length > 0">
+          {{ getTimeToExpireText(lastOffer, product) }}
+        </div>
+      </div>
+
+      <tvb-offers-buttons-bar
+        *ngIf="lastOffer && offerHistory.length > 0"
+        [appConfig]="appConfig"
+        [offer]="lastOffer"
+        [offerHistory]="offerHistory"
+        [offerSettings]="offerSettings"
+        [userPerspective]="userPerspective"
+        (acceptAction)="handleClickAcceptOffer($event)"
+        (rejectAction)="handleClickRejectOffer($event)"
+        (buyAction)="handleClickBuyProduct($event)"
+        (counterOfferAction)="handleClickMakeCounterOffer($event)"
+      ></tvb-offers-buttons-bar>
+
+      <div class="history-box">
+        <ng-container *ngFor="let offer of offerHistory">
+          <tvb-offers-history-row
+            *ngIf="offerHistory.length > 0"
+            [offerMadeAt]="offer.createdAt"
+            [expirationDate]="offer.createdAt"
+            [offerPosition]="offer.position"
+            [isLastPosition]="offer.position == offerHistory.length"
+            [offerValue]="offer.price[appConfig.currencyCode].value"
+            [buyerName]="offer.buyerName"
+            [buyerProfilePicture]="offer.buyerProfilePicture"
+            [sellerName]="offer.sellerName"
+            [sellerProfilePicture]="offer.sellerProfilePicture"
+            [currencyCode]="appConfig.currencyCode"
+            [currencySymbol]="appConfig.currencySymbol"
+            [userPerspective]="userPerspective"
+          ></tvb-offers-history-row>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+
+  <br />
+  <br />
+
+  <ng-container *ngIf="errorMessage">
+    <div class="col-12 alert-danger error-message text-center">
+      {{ errorMessage }}
+    </div>
+  </ng-container>
+</div>
+
+<loader></loader>

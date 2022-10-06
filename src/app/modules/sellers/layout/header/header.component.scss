@@ -1,0 +1,83 @@
+:host {
+  .checkoutheader {
+    background-color: var(--main-color-white);
+    padding: 20px 0;
+    border-bottom: 1px solid var(--main-color-gray);
+
+    .container {
+      .row {
+        align-items: center;
+        .logo-container {
+          flex: 1;
+          justify-content: center;
+          align-items: center;
+
+          .checkoutlogoimage {
+            width: 180px;
+            max-height: 50px;
+          }
+        }
+        .secure-selling {
+          flex: 1;
+          justify-content: center;
+          align-items: center;
+
+          .checkoutright {
+            text-align: right;
+            .checkoutrightp {
+              margin: 0;
+              padding: 10px 0;
+
+              .checkoutrightspan {
+                color: var(--main-color-black);
+                line-height: 30px;
+                font-size: 14px;
+                padding: 0 15px 0 0;
+              }
+              .checkoutrightimg {
+                width: auto;
+                max-height: 50px;
+                max-height: 30px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 380px) {
+    .checkoutheader {
+      .container {
+        .row {
+          .secure-selling {
+            .checkoutright {
+              .checkoutrightp {
+                .checkoutrightimg {
+                  max-height: 20px;
+                }
+                .checkoutrightspan {
+                  padding: 0 7px 0 0;
+                  font-size: 12px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  @media only screen and (max-width: 350px) {
+    .checkoutheader {
+      .container {
+        .row {
+          .logo-container {
+            .checkoutlogoimage {
+              width: 150px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

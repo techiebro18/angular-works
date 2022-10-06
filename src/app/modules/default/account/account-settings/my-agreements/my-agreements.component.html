@@ -1,0 +1,139 @@
+<div class="container">
+  <form (ngSubmit)="onSubmit()" id="mainForm" [formGroup]="mainForm">
+    <div class="text" (scroll)="onScroll($event)">
+      <div class="paragraph">
+        <b>PARTNER AGREEMENT</b>
+        <br />
+        Between
+      </div>
+
+      <div class="paragraph">
+        <br />
+        The Vintage Bar ApS
+        <br />
+        -no. 39106744
+        <br />
+        Hoejbro Plads 21, 2.
+        <br />
+        1200 Copenhagen K
+        <br />
+        (TVB)
+      </div>
+
+      <div class="paragraph">and</div>
+
+      <div class="paragraph">
+        Company: {{ user?.company_name }}
+        <br />
+        VAT: {{ user?.vat_number }}
+        <br />
+        (Partner)
+      </div>
+
+      <div class="paragraph">
+        <b>1. Confidentiality</b>
+        The Partner pledges to handle the content of this agreement in strict confidence and not to inform third parties
+        of its content. In the case of a violation of this confidentiality obligation, TVB reserves the right to
+        terminate the cooperation with the Partner without notice and to take further legal action.
+      </div>
+
+      <div class="paragraph">
+        <b>2. Integral part of the contract</b>
+        The respective latest version of the general terms and conditions for contractual partners of TVB („GTCCP“)
+        shall become an integral part of the contract. By accepting this contract, the Partner confirms that the Partner
+        has received a printout of the GTCCP and taken note of it.
+      </div>
+
+      <div class="paragraph">
+        <b>3. Miscellaneous</b>
+        If any of the provisions of this contract shall become or be held invalid or unenforceable, all other provisions
+        hereof shall remain in full force and effect. The invalid provision or unenforceable provision shall be deemed
+        to be automatically amended and replaced by a valid or enforceable provision which economically accomplishes as
+        far as possible the purpose and the intent of the invalid or unenforceable provision. The same shall apply to
+        gaps (if any).
+      </div>
+
+      <div class="paragraph">
+        <b>4. Services, supply costs, and fees</b>
+        <div class="list">
+          <br />
+          4.1 TVB is an affiliate of Miinto Group who runs multiple marketplaces and publishes the products of the
+          partner on such marketplaces to generate a number of certified sales.
+          <br />
+          4.2 TVB shall receive a sales charge consisting of a Bottom Commission fee and a Top Commission fee for each
+          item sold via TVB or its affiliates. The commission rates applicable from time to time may be found via the
+          Partner portal (My account) under My Agreements.
+        </div>
+      </div>
+
+      <div class="paragraph">
+        <b>5. Term, extension, and termination of the Partner Agreement</b>
+        <div class="list">
+          <br />
+          5.1 This Partner Agreement overrules and supersedes any previous agreements entered into between TVB and the
+          Partner and is supplemented by the GTCCP in force from time to time.
+          <br />
+          5.2 The termination period is 15 days from receipt of the written notice. Termination must be in writing.
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="!alreadyAccepted" class="warn">** You must scroll to the bottom before submitting</div>
+
+    <div class="box-commission" *ngIf="top_commissions">
+      <div class="header-title">Top Commission</div>
+      <div class="header">
+        <div>Product Price</div>
+        <div>Commission Rate</div>
+      </div>
+      <ng-container *ngFor="let top of top_commissions">
+        <div class="rows">
+          <div>{{ top.fromCondition }} {{ top.from }} AND {{ top.toCondition }} {{ top.to }}</div>
+          <div>{{ top.percentage }}%</div>
+        </div>
+      </ng-container>
+    </div>
+
+    <div class="box-commission bottom" *ngIf="bottom_commissions">
+      <div class="header-title">Bottom Commission</div>
+      <div class="header">
+        <div>Product Price</div>
+        <div>Commission Rate</div>
+      </div>
+      <ng-container *ngFor="let bottom of bottom_commissions">
+        <div class="rows">
+          <div>{{ bottom.fromCondition }} {{ bottom.from }} AND {{ bottom.toCondition }} {{ bottom.to }}</div>
+          <div>{{ bottom.percentage }}%</div>
+        </div>
+      </ng-container>
+    </div>
+
+    <ng-container *ngIf="!alreadyAccepted">
+      <div class="form-group">
+        <app-checkbox
+          [name]="'my_agreements'"
+          formControlName="my_agreements"
+          [disabled]="!readedTerms"
+          [ngClass]="{ disable: !readedTerms }"
+        >
+          On behalf of {{ user?.company_name }} I hereby verify that (i) I have the capacity to enter into this Partner
+          Agreement with TVB, and that (ii) the above Partner Agreement is hereby agreed and shall supersede any prior
+          agreement between {{ user?.company_name }}
+          and TVB.
+        </app-checkbox>
+        <button
+          class="btn primary update-btn"
+          type="submit"
+          id="save_button"
+          [disabled]="!mainForm.controls.my_agreements.value"
+        >
+          {{ 'Save' | translate }}
+        </button>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="alreadyAccepted">
+      <div class="already-accepted">My agreements, already accepted.</div>
+    </ng-container>
+  </form>
+</div>

@@ -1,0 +1,398 @@
+<div class="col-xs-12 col-md-8" [ngClass]="(isMobile$ | async) ? '' : 'container'">
+  <div class="title">
+    <span class="uppercase">Get Paid</span>
+    <br />
+  </div>
+
+  <form [formGroup]="getPaidForm" (ngSubmit)="submitForm()">
+    <div class="row">
+      <!-- PERSONAL INFO & CONTACT INFO -->
+      <div class="col-xs-12 col-md-6">
+        <div id="personal_information_title" class="form-group-title title medium">
+          {{ 'Personal information' | translate }}
+        </div>
+
+        <div class="form-group">
+          <div class="input-title">{{ 'Shipped From' | translate }}*</div>
+          <ng-select
+            id="country_input"
+            class="ng-select sellers-select"
+            formControlName="shipped_from"
+            [items]="countries"
+            bindValue="country_id"
+            bindLabel="name"
+            [clearable]="false"
+          ></ng-select>
+
+          <span
+            class="error-message"
+            *ngIf="
+              getPaidForm.controls.shipped_from.errors &&
+              getPaidForm.controls.shipped_from.errors.required
+            "
+          >
+            {{ 'Please enter shipped from country' | translate }}
+          </span>
+        </div>
+
+        <div class="form-group">
+          <div class="input-title">{{ 'First Name' | translate }}*</div>
+          <div class="input-container">
+            <input
+              type="text"
+              class="secondary"
+              formControlName="fname"
+              placeholder="{{ 'First Name' | translate }}"
+            />
+          </div>
+
+          <span
+            class="error-message"
+            *ngIf="getPaidForm.controls.fname.errors && getPaidForm.controls.fname.errors.required"
+          >
+            {{ 'Please enter first name' | translate }}
+          </span>
+        </div>
+
+        <div class="form-group">
+          <div class="input-title">{{ 'Last Name' | translate }}*</div>
+          <div class="input-container">
+            <input
+              type="text"
+              class="secondary"
+              formControlName="lname"
+              placeholder="{{ 'Last Name' | translate }}"
+            />
+          </div>
+
+          <span
+            class="error-message"
+            *ngIf="getPaidForm.controls.lname.errors && getPaidForm.controls.lname.errors.required"
+          >
+            {{ 'Please enter last name' | translate }}
+          </span>
+        </div>
+
+        <div class="form-group">
+          <div class="input-title">{{ 'Date of birth' | translate }}*</div>
+          <div class="input-container">
+            <div class="dropdown-field dropdown-date">
+              <input
+                matInput
+                formControlName="date_of_birth"
+                [matDatepicker]="picker"
+                [max]="maxDate"
+                (click)="picker.open()"
+                class="secondary"
+                placeholder="( {{ 'DD-MM-YYYY' | translate }} )"
+              />
+              <mat-datepicker #picker startView="multi-year"></mat-datepicker>
+            </div>
+          </div>
+
+          <span
+            class="error-message"
+            *ngIf="
+              getPaidForm.controls.date_of_birth.errors &&
+              (getPaidForm.controls.date_of_birth.errors.required ||
+                getPaidForm.controls.date_of_birth.errors.matDatepickerMax)
+            "
+          >
+            {{ 'Please enter date of birth' | translate }}
+          </span>
+        </div>
+
+        <div class="form-group-title title medium">
+          {{ 'Contact information' | translate }}
+        </div>
+
+        <div class="form-group">
+          <div class="input-title">{{ 'Email Address' | translate }}*</div>
+          <div class="input-container">
+            <input
+              type="email"
+              class="secondary"
+              formControlName="email"
+              placeholder="{{ 'Email Address' | translate }}"
+            />
+          </div>
+
+          <span
+            class="error-message"
+            *ngIf="getPaidForm.controls.email.errors && getPaidForm.controls.email.errors.required"
+          >
+            {{ 'Please enter email' | translate }}
+          </span>
+
+          <span
+            class="error-message"
+            *ngIf="getPaidForm.controls.email.errors && getPaidForm.controls.email.errors.email"
+          >
+            {{ 'Please enter valid email' | translate }}
+          </span>
+        </div>
+
+        <div class="form-group">
+          <div class="input-title">Mobile Number*</div>
+
+          <div class="input-container flex">
+            <ng-select
+              #phonecodeSelect
+              formControlName="phone_code"
+              class="phone-code-select tvb-select"
+              [items]="countryPhoneCodes"
+              bindLabel="phonecode"
+              bindValue="phonecode"
+              [clearable]="false"
+              [searchable]="false"
+            >
+              <ng-template ng-header-tmp>
+                <input
+                  type="text"
+                  class="phone-code-input"
+                  (input)="phonecodeSelect.filter($any($event.target).value)"
+                  placeholder="type code..."
+                />
+              </ng-template>
+
+              <ng-template ng-label-tmp let-item="item">
+                <span class="phonecode-label">+ {{ item.phonecode }}</span>
+              </ng-template>
+
+              <ng-template ng-option-tmp let-item="item">
+                <span class="phonecode-option">+ {{ item.phonecode }}</span>
+              </ng-template>
+            </ng-select>
+
+            <input
+              id="phone_number_input"
+              type="number"
+              class="phone-number-input secondary"
+              formControlName="mobile_no"
+              placeholder="Mobile number"
+            />
+          </div>
+
+          <span
+            *ngIf="
+              getPaidForm.controls.phone_code.errors &&
+              getPaidForm.controls.phone_code.errors.required
+            "
+          >
+            Please enter phone code.
+          </span>
+
+          <span
+            *ngIf="
+              getPaidForm.controls.mobile_no.errors &&
+              getPaidForm.controls.mobile_no.errors.required
+            "
+          >
+            Please enter mobile number.
+          </span>
+        </div>
+      </div>
+
+      <!-- BILLING ADDRESS & BANK INFO -->
+      <div class="col-xs-12 col-md-6">
+        <div id="billing_address_title" class="form-group-title form-group-title-2 title medium">
+          {{ 'Billing Address' | translate }}
+        </div>
+
+        <div class="form-group">
+          <div class="input-title">{{ 'Address' | translate }}*</div>
+          <div class="input-container">
+            <input
+              type="text"
+              class="secondary"
+              formControlName="address"
+              placeholder="{{ 'Address' | translate }}"
+            />
+          </div>
+
+          <span
+            class="error-message"
+            *ngIf="
+              getPaidForm.controls.address.errors && getPaidForm.controls.address.errors.required
+            "
+          >
+            {{ 'Please enter address' | translate }}
+          </span>
+        </div>
+
+        <div class="row billing-address-group">
+          <div class="col-6">
+            <div class="form-group">
+              <div class="input-title">{{ 'Country' | translate }}*</div>
+
+              <div class="input-container">
+                <div class="input-container dropdown-field dropdown-field2">
+                  <ng-select
+                    class="ng-select sellers-select"
+                    formControlName="country_id"
+                    [items]="countries"
+                    bindValue="country_id"
+                    bindLabel="name"
+                    [clearable]="false"
+                  ></ng-select>
+                </div>
+
+                <span
+                  class="error-message"
+                  *ngIf="
+                    getPaidForm.controls.country_id.errors &&
+                    getPaidForm.controls.country_id.errors.required
+                  "
+                >
+                  {{ 'Please enter country' | translate }}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-6">
+            <div class="form-group">
+              <div class="input-title">
+                {{ 'State' | translate }}
+              </div>
+
+              <div class="input-container">
+                <input
+                  type="text"
+                  class="secondary"
+                  formControlName="state"
+                  placeholder="{{ 'State' | translate }}"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row billing-address-group">
+          <div class="col-6">
+            <div class="form-group">
+              <div class="input-title">{{ 'City' | translate }}*</div>
+              <div class="input-container">
+                <input
+                  type="text"
+                  class="secondary"
+                  formControlName="city"
+                  placeholder="{{ 'City' | translate }}"
+                />
+              </div>
+
+              <span
+                class="error-message"
+                *ngIf="
+                  getPaidForm.controls.city.errors && getPaidForm.controls.city.errors.required
+                "
+              >
+                {{ 'Please enter city' | translate }}
+              </span>
+            </div>
+          </div>
+
+          <div class="col-6">
+            <div class="form-group">
+              <div class="input-title">{{ 'Post Code' | translate }}*</div>
+              <div class="input-container">
+                <input
+                  type="text"
+                  class="secondary"
+                  formControlName="postal_code"
+                  placeholder="{{ 'Pin code' | translate }}"
+                  (keypress)="keyPressAlphanumeric($event)"
+                />
+              </div>
+
+              <span
+                class="error-message"
+                *ngIf="
+                  getPaidForm.controls.postal_code.errors &&
+                  getPaidForm.controls.postal_code.errors.required
+                "
+              >
+                {{ 'Please enter post code' | translate }}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!--BANK INFORMATION-->
+        <div id="transfer_information_title" class="form-group-title title medium">
+          {{ 'Transfer Information' | translate }}
+        </div>
+
+        <div class="form-group">
+          <div class="input-title">
+            {{ 'Bank Country' | translate }}
+          </div>
+
+          <div class="input-container">
+            <div class="input-container dropdown-field dropdown-field-2">
+              <ng-select
+                class="ng-select sellers-select"
+                formControlName="bank_country"
+                [items]="countries"
+                bindValue="country_id"
+                bindLabel="name"
+                [clearable]="true"
+                [readonly]="user?.connected_stripe_id"
+              ></ng-select>
+            </div>
+          </div>
+
+          <span
+            class="error-message"
+            *ngIf="
+              getPaidForm.controls.bank_country.errors &&
+              getPaidForm.controls.bank_country.errors.required
+            "
+          >
+            {{ 'Please enter bank country' | translate }}
+          </span>
+        </div>
+
+        <div class="form-group">
+          <div class="input-title">{{ 'Bank Account Number' | translate }}</div>
+
+          <div class="input-container">
+            <input
+              type="text"
+              class="secondary"
+              formControlName="bank_account_number"
+              placeholder="{{ 'Bank Account Number' | translate }}"
+            />
+          </div>
+
+          <span
+            class="error-message"
+            *ngIf="
+              getPaidForm.controls.bank_account_number.errors &&
+              getPaidForm.controls.bank_account_number.errors.required
+            "
+          >
+            {{ 'Bank Account Number' | translate }}
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="after-form-container">
+      <ng-container *ngIf="errorMessage">
+        <div class="col-12 col-md-6 alert-danger error-message">
+          {{ errorMessage }}
+        </div>
+      </ng-container>
+
+      <button
+        id="submit_button"
+        type="submit"
+        class="btn primary"
+        [disabled]="!isReadyForNextStep()"
+      >
+        Continue
+      </button>
+    </div>
+  </form>
+</div>

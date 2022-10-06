@@ -1,0 +1,16 @@
+<mat-form-field appearance="fill">
+  <mat-label>{{ 'Enter from and to dates' | translate }}</mat-label>
+  <mat-date-range-input [formGroup]="form" [rangePicker]="picker">
+    <input matStartDate formControlName="fromDate" placeholder="{{ 'Start date' | translate }}" />
+    <input matEndDate formControlName="toDate" placeholder="{{ 'End date' | translate }}" />
+  </mat-date-range-input>
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-date-range-picker #picker></mat-date-range-picker>
+
+  <mat-error *ngIf="form.controls.fromDate.hasError('matStartDateInvalid')">
+    {{ 'Invalid start date' | translate }}
+  </mat-error>
+  <mat-error *ngIf="form.controls.toDate.hasError('matEndDateInvalid')">
+    {{ 'Invalid end date' | translate }}
+  </mat-error>
+</mat-form-field>

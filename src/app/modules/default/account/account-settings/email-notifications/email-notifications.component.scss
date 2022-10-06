@@ -1,0 +1,125 @@
+:host {
+  .email-notification-page {
+    .container {
+      flex-direction: column;
+      .tabs-left {
+        .tab-content {
+          .email-notification {
+            app-checkbox {
+              & ~ p {
+                font-family: FuturaBT-Light;
+                font-size: 15px;
+                margin-left: 40px;
+                clear: left;
+              }
+
+              ::ng-deep label small {
+                font-family: FuturaBT-Medium;
+                text-transform: uppercase;
+                margin-left: 10px;
+              }
+            }
+
+            h3.title {
+              font-size: 19px;
+              margin-bottom: 15px;
+              font-family: Cormorant;
+              text-transform: uppercase;
+            }
+
+            p {
+              &.subtitle {
+                margin-bottom: 60px;
+              }
+
+              &.checkbox-description {
+                font-size: 15px;
+                font-family: FuturaBT-Light;
+                margin-bottom: 30px;
+              }
+            }
+            .email-notification-card {
+              .notification-card {
+                position: relative;
+                padding-left: 30px;
+                input[type='checkbox'] {
+                  width: 10px;
+                  height: 10px;
+                  opacity: 0;
+                  left: 0;
+                  margin: auto;
+                  top: 5px;
+                  z-index: 1;
+                  cursor: pointer;
+                  position: absolute;
+                }
+                label {
+                  font-size: 14px;
+                  font-family: 'Playfair Display', serif;
+                  font-weight: 600;
+                }
+                label::before {
+                  content: '';
+                  display: inline-block;
+                  position: absolute;
+                  width: 10px;
+                  height: 10px;
+                  left: 0;
+                  top: 5px;
+                  border: 1px solid #ccc;
+                  border-radius: 0px;
+                  background-color: #fff;
+                }
+                input:checked + label::before {
+                  background-color: #191919 !important;
+                  border: 1px solid #191919 !important;
+                }
+                p {
+                  padding-top: 5px;
+                  margin-bottom: 10px;
+                }
+              }
+            }
+            .submit-notify {
+              position: relative;
+              margin-top: 30px;
+              padding-bottom: 20px;
+              float: right;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 992px) {
+    .email-notification-page {
+      .container {
+        flex-direction: column;
+        .tabs-left {
+          .tab-content {
+            .email-notification {
+              h3 {
+                text-align: center;
+              }
+              p {
+                text-align: center;
+              }
+            }
+            .email-notification-card {
+              h3 {
+                text-align: left;
+              }
+              p {
+                text-align: left;
+              }
+            }
+          }
+        }
+        .submit-notify {
+          text-align: center;
+        }
+      }
+    }
+  }
+}

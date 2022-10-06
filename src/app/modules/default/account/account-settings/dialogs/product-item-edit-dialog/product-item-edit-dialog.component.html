@@ -1,0 +1,85 @@
+<div class="container product-add-images d-flex p-0">
+  <div class="form-container-wrapper col-lg-12 col-md-12 col-sm-12 col-xs-12 p-0">
+    <div class="form-title title">
+      {{ 'Images' | translate }}
+    </div>
+    <div class="warning-container flex mt-4 mb-1">{{ 'image_note_1' | translate }}</div>
+    <div class="form-container" *ngIf="productInformationForm">
+      <form [formGroup]="productInformationForm" (ngSubmit)="submitForm(true)" id="imagesForm">
+        <div class="flex images-container" cdkDropListGroup>
+          <div
+            class="main-image-container form-group mt-5"
+            cdkDropList
+            (cdkDropListDropped)="dropMainImage($event)"
+            id="mainImageCdkDropListContainer"
+          >
+            <div class="form-group-title title small flex">{{ 'Main Photo' | translate }}*</div>
+            <div class="description flex">
+              {{ 'Front View Photo' | translate }}
+            </div>
+            <div class="input-container flex" cdkDrag>
+              <div class="image-container main">
+                <app-image-uploader
+                  (fileChange)="onFileChange($event, 'productImage')"
+                  [uploadedFile]="mainImage.file"
+                  (fileSizeError)="showErrorMessage('imageFileSize')"
+                  [id]="'productImage'"
+                ></app-image-uploader>
+              </div>
+              <div class="input-container flex" *cdkDragPlaceholder>
+                <div class="image-container">
+                  <app-image-uploader></app-image-uploader>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group additional-images mt-5 flex flex-column">
+            <div class="form-group-title title small flex">
+              {{ 'More Images' | translate }}
+            </div>
+            <div class="description flex text-center">
+              {{ 'Drag and drop up to 9 pictures' | translate }}
+            </div>
+            <div class="secondary-images-drop-lists-container flex">
+              <div
+                *ngFor="let item of secondaryImages; let i = index"
+                class="secondary-images-container flex"
+                cdkDropList
+                (cdkDropListDropped)="drop($event)"
+                cdkDropListConnectedTo="fakeDataForDropListSecondLineElement"
+                cdkDropListOrientation="horizontal"
+                [cdkDropListData]="{ item: item, index: i }"
+                id="fakeDataForDropListFirstLineElement"
+              >
+                <div class="input-container flex" cdkDrag>
+                  <div class="image-container">
+                    <app-image-uploader
+                      (fileChange)="onSecondaryImagesAdd($event, i)"
+                      [uploadedFile]="item.file"
+                      (fileSizeError)="showErrorMessage('imageFileSize')"
+                    ></app-image-uploader>
+                  </div>
+                  <div class="input-container flex" *cdkDragPlaceholder>
+                    <div class="image-container">
+                      <app-image-uploader></app-image-uploader>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="col-sm-12 col-xs-12 col-md-12 col-lg-12 alert-danger justify-content-center flex"
+          *ngIf="productUpdateErrorMessage"
+        >
+          {{ productUpdateErrorMessage }}
+        </div>
+      </form>
+    </div>
+  </div>
+  <app-vintage-bar-droppable-zone
+    (filesChange)="dropFiles($event)"
+    (fileSizeError)="showErrorMessage('imageFileSize')"
+  ></app-vintage-bar-droppable-zone>
+</div>

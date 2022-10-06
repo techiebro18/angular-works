@@ -1,0 +1,98 @@
+<div
+  class="input-file-container {{ layoutTheme }}"
+  [ngClass]="{ 'bg-image': mainImageTemp || uploadedFile }"
+  (mouseover)="showAddImageInfoOverlay = true"
+  (mouseout)="showAddImageInfoOverlay = false"
+>
+  <ng-container *ngIf="!uploadedFile && !mainImageTemp && mainImageTemp === null">
+    <label for="{{ id }}">
+      <input type="file" (change)="onFileChange($event)" class="d-none" id="{{ id }}" />
+      <div
+        class="photo-info-overlay"
+        [id]="'photo-info-overlay-' + id"
+        *ngIf="!uploadedFile && layoutTheme === 'default'"
+        [ngClass]="
+          showAddImageInfoOverlay || fixedOverlayInfo || (isMobile$ | async) ? 'd-block' : 'd-none'
+        "
+      >
+        <img src="assets/images/add-image.svg" alt="Upload Image" />
+        <div class="overlay-info-text-1">
+          <span>
+            {{ (isMobile$ | async) ? 'Tap' : 'Click' }}
+          </span>
+          to add photo
+          <br />
+        </div>
+        <div class="overlay-info-text-2">PNG, JPEG, HEIC</div>
+      </div>
+    </label>
+
+    <div
+      class="uploaded-image-preview {{ layoutTheme }}"
+      *ngIf="!uploadedFile && layoutTheme === 'profile-rounded'"
+    >
+      <img
+        src="assets/images/avatar.svg"
+        class="img-preview {{ layoutTheme }}"
+        (click)="file.click()"
+        alt="Upload Image"
+      />
+      <img
+        src="assets/images/icons/plus.svg"
+        class="add-image {{ layoutTheme }}"
+        (click)="file.click()"
+      />
+    </div>
+
+    <div
+      class="cover-image-box"
+      *ngIf="!uploadedFile && layoutTheme === 'cover-image'"
+      (click)="file.click()"
+    >
+      + Cover image
+    </div>
+  </ng-container>
+
+  <div
+    class="uploaded-image-preview {{ layoutTheme }}"
+    *ngIf="mainImageTemp && !uploadedImagePreview"
+  >
+    <img
+      src="assets/images/close-icon.png"
+      class="close-icon {{ layoutTheme }}"
+      (click)="clearImage()"
+    />
+    <img
+      *ngIf="mainImageTemp && !uploadedImagePreview"
+      class="img-preview {{ layoutTheme }}"
+      [src]="mainImageTemp"
+      (click)="file.click()"
+    />
+    <img
+      src="assets/images/icons/plus.svg"
+      class="add-image {{ layoutTheme }}"
+      (click)="file.click()"
+    />
+  </div>
+
+  <div class="uploaded-image-preview {{ layoutTheme }}" *ngIf="uploadedFile">
+    <img
+      src="assets/images/close-icon.png"
+      class="close-icon {{ layoutTheme }}"
+      (click)="clearImage()"
+    />
+    <img
+      *ngIf="uploadedImagePreview"
+      [src]="uploadedImagePreview"
+      class="img-preview {{ layoutTheme }}"
+      (click)="file.click()"
+    />
+    <img
+      src="assets/images/icons/plus.svg"
+      class="add-image {{ layoutTheme }}"
+      (click)="file.click()"
+    />
+  </div>
+
+  <input type="file" (change)="onFileChange($event)" class="d-none" id="{{ id }}" #file />
+</div>

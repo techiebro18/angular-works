@@ -1,0 +1,12 @@
+version: "3.7"
+services:
+  angular-website:
+    container_name: angular-website
+    build: .
+    ports:
+      - "9084:80"
+    networks:
+      - vintage_bar_default
+networks:
+  vintage_bar_default:
+    external: true

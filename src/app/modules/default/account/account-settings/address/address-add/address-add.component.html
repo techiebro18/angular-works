@@ -1,0 +1,320 @@
+<div class="container account-details">
+  <div class="form-container-wrapper">
+    <div class="form-title title">Change your address information</div>
+
+    <div class="form-container">
+      <form [formGroup]="addressFormGroup" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+            <div class="form-group-title title medium">Personal information</div>
+            <div class="form-group">
+              <div class="description">Salutation</div>
+              <div class="input-container select-salutation">
+                <label>
+                  <input type="radio" formControlName="salutation" [value]="'Ms'" class="secondary" />
+                  Ms.
+                </label>
+                <label>
+                  <input type="radio" formControlName="salutation" [value]="'Mrs'" class="secondary" />
+                  Mrs.
+                </label>
+                <label>
+                  <input type="radio" formControlName="salutation" [value]="'Mr'" class="secondary" />
+                  Mr.
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="description">First Name*</div>
+              <div class="input-container">
+                <input type="text" class="secondary" formControlName="fname" placeholder="First Name" />
+              </div>
+              <span
+                *ngIf="
+                  addressFormGroup.controls.fname.errors && addressFormGroup.controls.fname.errors.required && !isValid
+                "
+              >
+                Please enter first name
+              </span>
+            </div>
+
+            <div class="form-group">
+              <div class="description">Last Name*</div>
+              <div class="input-container">
+                <input type="text" class="secondary" formControlName="lname" placeholder="Last Name" />
+              </div>
+              <span
+                *ngIf="
+                  addressFormGroup.controls.lname.errors && addressFormGroup.controls.lname.errors.required && !isValid
+                "
+              >
+                Please enter last name
+              </span>
+            </div>
+            <div class="form-group">
+              <div class="description">Email Address*</div>
+              <div class="input-container">
+                <input type="email" class="secondary" formControlName="email_id" placeholder="Email Address" />
+              </div>
+              <span
+                *ngIf="
+                  addressFormGroup.controls.email_id.errors &&
+                  addressFormGroup.controls.email_id.errors.required &&
+                  !isValid
+                "
+              >
+                Please enter email
+              </span>
+              <span
+                *ngIf="
+                  addressFormGroup.controls.email_id.errors &&
+                  addressFormGroup.controls.email_id.errors.email &&
+                  !isValid
+                "
+              >
+                Please enter valid email
+              </span>
+            </div>
+            <div class="form-group">
+              <div class="description">Mobile Number*</div>
+              <div class="input-container">
+                <ng-select
+                  #phonecodeSelect
+                  formControlName="phonecode"
+                  [items]="countryPhoneCodes"
+                  [bindLabel]="'phonecode'"
+                  [bindValue]="'phonecode'"
+                  [clearable]="false"
+                  [searchable]="false"
+                  class="phone-code"
+                  [(ngModel)]="selectedPhoneCode"
+                >
+                  <ng-template ng-header-tmp>
+                    <input
+                      style="width: 100%; line-height: 24px"
+                      type="text"
+                      (input)="phonecodeSelect.filter($any($event.target).value)"
+                    />
+                  </ng-template>
+
+                  <ng-template ng-label-tmp let-item="item">
+                    <span class="phonecode-label">+ {{ item.phonecode }}</span>
+                  </ng-template>
+
+                  <ng-template ng-option-tmp let-item="item">
+                    <span class="phonecode-option">+ {{ item.phonecode }}</span>
+                  </ng-template>
+                </ng-select>
+                <input type="number" class="mobile-number" formControlName="mobile_no" placeholder="Mobile number" />
+              </div>
+              <span
+                *ngIf="
+                  addressFormGroup.controls.phonecode.errors &&
+                  addressFormGroup.controls.phonecode.errors.required &&
+                  !isValid
+                "
+              >
+                Please enter phone code
+              </span>
+              <span
+                *ngIf="
+                  addressFormGroup.controls.mobile_no.errors &&
+                  addressFormGroup.controls.mobile_no.errors.required &&
+                  !isValid
+                "
+              >
+                Please enter mobile no.
+              </span>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 contact_info">
+            <div class="form-group-title form-group-title-2 title medium">Contact information</div>
+            <div class="form-group">
+              <div class="description">Address 1*</div>
+              <div class="input-container">
+                <input type="text" class="secondary" formControlName="address_1" placeholder="Address 1" />
+              </div>
+              <span
+                *ngIf="
+                  addressFormGroup.controls.address_1.errors &&
+                  addressFormGroup.controls.address_1.errors.required &&
+                  !isValid
+                "
+              >
+                Please enter address 1
+              </span>
+            </div>
+            <div class="form-group">
+              <div class="description">Address 2</div>
+              <div class="input-container">
+                <input type="text" class="secondary" formControlName="address_2" placeholder="Address 2" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="description">Company Name*</div>
+              <div class="input-container">
+                <div class="input-container">
+                  <input type="text" class="secondary" formControlName="company" placeholder="Company Name" />
+                </div>
+                <span
+                  *ngIf="
+                    addressFormGroup.controls.company.errors &&
+                    addressFormGroup.controls.company.errors.required &&
+                    !isValid
+                  "
+                >
+                  Please enter company name
+                </span>
+              </div>
+            </div>
+
+            <div class="row billing-address-group">
+              <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                <div class="form-group">
+                  <div class="description">Country*</div>
+                  <div class="input-container">
+                    <div class="input-container dropdown-field">
+                      <ng-select
+                        #countrySelect
+                        formControlName="country"
+                        [items]="countries"
+                        [bindLabel]="'name'"
+                        [bindValue]="'id'"
+                        [clearable]="false"
+                        [searchable]="false"
+                        class="dropdown-select"
+                        [(ngModel)]="selectedCountry"
+                      >
+                        <ng-template ng-header-tmp>
+                          <input
+                            style="width: 100%; line-height: 24px"
+                            type="text"
+                            (input)="countrySelect.filter($any($event.target).value)"
+                          />
+                        </ng-template>
+                      </ng-select>
+                    </div>
+                    <span
+                      *ngIf="
+                        addressFormGroup.controls.country.errors &&
+                        addressFormGroup.controls.country.errors.required &&
+                        !isValid
+                      "
+                    >
+                      Please enter country
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                <div class="form-group">
+                  <div class="description">State</div>
+                  <div class="input-container">
+                    <input type="text" class="secondary" formControlName="state" placeholder="State" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                <div class="form-group">
+                  <div class="description">City*</div>
+                  <div class="input-container">
+                    <input type="text" class="secondary" formControlName="city" placeholder="City" />
+                  </div>
+                  <span
+                    *ngIf="
+                      addressFormGroup.controls.city.errors &&
+                      addressFormGroup.controls.city.errors.required &&
+                      !isValid
+                    "
+                  >
+                    Please enter city
+                  </span>
+                  <span
+                    *ngIf="
+                      addressFormGroup.controls.city.errors && addressFormGroup.controls.city.errors.specialCharacter
+                    "
+                  >
+                    {{ 'Special character not allowed' | translate }}
+                  </span>
+                </div>
+              </div>
+
+              <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                <div class="form-group">
+                  <div class="description">Post Code*</div>
+                  <div class="input-container">
+                    <input type="text" class="secondary" formControlName="pin_code" placeholder="Pin code" />
+                  </div>
+                  <span
+                    *ngIf="
+                      addressFormGroup.controls.pin_code.errors &&
+                      addressFormGroup.controls.pin_code.errors.required &&
+                      !isValid
+                    "
+                  >
+                    Please enter post code
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+            <div class="form-group-title preference-tab">Preferences</div>
+
+            <div class="form-group">
+              <div class="description">Address type</div>
+              <div class="input-container address-select">
+                <label>
+                  <input type="radio" class="secondary" [value]="'home'" formControlName="address_type" />
+                  Home
+                </label>
+                <label>
+                  <input type="radio" class="secondary" [value]="'office'" formControlName="address_type" />
+                  Office
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+            <div class="form-group update-button-box">
+              <button *ngIf="addressId !== null" type="submit" class="btn primary update-btn">UPDATE</button>
+              <button *ngIf="addressId === null" type="submit" class="btn primary update-btn">SAVE</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="items-model-up">
+    <div class="modal" id="trash-pupup" [style.display]="trashModel ? 'block' : 'none'">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              (click)="displayButton ? hidePupUp() : reloadItems()"
+            >
+              &times;
+            </button>
+          </div>
+          <div class="modal-body">
+            <h2>{{ popUpHeading }}</h2>
+            <div class="buttom-box"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

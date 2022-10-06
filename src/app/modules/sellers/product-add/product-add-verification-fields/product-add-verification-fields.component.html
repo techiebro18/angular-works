@@ -1,0 +1,86 @@
+<div class="container product-add-images d-flex mt-md-3">
+  <div class="form-container-wrapper col-12">
+    <div class="form-title title">{{ 'Account Verification' | translate }}</div>
+
+    <div class="form-group">
+      {{ 'account_verification_title' | translate: { userName: user?.first_name } }}
+    </div>
+
+    <div class="text-center mt-5 mb-5" *ngIf="!showForm">
+      <h3>
+        {{ 'Your bank information is being updated. Please wait a minute and click on the button below.' | translate }}
+      </h3>
+      <button class="btn primary" (click)="loadData()">{{ 'Refresh' | translate }}</button>
+    </div>
+
+    <div class="form-container" *ngIf="verificationForm && showForm">
+      <form [formGroup]="verificationForm" (ngSubmit)="submitForm()">
+        <div class="row">
+          <div class="col-xs-12 col-md-6">
+            <div class="form-group mt-5">
+              <div class="form-group-title title medium flex">{{ 'Identity Document' | translate }} *</div>
+
+              <div class="description flex">{{ 'Front View Photo' | translate }}</div>
+              <div class="input-container flex">
+                <div class="image-container">
+                  <app-image-uploader
+                    [id]="'individualVerificationDocument'"
+                    (fileChange)="onFileChange($event, 'individualverificationdocument')"
+                  ></app-image-uploader>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group mt-2">
+              <div class="description flex">{{ 'Back View Photo' | translate }}</div>
+
+              <div class="input-container flex">
+                <div class="image-container">
+                  <app-image-uploader
+                    [id]="'individualVerificationDocumentBack'"
+                    (fileChange)="onFileChange($event, 'individualverificationdocumentback')"
+                  ></app-image-uploader>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xs-12 col-md-6">
+            <div class="form-group mt-5">
+              <div class="form-group-title title medium flex">{{ 'Proof of Home Address' | translate }} *</div>
+
+              <div class="description flex">{{ 'Front View Photo' | translate }}</div>
+              <div class="input-container flex">
+                <div class="image-container">
+                  <app-image-uploader
+                    [id]="'individualVerificationAdditionalDocument'"
+                    (fileChange)="onFileChange($event, 'individualverificationadditional_document')"
+                  ></app-image-uploader>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group mt-2">
+              <div class="description flex">{{ 'Back View Photo' | translate }}</div>
+
+              <div class="input-container flex">
+                <div class="image-container">
+                  <app-image-uploader
+                    [id]="'individualVerificationAdditionalDocumentBack'"
+                    (fileChange)="onFileChange($event, 'individualverificationadditional_documentback')"
+                  ></app-image-uploader>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group justify-content-center d-flex mt-4">
+          <button id="submit_btn" type="submit" class="btn primary" [disabled]="verificationForm.invalid">
+            {{ 'Continue' | translate }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

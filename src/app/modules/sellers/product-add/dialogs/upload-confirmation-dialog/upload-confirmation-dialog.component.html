@@ -1,0 +1,19 @@
+<div class="upload-confirmation-dialog flex">
+  <div class="image-container">
+    <img src="{{ env.IMGIX_UPLOADS_URL }}static/shared/upload-confirmation-popup.png" />
+  </div>
+  <div class="buttons-container-wrapper flex">
+    <div class="title flex flex-column">
+      <div class="title">Congratulations!</div>
+      <div class="title medium">You have submitted your item!</div>
+    </div>
+    <div class="buttons-container flex">
+      <a class="my-items" [routerLink]="['/account/my-items/pending']" (click)="closeDialog()">
+        <button class="btn primary">GO TO MY ITEMS</button>
+      </a>
+      <button class="btn social" [routerLink]="['/sellers/product-add']" (click)="closeDialog()">
+        UPLOAD ANOTHER PRODUCT
+      </button>
+    </div>
+  </div>
+</div>

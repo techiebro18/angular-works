@@ -1,0 +1,40 @@
+<div class="gallery-container" [ngClass]="{ dark: theme === 'dark' }">
+  <div class="navigation-button-wrapper">
+    <button (click)="navigateToThePreviousImage()" class="navigation-button previous">
+      <img src="/assets/images/gallery/chevron_back_rgb_black.svg" />
+    </button>
+  </div>
+
+  <ul
+    #galleryWrapper
+    class="gallery-wrapper"
+    [ngClass]="{ fullscreen: isFullscreen }"
+    [@openClose]="isOpen ? 'open' : 'closed'"
+  >
+    <ng-content select=".slides"></ng-content>
+  </ul>
+
+  <div class="navigation-button-wrapper next">
+    <button (click)="navigateToTheNextImage()" class="navigation-button next">
+      <img src="/assets/images/gallery/chevron_forward_rgb_black.svg" />
+    </button>
+  </div>
+</div>
+
+<ul
+  *ngIf="thumbnails"
+  #thumbnailsWrapper
+  class="thumbnails-container"
+  [ngClass]="{ fullscreen: isFullscreen }"
+>
+  <ng-content select=".thumbnails"></ng-content>
+</ul>
+
+<ul *ngIf="!thumbnails" #thumbnailsWrapper class="dots-container">
+  <li
+    *ngFor="let item of items; let i = index"
+    class="dot"
+    [ngClass]="{ selected: i === selectedIndex }"
+    (click)="selectImageFromThumbnail(i)"
+  ></li>
+</ul>

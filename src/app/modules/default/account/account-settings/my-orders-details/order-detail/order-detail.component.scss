@@ -1,0 +1,192 @@
+.order-summary-details {
+  width: 100%;
+}
+.orderbottom {
+  border-bottom: 1px solid #ccc;
+}
+.orderbottom td {
+  padding: 15px 0;
+  vertical-align: middle;
+}
+.orderbottom .order-image {
+  padding: 0 42px;
+  text-align: center;
+}
+.orderbottom .order-image img {
+  width: 150px;
+}
+.orderbottom .order-image p {
+  font-weight: 800;
+  font-family: 'FuturaBT-Medium';
+}
+.orderbottom .order-image img {
+  max-width: 150px;
+}
+.orderbottom .product-description {
+  display: block;
+  width: 100%;
+}
+.orderbottom .product-description p {
+  display: block;
+  width: 100%;
+  font-size: 12px;
+}
+.orderbottom .product-description p span {
+  min-width: 110px;
+  display: inline-block;
+  color: #000;
+  font-family: 'FuturaBT-Medium';
+}
+.orderbottom .product-detail p {
+  display: block;
+  width: 100%;
+  font-size: 12px;
+}
+.orderbottom .product-detail p span {
+  min-width: 110px;
+  display: inline-block;
+  color: #000;
+  font-family: 'FuturaBT-Medium';
+}
+.orderbottom {
+  border-bottom: 1px solid #ccc;
+}
+.orderbottom td {
+  padding: 15px 0;
+  vertical-align: middle;
+}
+.orderbottom td.order-image-block {
+  width: 30%;
+  max-width: 200px;
+}
+.orderbottom .order-image {
+  padding: 0 42px;
+  text-align: center;
+}
+.orderbottom .order-image img {
+  width: 150px;
+}
+.orderbottom .order-image p {
+  font-weight: 800;
+  font-family: 'FuturaBT-Medium';
+}
+.orderbottom td.description-block {
+  width: 40%;
+  width: 29%;
+  min-width: 300px;
+}
+.orderbottom .product-description {
+  display: inline-block;
+  width: 100%;
+}
+.orderbottom .product-description p {
+  display: inline-block;
+  width: 100%;
+  font-size: 12px;
+}
+.orderbottom .product-description p span {
+  min-width: 110px;
+  display: inline-block;
+  color: #000;
+  font-family: 'FuturaBT-Medium';
+}
+.orderbottom .product-description .shipment-tracking-number {
+  color: #212529;
+  font-size: 12px;
+  cursor: pointer;
+}
+.orderbottom .product-description .download-invoice {
+  color: #212529;
+  font-size: 12px;
+  cursor: pointer;
+  padding-left: 5px;
+}
+.orderbottom td.product-detail-block {
+}
+.orderbottom .product-detail {
+  width: 200px;
+  float: right;
+}
+.orderbottom .product-detail p {
+  display: block;
+  width: 100%;
+  font-size: 12px;
+}
+.orderbottom .product-detail p.total {
+  font-family: 'FuturaBT-Medium';
+  font-weight: 900;
+}
+.orderbottom .product-detail p span {
+  min-width: 110px;
+  display: inline-block;
+  color: #000;
+  font-family: 'FuturaBT-Medium';
+}
+
+.account-tab-page .ordertimer .returnorder {
+  display: inline-block;
+  padding: 10px 12px;
+  font-size: 14px;
+  font-weight: 400;
+  border: 1px solid #e5e5e5;
+  background-color: transparent;
+  color: #191919;
+  min-width: 220px;
+  box-shadow: none;
+  float: right;
+}
+.proceed-btn {
+  display: inline-block;
+  padding: 0px 20px;
+  background-color: #191919;
+  font-size: 16px;
+  color: #ffffff;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: 0;
+  line-height: 40px;
+  min-width: 220px;
+}
+.proceed-btn.focus,
+.proceed-btn:focus,
+.proceed-btn:hover {
+  color: #fff;
+}
+.proceed-btn:hover {
+  background-color: #666;
+  color: #fff;
+  border-color: #e5e5e5;
+}
+.order-summary-details {
+  width: 100%;
+}
+.pading-bottom-space {
+  padding-bottom: 2%;
+}
+/* --------------- COMMON CSS END --------------- */
+
+@media only screen and (max-width: 991px) {
+  .cancelOrders {
+    max-width: auto;
+  }
+
+  .orderbottom td {
+    width: 100% !important;
+    display: block;
+  }
+
+  .order-summary-bottom .orderbottom {
+    float: left;
+  }
+
+  .orderbottom .product-detail {
+    float: left;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  :ng-deep .container {
+    width: 100%;
+  }
+}

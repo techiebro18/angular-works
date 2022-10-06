@@ -1,0 +1,282 @@
+<ng-container *ngIf="isMobile$ && userLogged$?.value">
+  <div class="left-section-a lr-section-a" [class.plus]="openAccountMenu" [class.minus]="!openAccountMenu">
+    <div class="back-button">
+      <div class="sf-nav__back" (click)="openMyAccountMenu(false)">
+        <span>
+          <img src="assets/images/gallery/chevron_back_rgb_black.svg" />
+        </span>
+        BACK
+      </div>
+      <hr class="sf-nav__divider" />
+    </div>
+    <tvb-user-mobile-menu [user]="userLogged$.value" (itemClicked)="openMyAccountMenu(false)"></tvb-user-mobile-menu>
+  </div>
+</ng-container>
+
+<div class="right-section-a lr-section-a" [class.plus]="!openAccountMenu" [class.minus]="openAccountMenu">
+  <div class="open-menu-section">
+    <div class="open-menu" (click)="openMyAccountMenu(true)">
+      <img src="assets/images/icons/back-arrow.svg" />
+      <span>My Account</span>
+    </div>
+  </div>
+
+  <div class="account-layout flex" [ngClass]="{ mobile: isMobile$ | async }">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-lg-3 account-sidebar">
+          <div class="page-title-on-menu account-sidebar-item">
+            <span>{{ 'My Account' | translate }}</span>
+          </div>
+
+          <div class="account-sidebar-item">
+            <img src="assets/images/icons/user.svg" class="item-icon" />
+            <a class="link primary no-underline" [routerLink]="['account-details']" routerLinkActive="is-active">
+              {{ 'My Details' | translate }}
+            </a>
+          </div>
+
+          <div class="account-sidebar-item">
+            <img src="assets/images/icons/box.svg" class="item-icon" />
+
+            <a class="link primary no-underline" [routerLink]="['my-orders']" routerLinkActive="is-active">
+              {{ 'My Orders' | translate }}
+            </a>
+          </div>
+
+          <div class="account-sidebar-item expandable">
+            <img src="assets/images/icons/house.svg" class="item-icon" />
+            <a
+              class="link primary no-underline expandable"
+              href="javascript:void(0);"
+              (click)="toggleMyItemsMenu()"
+              [ngClass]="{ expanded: expandMyItemsMenu }"
+            >
+              {{ 'menu.my_items.title' | translate }}
+              <img
+                class="arrow-expandable"
+                src="assets/images/icons/arrow.svg"
+                [ngClass]="{ expanded: expandMyItemsMenu }"
+              />
+            </a>
+
+            <div class="sub-items-wrapper" [ngClass]="{ expanded: expandMyItemsMenu }">
+              <div class="sub-item" [ngClass]="{ 'sub-item-zero-margin': !expandMyItemsMenu }">
+                <a
+                  id="for_sale_items_link"
+                  class="link primary no-underline child-item"
+                  routerLink="/account/my-items/items-for-sale"
+                  routerLinkActive="is-active"
+                >
+                  {{ 'menu.my_items.for_sale' | translate }}
+                </a>
+              </div>
+
+              <div class="sub-item" [ngClass]="{ 'sub-item-zero-margin': !expandMyItemsMenu }">
+                <a
+                  id="draft_items_link"
+                  class="link primary no-underline child-item"
+                  routerLink="/account/my-items/draft"
+                  routerLinkActive="is-active"
+                >
+                  {{ 'menu.my_items.draft' | translate }}
+                </a>
+              </div>
+
+              <div class="sub-item" [ngClass]="{ 'sub-item-zero-margin': !expandMyItemsMenu }">
+                <a
+                  id="sold_items_link"
+                  class="link primary no-underline child-item"
+                  routerLink="/account/my-items/items-sold"
+                  routerLinkActive="is-active"
+                >
+                  {{ 'menu.my_items.sold' | translate }}
+                </a>
+              </div>
+
+              <div class="sub-item" [ngClass]="{ 'sub-item-zero-margin': !expandMyItemsMenu }">
+                <a
+                  id="refused_items_link"
+                  class="link primary no-underline child-item"
+                  routerLink="/account/my-items/refused"
+                  routerLinkActive="is-active"
+                >
+                  {{ 'menu.my_items.refused' | translate }}
+                </a>
+              </div>
+
+              <div class="sub-item" [ngClass]="{ 'sub-item-zero-margin': !expandMyItemsMenu }">
+                <a
+                  id="pending_items_link"
+                  class="link primary no-underline child-item"
+                  routerLink="/account/my-items/pending"
+                  routerLinkActive="is-active"
+                >
+                  {{ 'menu.my_items.pending' | translate }}
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="account-sidebar-item">
+            <img src="assets/images/icons/heart_white.svg" class="item-icon" />
+            <a class="link primary no-underline" [routerLink]="['wishlist' | translate]" routerLinkActive="is-active">
+              {{ 'My Wishlist' | translate }}
+            </a>
+          </div>
+
+          <div class="account-sidebar-item expandable" *ngIf="offerService.getOfferGlobalStatus() | async">
+            <img src="assets/images/icons/chat.svg" class="item-icon" />
+            <a
+              class="link primary no-underline expandable"
+              href="javascript:void(0);"
+              (click)="toggleOffersMenu()"
+              [ngClass]="{ expanded: expandOffersMenu }"
+            >
+              {{ 'make_an_offer.menu.level_1' | translate }}
+              <img
+                class="arrow-expandable"
+                src="assets/images/icons/arrow.svg"
+                [ngClass]="{ expanded: expandOffersMenu }"
+              />
+            </a>
+
+            <div class="sub-items-wrapper" [ngClass]="{ expanded: expandOffersMenu }">
+              <div class="sub-item" [ngClass]="{ 'sub-item-zero-margin': !expandOffersMenu }">
+                <a
+                  id="your_offers_link"
+                  class="link primary no-underline child-item"
+                  routerLink="/account/my-offers/your-offers"
+                  routerLinkActive="is-active"
+                >
+                  {{ 'make_an_offer.menu.level_1_1' | translate }}
+                </a>
+              </div>
+
+              <div
+                class="sub-item"
+                [ngClass]="{ 'sub-item-zero-margin': !expandOffersMenu }"
+                *ngIf="isUserOpenToOffers"
+              >
+                <a
+                  id="received_offers_link"
+                  class="link primary no-underline child-item"
+                  routerLink="/account/my-offers/received-offers"
+                  routerLinkActive="is-active"
+                >
+                  {{ 'make_an_offer.menu.level_1_2' | translate }}
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="account-sidebar-item">
+            <img src="assets/images/icons/wallet.svg" class="item-icon" />
+            <a class="link primary no-underline" [routerLink]="['my-financials']" routerLinkActive="is-active">
+              {{ 'My Financials' | translate }}
+            </a>
+          </div>
+
+          <div class="account-sidebar-item">
+            <img src="assets/images/icons/card.svg" class="item-icon" />
+            <a class="link primary no-underline" [routerLink]="['get-paid']" routerLinkActive="is-active">
+              {{ 'Get paid' | translate }}
+            </a>
+          </div>
+
+          <div class="account-sidebar-item">
+            <img src="assets/images/icons/waitlist.svg" class="item-icon" />
+            <a class="link primary no-underline" [routerLink]="['waitlist-overview']" routerLinkActive="is-active">
+              {{ 'Waitlist' | translate }}
+            </a>
+          </div>
+
+          <div class="account-sidebar-item">
+            <a class="link primary no-underline" routerLink="price-reductions" routerLinkActive="is-active">
+              <img src="assets/images/icons/bell.svg" class="item-icon" />
+              {{ 'Follow price reductions' | translate }}
+            </a>
+          </div>
+
+          <div
+            class="account-sidebar-item"
+            *ngIf="
+              userRoleId == userRolesEnum.USER ||
+              userRoleId == userRolesEnum.PROFESSIONAL_SELLER ||
+              userRoleId == userRolesEnum.INFLUENCER
+            "
+          >
+            <img src="assets/images/icons/pin.svg" class="item-icon" />
+            <a class="link primary no-underline" [routerLink]="['address']" routerLinkActive="is-active">
+              {{ 'Address Book' | translate }}
+            </a>
+          </div>
+
+          <div
+            class="account-sidebar-item"
+            *ngIf="
+              userRoleId == userRolesEnum.USER ||
+              userRoleId == userRolesEnum.PROFESSIONAL_SELLER ||
+              userRoleId == userRolesEnum.INFLUENCER
+            "
+          >
+            <img src="assets/images/icons/pencil.svg" class="item-icon" />
+            <a class="link primary no-underline" [routerLink]="['email-notifications']" routerLinkActive="is-active">
+              {{ 'Notification Settings' | translate }}
+            </a>
+          </div>
+
+          <ng-container *ngIf="userRoleId == userRolesEnum.PROFESSIONAL_SELLER">
+            <div class="account-sidebar-item expandable">
+              <img src="assets/images/icons/help_and_support/terms_and_conditions.svg" class="item-icon" />
+              <a
+                class="link primary no-underline expandable"
+                href="javascript:void(0);"
+                (click)="toggleAcceptTermsMenu()"
+                [ngClass]="{ expanded: expandAcceptTermsMenu }"
+              >
+                {{ 'Terms and Conditions' | translate }}
+                <img
+                  class="arrow-expandable"
+                  src="assets/images/icons/arrow.svg"
+                  [ngClass]="{ expanded: expandAcceptTermsMenu }"
+                />
+              </a>
+
+              <div class="sub-items-wrapper" [ngClass]="{ expanded: expandAcceptTermsMenu }">
+                <div class="sub-item" [ngClass]="{ 'sub-item-zero-margin': !expandAcceptTermsMenu }">
+                  <a
+                    id="your_offers_link"
+                    class="link primary no-underline child-item"
+                    routerLink="/account/terms-and-conditions/accept-terms"
+                    routerLinkActive="is-active"
+                  >
+                    {{ 'Pro-seller Terms' | translate }}
+                  </a>
+                </div>
+
+                <div class="sub-item" [ngClass]="{ 'sub-item-zero-margin': !expandAcceptTermsMenu }">
+                  <a
+                    id="received_offers_link"
+                    class="link primary no-underline child-item"
+                    routerLink="/account/terms-and-conditions/my-agreements"
+                    routerLinkActive="is-active"
+                  >
+                    {{ 'My Agreements' | translate }}
+                  </a>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+
+        <div class="col-12 account-settings-page-container">
+          <div class="inner-header">
+            {{ pageTitle | translate }}
+          </div>
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

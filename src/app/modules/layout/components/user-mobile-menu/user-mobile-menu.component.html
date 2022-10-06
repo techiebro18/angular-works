@@ -1,0 +1,167 @@
+<div class="user-content">
+  <div class="avatar">
+    <img [src]="user?.image_id" *ngIf="user?.image_id && user?.image_id !== ''" />
+    <img src="assets/images/avatar.svg" *ngIf="!user?.image_id || user?.image_id === ''" />
+  </div>
+  <div class="name">{{ user?.first_name }} {{ user?.last_name }}</div>
+  <div class="label">{{ 'My Account' | translate }}</div>
+</div>
+
+<div class="inside-menu">
+  <ul>
+    <li>
+      <img src="assets/images/icons/user.svg" />
+      <a (click)="closeNav()" routerLink="/account/account-details" routerLinkActive="is-active">
+        {{ 'My Details' | translate }}
+      </a>
+    </li>
+    <li>
+      <img src="assets/images/icons/box.svg" />
+      <a (click)="closeNav()" routerLink="/account/my-orders" routerLinkActive="is-active">
+        {{ 'My Orders' | translate }}
+      </a>
+    </li>
+    <li [ngClass]="{ 'no-border': expandMyItemsMenu }">
+      <img src="assets/images/icons/house.svg" />
+      <a
+        href="javascript:void(0);"
+        (click)="toggleMyItemsMenu()"
+        [ngClass]="{ expanded: expandMyItemsMenu }"
+        routerLinkActive="is-active"
+      >
+        {{ 'My Items' | translate }}
+        <img class="arrow-expandable" src="assets/images/icons/arrow.svg" [ngClass]="{ expanded: expandMyItemsMenu }" />
+      </a>
+      <ul class="sub-item" [ngClass]="{ expanded: expandMyItemsMenu }">
+        <li class="top-border">
+          <a (click)="closeNav()" routerLink="/account/my-items/items-for-sale" routerLinkActive="is-active">
+            {{ 'Items For Sale' | translate }}
+          </a>
+        </li>
+        <li>
+          <a (click)="closeNav()" routerLink="/account/my-items/draft" routerLinkActive="is-active">
+            {{ 'Draft' | translate }}
+          </a>
+        </li>
+        <li>
+          <a (click)="closeNav()" routerLink="/account/my-items/items-sold" routerLinkActive="is-active">
+            {{ 'Sold Items' | translate }}
+          </a>
+        </li>
+        <li>
+          <a (click)="closeNav()" routerLink="/account/my-items/refused" routerLinkActive="is-active">
+            {{ 'Refused Items' | translate }}
+          </a>
+        </li>
+      </ul>
+    </li>
+
+    <li [ngClass]="{ 'no-border': expandMyOffersMenu }">
+      <img src="assets/images/icons/chat.svg" />
+      <a
+        href="javascript:void(0);"
+        (click)="toggleMyOffersMenu()"
+        [ngClass]="{ expanded: expandMyOffersMenu }"
+        routerLinkActive="is-active"
+      >
+        {{ 'My Offers' | translate }}
+        <img
+          class="arrow-expandable"
+          src="assets/images/icons/arrow.svg"
+          [ngClass]="{ expanded: expandMyOffersMenu }"
+        />
+      </a>
+      <ul class="sub-item" [ngClass]="{ expanded: expandMyOffersMenu }">
+        <li class="top-border">
+          <a (click)="closeNav()" routerLink="/account/my-offers/your-offers" routerLinkActive="is-active">
+            {{ 'Your Offers' | translate }}
+          </a>
+        </li>
+        <li>
+          <a (click)="closeNav()" routerLink="/account/my-offers/received-offers" routerLinkActive="is-active">
+            {{ 'Received Offers' | translate }}
+          </a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <img src="assets/images/icons/wallet.svg" />
+      <a (click)="closeNav()" routerLink="/account/my-financials" routerLinkActive="is-active">
+        {{ 'My Financials' | translate }}
+      </a>
+    </li>
+    <li>
+      <img src="assets/images/icons/wishlist.svg" />
+      <a (click)="closeNav()" routerLink="/account/wishlist" routerLinkActive="is-active">
+        {{ 'My Wishlist' | translate }}
+      </a>
+    </li>
+    <li>
+      <img src="assets/images/icons/black-card.svg" />
+      <a (click)="closeNav()" routerLink="/account/get-paid" routerLinkActive="is-active">
+        {{ 'Get Paid' | translate }}
+      </a>
+    </li>
+    <li>
+      <img src="assets/images/icons/waitlist.svg" />
+      <a (click)="closeNav()" routerLink="/account/waitlist-overview" routerLinkActive="is-active">
+        {{ 'Waitlist' | translate }}
+      </a>
+    </li>
+    <li>
+      <img src="assets/images/icons/price.svg" />
+      <a (click)="closeNav()" routerLink="/account/price-reductions" routerLinkActive="is-active">
+        {{ 'Follow price reductions' | translate }}
+      </a>
+    </li>
+    <li>
+      <img src="assets/images/icons/address.svg" />
+      <a (click)="closeNav()" routerLink="/account/address" routerLinkActive="is-active">
+        {{ 'Address Book' | translate }}
+      </a>
+    </li>
+    <li>
+      <img src="assets/images/icons/pencil.svg" />
+      <a (click)="closeNav()" routerLink="/account/email-notifications" routerLinkActive="is-active">
+        {{ 'Notification Settings' | translate }}
+      </a>
+    </li>
+    <ng-container *ngIf="user?.role_id == userRolesEnum.PROFESSIONAL_SELLER">
+      <li [ngClass]="{ 'no-border': expandTermsMenu }">
+        <img src="assets/images/icons/help_and_support/terms_and_conditions.svg" />
+        <a
+          href="javascript:void(0);"
+          (click)="toggleTermsMenu()"
+          [ngClass]="{ expanded: expandTermsMenu }"
+          routerLinkActive="is-active"
+        >
+          {{ 'Terms and Conditions' | translate }}
+          <img class="arrow-expandable" src="assets/images/icons/arrow.svg" [ngClass]="{ expanded: expandTermsMenu }" />
+        </a>
+        <ul class="sub-item" [ngClass]="{ expanded: expandTermsMenu }">
+          <li class="top-border">
+            <a
+              (click)="closeNav()"
+              routerLink="/account/terms-and-conditions/accept-terms"
+              routerLinkActive="is-active"
+            >
+              {{ 'Pro-seller Terms' | translate }}
+            </a>
+          </li>
+          <li class="top-border">
+            <a
+              (click)="closeNav()"
+              routerLink="/account/terms-and-conditions/my-agreements"
+              routerLinkActive="is-active"
+            >
+              {{ 'My Agreements' | translate }}
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ng-container>
+    <li>
+      <a href="javascript:void(0);" (click)="logout()">{{ 'Sign Out' | translate }}</a>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,35 @@
+<div class="accordion horizontal">
+  <ng-container *ngFor="let user of items; let i = index">
+    <section
+      id="{{ user.id }}"
+      style="background-image: url('{{ user.cover_image }}'); background-position: 50% 50%; background-size: cover;"
+      [ngClass]="{ opened: id === user.id }"
+      (click)="openTab(user.id)"
+      class="member_{{ i }}"
+    >
+      <h2>
+        <img *ngIf="!user.image_id || user.image_id === '0'" src="assets/images/avatar.svg" class="avatar" />
+        <img *ngIf="user.image_id && user.image_id !== '0'" [src]="user.image_id" class="avatar" />
+        <a routerLink="/community/members/{{ user.username }}" class="link-member">
+          {{ user.company_name }}
+        </a>
+        <a href="javascript:void(0);">{{ user.company_name }}</a>
+      </h2>
+      <div class="box-member">
+        <p class="country">{{ user.country }}</p>
+        <p class="company-name">
+          <a routerLink="/community/members/{{ user.username }}">{{ user.company_name }}</a>
+        </p>
+        <p class="description">{{ user.member_description }}</p>
+        <div class="items">
+          Items for sale
+          <div class="count">{{ user.listedItems }}</div>
+        </div>
+        <div class="items">
+          Items sold
+          <div class="count">{{ user.totalItemsSold }}</div>
+        </div>
+      </div>
+    </section>
+  </ng-container>
+</div>

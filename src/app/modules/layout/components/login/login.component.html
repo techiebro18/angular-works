@@ -1,0 +1,65 @@
+<div class="loginContainer">
+  <div class="create-account">
+    <form
+      class="form-signin tvb-form"
+      [formGroup]="form"
+      autocomplete="off"
+      (ngSubmit)="loginSubmit()"
+      novalidate
+    >
+      <div class="form-group">
+        <input
+          id="email"
+          type="text"
+          class="form-control"
+          placeholder="{{ 'Email' | translate }} *"
+          formControlName="email"
+          (keyup)="incorrectCredentials = false"
+        />
+        <div *ngIf="submitted && !incorrectCredentials && email.invalid" class="error_message">
+          <span *ngIf="email.errors?.email">{{ 'Please enter a valid email' | translate }}</span>
+          <span *ngIf="email.errors?.required">{{ 'Email address is required' | translate }}</span>
+        </div>
+      </div>
+      <div class="form-group login-password">
+        <span matSuffix (click)="hide = !hide" class="eye_icon">
+          <i *ngIf="hide" class="fa fa-eye-slash"></i>
+          <i *ngIf="!hide" class="fa fa-eye"></i>
+        </span>
+        <input
+          id="password"
+          class="form-control"
+          placeholder="{{ 'Password' | translate }} *"
+          [type]="hide ? 'password' : 'type'"
+          formControlName="password"
+          (keyup)="incorrectCredentials = false"
+        />
+        <div *ngIf="submitted && !incorrectCredentials && password.invalid" class="error_message">
+          <span *ngIf="password.errors?.required">{{ 'Password is required' | translate }}</span>
+        </div>
+      </div>
+      <div class="form-group" *ngIf="incorrectCredentials">
+        <div class="col-md-12" style="margin-bottom: 9px">
+          <div>
+            <!-- Username or password is invalid. -->
+            <span>{{ loginErrorMessage | translate }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="text-center-mobile">
+        <button id="submit" class="btn tvb-button primary" type="submit">
+          {{ 'Log In' | translate }}
+        </button>
+      </div>
+      <div class="form-group text-left">
+        <p class="help-block">
+          <a routerLink="/forgot-password" routerLinkActive="active" (click)="closeDialog()">
+            {{ 'Forgotten password' | translate }}?
+          </a>
+        </p>
+      </div>
+      <!-- (valueChangeS)='displayCounterS($event)' -->
+    </form>
+    <app-social-login (socialloggedin)="closeDialog()" [location]="location"></app-social-login>
+  </div>
+</div>

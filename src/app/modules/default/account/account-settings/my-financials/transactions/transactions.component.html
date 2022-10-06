@@ -1,0 +1,144 @@
+<div class="form-container">
+  <form class="transaction-form" [formGroup]="searchForm" (ngSubmit)="searchList()">
+    <div class="transaction-sort">
+      <div class="form-group">
+        <div class="description">Order Item id</div>
+        <div class="input-container">
+          <input type="text" formControlName="order_item_id" placeholder="Order Item id" />
+        </div>
+      </div>
+    </div>
+    <div class="transaction-sort">
+      <div class="form-group">
+        <div class="description">Status</div>
+        <div class="input-container dropdown-field">
+          <ng-select
+            class="dropdown-select"
+            [items]="statusList"
+            [bindValue]="'value'"
+            [bindLabel]="'name'"
+            formControlName="status"
+            [clearable]="false"
+          ></ng-select>
+        </div>
+      </div>
+    </div>
+    <div class="transaction-sort">
+      <div class="form-group">
+        <div class="description">Date Range</div>
+        <div class="input-container dropdown-field">
+          <input type="text" placeholder="Date Range" (click)="onDateClick()" [value]="dateRangeValue" />
+        </div>
+      </div>
+    </div>
+    <div class="transaction-sort">
+      <div class="form-group">
+        <div class="description">Stripe Payment Id</div>
+        <div class="input-container dropdown-field">
+          <input type="text" formControlName="stripe_id" placeholder="Stripe Payment Id " />
+        </div>
+      </div>
+    </div>
+    <div class="transaction-sort">
+      <div class="form-group">
+        <div class="description"></div>
+        <div class="input-container dropdown-field">
+          <button type="submit" class="btn primary update-btn">Search</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div *ngIf="transactionList" class="items-container flex" [ngClass]="{ mobile: isMobile$ | async }">
+  <div class="items-table-container" *ngIf="listVIewOption === 'grid'">
+    <div class="table-responsive payout-details-row">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>{{ 'Order Item No' | translate }}</th>
+            <th>{{ 'Purchase Date' | translate }}</th>
+            <th>{{ 'Seller SKU' | translate }}</th>
+            <th>{{ 'For You' | translate }}</th>
+            <th>{{ 'Status' | translate }}</th>
+            <th>{{ 'Due Date' | translate }}</th>
+            <th>{{ 'Order Completed' | translate }}</th>
+            <th>{{ 'Stripe Payment Id' | translate }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let transaction of transactionList">
+            <td class="seller_items_name">
+              <a [routerLink]="['transaction-details/', transaction.order_item_id]">
+                {{ transaction.order_item_id }}
+              </a>
+            </td>
+            <td class="seller_items_name">{{ transaction.purchase_date }}</td>
+            <td class="seller_items_sku">{{ transaction.seller_sku }}</td>
+            <td>
+              <span *ngIf="transaction.payout_amount && transaction.payout_currency">
+                {{ transaction.payout_amount | currency: transaction.payout_currency }}
+              </span>
+
+              <span *ngIf="!transaction.payout_amount && !transaction.payout_currency && sellerCurrency">
+                {{ transaction['cost_of_good_' + sellerCurrency] | currency: sellerCurrency }}
+              </span>
+
+              <span *ngIf="!transaction.payout_amount && !transaction.payout_currency && !sellerCurrency">0.00</span>
+            </td>
+            <td>
+              <span *ngIf="transaction.payout_status">{{ transaction.payout_status | titlecase }}</span>
+              <span *ngIf="!transaction.payout_status">Pending</span>
+            </td>
+
+            <td>
+              <span
+                *ngIf="
+                  transaction.payment_due_date &&
+                  (transaction.status != 'refund_pending' || transaction.status != 'refund_overdue')
+                "
+              >
+                {{ transaction.payment_due_date }}
+              </span>
+              <span
+                *ngIf="
+                  !transaction.payment_due_date &&
+                  (transaction.status != 'refund_pending' || transaction.status != 'refund_overdue')
+                "
+              >
+                {{ 'Waiting to be Shipped' | translate }}
+              </span>
+              <span
+                *ngIf="
+                  (transaction.payment_due_date && transaction.status == 'refund_pending') ||
+                  transaction.status == 'refund_overdue'
+                "
+              >
+                {{ 'Return Requested' | translate }}
+              </span>
+            </td>
+
+            <td>
+              <span *ngIf="transaction.payout_created_date">{{ transaction.payout_created_date }}</span>
+              <span *ngIf="!transaction.payout_created_date"></span>
+            </td>
+
+            <td>
+              <span *ngIf="transaction.txn_id">{{ transaction.txn_id }}</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div *ngIf="!transactionList.length" class="items-placeholder title mt-5 text-center">
+    {{ 'No transactions available' | translate }}
+  </div>
+</div>
+<mat-paginator
+  [length]="pagination.total"
+  *ngIf="transactionList && transactionList.length"
+  [pageSize]="pagination.per_page"
+  (page)="getData($event)"
+  [pageSizeOptions]="[25, 50, 75, 100]"
+></mat-paginator>

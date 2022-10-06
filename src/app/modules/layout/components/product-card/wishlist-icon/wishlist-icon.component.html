@@ -1,0 +1,32 @@
+<div *ngIf="(authService.isLoggedInObs | async) && (user$ | async)?.role_id != 2; else elseBlock">
+  <div class="wishlist-icon">
+    <span *ngIf="addWishIcon">
+      <a
+        href="javascript:void(0);"
+        (click)="addToWishList(productId)"
+        [attr.id]="'add' + productId"
+      >
+        <i class="fa fa-heart-o" aria-hidden="true"></i>
+      </a>
+    </span>
+    <span *ngIf="!addWishIcon">
+      <a
+        href="javascript:void(0);"
+        (click)="removeWishList(productId)"
+        [attr.id]="'remove' + productId"
+      >
+        <i class="fa fa-heart" aria-hidden="true"></i>
+      </a>
+    </span>
+  </div>
+</div>
+<ng-template #elseBlock>
+  <div class="wishlist-icon">
+    <span>
+      <a href="javascript:void(0);" (click)="openPopup(true, productId)">
+        <i class="fa fa-heart-o" aria-hidden="true"></i>
+      </a>
+    </span>
+  </div>
+</ng-template>
+<span *ngIf="total_wishlisted > 0" class="">{{ total_wishlisted }}</span>

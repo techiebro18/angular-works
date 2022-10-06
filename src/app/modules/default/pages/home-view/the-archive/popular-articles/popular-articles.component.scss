@@ -1,0 +1,284 @@
+:host {
+  .main-title {
+    text-align: center;
+    color: var(--main-color-black);
+    width: 50%;
+    margin: 50px auto;
+    h2 {
+      font-size: 42px;
+      font-family: 'Cormorant-Italic';
+    }
+    h5 {
+      font-size: 14px;
+      font-family: 'Manrope';
+    }
+  }
+
+  .box-article {
+    float: left;
+    a:hover {
+      text-decoration: none;
+      color: var(--main-color-white);
+    }
+    .main-article {
+      color: var(--main-color-white);
+      background-position: 50% 50%;
+      background-size: cover;
+      cursor: pointer;
+      width: 41.83vw;
+      height: 71.6vh;
+      max-width: 662px;
+      max-height: 620px;
+      padding: 39vh 2.2vw 4vh;
+      min-width: 488px;
+
+      .small-title {
+        font-family: 'Manrope-Medium';
+        font-size: 12px;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+        span {
+          padding: 0 8px;
+        }
+      }
+      .title {
+        font-family: 'Cormorant';
+        font-size: 38px;
+        text-transform: uppercase;
+        margin-bottom: 30px;
+      }
+      .article-desc {
+        font-family: 'Manrope';
+        font-size: 14px;
+        ::ng-deep {
+          p {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            line-height: 15px;
+          }
+        }
+      }
+      .link {
+        margin-top: 30px;
+        a {
+          font-size: 14px;
+          color: var(--main-color-white);
+          text-decoration: underline;
+          text-transform: uppercase;
+        }
+      }
+    }
+
+    .articles-title {
+      font-family: 'Cormorant-Italic';
+      font-size: 22px;
+      width: 26.81vw;
+      max-width: 390px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid var(--main-color-gray-3);
+      div {
+        float: right;
+        text-align: right;
+        a {
+          font-family: 'Manrope';
+          font-size: 14px;
+          color: var(--main-color-black);
+          text-decoration: underline;
+        }
+      }
+    }
+    .articles {
+      width: 26.81vw;
+      max-width: 390px;
+      list-style-type: none;
+      padding-left: 0;
+      .item {
+        height: 16.5vh;
+        border-bottom: 1px solid var(--main-color-gray-3);
+        display: flex;
+        clear: both;
+        max-height: 145.4px;
+        .box-content {
+          float: left;
+          margin-top: 2vh;
+          &.desc {
+            margin-left: 20px;
+          }
+          img {
+            width: 6.97vw;
+            height: 12.3vh;
+            max-width: 134px;
+            max-height: 101px;
+            object-fit: cover;
+          }
+          ::ng-deep {
+            .title {
+              font-family: 'Cormorant';
+              font-size: 17px;
+              text-transform: uppercase;
+              margin-bottom: 1.2vh;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              display: -webkit-box;
+              -webkit-line-clamp: 1;
+              -webkit-box-orient: vertical;
+              width: 18vw;
+              max-width: 237.85px;
+              padding-right: 12px;
+            }
+          }
+          .date {
+            font-family: 'Manrope-Medium';
+            font-size: 12px;
+            text-transform: uppercase;
+            width: 18vw;
+            max-width: 237.85px;
+            height: 4.5vh;
+            max-height: 45px;
+          }
+          .description {
+            font-family: 'Manrope';
+            font-size: 13px;
+            width: 18vw;
+            max-width: 237.85px;
+            padding-right: 12px;
+            ::ng-deep {
+              p {
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                line-height: 13px;
+              }
+            }
+          }
+        }
+        .arrow {
+          float: left;
+          cursor: pointer;
+          img {
+            height: 12.5px;
+            width: 7.13px;
+            transform: rotate(270deg);
+            margin-top: 7vh;
+          }
+        }
+      }
+    }
+    &.pop {
+      margin-left: 3vw;
+    }
+  }
+
+  .clear {
+    clear: both;
+  }
+
+  @media only screen and (max-width: 1023px) {
+    .main-title {
+      margin: 30px auto;
+      width: unset;
+      h2 {
+        font-size: 34px;
+      }
+      h5 {
+        font-size: 14px;
+      }
+    }
+    .box-article {
+      float: unset;
+      .main-article {
+        width: 90.83vw;
+        height: 39.6vh;
+        padding: 18vh 2.2vw 4vh;
+        min-width: unset;
+        .small-title {
+          font-size: 11px;
+          span {
+            padding: 0 6px;
+          }
+        }
+        .title {
+          font-size: 24px;
+          margin-bottom: 13px;
+        }
+        .article-desc {
+          font-size: 11px;
+        }
+        .link {
+          a {
+            font-size: 11px;
+          }
+        }
+      }
+      .articles-title {
+        margin-top: 20px;
+        width: 90.81vw;
+        div {
+          float: right;
+          text-align: right;
+          a {
+            font-size: 12px;
+          }
+        }
+      }
+      .articles {
+        width: 90.81vw;
+        .item {
+          padding: 2.14vh 0;
+          border-bottom: 1px solid var(--main-color-gray-3);
+          display: flex;
+          clear: both;
+          height: unset;
+          .box-content {
+            float: left;
+            margin-top: unset;
+            &.desc {
+              margin-left: 20px;
+            }
+            img {
+              width: 31.97vw;
+              height: 13vh;
+            }
+            .title {
+              width: 50vw;
+              font-size: 16px;
+            }
+            .date {
+              font-size: 11px;
+              margin-bottom: 15px;
+              width: 50vw;
+            }
+            .description {
+              font-size: 11px;
+              width: 50vw;
+            }
+          }
+          .arrow {
+            float: left;
+            cursor: pointer;
+            img {
+              width: 11.13px;
+              margin-top: 5.2vh;
+            }
+          }
+        }
+        .item:nth-child(2),
+        .item:nth-child(3) {
+          display: none;
+        }
+      }
+      &.pop {
+        margin-left: unset;
+      }
+    }
+  }
+}

@@ -1,0 +1,60 @@
+<div class="account-box ignore-click-outside">
+  <div class="ignore-click-outside" app-click-outside (clickOutside)="hideAccountBox()">
+    <div class="arrow-up"></div>
+    <div class="user-content">
+      <div class="avatar">
+        <img [src]="user?.value.image_id" *ngIf="user?.value.image_id && user?.value.image_id !== ''" />
+        <img src="assets/images/avatar.svg" *ngIf="!user?.value.image_id || user?.value.image_id === ''" />
+      </div>
+      <div class="name">{{ user?.value.first_name }} {{ user?.value.last_name }}</div>
+      <div class="label">
+        <a (click)="hideAccountBox()" routerLink="/account/account-details">{{ 'View My Account' | translate }}</a>
+      </div>
+    </div>
+
+    <div class="account-section ignore-click-outside">
+      <ul>
+        <li (click)="goTo('/account/account-details')">
+          <a (click)="hideAccountBox()" routerLink="/account/account-details" routerLinkActive="is-active">
+            <img src="assets/images/icons/user.svg" />
+            {{ 'My Details' | translate }}
+            <img class="arrow-expandable" src="assets/images/icons/arrow.svg" />
+          </a>
+        </li>
+        <li (click)="goTo('/account/my-orders')">
+          <img src="assets/images/icons/box.svg" />
+          <a (click)="hideAccountBox()" routerLink="/account/my-orders" routerLinkActive="is-active">
+            {{ 'My Orders' | translate }}
+          </a>
+          <img class="arrow-expandable" src="assets/images/icons/arrow.svg" />
+        </li>
+        <li (click)="goTo('/account/my-items/items-for-sale')">
+          <img src="assets/images/icons/house.svg" />
+          <a (click)="hideAccountBox()" routerLink="/account/my-items/items-for-sale" routerLinkActive="is-active">
+            {{ 'My Items' | translate }}
+          </a>
+          <img class="arrow-expandable" src="assets/images/icons/arrow.svg" />
+        </li>
+        <li (click)="goTo('/account/wishlist')">
+          <img src="assets/images/icons/wishlist.svg" />
+          <a (click)="hideAccountBox()" routerLink="/account/wishlist" routerLinkActive="is-active">
+            {{ 'My Wishlist' | translate }}
+          </a>
+          <img class="arrow-expandable" src="assets/images/icons/arrow.svg" />
+        </li>
+        <li (click)="goTo('/account/my-offers/your-offers')">
+          <img src="assets/images/icons/chat.svg" />
+          <a (click)="hideAccountBox()" routerLink="/account/my-offers/your-offers" routerLinkActive="is-active">
+            {{ 'My Offers' | translate }}
+          </a>
+          <img class="arrow-expandable" src="assets/images/icons/arrow.svg" />
+        </li>
+        <li (click)="logout()">
+          <a (click)="logout()" href="javascript:void(0)">
+            {{ 'Sign Out' | translate }}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

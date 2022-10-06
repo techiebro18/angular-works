@@ -1,0 +1,151 @@
+<div class="row top-bar" *ngIf="paginationConfig.totalItems > 0">
+  <div class="search-box">
+    <i class="fa fa-search search-icon"></i>
+    <input
+      (keyup)="onQuickSearchItems()"
+      [(ngModel)]="quickSearchTerm"
+      [placeholder]="'make_an_offer.listing.search_placeholder' | translate"
+      class="primary search-field"
+      type="text"
+    />
+  </div>
+
+  <div class="box-pagination-header">
+    <pagination-controls (pageChange)="onPageChange($event)" nextLabel="" previousLabel=""></pagination-controls>
+  </div>
+</div>
+
+<ng-container *ngIf="items?.length > 0; else elseBlock">
+  <div class="desktop tvb-table" *ngIf="!(isMobile$ | async)">
+    <div class="row tvb-header">
+      <div class="col col-md-2 header-img"></div>
+
+      <div class="col col-md-3 header-name">
+        {{ 'my_items.sold.listing.header.name' | translate }}
+      </div>
+
+      <div class="col col-md-2 offer-date-col">
+        {{ 'my_items.sold.listing.header.seller_sku' | translate }}
+      </div>
+
+      <div class="col col-md-2">
+        {{ 'my_items.sold.listing.header.price_on_site' | translate }}
+      </div>
+
+      <div class="col col-md-2">
+        {{ 'my_items.sold.listing.header.price_for_you' | translate }}
+      </div>
+
+      <div class="col col-md-1"></div>
+    </div>
+
+    <div class="tvb-body">
+      <ng-container *ngFor="let item of items | paginate: paginationConfig">
+        <div class="row item-row" [ngClass]="{ expanded: item.isTravelLineExpanded }">
+          <div class="col col-md-2 col-img" (click)="expandItem(item)">
+            <img src="{{ item.image }}" tvb-img-fallback />
+          </div>
+
+          <div class="col col-md-3 col-name">
+            <div class="text-overflow-ellipsis" [title]="item.product_name" (click)="expandItem(item)">
+              {{ item.product_name }}
+            </div>
+          </div>
+
+          <div class="col col-md-2">
+            {{ item.sku }}
+          </div>
+
+          <div class="col col-md-2 price-on-site">
+            <div [ngClass]="{ 'text-line-through': item.is_discount > 0 }">
+              {{ getPriceOnSite(item) | currency: item.base_currency }}
+            </div>
+            <div class="discount-price-text" *ngIf="item.is_discount > 0">
+              {{ getDiscountPrice(item) | currency: item.base_currency }}
+            </div>
+          </div>
+
+          <div class="col col-md-2">
+            {{ getForYouPrice(item) | currency: item.base_currency }}
+          </div>
+
+          <div class="col col-md-1">
+            <span class="accordion-arrow" (click)="expandItem(item)">
+              <img class="expand-arrow" src="assets/images/icons/help_and_support/arrow.svg" />
+            </span>
+          </div>
+
+          <tvb-sold-item-travel-line
+            [soldItemId]="item?.order_item_id"
+            [expanded]="item.isTravelLineExpanded"
+          ></tvb-sold-item-travel-line>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="mobile" *ngIf="isMobile$ | async">
+    <div class="listing">
+      <ng-container *ngFor="let item of items">
+        <div class="list-item">
+          <div class="row item-row" [ngClass]="{ expanded: item.isTravelLineExpanded }">
+            <div class="col-3 product-img">
+              <img [src]="item.image" tvb-img-fallback decoding="async" />
+            </div>
+
+            <div class="col-7 item-info">
+              <p class="brand-name">{{ item.brand_name }}</p>
+              <p class="item-text">{{ item.product_name }}</p>
+
+              <br />
+
+              <p class="item-text">SKU: {{ item.sku }}</p>
+
+              <div class="item-text">
+                <div>
+                  {{ 'Price on Site' | translate }}:
+                  <span [ngClass]="{ 'text-line-through': item.is_discount > 0 }">
+                    {{ getPriceOnSite(item) | currency: item.base_currency }}
+                  </span>
+                </div>
+
+                <div *ngIf="item.is_discount > 0">
+                  {{ 'Discounted Price' | translate }}:
+                  <span class="discount-price-text">
+                    {{ getDiscountPrice(item) | currency: item.base_currency }}
+                  </span>
+                </div>
+              </div>
+
+              <p class="item-text for-you">
+                {{ 'my_items.for_sale.listing.header.price_for_you' | translate }}:
+                {{ getForYouPrice(item) | currency: item.base_currency }}
+              </p>
+            </div>
+
+            <div class="col col-2">
+              <span class="accordion-arrow" (click)="expandItem(item)">
+                <img class="expand-arrow" src="assets/images/icons/help_and_support/arrow.svg" />
+              </span>
+            </div>
+
+            <tvb-sold-item-travel-line
+              [soldItemId]="item?.order_item_id"
+              [expanded]="item.isTravelLineExpanded"
+            ></tvb-sold-item-travel-line>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #elseBlock>
+  <div class="empty-warning">{{ 'There are no items to list' | translate }}</div>
+</ng-template>
+
+<div class="row bottom-bar" *ngIf="paginationConfig.totalItems > 0">
+  <div class="box-pagination-footer">
+    <pagination-controls (pageChange)="onPageChange($event)" nextLabel="" previousLabel=""></pagination-controls>
+  </div>
+</div>

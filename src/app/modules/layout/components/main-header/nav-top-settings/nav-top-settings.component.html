@@ -1,0 +1,35 @@
+<div class="left-top">
+  <ul class="lang-count" *ngIf="!(appService.isSettingsPopupDisabled$ | async)">
+    <li>
+      <a href="javascript:void(0)" (click)="openSettingPopup()">
+        <span>{{ selectedCountry }}&nbsp;&nbsp;•</span>
+      </a>
+    </li>
+    <li>
+      <a href="javascript:void(0)" (click)="openSettingPopup()">
+        {{ selectedLanguage }}
+        <span>•</span>
+      </a>
+    </li>
+    <li>
+      <a href="javascript:void(0)" (click)="openSettingPopup()">{{ selectedCurrency }}</a>
+    </li>
+  </ul>
+
+  <ul class="lang-count" *ngIf="appService.isSettingsPopupDisabled$ | async">
+    <li>
+      <a href="javascript:void(0)">
+        <span>{{ selectedCountry }}&nbsp;&nbsp;-</span>
+      </a>
+    </li>
+    <li>
+      <a href="javascript:void(0)">
+        {{ selectedLanguage }}
+        <span>•</span>
+      </a>
+    </li>
+    <li>
+      <a href="javascript:void(0)">{{ selectedCurrency }}</a>
+    </li>
+  </ul>
+</div>

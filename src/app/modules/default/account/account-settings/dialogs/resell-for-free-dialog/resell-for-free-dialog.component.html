@@ -1,0 +1,98 @@
+<div class="container flex resell-for-free-container" *ngIf="!response">
+  <div class="product-data flex">
+    <div class="product-data-description">
+      {{ 'RESELL_FOR_FREE_WARRANTY_TEXT' | translate }}
+    </div>
+    <div class="form-container flex">
+      <form [formGroup]="resellForFreeForm" class="flex resell-for-free-form">
+        <div class="form-group flex item row">
+          <div class="form-group-title title small">
+            {{ 'Item' | translate }}
+          </div>
+          <div class="input-container">
+            <input
+              class="secondary"
+              type="text"
+              inputmode="decimal"
+              formControlName="item"
+              readonly
+            />
+          </div>
+        </div>
+        <div class="pricing-information flex row">
+          <div class="form-group flex col-md-4 col-sm-12 col-xs-12">
+            <div class="form-group-title title small">
+              {{ 'Price on site' | translate }}
+            </div>
+            <div class="input-container">
+              <input
+                class="secondary for-customer"
+                formControlName="price_on_site"
+                type="number"
+                readonly
+              />
+            </div>
+          </div>
+          <div class="form-group flex col-md-4 col-sm-12 col-xs-12">
+            <div class="form-group-title title small">
+              {{ 'TVB_COMMISSION' | translate }}
+            </div>
+            <div class="input-container">
+              <input
+                class="secondary for-customer"
+                formControlName="tvb_commission"
+                type="number"
+                readonly
+              />
+            </div>
+          </div>
+          <div class="form-group flex col-md-4 col-sm-12 col-xs-12">
+            <div class="form-group-title title small">
+              {{ 'FINAL_PRICE_FOR_YOU' | translate }}
+            </div>
+            <div class="input-container">
+              <input
+                class="secondary for-customer"
+                formControlName="final_price"
+                type="number"
+                readonly
+              />
+            </div>
+          </div>
+        </div>
+        <div class="form-group tos-container">
+          <div
+            class="tos"
+            [ngClass]="
+              resellForFreeForm.controls.tos.errors &&
+              resellForFreeForm.controls.tos.errors.required &&
+              submitted
+                ? 'invalid-data-tos'
+                : ''
+            "
+          >
+            <mat-checkbox formControlName="tos">I accept the terms & conditions.</mat-checkbox>
+          </div>
+          <span
+            class="error-message"
+            *ngIf="
+              resellForFreeForm.controls.tos.errors &&
+              resellForFreeForm.controls.tos.errors.required &&
+              submitted
+            "
+          >
+            Terms & conditions is required
+          </span>
+        </div>
+        <div class="form-group submit">
+          <button class="btn primary" (click)="submitForm()" [disabled]="resellForFreeForm.invalid">
+            {{ 'Submit' | translate }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="container flex" *ngIf="response">
+  {{ errorMessage }}
+</div>

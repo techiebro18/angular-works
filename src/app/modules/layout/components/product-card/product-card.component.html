@@ -1,0 +1,96 @@
+<div class="product-card" [ngClass]="{ 'new-layout': newLayout }">
+  <div class="item-header">
+    <div
+      class="col-md-4 col-xs-4 hit-on-sale"
+      [ngClass]="{ 'new-layout': newLayout }"
+      *ngIf="hit.is_discount == 1 && hit['discount_percentage'].toFixed(0) > 4"
+    >
+      <span *ngIf="!saleBadgeEnabled">{{ 'On sale' | translate }}</span>
+      <span *ngIf="saleBadgeEnabled">{{ discountedPercentage }}% Off</span>
+    </div>
+    <div class="wishlistCount">
+      <!-- <mat-icon aria-hidden="false" aria-label="Example home icon">favorite_border</mat-icon> -->
+      <app-wishlist-icon [productId]="hit.id" [hit]="hit" [prdImg]="hit.imgix_image_url"></app-wishlist-icon>
+    </div>
+  </div>
+  <div class="item-image" [ngClass]="{ 'new-layout': newLayout }">
+    <!-- <a  href="{{pdpUrl}}/{{hit.styles_seo_url_en}}#{{hit.id}}"> -->
+    <a
+      routerLink="/{{ hit.styles_seo_url_en }}"
+      [queryParams]="{ pdp: hit.id, position: hit.__position }"
+      [attr.data-price]="hit['regular_price_' + config$.value.currencyCode]"
+      [attr.data-discounted_price]="hit['discounted_price_' + config$.value.currencyCode]"
+      (click)="productDetail()"
+    >
+      <ng-container *appShellNoRender>
+        <img
+          class="hit-img img-responsive"
+          [ngClass]="{ 'new-layout': newLayout }"
+          *ngIf="hit.imgix_image_url"
+          src="{{ hit.imgix_image_url }}"
+          alt="{{ hit.name }}"
+        />
+        <img
+          class="hit-img img-responsive"
+          [ngClass]="{ 'new-layout': newLayout }"
+          *ngIf="!hit.imgix_image_url && hit.imgix_image_url_uploads"
+          src="{{ hit.imgix_image_url_uploads }}"
+          alt="{{ hit.name }}"
+        />
+        <img
+          class="hit-img img-responsive"
+          [ngClass]="{ 'new-layout': newLayout }"
+          *ngIf="!hit.imgix_image_url && !hit.imgix_image_url_uploads"
+          [src]="defaultImageUrl"
+          alt="{{ hit.name }}"
+        />
+      </ng-container>
+    </a>
+  </div>
+  <div class="details" [ngClass]="{ 'new-layout': newLayout }">
+    <div class="tag-container">
+      <tvb-badge
+        id="listing-badge"
+        label="We Love"
+        backgroundColor="#EDE9E1"
+        color="#000"
+        borderRadius="50px"
+        *ngIf="weLoveTag"
+      ></tvb-badge>
+    </div>
+    <a
+      class="hit-description"
+      [ngClass]="{ 'new-layout': newLayout }"
+      routerLink="/designer/{{ hit.brands_seo_url_en }}"
+    >
+      <ais-highlight [attribute]="descriptionAttribute" [hit]="hit"></ais-highlight>
+    </a>
+    <div class="hit-name" [ngClass]="{ 'new-layout': newLayout }" (click)="productDetail()">
+      <ais-highlight
+        [attribute]="nameAttribute"
+        [hit]="hit"
+        routerLink="/{{ hit.styles_seo_url_en }}"
+        [queryParams]="{ pdp: hit.id }"
+      ></ais-highlight>
+      <div *ngIf="hit.shoes_size" class="size">
+        {{ 'Size' | translate }}
+        <strong>{{ hit.shoes_size }} EU</strong>
+      </div>
+      <div *ngIf="hit.clothing_size" class="size">
+        {{ 'Size' | translate }}
+        <strong>{{ hit.clothing_size }} EU</strong>
+      </div>
+    </div>
+    <div *ngIf="hit.is_discount == 0" class="hit-price" [ngClass]="{ 'new-layout': newLayout }">
+      {{ hit['regular_price_' + config$.value.currencyCode] | currency: config$.value.currencyCode }}
+    </div>
+    <div *ngIf="hit.is_discount == 1" class="hit-price" [ngClass]="{ 'new-layout': newLayout }">
+      <div class="previous-price">
+        {{ hit['regular_price_' + config$.value.currencyCode] | currency: config$.value.currencyCode }}
+      </div>
+      <div class="discount-price">
+        {{ hit['discounted_price_' + config$.value.currencyCode] | currency: config$.value.currencyCode }}
+      </div>
+    </div>
+  </div>
+</div>

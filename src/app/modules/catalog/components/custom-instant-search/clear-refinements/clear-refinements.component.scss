@@ -1,0 +1,19 @@
+.clear-refinement-btn {
+  height: 49px;
+  border-radius: 0;
+  white-space: nowrap;
+}
+
+@media screen and (min-width: 1024px) {
+  .clear-refinement-btn {
+    border: none;
+    text-transform: none;
+    height: 41px;
+  }
+}
+
+// @media screen and (max-width: 1024px) {
+//   .clear-refinement-btn.desktop {
+
+//   }
+// }

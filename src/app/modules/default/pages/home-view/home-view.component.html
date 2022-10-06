@@ -1,0 +1,89 @@
+<div class="slider-container" *ngIf="data && data.slider">
+  <div class="banner-wrap">
+    <div class="item">
+      <a href="{{ data.slider.link }}" class="slider-link">
+        <img
+          id="slider-img"
+          srcset=""
+          src="{{ env.UPLOADS_IMGIX_URL }}dynamic/homepage/{{ data.slider.image_url }}.{{ data.slider.extension }}"
+          alt="{{ data.slider.image_url }}.{{ data.slider.extension }}"
+          class="img-responsive w-100 forOther"
+        />
+
+        <div id="home-slider-title-div" class="home-slider-title-div">
+          <div id="the-vintage-bar-title" class="the-vintage-bar-title">THE VINTAGE BAR</div>
+
+          <h1 [innerHTML]="data.slider.title"></h1>
+
+          <div id="cta-btn-desktop" class="cta-btn shop-btn box-desktop">
+            <a href="{{ data.slider.link }}">{{ data.slider.button }}</a>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div id="cta-btn-mobile" class="cta-btn shop-btn box-mobile">
+    <a href="{{ data.slider.link }}">{{ data.slider.button }}</a>
+  </div>
+</div>
+
+<div id="we-love-box" *ngIf="weLoveShowcaseData?.items?.length > 0">
+  <div id="we-love-header" class="container">
+    <span id="we-love-title">
+      {{ 'We love' | translate }}
+    </span>
+
+    <a id="see-all-link" class="link primary" routerLink="/discover/we-love">
+      {{ 'See all' | translate }}
+    </a>
+  </div>
+
+  <div class="showcase-container container">
+    <tvb-showcase [data]="weLoveShowcaseData">
+      <ng-template let-item #weLove>
+        <tvb-product-spotlight
+          [product]="item"
+          [showSaleBadge]="false"
+          [showWeLoveTag]="true"
+          [currencyCode]="weLoveShowcaseData?.currencyCode"
+        ></tvb-product-spotlight>
+      </ng-template>
+    </tvb-showcase>
+  </div>
+</div>
+
+<div class="container small-container" *ngIf="data?.home">
+  <div class="row">
+    <app-intro-section [sectionInfo]="data.home"></app-intro-section>
+  </div>
+</div>
+
+<div id="campaigns-box" class="container" *ngIf="campaignsShowcaseData?.items?.length > 0">
+  <tvb-showcase [data]="campaignsShowcaseData">
+    <ng-template let-item #campaigns>
+      <tvb-campaign-card [campaign]="item"></tvb-campaign-card>
+    </ng-template>
+  </tvb-showcase>
+</div>
+
+<ng-container *ngIf="users">
+  <ng-container *ngIf="users.length > 4">
+    <p class="explore">Explore the best secondhand boutiques from all of Europe</p>
+    <tvb-members-accordion [users]="users"></tvb-members-accordion>
+  </ng-container>
+</ng-container>
+
+<ng-container *ngIf="articles">
+  <tvb-popular-articles [articles]="articles"></tvb-popular-articles>
+</ng-container>
+
+<div class="container" *ngIf="data?.home">
+  <tvb-for-your-budget></tvb-for-your-budget>
+</div>
+
+<div class="container small-container" *ngIf="data?.home">
+  <div class="row">
+    <tvb-new-arrivals [numOfProducts]="numOfProducts"></tvb-new-arrivals>
+  </div>
+</div>

@@ -1,0 +1,36 @@
+footer {
+  margin: 10em 0 0;
+  background: #ede9e1;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 100px 0;
+
+  section {
+    width: 270px;
+    margin: 0 2em;
+    text-align: center;
+
+    img {
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      text-align: center;
+      font-family: 'FuturaBT-Medium', sans-serif;
+      text-transform: uppercase;
+      font-size: 15px;
+    }
+
+    p {
+      text-align: center;
+      margin: 0;
+    }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  footer section {
+    margin-bottom: 2em;
+  }
+}

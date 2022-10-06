@@ -1,0 +1,69 @@
+.back-btn {
+  color: var(--main-color-black);
+  text-decoration: underline;
+  text-transform: uppercase;
+}
+
+.product-header {
+  display: flex;
+  border-bottom: 2px solid var(--main-color-gray);
+
+  .product-image {
+    padding: 10px;
+  }
+
+  .product-info {
+    padding: 40px 20px 40px 0;
+
+    .product-brand-name {
+      text-transform: uppercase;
+      font-weight: 600;
+      font-family: 'Futura';
+      font-size: 0.8rem;
+    }
+  }
+
+  .time-to-expire {
+    color: var(--form-error);
+    font-size: 0.8rem;
+    font-family: 'FuturaBT-Light';
+    margin: auto 0 auto auto;
+  }
+}
+
+.buttons-box {
+  display: flex;
+  justify-content: center;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  align-content: center;
+  align-items: center;
+
+  button {
+    flex: 1;
+    margin: 8px 4px;
+    min-width: unset;
+    line-height: 15px;
+
+    &:first-of-type {
+      margin-left: 0;
+    }
+
+    &:last-of-type {
+      margin-right: 0;
+    }
+  }
+}
+
+.history-box {
+  border-top: 2px solid var(--main-color-gray);
+  padding: 10px;
+}
+
+.no-borders {
+  border: none;
+}
+
+// Phones, Mobile devices
+@media (max-width: 480px) {
+}
